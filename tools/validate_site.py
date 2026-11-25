@@ -1,0 +1,136 @@
+#!/usr/bin/env python3
+"""Validate the generated static site.
+
+Checks:
+  1. Every internal link / asset resolves (no broken links).
+  2. Every <tr> in a <tbody> has at least one https link to an official host.
+  3. Rows marked Verified have at least one .gov source (not just docs).
+  4. Rows marked data-unverified="true" have a BLANK <td class="value">.
+  5. No personal-information patterns appear in any published HTML.
+  6. .nojekyll exists (Pages legacy build will not process Liquid syntax).
+"""
+from __future__ import annotations
+
+import html as htmlmod
+import os
+import re
+import sys
+from pathlib import Path
+from urllib.parse import urlparse
+
+ROOT = Path(__file__).resolve().parents[1]
+OFFICIAL_SUFFIX = (".gov",)
+OFFICIAL_EXACT = {"docs.github.com", "github.com"}
+
+PERSONAL_PATTERNS = [
+    re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"),  # email
+    re.compile(r"\b\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}\b"),            # phone
+    re.compile(r"\b\d{1,5}\s+(?:[A-Z][a-z]+\s)+(?:Street|St|Avenue|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr)\b"),  # street address
+]
+PERSONAL_NAMES = ["Rachel Webb", "Lance Tucker", "Dawn Hooper", "Sarah Super", "Doug Cook", "Van Ingram", "Carl Mount", "Steven Piano"]
+
+errors: list[str] = []
+stats = {"files": 0, "internal_links": 0, "external_links": 0, "rows": 0, "verified_rows": 0, "unverified_rows": 0}
+
+def is_official(url: str) -> bool:
+    try:
+        host = urlparse(url).hostname or ""
+    except Exception:
+        return False
+    host = host.lower()
+    return host.endswith(OFFICIAL_SUFFIX) or host in OFFICIAL_EXACT
+
+def is_gov(url: str) -> bool:
+    try:
+        host = urlparse(url).hostname or ""
+    except Exception:
+        return False
+    return host.lower().endswith(".gov")
+
+def strip_tags(s: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", htmlmod.unescape(s))).strip()
+
+href_re = re.compile(r"<a\b[^>]*?href=\"([^\"]+)\"[^>]*>", re.I | re.S)
+tbody_re = re.compile(r"<tbody>(.*?)</tbody>", re.I | re.S)
+tr_re = re.compile(r"<tr\b[^>]*>.*?</tr>", re.I | re.S)
+value_re = re.compile(r"<td class=\"value\">(.*?)</td>", re.I | re.S)
+
+html_files = sorted(p for p in ROOT.rglob("*.html") if ".git" not in p.parts)
+for f in html_files:
+    stats["files"] += 1
+    text = f.read_text(encoding="utf-8")
+    rel = f.relative_to(ROOT)
+
+    # --- links -------------------------------------------------------------
+    for raw in href_re.findall(text):
+        href = htmlmod.unescape(raw)
+        if href.startswith("https://") or href.startswith("http://"):
+            stats["external_links"] += 1
+            if not href.startswith("https://"):
+                errors.append(f"{rel}: non-https external link {href}")
+            if not is_official(href):
+                errors.append(f"{rel}: external link is not an official host: {href}")
+        elif href.startswith("mailto:"):
+            errors.append(f"{rel}: mailto link found (privacy): {href}")
+        elif href.startswith("#"):
+            anchor = href[1:]
+            if anchor and f'id="{anchor}"' not in text:
+                errors.append(f"{rel}: missing anchor #{anchor}")
+        else:
+            stats["internal_links"] += 1
+            path_part = href.split("#", 1)[0]
+            if not path_part:
+                continue
+            target = (f.parent / path_part).resolve()
+            try:
+                target.relative_to(ROOT)
+            except ValueError:
+                errors.append(f"{rel}: link escapes workspace: {href}")
+                continue
+            if not target.is_file():
+                errors.append(f"{rel}: broken internal link {href} -> {target}")
+
+    # --- table rows --------------------------------------------------------
+    for tbody in tbody_re.findall(text):
+        for tr in tr_re.findall(tbody):
+            stats["rows"] += 1
+            hrefs = [htmlmod.unescape(h) for h in href_re.findall(tr)]
+            external = [h for h in hrefs if h.startswith("https://")]
+            if not any(is_official(h) for h in external):
+                errors.append(f"{rel}: table row has no official source link")
+            if ">Verified</span>" in tr:
+                stats["verified_rows"] += 1
+                if not any(is_gov(h) for h in external):
+                    errors.append(f"{rel}: Verified row lacks a .gov source")
+            if 'data-unverified="true"' in tr:
+                stats["unverified_rows"] += 1
+                m = value_re.search(tr)
+                if not m:
+                    errors.append(f"{rel}: unverified row has no <td class=\"value\">")
+                elif strip_tags(m.group(1)) != "":
+                    errors.append(f"{rel}: unverified row has non-blank value: {strip_tags(m.group(1))!r}")
+
+    # --- privacy -----------------------------------------------------------
+    for pat in PERSONAL_PATTERNS:
+        m = pat.search(text)
+        if m:
+            errors.append(f"{rel}: possible personal information: {m.group(0)!r}")
+    for name in PERSONAL_NAMES:
+        if name in text:
+            errors.append(f"{rel}: personal name found: {name}")
+
+if not (ROOT / ".nojekyll").is_file():
+    errors.append("missing .nojekyll")
+
+print("Site validation")
+print("---------------")
+for k, v in stats.items():
+    print(f"{k:>18}: {v}")
+if errors:
+    print(f"\nFAILED with {len(errors)} error(s):")
+    for e in errors[:80]:
+        print(" -", e)
+    if len(errors) > 80:
+        print(f" ... and {len(errors)-80} more")
+    sys.exit(1)
+print("\nOK: no broken links; every table row has an official source link; unverified values are blank; no personal information detected.")

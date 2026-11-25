@@ -1,0 +1,1051 @@
+{
+  "build_date": "2026-11-25",
+  "model_version": "v0.1-framework",
+  "session": "dd713c44",
+  "verified_observations": [
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "Tenant brand (public)",
+      "value": "Jack in the Box",
+      "scope": "Single-tenant NNN",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "Population estimate",
+      "value": "3,869,089",
+      "scope": "Los Angeles city, July 1, 2025 (V2025)",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "Median household income",
+      "value": "$81,939",
+      "scope": "Los Angeles city, 2020-2024 (2024 dollars)",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "Mean travel time to work",
+      "value": "30.7 minutes",
+      "scope": "Los Angeles city, 2020-2024",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "Unemployment rate",
+      "value": "4.4% (preliminary)",
+      "scope": "Los Angeles-Long Beach-Santa Ana MSA, Sept 2026",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "Total nonfarm employment",
+      "value": "6,371.5 thousand (preliminary)",
+      "scope": "Los Angeles MSA, Oct 2026",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "Public school students",
+      "value": "408,026",
+      "scope": "Los Angeles Unified, 2024-2025",
+      "sources": [
+        "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "System same-store sales",
+      "value": "-4.2%",
+      "scope": "Jack in the Box brand, FY2025 vs FY2024",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "Franchise rental revenues",
+      "value": "$368,643 thousand",
+      "scope": "Jack in the Box Inc., FY2025",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/executive-summary.html",
+      "indicator": "County total employment projection",
+      "value": "5,461,000",
+      "scope": "Los Angeles County, 2050 (SCAG baseline)",
+      "sources": [
+        "https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf"
+      ]
+    },
+    {
+      "page": "pages/questions.html",
+      "indicator": "Q08 \u00b7 What is the tenant's direction, not one quarter?",
+      "value": "FY2025 system same-store sales -4.2%; FY2024 -1.3%; FY2025 31 openings / 86 closures; franchise rental revenues FY2023-2025 $364,591k / $375,428k / $368,643k.",
+      "scope": "Direction is negative across multiple periods.",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm",
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Population estimate",
+      "value": "3,869,089",
+      "scope": "Los Angeles city, July 1, 2025 (V2025)",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Population change",
+      "value": "-0.8%",
+      "scope": "Los Angeles city, Apr 1 2020 \u2192 July 1 2025",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Median household income",
+      "value": "$81,939",
+      "scope": "Los Angeles city, 2020-2024 (2024 dollars)",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Educational attainment",
+      "value": "38.5%",
+      "scope": "Los Angeles city, bachelor's or higher, 25+, 2020-2024",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Median gross rent",
+      "value": "$1,933",
+      "scope": "Los Angeles city, 2020-2024",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Accommodation & food services sales",
+      "value": "$17,366,966 thousand",
+      "scope": "Los Angeles city, 2022 Economic Census",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Retail sales per capita",
+      "value": "$21,281",
+      "scope": "Los Angeles city, 2022",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Mean travel time to work",
+      "value": "30.7 minutes",
+      "scope": "Los Angeles city, 2020-2024",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Population density",
+      "value": "8,304.2 per sq mile",
+      "scope": "Los Angeles city, 2020",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Unemployment rate",
+      "value": "4.4% (preliminary)",
+      "scope": "Los Angeles MSA, Sept 2026",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Total nonfarm employment",
+      "value": "6,371.5 thousand (preliminary)",
+      "scope": "Los Angeles MSA, Oct 2026",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "CPI-U all items",
+      "value": "360.965",
+      "scope": "Los Angeles-Long Beach-Anaheim, Oct 2026",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Leisure & hospitality employment",
+      "value": "787.5 thousand (preliminary)",
+      "scope": "Los Angeles MSA, Oct 2026",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "County total employment projection",
+      "value": "5,461,000",
+      "scope": "Los Angeles County, 2050 (SCAG baseline)",
+      "sources": [
+        "https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "County resident labour force projection",
+      "value": "5,518,000",
+      "scope": "Los Angeles County, 2050 (SCAG baseline)",
+      "sources": [
+        "https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "SCAG accommodation & food service jobs",
+      "value": "938 thousand",
+      "scope": "SCAG region, 2050 projection",
+      "sources": [
+        "https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Regional transportation investment",
+      "value": "$751.7 billion",
+      "scope": "Connect SoCal 2024 project list",
+      "sources": [
+        "https://sustain.scag.ca.gov/sites/default/files/2024-05/23-2987-connect-socal-2024-final-ch-03-our-plan-040424.pdf"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Los Angeles Unified students",
+      "value": "408,026",
+      "scope": "2024-2025 school year",
+      "sources": [
+        "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "System same-store sales",
+      "value": "-1.3%",
+      "scope": "Jack in the Box brand, FY2024",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "System same-store sales",
+      "value": "-4.2%",
+      "scope": "Jack in the Box brand, FY2025",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Jack in the Box restaurants, end of year",
+      "value": "2,191",
+      "scope": "FY2024 (end of Q4)",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Jack in the Box restaurants, end of year",
+      "value": "2,136",
+      "scope": "FY2025 (end of Q4)",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm",
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Restaurant openings",
+      "value": "31",
+      "scope": "Jack in the Box brand, FY2025",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Restaurant closures",
+      "value": "86",
+      "scope": "Jack in the Box brand, FY2025",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Franchise rental revenues",
+      "value": "$364,591 thousand",
+      "scope": "Jack in the Box Inc., FY2023",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Franchise rental revenues",
+      "value": "$375,428 thousand",
+      "scope": "Jack in the Box Inc., FY2024",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Franchise rental revenues",
+      "value": "$368,643 thousand",
+      "scope": "Jack in the Box Inc., FY2025",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Company restaurant sales",
+      "value": "$846,278 thousand",
+      "scope": "Jack in the Box Inc., FY2023",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Company restaurant sales",
+      "value": "$709,035 thousand",
+      "scope": "Jack in the Box Inc., FY2024",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Company restaurant sales",
+      "value": "$627,344 thousand",
+      "scope": "Jack in the Box Inc., FY2025",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Special Flood Hazard Area definition",
+      "value": "1% annual chance flood (100-year)",
+      "scope": "FEMA flood zones glossary",
+      "sources": [
+        "https://www.fema.gov/about/glossary/flood-zones"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Zone A 30-year mortgage chance",
+      "value": "26%",
+      "scope": "FEMA Know Your Risk",
+      "sources": [
+        "https://www.fema.gov/flood-maps/know-your-risk/homeowners"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "NFHL population coverage",
+      "value": "over 90% of U.S. population",
+      "scope": "FEMA National Flood Hazard Layer",
+      "sources": [
+        "https://www.fema.gov/flood-maps/national-flood-hazard-layer"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "National Risk Index",
+      "value": "18 natural hazards; Census tract or county level",
+      "scope": "FEMA NRI, v1.20 Dec 2025",
+      "sources": [
+        "https://www.fema.gov/flood-maps/products-tools/national-risk-index"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "California wildfire disaster",
+      "value": "DR-4856-CA, declared Jan 8, 2025",
+      "scope": "Incident period Jan 7-31, 2025",
+      "sources": [
+        "https://www.fema.gov/disaster/4856"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Designated areas",
+      "value": "Los Angeles County \u2014 Individual Assistance; debris removal / emergency protective measures (Categories A and B)",
+      "scope": "FEMA-4856-DR initial notice",
+      "sources": [
+        "https://www.fema.gov/disaster-federal-register-notice/4856-dr-ca-initial-notice"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "CGS regulatory zones",
+      "value": "Alquist-Priolo fault zones; liquefaction and landslide zones; tsunami zones",
+      "scope": "California Seismic Hazards Program",
+      "sources": [
+        "https://www.conservation.ca.gov/cgs/shzp"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "2025 LA County fault-zone map release",
+      "value": "Nov 20, 2025 official maps",
+      "scope": "Pasadena / Mt. Wilson quadrangles, Los Angeles County",
+      "sources": [
+        "https://www.conservation.ca.gov/cgs/publication-announcements"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "USGS 2023 NSHM",
+      "value": "Includes basin-specific data in the Los Angeles region",
+      "scope": "National Seismic Hazard Model",
+      "sources": [
+        "https://www.usgs.gov/programs/earthquake-hazards/science/2023-50-state-long-term-national-seismic-hazard-model"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "CAL FIRE FHSZ classes",
+      "value": "Moderate / High / Very High",
+      "scope": "State Responsibility Area",
+      "sources": [
+        "https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "LRA FHSZ rollout",
+      "value": "Phases 1-4 maps released Feb 10 - Mar 24, 2025",
+      "scope": "Local Responsibility Area",
+      "sources": [
+        "https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Insurance oversight",
+      "value": "Wildfire, FAIR Plan and Sustainable Insurance Strategy resources",
+      "scope": "California Department of Insurance",
+      "sources": [
+        "https://www.insurance.ca.gov/"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Inflation / CPI",
+      "value": "3.7% 12-month change, Sept 2026 (LA MSA, verified)",
+      "scope": "Business as usual",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Employment cycle",
+      "value": "+0.9% 12-month total nonfarm change, Oct 2026 (prelim)",
+      "scope": "Business as usual",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Tenant same-store sales decline",
+      "value": "-4.2% FY2025, -1.3% FY2024",
+      "scope": "Business as usual",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Wildfire / straight-line winds",
+      "value": "DR-4856-CA, Jan 2025",
+      "scope": "Black swan",
+      "sources": [
+        "https://www.fema.gov/disaster/4856"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Earthquake ground shaking / fault rupture",
+      "value": "USGS NSHM + CGS regulatory zones",
+      "scope": "Black swan",
+      "sources": [
+        "https://www.usgs.gov/programs/earthquake-hazards/science/2023-50-state-long-term-national-seismic-hazard-model",
+        "https://www.conservation.ca.gov/cgs/shzp"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Flood",
+      "value": "FEMA SFHA 1% annual chance / 26% over 30 years",
+      "scope": "Black swan",
+      "sources": [
+        "https://www.fema.gov/about/glossary/flood-zones",
+        "https://www.fema.gov/flood-maps/know-your-risk/homeowners"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
+      "indicator": "Insurance non-renewal / cost shock",
+      "value": "CDI wildfire and FAIR Plan resources",
+      "scope": "Black swan / BAU",
+      "sources": [
+        "https://www.insurance.ca.gov/"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "Federal long-term capital gain rates",
+      "value": "0% / 15% / 20%",
+      "scope": "2025 tax year",
+      "sources": [
+        "https://www.irs.gov/taxtopics/tc409"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "Unrecaptured section 1250 gain",
+      "value": "maximum 25%",
+      "scope": "2025 tax year",
+      "sources": [
+        "https://www.irs.gov/taxtopics/tc409"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "Net investment income tax",
+      "value": "3.8%",
+      "scope": "Individuals above threshold",
+      "sources": [
+        "https://www.irs.gov/taxtopics/tc559"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "Section 1031 like-kind exchange",
+      "value": "Real property only, since Jan 1, 2018",
+      "scope": "Business / investment real property",
+      "sources": [
+        "https://www.irs.gov/businesses/small-businesses-self-employed/like-kind-exchanges-real-estate-tax-tips"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "California capital gains",
+      "value": "Taxed as ordinary income",
+      "scope": "California personal income",
+      "sources": [
+        "https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "California personal income tax rates",
+      "value": "1% to 12.3%",
+      "scope": "Nine rates under PITL",
+      "sources": [
+        "https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "CA maximum personal income tax rate",
+      "value": "13.3%",
+      "scope": "FTB summary of federal changes",
+      "sources": [
+        "https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html"
+      ]
+    },
+    {
+      "page": "pages/calculator.html",
+      "indicator": "Federal long-term capital gain rate",
+      "value": "15%",
+      "scope": "2025 rate for most individuals",
+      "sources": [
+        "https://www.irs.gov/taxtopics/tc409"
+      ]
+    },
+    {
+      "page": "pages/calculator.html",
+      "indicator": "Unrecaptured \u00a71250 rate",
+      "value": "25%",
+      "scope": "Maximum rate on section 1250 real property",
+      "sources": [
+        "https://www.irs.gov/taxtopics/tc409"
+      ]
+    },
+    {
+      "page": "pages/calculator.html",
+      "indicator": "Net investment income tax",
+      "value": "3.8%",
+      "scope": "Above applicable thresholds",
+      "sources": [
+        "https://www.irs.gov/taxtopics/tc559"
+      ]
+    },
+    {
+      "page": "pages/calculator.html",
+      "indicator": "California marginal rate",
+      "value": "12.3%",
+      "scope": "Top PITL rate; +1% over $1,000,000",
+      "sources": [
+        "https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf",
+        "https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html"
+      ]
+    },
+    {
+      "page": "pages/calculator.html",
+      "indicator": "\u00a71031 real-property-only rule",
+      "value": "Real property only",
+      "scope": "Since Jan 1, 2018",
+      "sources": [
+        "https://www.irs.gov/businesses/small-businesses-self-employed/like-kind-exchanges-real-estate-tax-tips"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CENSUS_CITY",
+      "value": "U.S. Census Bureau",
+      "scope": "U.S. Census Bureau QuickFacts \u2014 Los Angeles city, California",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "BLS_LA",
+      "value": "U.S. Bureau of Labor Statistics",
+      "scope": "Economy at a Glance \u2014 Los Angeles-Long Beach-Santa Ana, CA",
+      "sources": [
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "NCES_LAUSD",
+      "value": "National Center for Education Statistics",
+      "scope": "CCD District Detail \u2014 Los Angeles Unified (ID 0622710)",
+      "sources": [
+        "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "IRS_409",
+      "value": "Internal Revenue Service",
+      "scope": "Topic no. 409, Capital gains and losses",
+      "sources": [
+        "https://www.irs.gov/taxtopics/tc409"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "IRS_559",
+      "value": "Internal Revenue Service",
+      "scope": "Topic no. 559, Net investment income tax",
+      "sources": [
+        "https://www.irs.gov/taxtopics/tc559"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "IRS_1031",
+      "value": "Internal Revenue Service",
+      "scope": "Like-kind exchanges \u2014 Real estate tax tips",
+      "sources": [
+        "https://www.irs.gov/businesses/small-businesses-self-employed/like-kind-exchanges-real-estate-tax-tips"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FTB_CAPGAINS",
+      "value": "California Franchise Tax Board",
+      "scope": "Capital gains and losses \u2014 Personal income types",
+      "sources": [
+        "https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FTB_AB1219",
+      "value": "California Franchise Tax Board",
+      "scope": "Bill Analysis, AB 1219 (Personal Income Tax Reduction)",
+      "sources": [
+        "https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FTB_SUMMARY",
+      "value": "California Franchise Tax Board",
+      "scope": "Summary of Federal Income Tax Changes",
+      "sources": [
+        "https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FEMA_ZONES",
+      "value": "Federal Emergency Management Agency",
+      "scope": "FEMA Flood Zones glossary",
+      "sources": [
+        "https://www.fema.gov/about/glossary/flood-zones"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FEMA_NFHL",
+      "value": "Federal Emergency Management Agency",
+      "scope": "Flood Data Viewers and Geospatial Data / National Flood Hazard Layer",
+      "sources": [
+        "https://www.fema.gov/flood-maps/national-flood-hazard-layer"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FEMA_RISK",
+      "value": "Federal Emergency Management Agency",
+      "scope": "Know Your Flood Risk: Homeowners, Renters or Business Owners",
+      "sources": [
+        "https://www.fema.gov/flood-maps/know-your-risk/homeowners"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FEMA_NRI",
+      "value": "Federal Emergency Management Agency",
+      "scope": "National Risk Index for Natural Hazards",
+      "sources": [
+        "https://www.fema.gov/flood-maps/products-tools/national-risk-index"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FEMA_DR4856",
+      "value": "Federal Emergency Management Agency",
+      "scope": "California Wildfires and Straight-line Winds (DR-4856-CA)",
+      "sources": [
+        "https://www.fema.gov/disaster/4856"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FEMA_DR4856_NOTICE",
+      "value": "Federal Emergency Management Agency",
+      "scope": "4856-DR-CA Initial Notice",
+      "sources": [
+        "https://www.fema.gov/disaster-federal-register-notice/4856-dr-ca-initial-notice"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CGS_PROGRAM",
+      "value": "California Geological Survey",
+      "scope": "The California Seismic Hazards Program",
+      "sources": [
+        "https://www.conservation.ca.gov/cgs/shzp"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CGS_EQZAPP",
+      "value": "California Geological Survey",
+      "scope": "EQ Zapp \u2014 California Earthquake Hazards Zone Application",
+      "sources": [
+        "https://maps.conservation.ca.gov/cgs/informationwarehouse/eqzapp/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CGS_ANNOUNCE",
+      "value": "California Geological Survey",
+      "scope": "CGS Publication Announcements",
+      "sources": [
+        "https://www.conservation.ca.gov/cgs/publication-announcements"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "USGS_NSHM",
+      "value": "U.S. Geological Survey",
+      "scope": "2023 50-State Long-term National Seismic Hazard Model",
+      "sources": [
+        "https://www.usgs.gov/programs/earthquake-hazards/science/2023-50-state-long-term-national-seismic-hazard-model"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CALFIRE_FHSZ",
+      "value": "CAL FIRE / Office of the State Fire Marshal",
+      "scope": "Fire Hazard Severity Zones",
+      "sources": [
+        "https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CALFIRE_INCIDENTS",
+      "value": "CAL FIRE",
+      "scope": "Current Emergency Incidents",
+      "sources": [
+        "https://www.fire.ca.gov/incidents/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CDI",
+      "value": "California Department of Insurance",
+      "scope": "California Department of Insurance",
+      "sources": [
+        "https://www.insurance.ca.gov/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SEC_10K",
+      "value": "U.S. Securities and Exchange Commission",
+      "scope": "Jack in the Box Inc. FY2025 Form 10-K",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SEC_Q4",
+      "value": "U.S. Securities and Exchange Commission",
+      "scope": "Jack in the Box Inc. Q4/FY2025 earnings release (Exhibit 99.1)",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SEC_LIST",
+      "value": "U.S. Securities and Exchange Commission",
+      "scope": "SEC EDGAR 10-K filing list for CIK 0000807882",
+      "sources": [
+        "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000807882&type=10-K&dateb=&owner=include&count=40"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SEC_INDEX",
+      "value": "U.S. Securities and Exchange Commission",
+      "scope": "SEC filing index 0000807882-25-000072",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/0000807882-25-000072-index.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SCAG_DEMOG",
+      "value": "Southern California Association of Governments",
+      "scope": "Connect SoCal 2024 Demographics & Growth Forecast Technical Report",
+      "sources": [
+        "https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SCAG_PLAN",
+      "value": "Southern California Association of Governments",
+      "scope": "Connect SoCal 2024 \u2014 Chapter 3, The Plan",
+      "sources": [
+        "https://sustain.scag.ca.gov/sites/default/files/2024-05/23-2987-connect-socal-2024-final-ch-03-our-plan-040424.pdf"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "LACITY_PLANNING",
+      "value": "City of Los Angeles",
+      "scope": "Los Angeles City Planning",
+      "sources": [
+        "https://planning.lacity.gov/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CALTRANS",
+      "value": "California Department of Transportation",
+      "scope": "Traffic Volumes \u2014 Caltrans Traffic Census Program",
+      "sources": [
+        "https://dot.ca.gov/programs/traffic-operations/census/traffic-volumes"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CENSUS_ACS",
+      "value": "U.S. Census Bureau",
+      "scope": "American Community Survey (ACS)",
+      "sources": [
+        "https://www.census.gov/programs-surveys/acs"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CENSUS_CBP",
+      "value": "U.S. Census Bureau",
+      "scope": "County Business Patterns (CBP)",
+      "sources": [
+        "https://www.census.gov/programs-surveys/cbp.html"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CENSUS_DATA",
+      "value": "U.S. Census Bureau",
+      "scope": "Explore Census Data (data.census.gov)",
+      "sources": [
+        "https://data.census.gov/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CENSUS_GEOCODER",
+      "value": "U.S. Census Bureau",
+      "scope": "Census Geocoder",
+      "sources": [
+        "https://geocoding.geo.census.gov/geocoder/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CENSUS_ONTHEMAP",
+      "value": "U.S. Census Bureau",
+      "scope": "OnTheMap \u2014 LEHD workforce and commuting data",
+      "sources": [
+        "https://onthemap.ces.census.gov/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CCPA",
+      "value": "California Attorney General",
+      "scope": "California Consumer Privacy Act (CCPA)",
+      "sources": [
+        "https://oag.ca.gov/privacy/ccpa"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "ASSESSOR",
+      "value": "Los Angeles County",
+      "scope": "Los Angeles County Assessor",
+      "sources": [
+        "https://assessor.lacounty.gov/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "LEGINFO",
+      "value": "State of California",
+      "scope": "California Legislative Information",
+      "sources": [
+        "https://leginfo.legislature.ca.gov/"
+      ]
+    },
+    {
+      "page": "pages/privacy.html",
+      "indicator": "Aggregate official statistics",
+      "value": "Published with source links",
+      "scope": "Anonymous, non-identifying",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224",
+        "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm",
+        "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710"
+      ]
+    },
+    {
+      "page": "pages/privacy.html",
+      "indicator": "Public tenant filings",
+      "value": "Published with source links",
+      "scope": "Public company information",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+      ]
+    },
+    {
+      "page": "pages/privacy.html",
+      "indicator": "CCPA (as amended)",
+      "value": "Defines personal information and consumer rights; sensitive personal information includes precise geolocation and financial account data.",
+      "scope": "California Attorney General",
+      "sources": [
+        "https://oag.ca.gov/privacy/ccpa"
+      ]
+    },
+    {
+      "page": "pages/privacy.html",
+      "indicator": "Census Geocoder",
+      "value": "Official address-to-geography matching; used only in the secure workflow.",
+      "scope": "U.S. Census Bureau",
+      "sources": [
+        "https://geocoding.geo.census.gov/geocoder/"
+      ]
+    },
+    {
+      "page": "pages/privacy.html",
+      "indicator": "FEMA / CGS / CAL FIRE map portals",
+      "value": "Parcel lookups require an address; therefore they belong to the private workflow.",
+      "scope": "Federal / California agencies",
+      "sources": [
+        "https://www.fema.gov/flood-maps/national-flood-hazard-layer",
+        "https://maps.conservation.ca.gov/cgs/informationwarehouse/eqzapp/",
+        "https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones"
+      ]
+    }
+  ]
+}

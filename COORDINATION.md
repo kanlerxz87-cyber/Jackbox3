@@ -35,17 +35,17 @@ does not block anything).
 | Task | Description / user requirement | Status | Owner session | File scope (exclusive) |
 | --- | --- | --- | --- | --- |
 | T00 | Read repo + create this board; commit & push claim immediately | done | `dd713c44` | `COORDINATION.md`, `README.md` |
-| T01 | Official source register, verification log, line-by-line source links | in progress | `dd713c44` | `SOURCES.md`, `VERIFICATION.md`, `data/` (per-category JSON only) |
-| T02 | Privacy, placeholders, access-control policy | in progress | `dd713c44` | `pages/privacy.html` |
-| T03 | Executive summary + W-10 one-page printable advisor summary | in progress | `dd713c44` | `pages/executive-summary.html` |
-| T04 | W-03 decision-gate progress board | in progress | `dd713c44` | `pages/decision-gates.html` |
-| T05 | Questions / information / answers + how to discover missing information | in progress | `dd713c44` | `pages/questions.html` |
-| T06 | W-01 trade-area figures; neighbourhood data; tract-level trend evidence; regional figures | in progress | `dd713c44` | `pages/market.html` |
-| T07 | W-04 parcel hazard screening; seismic / flood / fire; black-swan stress | in progress | `dd713c44` | `pages/hazards.html` |
-| T08 | Lease abstract placeholder, notice calendar, W-02 sell-vs-hold worksheet, cash-flow model, after-tax module, short-lease discount | in progress | `dd713c44` | `pages/lease-cashflow.html` |
-| T09 | Browser-only private calculator (no network, no storage) | in progress | `dd713c44` | `pages/calculator.html`, `assets/calculator.js` |
-| T10 | Risks for every decision option; recommended path; wealth preservation / growth balance | in progress | `dd713c44` | `pages/risks.html` |
-| T11 | Flagged for Review page (unverified values, irregularities) + Suggestions page (review & choose path before implementing) | in progress | `dd713c44` | `pages/flagged.html`, `pages/suggestions.html` |
+| T01 | Official source register, verification log, line-by-line source links | done | `dd713c44` | `SOURCES.md`, `VERIFICATION.md`, `data/` (per-category JSON only) |
+| T02 | Privacy, placeholders, access-control policy | done | `dd713c44` | `pages/privacy.html` |
+| T03 | Executive summary + W-10 one-page printable advisor summary | done | `dd713c44` | `pages/executive-summary.html` |
+| T04 | W-03 decision-gate progress board | done | `dd713c44` | `pages/decision-gates.html` |
+| T05 | Questions / information / answers + how to discover missing information | done | `dd713c44` | `pages/questions.html` |
+| T06 | W-01 trade-area figures; neighbourhood data; tract-level trend evidence; regional figures | done | `dd713c44` | `pages/market.html` |
+| T07 | W-04 parcel hazard screening; seismic / flood / fire; black-swan stress | done | `dd713c44` | `pages/hazards.html` |
+| T08 | Lease abstract placeholder, notice calendar, W-02 sell-vs-hold worksheet, cash-flow model, after-tax module, short-lease discount | done | `dd713c44` | `pages/lease-cashflow.html` |
+| T09 | Browser-only private calculator (no network, no storage) | done | `dd713c44` | `pages/calculator.html`, `assets/calculator.js` |
+| T10 | Risks for every decision option; recommended path; wealth preservation / growth balance | done | `dd713c44` | `pages/risks.html` |
+| T11 | Flagged for Review page (unverified values, irregularities) + Suggestions page (review & choose path before implementing) | done | `dd713c44` | `pages/flagged.html`, `pages/suggestions.html` |
 | T12 | **Final integration session:** combined data register, index + navigation, site-wide link/build check, publish | in progress | `dd713c44` | `index.html`, `pages/data-sources.html`, `assets/style.css`, `assets/site.js`, `.nojekyll`, navigation blocks in `pages/*.html` |
 
 All tasks are claimed by session `dd713c44`. No task is started twice. If any other session
@@ -65,3 +65,14 @@ appears, it must not edit a file listed in another task's scope; log requests he
 | --- | --- | --- | --- | --- |
 | 1 | Created board, claimed all tasks, logged environment constraints | `git status`, `git log`, `gh api .../pages`, `gh api .../actions/workflows` | Confirmed repo contents, branch, Pages source, active workflow | IR-01..IR-05 |
 | 2 | Fetched and checked official sources line by line | Census QuickFacts, BLS EAG, NCES CCD, IRS, FTB, FEMA, USGS, CGS, CAL FIRE, CDI, SEC EDGAR, SCAG, Caltrans, LA City Planning, CA AG | Direct `fetch_page` retrieval of official pages/PDFs; values transcribed only from retrieved text; no value inferred | IR-06 (Census LA County QuickFacts page repeatedly failed to fetch; county proxy values left blank, not inferred) |
+| 3 | Built source register, verification log, per-category data, all subpages, assets and browser calculator | `SOURCES.md`, `VERIFICATION.md`, `data/verified-observations.json`, `tools/build_site.py`, `pages/*.html`, `assets/*`, `README.md` | Single generator; every table row gets an official source link; unverified values blank; no personal info; 115 verified observations | IR-01..IR-09 published on `pages/flagged.html` |
+| 4 | Final integration: combined data register, index + navigation, site-wide link/build check | `index.html`, `pages/data-sources.html`, `tools/validate_site.py`, local static server | `python3 tools/validate_site.py` OK: 13 HTML files, 236 internal links, 523 external official links, 321 table rows, 115 verified rows, 114 unverified blank rows; local HTTP 200 on all pages/assets; `SOURCES.md` + `VERIFICATION.md` regenerated line by line | IR-01 (single fixed branch; no per-task branches to merge), IR-06 (county proxy blank) |
+
+## PR / merge record
+
+| Item | Value |
+| --- | --- |
+| PR | pending creation |
+| Merge result | pending |
+| Pages deployment | pending |
+
