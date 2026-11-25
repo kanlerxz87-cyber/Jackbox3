@@ -109,7 +109,24 @@ Full detail is in `data/findings.json` (machine) and `sources.html` (human). Sum
 | Merge commit | `c5986ceb20f5674e3c99e3f0fa1ce142d9eeff14` |
 | Pages build | **built** — commit `c5986ce`, created 13:57:58Z, completed 13:58:33Z, `error: null` |
 | Live URL | https://kanlerxz87-cyber.github.io/Jackbox3/ |
-| Post-deploy verification | Live HTML fetched over the public internet for `index.html`, `flagged-for-review.html` and `calculator.html`. Content, navigation, styling and source links all render. |
+| Post-deploy verification | Live HTML fetched over the public internet for `index.html`, `flagged-for-review.html`, `calculator.html`, `tax.html` and `hazards.html`. Content, navigation, styling and source links all render. |
+
+### Follow-up PRs in the same session
+
+| PR | Purpose | Merge commit | Pages build |
+|---|---|---|---|
+| [#2](https://github.com/kanlerxz87-cyber/Jackbox3/pull/2) | Re-verification pass: recovered `TX-07`, added `TX-15` and `TX-16`, corrected the section 1250 ceiling and the California standard deduction, fixed the stale gate count | `69fd793` | built |
+| [#3](https://github.com/kanlerxz87-cyber/Jackbox3/pull/3) | Presentation only: thousands separators on countable integers, units in parentheses. Identifier units (GEOID, FIPS) deliberately excluded so codes stay intact | `96643bf` | built |
+
+Final state: `main` at `96643bf`, Pages status `built`, no open pull requests, no failed builds.
+
+### One thing to know about GitHub Pages caching
+
+A plain fetch of the site root right after a deploy can serve the previous HTML for a few minutes
+because of the CDN cache. Two fetches of the same URL before and after a cache-busting query string
+returned different content on the first deploy. Both times `origin/main` was checked directly and
+held the correct HTML, so this is edge caching rather than a broken build. If the live page ever
+looks stale, append `?v=2` to the URL before concluding anything is wrong.
 
 Flagged irregularities and unverified items did not block the merge; they are published on
 `flagged-for-review.html` with source links, as instructed.
