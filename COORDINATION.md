@@ -34,7 +34,7 @@ does not block anything).
 
 | Task | Description / user requirement | Status | Owner session | File scope (exclusive) |
 | --- | --- | --- | --- | --- |
-| T00 | Read repo + create this board; commit & push claim immediately | in progress | `dd713c44` | `COORDINATION.md`, `README.md` |
+| T00 | Read repo + create this board; commit & push claim immediately | done | `dd713c44` | `COORDINATION.md`, `README.md` |
 | T01 | Official source register, verification log, line-by-line source links | in progress | `dd713c44` | `SOURCES.md`, `VERIFICATION.md`, `data/` (per-category JSON only) |
 | T02 | Privacy, placeholders, access-control policy | in progress | `dd713c44` | `pages/privacy.html` |
 | T03 | Executive summary + W-10 one-page printable advisor summary | in progress | `dd713c44` | `pages/executive-summary.html` |
@@ -64,3 +64,4 @@ appears, it must not edit a file listed in another task's scope; log requests he
 | Phase | Action | Sources used | Verification performed | Irregularities |
 | --- | --- | --- | --- | --- |
 | 1 | Created board, claimed all tasks, logged environment constraints | `git status`, `git log`, `gh api .../pages`, `gh api .../actions/workflows` | Confirmed repo contents, branch, Pages source, active workflow | IR-01..IR-05 |
+| 2 | Fetched and checked official sources line by line | Census QuickFacts, BLS EAG, NCES CCD, IRS, FTB, FEMA, USGS, CGS, CAL FIRE, CDI, SEC EDGAR, SCAG, Caltrans, LA City Planning, CA AG | Direct `fetch_page` retrieval of official pages/PDFs; values transcribed only from retrieved text; no value inferred | IR-06 (Census LA County QuickFacts page repeatedly failed to fetch; county proxy values left blank, not inferred) |
