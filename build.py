@@ -1614,7 +1614,7 @@ estimate of analyst and adviser time. Select the ones you want to pursue, then t
             esc(s["tier"]),
             esc(s["retrieved"]),
             "<span class='muted'>%s</span>" % esc(s.get("caveat", "")),
-            "<code>%s</code>" % esc(", ".join(used)),
+            ("<code>%s</code>" % esc(", ".join(used))) if used else "<span class='muted'>context only</span>",
         ])
 
     src_body = """
