@@ -92,6 +92,53 @@ Full detail is in `data/findings.json` (machine) and `sources.html` (human). Sum
 10. No cap-rate, comparable-sale, rent-comp, property-tax or insurance-premium figure was
     obtainable from an official source. All such cells are blank and marked unverified.
 
+## Concurrency incident — 2026-11-25, 14:04Z
+
+**What happened.** While this session was finishing (four PRs merged between 13:57Z and 14:05Z), a
+second session on branch `arena/dd713c44-jackbox3` opened
+[PR #6](https://github.com/kanlerxz87-cyber/Jackbox3/pull/6) — "Build anonymous source-linked Jackbox3
+decision dashboard and GitHub Pages site". It arrived after this session's integration had already
+published to `main`, and it was created without a matching claim on this board, so the claim-then-commit
+protocol did not prevent the overlap. Neither session is at fault for not predicting the other; the board
+was created by this session at 13:37Z and the other session started after that, so it may simply not have
+been read.
+
+**State.** PR #6 is reported as `CONFLICTING` against `main` and is **still open**. This session did **not**
+merge it and did **not** close it, because it is another session's work and closing it would discard that
+work, which the protocol forbids.
+
+**Overlap.** The two builds are structurally different and both are substantial:
+
+| This session (`arena/47b70455-jackbox3`, merged) | Other session (`arena/dd713c44-jackbox3`, open) |
+|---|---|
+| Flat HTML at repo root | `pages/` directory, plus `.nojekyll` |
+| `data/findings.json` + `data/rules.json` | `data/verified-observations.json` |
+| `build.py` + `scripts/check_site.py` | `tools/build_site.py` + `tools/validate_site.py` |
+| `assets/style.css`, `assets/calculator.js` | `assets/style.css`, `assets/calculator.js`, `assets/site.js` |
+| — | `SOURCES.md`, `VERIFICATION.md` |
+
+Genuine file conflicts exist on `COORDINATION.md`, `README.md`, `assets/style.css`,
+`assets/calculator.js` and `index.html`. Both sessions independently reached the same W-01…W-10 and
+gate/flag/suggestion structure, which is a good sign for the analysis and a problem for the merge.
+
+**Decision taken, and why.** This session stopped integrating at this point rather than picking a winner.
+Choosing one build over the other is an editorial and ownership decision for the user, not something a
+session should make unilaterally on another session's work.
+
+**Options for the user, in the order this session would recommend them:**
+
+1. **Keep `main` as published and close PR #6.** `main` is live, verified, and its checker passes. This is the
+   lowest-risk option and loses nothing that is currently deployed.
+2. **Read both and take the better page from each.** The other build has some structure this one lacks —
+   a dedicated `lease-cashflow` page, a `privacy` page, and separate `SOURCES.md` and `VERIFICATION.md`
+   documents. Those are worth reviewing before deciding.
+3. **Merge PR #6 as a rebase and retire this build.** Viable, but it needs a human to resolve five conflicting
+   files and then re-run whichever validator is kept.
+
+**What this session did not do:** it did not delete the other branch, force-push over it, or mark PR #6 as
+superseded. If the user wants option 1, closing PR #6 with a note pointing at `main` is the clean step, and
+it should be done deliberately rather than automatically.
+
 ## Log
 
 - **2026-11-25** — Session `47b70455` created the board, claimed T-01…T-22, and completed the
