@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology &amp;amp; privacy &middot; Jackbox property workspace</title>
+<meta name="description" content="Verified public-source analysis of a central Los Angeles net-leased quick-service restaurant property. No personal information is published.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">JB</span>
+      <span class="brand-text">
+        <strong>Property decision workspace</strong>
+        <small>Central Los Angeles &middot; net-leased QSR &middot; public sources only</small>
+      </span>
+    </a>
+    <div class="head-badges">
+      <span class="chip chip-privacy" title="No personal or identifying information is published anywhere on this site.">Anonymous by design</span>
+      <span class="chip">Public official sources</span>
+    </div>
+  </div>
+  <div class="wrap"><nav class='site-nav' aria-label='Primary'><ul><li class='nav-group-label'>Overview</li><li><a href='index.html'>Dashboard</a></li><li class='nav-group-label'>Findings</li><li><a href='executive-summary.html'>Executive summary</a></li><li><a href='questions.html'>Decision gates</a></li><li><a href='trade-area.html'>W-01 · Trade area</a></li><li><a href='valuation.html'>W-02 · Sell vs hold</a></li><li><a href='hazards.html'>W-04 · Hazards</a></li><li><a href='tax.html'>After-tax module</a></li><li><a href='economy.html'>Economy &amp; labour</a></li><li><a href='demographics.html'>Demographics</a></li><li><a href='schools.html'>Schools</a></li><li><a href='tenant-credit.html'>Tenant credit</a></li><li><a href='risk.html'>Risk register</a></li><li class='nav-group-label'>Review</li><li><a href='suggestions.html'>Suggestions</a></li><li><a href='flagged-for-review.html'>Flagged for review</a></li><li><a href='sources.html'>Source register</a></li><li><a href='methodology.html' class='current' aria-current='page'>Methodology &amp; privacy</a></li><li class='nav-group-label'>Tools</li><li><a href='calculator.html'>Private calculator</a></li><li><a href='advisor-one-page.html'>W-10 · Advisor one-page</a></li></ul></nav></div>
+</header>
+<main id="main" class="wrap">
+  <p class="kicker">Review</p>
+  <h1>Methodology &amp;amp; privacy</h1>
+  <p class='page-sub'>The verification rules, the privacy model, and an explicit statement of what this site is not.</p>
+  
+<div class="callout callout-key">
+  <h3>The rules this build follows</h3>
+  <ol>
+    <li><strong>A value is present only if an official source produced it.</strong> Otherwise the cell is blank and flagged.</li>
+    <li><strong>Nothing is inferred, interpolated or filled in.</strong> A null from the source stays a null here.</li>
+    <li><strong>Arithmetic is allowed and labelled.</strong> If two verified numbers are divided, the row is marked derived and the formula is recorded.</li>
+    <li><strong>Observations and assumptions never share a column.</strong> Assumptions live only in the private calculator, typed by the reader.</li>
+    <li><strong>A proxy is called a proxy.</strong> The reference point is not the parcel, and every page that uses it says so.</li>
+    <li><strong>A gap is a finding.</strong> "We could not verify this, and here is the document that would" is a real answer.</li>
+  </ol>
+</div>
+
+<h2>The privacy model</h2>
+<p>Personal privacy is the highest-priority constraint in this project, and the design choice that satisfies it is
+<strong>non-collection</strong>. This build did not research, record or transmit any of the following:</p>
+<ul>
+  <li>The owner's name, address, contact details, tax identifiers or net worth.</li>
+  <li>The franchisee's or guarantor's identity and financial statements.</li>
+  <li>The lease document, its contents, or any identifying term.</li>
+  <li>The parcel address, assessor parcel number, or exact coordinates.</li>
+  <li>Mortgage balance, lender, rate, or any account number.</li>
+  <li>Insurance policy numbers, premiums or coverage amounts.</li>
+  <li>The tenant's store-level sales, which are not public.</li>
+</ul>
+<p>Where a conclusion requires one of these, the site names the <em>document type</em> and the <em>role that holds it</em>
+(GATE-01 through GATE-20) and stops there. It never paraphrases, approximates or summarises the private contents, because a
+summary of private data is still private data.</p>
+
+<h3>What is published, and why that is safe</h3>
+<p>Everything on this site is one of three things: a public aggregate (a Census tract statistic covering 2,598 anonymous
+residents), a public legal or tax rule (an IRS bracket), or a public company filing (a revenue figure from an SEC 10-Q). None of
+the three identifies a person, and none becomes identifying when combined with the others, because none of them is specific to
+this property.</p>
+
+<h3>The calculator</h3>
+<p>The <a href="calculator.html">private calculator</a> is a single HTML page with one embedded script. It makes <strong>no
+network requests</strong>: no fetch, no XMLHttpRequest, no analytics, no third-party fonts, no cookies, no localStorage.
+Everything you type stays in the browser tab's memory and disappears when you close it. This can be verified by reading
+<code>assets/calculator.js</code> &mdash; it is the only script that page loads &mdash; or by watching the browser's network panel
+while using the form.</p>
+
+<h2>How each finding was produced</h2>
+<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>Method</th><th scope='col'>Where it was used</th><th scope='col'>What it guarantees</th></tr></thead><tbody><tr><td>Live query against an official REST or ArcGIS service</td><td>Census geocoder, BLS, USGS, FEMA NFHL, FEMA NRI, CAL FIRE</td><td>The number is what the agency's own system returns today</td></tr><tr><td>Reading an official publication</td><td>IRS topics and publications, Rev. Proc. 2025-32, FTB schedules</td><td>The rule is what the tax authority published, quoted rather than paraphrased</td></tr><tr><td>Reading an SEC filing exhibit</td><td>Jack in the Box 10-Q exhibit 99.1, DEF 14A</td><td>The company's own reported figure, with the accession recorded</td></tr><tr><td>Arithmetic on verified values</td><td>All rows marked derived</td><td>Reproducible; the formula is on the row</td></tr><tr><td>Third-party API mirror of an official dataset</td><td>ACS via Census Reporter; NCES CCD via the Urban Institute</td><td>Labelled as a mirror, with a primary cross-check requested</td></tr></tbody></table></div>
+
+<h2>What this site is not</h2>
+<ul>
+  <li>Not an appraisal. No value opinion is expressed.</li>
+  <li>Not a tax opinion. The calculator applies published brackets to the reader's own numbers.</li>
+  <li>Not investment, legal or accounting advice.</li>
+  <li>Not a projection. No forward-looking figure is published, because the inputs for one are not verified.</li>
+  <li>Not a recommendation to buy, sell, hold or renew. It is a register of what must be known first.</li>
+</ul>
+
+<h2>Reproducing this build</h2>
+<p>Everything is static and generated. <code>python3 build.py</code> regenerates every page from <code>data/findings.json</code>
+and <code>data/rules.json</code>; <code>python3 scripts/check_site.py</code> validates that every table row carries a source and
+that no internal link is broken. The verification date is stamped on every page as 2026-11-25.</p>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p><strong>Privacy.</strong> This site publishes only aggregate, non-identifying findings. No owner name, tenant contact, lease document, parcel identifier, loan figure or financial record appears here. Those belong in the owner's access-controlled internal workspace with authorised advisers.</p>
+    <p><strong>Nature of this site.</strong> It is a research and decision-gate register. It is not an appraisal, a tax opinion, a legal opinion, or investment advice. A blank means "not verified", not "zero".</p>
+    <p class="foot-meta">Built 2026-11-25 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
+  </div>
+</footer>
+</body>
+</html>
