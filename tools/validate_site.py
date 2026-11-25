@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Validate the generated static site.
+"""Validate the /workspace/ audit site (session dd713c44).
+
+The root site from session 47b70455 is validated separately by scripts/check_site.py.
 
 Checks:
   1. Every internal link / asset resolves (no broken links).
@@ -55,7 +57,7 @@ tbody_re = re.compile(r"<tbody>(.*?)</tbody>", re.I | re.S)
 tr_re = re.compile(r"<tr\b[^>]*>.*?</tr>", re.I | re.S)
 value_re = re.compile(r"<td class=\"value\">(.*?)</td>", re.I | re.S)
 
-html_files = sorted(p for p in ROOT.rglob("*.html") if ".git" not in p.parts)
+html_files = sorted(p for p in (ROOT / "workspace").rglob("*.html") if ".git" not in p.parts)
 for f in html_files:
     stats["files"] += 1
     text = f.read_text(encoding="utf-8")
