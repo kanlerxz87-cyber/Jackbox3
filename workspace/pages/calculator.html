@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Anonymous public decision-support summary for a single-tenant NNN property. No personal information is published.">
+<title>Private Calculator · Jackbox3</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/calculator.js" defer></script>
+</head>
+<body class="" data-base="..">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<nav class="site-nav" aria-label="Primary navigation">
+<a class="brand" href="../index.html">Jackbox3<span> · anonymous decision workspace</span></a>
+<div class="nav-groups">
+<div class="nav-group">
+<span class="nav-group-title">Overview</span>
+<a href="../index.html">Dashboard</a>
+<a href="../pages/executive-summary.html">Executive Summary</a>
+<a href="../pages/decision-gates.html">Decision Gates</a>
+</div>
+<div class="nav-group">
+<span class="nav-group-title">Decide</span>
+<a href="../pages/risks.html">Risks &amp; Decision</a>
+<a href="../pages/questions.html">Questions &amp; Answers</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+</div>
+<div class="nav-group">
+<span class="nav-group-title">Evidence</span>
+<a href="../pages/market.html">Market &amp; Trade Area</a>
+<a href="../pages/hazards.html">Hazards &amp; Resilience</a>
+<a href="../pages/data-sources.html">Data &amp; Sources</a>
+<a href="../pages/flagged.html">Flagged for Review</a>
+</div>
+<div class="nav-group">
+<span class="nav-group-title">Tools</span>
+<a href="../pages/lease-cashflow.html">Lease &amp; Cash Flow</a>
+<a href="../pages/calculator.html" aria-current="page">Private Calculator</a>
+<a href="../pages/privacy.html">Privacy &amp; Data Handling</a>
+</div>
+</div></nav>
+<div class="page-head">
+<h1>Private Calculator</h1>
+<p>A browser-only after-tax sell-versus-hold calculator with combined hazard/financial stress. No data leaves the browser.</p>
+</div>
+</header>
+<main id="main">
+<div class="privacy-banner"><strong>Privacy:</strong> this public site contains no parcel identifiers, owner names, lease files, addresses, or owner financial data. All subject-property fields are redacted placeholders; only aggregate official statistics and anonymised findings are published. See <a href="privacy.html">Privacy &amp; Data Handling</a>.</div>
+
+<section class="card">
+<h2>Private, browser-only calculator</h2>
+<p class="lede">This calculator runs entirely in the reader's browser. It makes no network requests, uses no cookies, localStorage or sessionStorage, and transmits nothing. All owner-specific fields are blank by default; only tax rates that were verified from official sources are pre-filled. Results are assumptions, not official values.</p>
+<div class="calc-grid">
+<form id="calc-form" class="calc-form" autocomplete="off">
+<fieldset><legend>Sale case (private inputs)</legend>
+<label>Gross sale price <input type="number" id="sale_price" min="0" step="1000" placeholder="blank = unverified"></label>
+<label>Adjusted tax basis <input type="number" id="basis" min="0" step="1000" placeholder="blank = unverified"></label>
+<label>Selling costs <input type="number" id="selling_costs" min="0" step="1000" placeholder="blank = unverified"></label>
+<label>Unrecaptured §1250 gain <input type="number" id="gain_1250" min="0" step="1000" placeholder="blank = unverified"></label>
+<label>Federal LTCG rate (%) <input type="number" id="fed_rate" value="15" min="0" max="40" step="0.1"></label>
+<label>§1250 rate (%) <input type="number" id="rate_1250" value="25" min="0" max="40" step="0.1"></label>
+<label>NIIT rate (%) <input type="number" id="niit_rate" value="3.8" min="0" max="10" step="0.1"></label>
+<label>NIIT applies? <select id="niit_applies"><option value="no">No — MAGI threshold not modelled</option><option value="yes">Yes — apply 3.8% to gain</option></select></label>
+<label>CA marginal rate (%) <input type="number" id="ca_rate" value="12.3" min="0" max="20" step="0.1"></label>
+<label>§1031 deferral? <select id="exchange1031"><option value="no">No</option><option value="yes">Yes — defer recognised gain</option></select></label>
+</fieldset>
+<fieldset><legend>Hold / renewal case (private inputs)</legend>
+<label>Annual NNN rent <input type="number" id="annual_rent" min="0" step="1000" placeholder="blank = unverified"></label>
+<label>Annual operating costs passed through <input type="number" id="annual_costs" min="0" step="1000" placeholder="blank = unverified"></label>
+<label>Hold years <input type="number" id="years" min="1" max="40" step="1" placeholder="blank = unverified"></label>
+<label>Discount rate (%) <input type="number" id="discount_rate" min="0" max="30" step="0.1" placeholder="blank = unverified"></label>
+<label>Terminal value (exit) <input type="number" id="terminal_value" min="0" step="1000" placeholder="blank = unverified"></label>
+<label>Ordinary income tax rate (%) — assumption <input type="number" id="ordinary_rate" min="0" max="60" step="0.1" placeholder="blank = pre-tax hold case"></label>
+</fieldset>
+<fieldset><legend>Combined stress (assumptions)</legend>
+<label>Loss-of-rent months <input type="number" id="downtime_months" min="0" max="60" step="1" placeholder="blank = unverified"></label>
+<label>Repair / retrofit cost <input type="number" id="repair_cost" min="0" step="1000" placeholder="blank = unverified"></label>
+<label>Exit liquidity haircut (%) <input type="number" id="exit_haircut" min="0" max="100" step="1" placeholder="blank = unverified"></label>
+</fieldset>
+<div class="calc-actions no-print">
+<button type="submit" class="btn primary">Compute comparison</button>
+<button type="reset" class="btn">Clear</button>
+</div>
+</form>
+<div class="calc-results" aria-live="polite">
+<h3>Result (assumptions only)</h3>
+<table class="result-table"><thead><tr><th>Result</th><th>Value</th><th>Source (official)</th></tr></thead><tbody>
+<tr><th>After-tax Sale Equivalent (ATSE)</th><td id="out_atse">—</td><td><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer">IRS Topic 409</a></td></tr>
+<tr><th>Hold NPV (after-tax if ordinary rate supplied)</th><td id="out_hold">—</td><td><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer">IRS Topic 409</a></td></tr>
+<tr><th>Difference (Hold − Sale)</th><td id="out_diff">—</td><td><a href="https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html" target="_blank" rel="noopener noreferrer">FTB</a></td></tr>
+<tr><th>Combined-stress Hold NPV</th><td id="out_stress">—</td><td><a href="https://www.fema.gov/flood-maps/products-tools/national-risk-index" target="_blank" rel="noopener noreferrer">FEMA NRI</a></td></tr>
+<tr><th>Model status</th><td id="out_status">Not computed. Blank inputs are treated as zero and flagged below.</td><td><a href="https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm" target="_blank" rel="noopener noreferrer">SEC 10-K</a></td></tr>
+</tbody></table>
+<p id="calc-warning" class="warn-box">No winner is selected. This tool prepares the after-tax sale comparison alongside a negotiated renewal case; a decision requires the verified private inputs listed in the Decision Gates.</p>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>Verified defaults used by the calculator</h2>
+<div class="table-wrap">
+<p class="table-caption">Only these official tax rules are pre-filled. Every property-specific input is blank.</p>
+<table class="data-table">
+<thead><tr><th>Default</th><th>Value</th><th>Source rule</th><th>Status</th><th>Source (official)</th><th>Notes / finding</th></tr></thead>
+<tbody>
+<tr class="data-row">
+<td>Federal long-term capital gain rate</td>
+<td class="value">15%</td>
+<td>2025 rate for most individuals</td>
+<td><span class="badge ok">Verified</span></td>
+<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 409, Capital gains and losses</a></td>
+<td>0% / 15% / 20% depending on taxable income.</td>
+</tr>
+<tr class="data-row">
+<td>Unrecaptured §1250 rate</td>
+<td class="value">25%</td>
+<td>Maximum rate on section 1250 real property</td>
+<td><span class="badge ok">Verified</span></td>
+<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 409, Capital gains and losses</a></td>
+<td>Editable.</td>
+</tr>
+<tr class="data-row">
+<td>Net investment income tax</td>
+<td class="value">3.8%</td>
+<td>Above applicable thresholds</td>
+<td><span class="badge ok">Verified</span></td>
+<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc559" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 559, Net investment income tax</a></td>
+<td>Editable.</td>
+</tr>
+<tr class="data-row">
+<td>California marginal rate</td>
+<td class="value">12.3%</td>
+<td>Top PITL rate; +1% over $1,000,000</td>
+<td><span class="badge ok">Verified</span></td>
+<td class="source-cell"><a href="https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf" target="_blank" rel="noopener noreferrer" title="California Franchise Tax Board">Bill Analysis, AB 1219 (Personal Income Tax Reduction)</a><br><a href="https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html" target="_blank" rel="noopener noreferrer" title="California Franchise Tax Board">Summary of Federal Income Tax Changes</a></td>
+<td>California taxes capital gains as ordinary income.</td>
+</tr>
+<tr class="data-row">
+<td>§1031 real-property-only rule</td>
+<td class="value">Real property only</td>
+<td>Since Jan 1, 2018</td>
+<td><span class="badge ok">Verified</span></td>
+<td class="source-cell"><a href="https://www.irs.gov/businesses/small-businesses-self-employed/like-kind-exchanges-real-estate-tax-tips" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Like-kind exchanges — Real estate tax tips</a></td>
+<td>Used only if the adviser selects deferral.</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="card">
+<h2>Input classification</h2>
+<div class="table-wrap">
+<p class="table-caption">Observations and assumptions are kept separate by construction.</p>
+<table class="data-table">
+<thead><tr><th>Class</th><th>Examples</th><th>Handling</th><th>Status</th><th>Source (official)</th><th>Notes / finding</th></tr></thead>
+<tbody>
+<tr class="data-row">
+<td>Observation (official)</td>
+<td class="value">Tax rates, regional figures, tenant filings</td>
+<td>Source-linked on this site</td>
+<td><span class="badge info">Control</span></td>
+<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 409, Capital gains and losses</a><br><a href="https://www.bls.gov/eag/eag.ca_losangeles_msa.htm" target="_blank" rel="noopener noreferrer" title="U.S. Bureau of Labor Statistics">Economy at a Glance — Los Angeles-Long Beach-Santa Ana, CA</a><br><a href="https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm" target="_blank" rel="noopener noreferrer" title="U.S. Securities and Exchange Commission">Jack in the Box Inc. FY2025 Form 10-K</a></td>
+<td>Never inferred.</td>
+</tr>
+<tr class="data-row">
+<td>Assumption (private)</td>
+<td class="value">Sale price, basis, rent, discount rate, repair cost, downtime</td>
+<td>Browser only; blank by default</td>
+<td><span class="badge info">Control</span></td>
+<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 409, Capital gains and losses</a><br><a href="https://www.fema.gov/flood-maps/products-tools/national-risk-index" target="_blank" rel="noopener noreferrer" title="Federal Emergency Management Agency">National Risk Index for Natural Hazards</a></td>
+<td>Not published; not stored.</td>
+</tr>
+<tr class="data-row unverified-row" data-unverified="true">
+<td>Back-test</td>
+<td class="value"></td>
+<td>NOT RUN</td>
+<td><span class="badge muted">Not run</span></td>
+<td class="source-cell"><a href="https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm" target="_blank" rel="noopener noreferrer" title="U.S. Securities and Exchange Commission">Jack in the Box Inc. FY2025 Form 10-K</a><br><a href="https://www.bls.gov/eag/eag.ca_losangeles_msa.htm" target="_blank" rel="noopener noreferrer" title="U.S. Bureau of Labor Statistics">Economy at a Glance — Los Angeles-Long Beach-Santa Ana, CA</a></td>
+<td>Requires verified inputs and sufficient comparable history.</td>
+</tr>
+</tbody></table></div>
+</section></main>
+<footer class="footer">
+<p>Build 2026-11-25 · session <code>dd713c44</code> · model <code>v0.1-framework</code> · public anonymous summary only.</p>
+<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the <a href="flagged.html">Flagged for Review</a> page. Raw verification log: <a href="../../VERIFICATION.md">VERIFICATION.md</a>.</p>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

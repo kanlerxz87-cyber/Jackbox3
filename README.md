@@ -78,3 +78,28 @@ listing.
 Design choice: **non-collection**, not redaction. The project never gathered the private data,
 so there is nothing to leak. The calculator runs entirely in the browser tab and makes no
 network requests; `scripts/check_site.py` fails the build if that stops being true.
+
+## Additional source-verified audit workspace (`/workspace/`)
+
+Session `dd713c44` added a second, independent, source-linked decision workspace under
+[`workspace/index.html`](workspace/index.html). It keeps the same privacy rules (no personal
+information, redacted placeholders, aggregate official data only) and adds:
+
+- `SOURCES.md` — official source register with links for manual review.
+- `VERIFICATION.md` — line-by-line verification log of every published value.
+- `data/verified-observations.json` — machine-readable verified observations.
+- `tools/build_site.py` — single generator; `tools/validate_site.py` — link / source / privacy checks.
+- `workspace/pages/*` — dashboard subpages by category, including a **Flagged for Review** page
+  and a **Suggestions** page with a review-and-choose workflow.
+- `workspace/assets/calculator.js` — private browser-only after-tax calculator (no network, no storage).
+
+Rebuild and check:
+
+```bash
+python3 tools/build_site.py
+python3 tools/validate_site.py
+python3 scripts/check_site.py
+```
+
+The two workspaces are deliberately complementary: this root dashboard is session `47b70455`'s
+integrated site; `/workspace/` is session `dd713c44`'s independently verified audit trail.

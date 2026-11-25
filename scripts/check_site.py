@@ -59,6 +59,11 @@ def main() -> int:
         "assets/style.css", "assets/calculator.js",
         "data/findings.json", "data/rules.json",
     }
+    # Final integration: the /workspace/ audit site is a preserved second site.
+    local_files |= {
+        str(p.relative_to(ROOT)) for p in ROOT.rglob("*")
+        if p.is_file() and ".git" not in p.parts
+    }
     for page, content in html_by_page.items():
         for href in re.findall(r'href=[\'"]([^\'"]+)[\'"]', content):
             if href.startswith(("http://", "https://", "mailto:", "#")):
