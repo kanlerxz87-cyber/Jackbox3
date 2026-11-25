@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions &middot; Jackbox property workspace</title>
+<meta name="description" content="Verified public-source analysis of a central Los Angeles net-leased quick-service restaurant property. No personal information is published.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">JB</span>
+      <span class="brand-text">
+        <strong>Property decision workspace</strong>
+        <small>Central Los Angeles &middot; net-leased QSR &middot; public sources only</small>
+      </span>
+    </a>
+    <div class="head-badges">
+      <span class="chip chip-privacy" title="No personal or identifying information is published anywhere on this site.">Anonymous by design</span>
+      <span class="chip">Public official sources</span>
+    </div>
+  </div>
+  <div class="wrap"><nav class='site-nav' aria-label='Primary'><ul><li class='nav-group-label'>Overview</li><li><a href='index.html'>Dashboard</a></li><li class='nav-group-label'>Findings</li><li><a href='executive-summary.html'>Executive summary</a></li><li><a href='questions.html'>Decision gates</a></li><li><a href='trade-area.html'>W-01 · Trade area</a></li><li><a href='valuation.html'>W-02 · Sell vs hold</a></li><li><a href='hazards.html'>W-04 · Hazards</a></li><li><a href='tax.html'>After-tax module</a></li><li><a href='economy.html'>Economy &amp; labour</a></li><li><a href='demographics.html'>Demographics</a></li><li><a href='schools.html'>Schools</a></li><li><a href='tenant-credit.html'>Tenant credit</a></li><li><a href='risk.html'>Risk register</a></li><li class='nav-group-label'>Review</li><li><a href='suggestions.html' class='current' aria-current='page'>Suggestions</a></li><li><a href='flagged-for-review.html'>Flagged for review</a></li><li><a href='sources.html'>Source register</a></li><li><a href='methodology.html'>Methodology &amp; privacy</a></li><li class='nav-group-label'>Tools</li><li><a href='calculator.html'>Private calculator</a></li><li><a href='advisor-one-page.html'>W-10 · Advisor one-page</a></li></ul></nav></div>
+</header>
+<main id="main" class="wrap">
+  <p class="kicker">Review</p>
+  <h1>Suggestions</h1>
+  <p class='page-sub'>Twelve concrete improvements, ranked by impact per unit of effort, for the owner to review and shortlist before anything is implemented.</p>
+  
+<div class="callout callout-key">
+  <h3>How to use this page</h3>
+  <p>Twelve suggestions, each with the reason it matters, the effort it takes and the concrete first step. They are ordered by a
+  simple rule: things that are cheap, blocking and owner-held come first, because they change the decision most per dollar and
+  per week. Use the checkboxes to shortlist a path; nothing is stored or transmitted.</p>
+</div>
+
+<h2>Suggestion review</h2>
+<p class="muted">Impact is this project's judgement of how much the item changes the sell-versus-renew answer. Effort is an
+estimate of analyst and adviser time. Select the ones you want to pursue, then take the shortlist to your advisers.</p>
+<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>ID</th><th scope='col'>Suggestion and why it matters</th><th scope='col'>Impact</th><th scope='col'>Effort</th><th scope='col'>Concrete first step</th><th scope='col'>Related page</th><th scope='col'>Pick</th></tr></thead><tbody><tr><td><code>S-01</code></td><td><strong>Close the four blocking document gates before anything else</strong><br><span class='muted'>GATE-01, GATE-03, GATE-04 and GATE-18 are all owner-held documents that cost nothing to retrieve and unlock the entire analysis.</span></td><td><span class='prio prio-high'>High</span></td><td>Low</td><td>Send four specific requests: lease and amendments, depreciation schedules, lender statement, written objectives.</td><td>Questions</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-01'></td></tr><tr><td><code>S-02</code></td><td><strong>Order the appraisal and the structural report in parallel</strong><br><span class='muted'>These are the two inputs that cannot be produced internally, they cost the most in the gate list, and both cases need them.</span></td><td><span class='prio prio-high'>High</span></td><td>Medium</td><td>Engage a state-certified appraiser and a licensed structural engineer now; both take weeks.</td><td>W-02 Sell vs hold</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-02'></td></tr><tr><td><code>S-03</code></td><td><strong>Re-run every spatial query at the real parcel</strong><br><span class='muted'>The repository currently uses a Civic Center reference point. One address re-runs the flood, fire, seismic, tract and tract-figure queries.</span></td><td><span class='prio prio-high'>High</span></td><td>Very low</td><td>Add a small script that takes coordinates and emits a dated hazard and census sheet.</td><td>W-01 / W-04</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-03'></td></tr><tr><td><code>S-04</code></td><td><strong>Obtain a Census API key and pull a genuine multi-year tract series</strong><br><span class='muted'>Without it, population and income trend cannot be established and every tract figure is a single five-year blend.</span></td><td><span class='prio prio-medium'>Medium</span></td><td>Very low</td><td>Request a key from api.census.gov, then re-pull B19013 and B01003 by year.</td><td>Demographics</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-04'></td></tr><tr><td><code>S-05</code></td><td><strong>Verify and add the California mental-health surcharge to the tax module</strong><br><span class='muted'>It is the largest known omission in the after-tax number, and it only bites on large gains &amp;mdash; exactly the case where the decision is close.</span></td><td><span class='prio prio-high'>High</span></td><td>Low</td><td>Retrieve the FTB page or a CPA&#x27;s confirmation, then add the bracket to data/rules.json.</td><td>After-tax module</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-05'></td></tr><tr><td><code>S-06</code></td><td><strong>Replace the single tract with a drive-time catchment of three to five tracts</strong><br><span class='muted'>One tract with a &amp;plusmn;236-household sample is carrying too much weight in the trade-area story.</span></td><td><span class='prio prio-medium'>Medium</span></td><td>Medium</td><td>Define the catchment from the parcel with a drive-time analysis and weight the tracts by population.</td><td>W-01 Trade area</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-06'></td></tr><tr><td><code>S-07</code></td><td><strong>Add a named-comparable rent opinion rather than a survey average</strong><br><span class='muted'>Survey averages hide the term and credit differences that drive QSR rent. Named comparables are what make a rent figure defensible.</span></td><td><span class='prio prio-high'>High</span></td><td>Medium</td><td>Commission a broker opinion with addresses, dates, sizes, rents and remaining terms.</td><td>W-02 Sell vs hold</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-07'></td></tr><tr><td><code>S-08</code></td><td><strong>Build and version the cash-flow model only when the inputs exist</strong><br><span class='muted'>A model built on absent inputs produces confident nonsense. The precondition is stated in the owner&#x27;s own instruction.</span></td><td><span class='prio prio-medium'>Medium</span></td><td>High</td><td>Wait for GATE-02, GATE-03, GATE-05 and GATE-19; then build with assumptions in a separate, dated column.</td><td>W-02 Sell vs hold</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-08'></td></tr><tr><td><code>S-09</code></td><td><strong>Add a monitoring dashboard with four tripwires</strong><br><span class='muted'>The risks that matter here are liquidity events. Early warning is cheap and the underlying data is free.</span></td><td><span class='prio prio-medium'>Medium</span></td><td>Low</td><td>Track CAL FIRE incidents, insurer filings, the tenant&#x27;s quarterly releases and city planning agendas.</td><td>Risk register</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-09'></td></tr><tr><td><code>S-10</code></td><td><strong>Publish the assumptions register separately from the observations</strong><br><span class='muted'>It is the difference between analysis and advocacy, and it is what lets a reader challenge a number.</span></td><td><span class='prio prio-medium'>Medium</span></td><td>Very low</td><td>Every derived figure already carries a formula; extend that discipline to the assumptions used in the calculator.</td><td>Methodology</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-10'></td></tr><tr><td><code>S-11</code></td><td><strong>Get a CPA to sign off on the encoded tax rules</strong><br><span class='muted'>The calculator applies published brackets correctly, but it does not know this owner&#x27;s situation, and several rules are deliberately excluded.</span></td><td><span class='prio prio-high'>High</span></td><td>Low</td><td>Have the CPA review data/rules.json and the excluded list.</td><td>After-tax module</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-11'></td></tr><tr><td><code>S-12</code></td><td><strong>Publish nothing identifying, and keep it that way</strong><br><span class='muted'>Privacy is the top-priority constraint. The current design achieves it by never collecting, rather than by redacting.</span></td><td><span class='prio prio-high'>High</span></td><td>Very low</td><td>Keep the parcel address and every private document out of this repository; use the internal workspace only.</td><td>Methodology</td><td><input type='checkbox' class='pick' aria-label='shortlist suggestion S-12'></td></tr></tbody></table></div>
+
+<h2>If you only do four things</h2>
+<ol class="steps">
+  <li><strong>S-01</strong> &mdash; pull the lease, the depreciation schedules and the lender statement, and write down the objective.
+  Zero cost, and it unlocks the analysis.</li>
+  <li><strong>S-02</strong> &mdash; order the appraisal and the structural report. The only two things that cannot be produced in-house.</li>
+  <li><strong>S-07</strong> &mdash; get a rent opinion with named comparables, so the renewal case stops being hypothetical.</li>
+  <li><strong>S-11</strong> &mdash; have a CPA review the tax rules before any number from this site is used in a commitment.</li>
+</ol>
+
+<h2>What the site should do next, as a product</h2>
+<ul class="suggest">
+  <li><strong>A single decision-packet export</strong> that prints the open gates, the two cases and the verified evidence on four
+  pages for an adviser meeting. The <a href="advisor-one-page.html">one-page summary</a> is the start of this.</li>
+  <li><strong>A gate tracker that persists locally</strong> in the owner's browser, so progress can be recorded without any server.</li>
+  <li><strong>An explicit assumptions register</strong>, so that every number used in a future model is dated and attributable.</li>
+  <li><strong>A quarterly refresh job</strong> that re-pulls BLS, SEC and FEMA data and flags any material change since the last build.</li>
+</ul>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p><strong>Privacy.</strong> This site publishes only aggregate, non-identifying findings. No owner name, tenant contact, lease document, parcel identifier, loan figure or financial record appears here. Those belong in the owner's access-controlled internal workspace with authorised advisers.</p>
+    <p><strong>Nature of this site.</strong> It is a research and decision-gate register. It is not an appraisal, a tax opinion, a legal opinion, or investment advice. A blank means "not verified", not "zero".</p>
+    <p class="foot-meta">Built 2026-11-25 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
+  </div>
+</footer>
+</body>
+</html>

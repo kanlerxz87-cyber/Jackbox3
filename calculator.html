@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private calculator &middot; Jackbox property workspace</title>
+<meta name="description" content="Verified public-source analysis of a central Los Angeles net-leased quick-service restaurant property. No personal information is published.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/calculator.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">JB</span>
+      <span class="brand-text">
+        <strong>Property decision workspace</strong>
+        <small>Central Los Angeles &middot; net-leased QSR &middot; public sources only</small>
+      </span>
+    </a>
+    <div class="head-badges">
+      <span class="chip chip-privacy" title="No personal or identifying information is published anywhere on this site.">Anonymous by design</span>
+      <span class="chip">Public official sources</span>
+    </div>
+  </div>
+  <div class="wrap"><nav class='site-nav' aria-label='Primary'><ul><li class='nav-group-label'>Overview</li><li><a href='index.html'>Dashboard</a></li><li class='nav-group-label'>Findings</li><li><a href='executive-summary.html'>Executive summary</a></li><li><a href='questions.html'>Decision gates</a></li><li><a href='trade-area.html'>W-01 · Trade area</a></li><li><a href='valuation.html'>W-02 · Sell vs hold</a></li><li><a href='hazards.html'>W-04 · Hazards</a></li><li><a href='tax.html'>After-tax module</a></li><li><a href='economy.html'>Economy &amp; labour</a></li><li><a href='demographics.html'>Demographics</a></li><li><a href='schools.html'>Schools</a></li><li><a href='tenant-credit.html'>Tenant credit</a></li><li><a href='risk.html'>Risk register</a></li><li class='nav-group-label'>Review</li><li><a href='suggestions.html'>Suggestions</a></li><li><a href='flagged-for-review.html'>Flagged for review</a></li><li><a href='sources.html'>Source register</a></li><li><a href='methodology.html'>Methodology &amp; privacy</a></li><li class='nav-group-label'>Tools</li><li><a href='calculator.html' class='current' aria-current='page'>Private calculator</a></li><li><a href='advisor-one-page.html'>W-10 · Advisor one-page</a></li></ul></nav></div>
+</header>
+<main id="main" class="wrap">
+  <p class="kicker">Tools</p>
+  <h1>Private calculator</h1>
+  <p class='page-sub'>An after-tax calculator that runs entirely in your browser, applies only verified rules, and tells you what it omits.</p>
+  
+<div class="callout callout-key">
+  <h3>Runs entirely in your browser</h3>
+  <p>This calculator makes no network requests of any kind. Nothing you type is transmitted, logged, saved or shared. Close the
+  tab and it is gone. It applies only the tax rules that were verified from official IRS and California Franchise Tax Board
+  publications; every rule it deliberately omits is listed below the result.</p>
+</div>
+
+<noscript><p class="callout callout-warn"><strong>JavaScript is off.</strong> The calculator needs JavaScript to run locally. The
+rules it implements are documented in full on the <a href="tax.html">after-tax module</a> page, and you can work the arithmetic by
+hand from those schedules.</p></noscript>
+
+<form id="calc" class="calc" autocomplete="off">
+  <fieldset>
+    <legend>Filing status</legend>
+    <label for="status">Filing status
+      <select id="status" name="status">
+        <option value="single">Single</option>
+        <option value="married_joint">Married filing jointly</option>
+        <option value="married_separate">Married filing separately</option>
+        <option value="head_of_household">Head of household</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Other income <span class="hint">so the brackets stack correctly</span></legend>
+    <label for="otherIncome">Wages and other ordinary income <input type="number" id="otherIncome" value="0" min="0" step="1000"></label>
+    <label for="otherGain">Other long-term capital gain this year <input type="number" id="otherGain" value="0" min="0" step="1000"></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>The sale</legend>
+    <label for="price">Contract sale price <input type="number" id="price" value="0" min="0" step="1000"></label>
+    <label for="costs">Selling costs &mdash; commission, transfer tax, legal <input type="number" id="costs" value="0" min="0" step="1000"></label>
+    <label for="payoff">Mortgage pay-off including any penalty <input type="number" id="payoff" value="0" min="0" step="1000"></label>
+    <label for="basis">Original cost basis <input type="number" id="basis" value="0" min="0" step="1000"></label>
+    <label for="improvements">Capitalised improvements added to basis <input type="number" id="improvements" value="0" min="0" step="1000"></label>
+    <label for="depreciation">Depreciation taken or allowable since acquisition <input type="number" id="depreciation" value="0" min="0" step="1000"></label>
+  </fieldset>
+
+  <p class="calc-actions">
+    <button type="submit">Calculate after-tax proceeds</button>
+    <button type="reset" class="ghost">Clear</button>
+  </p>
+</form>
+
+<div id="result" class="calc-result" hidden aria-live="polite"></div>
+
+<h2>Rules this calculator applies</h2>
+<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>Rule</th><th scope='col'>Applied value</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>Federal ordinary brackets</td><td>10 / 12 / 22 / 24 / 32 / 35 / 37% (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>Federal long-term capital gain</td><td>0% up to the zero ceiling, 15% to the fifteen ceiling, 20% above (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>Unrecaptured section 1250 gain</td><td>25% maximum</td><td><a class='src' href='https://www.irs.gov/taxtopics/tc409' rel='noopener noreferrer' target='_blank' title='IRS Topic no. 409 — Capital gains and losses (2025 rates and thresholds)'>S18</a></td></tr><tr><td>Net investment income tax</td><td>3.8% above $200,000 single or $250,000 joint MAGI</td><td><a class='src' href='https://www.irs.gov/individuals/net-investment-income-tax' rel='noopener noreferrer' target='_blank' title='IRS — Net Investment Income Tax'>S19</a></td></tr><tr><td>California income tax</td><td>Ordinary brackets 1% to 12.3% (2025 schedules); gain taxed as ordinary income</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 California Tax Rate Schedules (Form 540)'>S23</a></td></tr><tr><td>Federal standard deduction</td><td>$16,100 single; $32,200 joint (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>California standard deduction</td><td>$5,706 single; $11,412 joint, head of household (2025)</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 Instructions for Form 540'>S24</a></td></tr><tr><td>California Behavioral Health Services Tax</td><td>1% of California taxable income above $1,000,000</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 Instructions for Form 540'>S24</a></td></tr><tr><td>Section 1250 treatment</td><td>Taxed at the lesser of the ordinary marginal rate and the 25% ceiling</td><td><a class='src' href='https://www.irs.gov/taxtopics/tc409' rel='noopener noreferrer' target='_blank' title='IRS Topic no. 409 — Capital gains and losses (2025 rates and thresholds)'>S18</a></td></tr></tbody></table></div>
+
+<h2>Rules this calculator does not apply</h2>
+<div class="callout callout-warn">
+  <ul>
+    <li><strong>California alternative minimum tax</strong> &mdash; the threshold is applied as a warning only, because the computation
+    needs Schedule P (540) preference items from your full return. <code>TX-16</code></li>
+    <li><strong>Property-tax reassessment on sale</strong> &mdash; a cost to the buyer. Not modelled. <code>TX-11</code></li>
+    <li><strong>FTB Form 593 withholding</strong> &mdash; not modelled. <code>TX-12</code></li>
+    <li><strong>Section 199A, Opportunity Zone provisions, itemised deductions, credits and exemption credits, and any depreciation
+    recapture beyond the 25% ceiling</strong> &mdash; not verified, so not applied.</li>
+  </ul>
+  <p>The full machine-readable list of exclusions is in <code>data/rules.json</code>. Have a CPA review any number before it is
+  used in a commitment.</p>
+</div>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p><strong>Privacy.</strong> This site publishes only aggregate, non-identifying findings. No owner name, tenant contact, lease document, parcel identifier, loan figure or financial record appears here. Those belong in the owner's access-controlled internal workspace with authorised advisers.</p>
+    <p><strong>Nature of this site.</strong> It is a research and decision-gate register. It is not an appraisal, a tax opinion, a legal opinion, or investment advice. A blank means "not verified", not "zero".</p>
+    <p class="foot-meta">Built 2026-11-25 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
+  </div>
+</footer>
+</body>
+</html>
