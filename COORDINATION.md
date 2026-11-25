@@ -196,5 +196,6 @@ IR-01 fixed branch (no per-task branches); IR-02 legacy Pages build from `main`;
 | Item | Value |
 | --- | --- |
 | PR | https://github.com/kanlerxz87-cyber/Jackbox3/pull/6 |
-| Merge result | pending — recorded after `gh pr merge 6 --merge` |
-| Pages deployment | pending — confirmed after merge |
+| Merge result | **MERGED** 2026-11-25T14:11:14Z via `gh pr merge 6 --merge`; merge commit `fc58dfa` |
+| Pages deployment | **built** 2026-11-25T14:11:43Z (build `1402443065`, commit `fc58dfa`); live root and `/workspace/` URLs verified with HTTP 200 / fetched content |
+| Conflict rebase note | `git pull --rebase` was attempted before the final push but aborted because replaying `main`'s already-merged commits caused add/add conflicts; `origin/arena/dd713c44-jackbox3` was confirmed an ancestor of `HEAD`, so a fast-forward `git push` was used instead. No work was discarded. |
