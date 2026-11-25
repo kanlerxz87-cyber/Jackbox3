@@ -200,7 +200,7 @@ def page(slug, title, subtitle, sections, base, extra_head="", body_class=""):
     foot = f'''</main>
 <footer class="footer">
 <p>Build {esc(BUILD_DATE)} · session <code>{esc(SESSION_ID)}</code> · model <code>{esc(MODEL_VERSION)}</code> · public anonymous summary only.</p>
-<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the {ilink(("pages/flagged.html" if base == "." else "flagged.html"), "Flagged for Review")} page. Raw verification log: {ilink(("VERIFICATION.md" if base == "." else "../VERIFICATION.md"), "VERIFICATION.md")}.</p>
+<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the {ilink(("pages/flagged.html" if base == "." else "flagged.html"), "Flagged for Review")} page. Raw verification log: {ilink(("../VERIFICATION.md" if base == "." else "../../VERIFICATION.md"), "VERIFICATION.md")}.</p>
 </footer>
 <script src="{js}"></script>
 </body>
@@ -262,7 +262,7 @@ s.append(section("Top risks to resolve before commitment", table("Risk", "Curren
     R("Tenant trend is negative across multiple periods", "Direction noted, not extrapolated", "Multi-year SEC series", "Analysis", ["SEC_10K", "SEC_Q4"], "Same-store sales, unit counts, closures and franchise rental revenue show direction, not one quarter."),
 ], "Manageable risk is maintained by not committing until gates close.")))
 
-PAGES["pages/executive-summary.html"] = page("executive-summary.html", "Executive Summary", "One-page printable summary for advisers — anonymous, source-linked, and explicitly unverified where evidence is missing.", s, "..", "", "printable")
+PAGES["workspace/pages/executive-summary.html"] = page("executive-summary.html", "Executive Summary", "One-page printable summary for advisers — anonymous, source-linked, and explicitly unverified where evidence is missing.", s, "..", "", "printable")
 
 # --- Decision gates --------------------------------------------------------
 begin_page("pages/decision-gates.html")
@@ -283,7 +283,7 @@ s.append(section("Gate rule", table("Rule", "Statement", "Why it matters", [
     R("Observations vs assumptions", "Every model input is labelled Observation (official source) or Assumption (adviser input).", "Keeps projections auditable", "Control", ["CENSUS_ACS", "SEC_10K"], "See Lease & Cash Flow and Market & Trade Area."),
     R("Back-test condition", "Create and back-test a versioned cash-flow model only when verified inputs and sufficient comparable history exist.", "Avoids false precision", "Control", ["SEC_10K", "BLS_LA"], "Currently Not run."),
 ], "These are internal controls, not empirical values.")))
-PAGES["pages/decision-gates.html"] = page("decision-gates.html", "Decision Gates", "Progress board for the evidence that must exist before a sale or renewal commitment.", s, "..")
+PAGES["workspace/pages/decision-gates.html"] = page("decision-gates.html", "Decision Gates", "Progress board for the evidence that must exist before a sale or renewal commitment.", s, "..")
 
 # --- Questions -------------------------------------------------------------
 begin_page("pages/questions.html")
@@ -305,7 +305,7 @@ s.append(section("Questions, information, answers and discovery", table("ID / Qu
     R("Q14 · What is the best decision for wealth preservation and growth?", "Verified rules, regional observations and tenant trend exist; private inputs do not.", "Preserve optionality; close gates; then apply the conditional matrix.", "Analysis", ["IRS_409", "FEMA_NFHL", "CGS_EQZAPP", "SEC_10K"], "See Risks & Decision for the conditional matrix and balanced recommendation."),
 ], "Answers are limited to what official sources support. Missing-information discovery steps are listed in the notes."),
     "This is the requested clear list of questions, information and answers, plus suggestions for discovering what is missing."))
-PAGES["pages/questions.html"] = page("questions.html", "Questions & Answers", "What we have, what we do not have, what can be said now, and how to discover the missing information.", s, "..")
+PAGES["workspace/pages/questions.html"] = page("questions.html", "Questions & Answers", "What we have, what we do not have, what can be said now, and how to discover the missing information.", s, "..")
 
 # --- Market ----------------------------------------------------------------
 begin_page("pages/market.html")
@@ -372,7 +372,7 @@ s.append(section("Observations vs assumptions", table("Class", "Examples", "Rule
     R("Assumption", "Discount rate, rent growth, exit cap rate, repair cost, loss-of-rent months", "Must be labelled and left blank in public tables", "Control", ["IRS_409", "BLS_LA", "SEC_10K"], "Entered only in the private browser calculator."),
     R("Projection", "SCAG 2050 county employment, FY2026 tenant guidance", "Marked as projection/guidance, not observation", "Control", ["SCAG_DEMOG", "SEC_Q4"], "Not back-tested as a parcel forecast."),
 ], "The projection system separates observations from assumptions by construction.")))
-PAGES["pages/market.html"] = page("market.html", "Market & Trade Area", "W-01 trade-area framework, verified regional figures, tract-level trend template, schools, traffic, competitors, planning and job growth.", s, "..")
+PAGES["workspace/pages/market.html"] = page("market.html", "Market & Trade Area", "W-01 trade-area framework, verified regional figures, tract-level trend template, schools, traffic, competitors, planning and job growth.", s, "..")
 
 # --- Hazards ---------------------------------------------------------------
 begin_page("pages/hazards.html")
@@ -414,7 +414,7 @@ s.append(section("Business-as-usual and black-swan stress", table("Scenario", "V
     R("Insurance non-renewal / cost shock", "CDI wildfire and FAIR Plan resources", "Black swan / BAU", "Verified", "CDI", "Parcel premium blank; stress in calculator."),
     R("Combined stress result", "", "Loss of rent + repairs + exit liquidity", "Unverified", ["FEMA_NRI", "CDI", "SEC_10K"], "Requires private inputs; see calculator. Value blank.", True),
 ], "Rare events are represented by official hazard authorities, not by invented probabilities.")))
-PAGES["pages/hazards.html"] = page("hazards.html", "Hazards & Resilience", "W-04 parcel hazard screening, verified regional hazard context, and combined business-as-usual / black-swan stress.", s, "..")
+PAGES["workspace/pages/hazards.html"] = page("hazards.html", "Hazards & Resilience", "W-04 parcel hazard screening, verified regional hazard context, and combined business-as-usual / black-swan stress.", s, "..")
 
 # --- Lease & cash flow -----------------------------------------------------
 begin_page("pages/lease-cashflow.html")
@@ -463,7 +463,7 @@ s.append(section("Versioned cash-flow model", table("Attribute", "Value", "Statu
     R("Observation inputs", "Census, BLS, NCES, SEC, SCAG rows on this site", "Source-linked", "Control", ["CENSUS_CITY", "BLS_LA", "NCES_LAUSD", "SEC_10K", "SCAG_DEMOG"], "See Data & Sources."),
     R("Assumption inputs", "Rent growth, discount rate, exit cap rate, repair cost, downtime", "Private calculator only", "Control", ["IRS_409", "BLS_LA"], "Never published as verified values."),
 ], "The model is a documented framework, not a validated forecast.")))
-PAGES["pages/lease-cashflow.html"] = page("lease-cashflow.html", "Lease & Cash Flow", "Private lease abstract placeholder, notice calendar, W-02 sell-versus-hold worksheet, after-tax module, short-lease discount and versioned model.", s, "..")
+PAGES["workspace/pages/lease-cashflow.html"] = page("lease-cashflow.html", "Lease & Cash Flow", "Private lease abstract placeholder, notice calendar, W-02 sell-versus-hold worksheet, after-tax module, short-lease discount and versioned model.", s, "..")
 
 # --- Calculator ------------------------------------------------------------
 calc_extra = '<script src="../assets/calculator.js" defer></script>'
@@ -531,7 +531,7 @@ s.append(section("Input classification", table("Class", "Examples", "Handling", 
     R("Assumption (private)", "Sale price, basis, rent, discount rate, repair cost, downtime", "Browser only; blank by default", "Control", ["IRS_409", "FEMA_NRI"], "Not published; not stored."),
     R("Back-test", "", "NOT RUN", "Not run", ["SEC_10K", "BLS_LA"], "Requires verified inputs and sufficient comparable history.", True),
 ], "Observations and assumptions are kept separate by construction.")))
-PAGES["pages/calculator.html"] = page("calculator.html", "Private Calculator", "A browser-only after-tax sell-versus-hold calculator with combined hazard/financial stress. No data leaves the browser.", s, "..", calc_extra)
+PAGES["workspace/pages/calculator.html"] = page("calculator.html", "Private Calculator", "A browser-only after-tax sell-versus-hold calculator with combined hazard/financial stress. No data leaves the browser.", s, "..", calc_extra)
 
 # --- Risks -----------------------------------------------------------------
 begin_page("pages/risks.html")
@@ -561,7 +561,7 @@ s.append(section("Balanced recommendation for the individual", table("Objective"
     R("Manageable level of risk", "Use the browser calculator to stress loss of rent, repairs and exit liquidity together; require hazard zones and insurance quotes before commitment.", "BAU and black swan treated together", "Analysis", ["FEMA_NRI", "CGS_PROGRAM", "CALFIRE_FHSZ", "CDI"], "No invented probabilities."),
     R("Best course of action today", "Preserve optionality and close the decision gates; then apply the conditional matrix.", "Wealth + growth balance", "Analysis", ["IRS_409", "FEMA_NFHL", "CGS_EQZAPP", "SEC_10K"], "This is the supportable decision given the evidence that exists."),
 ], "The recommended balance is a process decision now and an evidence-based property decision after the gates close.")))
-PAGES["pages/risks.html"] = page("risks.html", "Risks & Decision", "Risks for every possible decision, business-as-usual and black-swan events, conditional decision matrix, and the balanced wealth/growth recommendation.", s, "..")
+PAGES["workspace/pages/risks.html"] = page("risks.html", "Risks & Decision", "Risks for every possible decision, business-as-usual and black-swan events, conditional decision matrix, and the balanced wealth/growth recommendation.", s, "..")
 
 # --- Data & sources --------------------------------------------------------
 begin_page("pages/data-sources.html")
@@ -585,7 +585,7 @@ s.append(section("Verification summary", table("Measure", "Value", "Meaning", [
     R("Model version", MODEL_VERSION, "Framework only", "Control", "SEC_10K", "Back-test NOT RUN."),
     R("Build date", BUILD_DATE, "UTC", "Control", "GH_PAGES_DOCS", "Site build date."),
 ], "Counts are generated from the same data register that renders the site.")))
-PAGES["pages/data-sources.html"] = page("data-sources.html", "Data & Sources", "Master official source register, verification summary, and links for manual review.", s, "..")
+PAGES["workspace/pages/data-sources.html"] = page("data-sources.html", "Data & Sources", "Master official source register, verification summary, and links for manual review.", s, "..")
 
 # --- Flagged for review ----------------------------------------------------
 begin_page("pages/flagged.html")
@@ -612,7 +612,7 @@ ir_rows = [R(i, "", desc, "Flagged", srcid, note, True) for i, desc, srcid, note
 s.append(section("Irregularities for review", table("ID", "Value", "Irregularity", ir_rows,
     "Clearly labelled Flagged for Review page. Irregularities and unverified items do not block the merge."),
     "Each row links to an official site for manual review; process irregularities cite official product documentation."))
-PAGES["pages/flagged.html"] = page("flagged.html", "Flagged for Review", "Clearly labelled page for unverified values and irregularities, with official source links. Does not block the merge.", s, "..")
+PAGES["workspace/pages/flagged.html"] = page("flagged.html", "Flagged for Review", "Clearly labelled page for unverified values and irregularities, with official source links. Does not block the merge.", s, "..")
 
 # --- Suggestions -----------------------------------------------------------
 begin_page("pages/suggestions.html")
@@ -641,7 +641,7 @@ s.append(section("Review workflow", table("Step", "Action", "Rule", [
     R("2", "Adopted items are written as new tasks in COORDINATION.md with owner and file scope.", "Separate change task required", "Control", "GH_PAGES_DOCS", "Prevents unreviewed changes."),
     R("3", "Only after that task is claimed are site changes made and re-verified line by line.", "Re-verification required", "Control", "CENSUS_ACS", "Every new row needs an official source link."),
 ], "This implements the requested 'review suggestions and choose the best path before implementing any changes'.")))
-PAGES["pages/suggestions.html"] = page("suggestions.html", "Suggestions", "Dedicated section for suggestions, with a review-and-choose workflow that implements nothing until a path is selected.", s, "..")
+PAGES["workspace/pages/suggestions.html"] = page("suggestions.html", "Suggestions", "Dedicated section for suggestions, with a review-and-choose workflow that implements nothing until a path is selected.", s, "..")
 
 # --- Privacy ---------------------------------------------------------------
 begin_page("pages/privacy.html")
@@ -667,7 +667,7 @@ s.append(section("Legal / official basis", table("Authority", "Relevance", "Sour
     R("Census Geocoder", "Official address-to-geography matching; used only in the secure workflow.", "U.S. Census Bureau", "Verified", "CENSUS_GEOCODER", "No address published."),
     R("FEMA / CGS / CAL FIRE map portals", "Parcel lookups require an address; therefore they belong to the private workflow.", "Federal / California agencies", "Verified", ["FEMA_NFHL", "CGS_EQZAPP", "CALFIRE_FHSZ"], "Regional context is published; parcel status is not."),
 ], "Official sources underpin the privacy boundary as well as the data.")))
-PAGES["pages/privacy.html"] = page("privacy.html", "Privacy & Data Handling", "Highest-urgency privacy policy: anonymisation, placeholders, internal-only records, and the secure location workflow.", s, "..")
+PAGES["workspace/pages/privacy.html"] = page("privacy.html", "Privacy & Data Handling", "Highest-urgency privacy policy: anonymisation, placeholders, internal-only records, and the secure location workflow.", s, "..")
 
 # --- Dashboard -------------------------------------------------------------
 verified_count = len(VERIFIED_ROWS)
@@ -715,7 +715,7 @@ dash.append(section("Start here", table("Step", "Page", "Why", [
     R("4", ilink("./pages/risks.html", "Risks & Decision"), "Conditional best-decision rule and balanced recommendation.", "Control", "IRS_409", "No winner yet."),
     R("5", ilink("./pages/flagged.html", "Flagged for Review"), "Unverified items and irregularities for manual review.", "Control", "CENSUS_COUNTY", "Does not block the merge."),
 ], "Suggested reading order.")))
-PAGES["index.html"] = page("index.html", "Dashboard", "Clean landing page for the anonymous, source-linked property decision workspace.", dash, ".", body_class="dashboard")
+PAGES["workspace/index.html"] = page("index.html", "Dashboard", "Clean landing page for the anonymous, source-linked property decision workspace.", dash, ".", body_class="dashboard")
 
 # ---------------------------------------------------------------------------
 # Write everything

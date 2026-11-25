@@ -1,82 +1,105 @@
-# Jackbox3 — anonymous property decision workspace
+# Jackbox3 — property decision workspace
 
-This repository publishes a **public, anonymous** decision-support site for a single-tenant
-NNN property described as a Jack in the Box around central Los Angeles, with an
-**owner-supplied, unverified** lease-expiry range of 2030–2035. The question is whether to
-sell before expiry or to renew, based on verified local economic evidence, while preserving
-wealth, retaining growth opportunity and keeping risk manageable.
+A static, dependency-free research site for one decision: **sell a central-Los Angeles
+net-leased Jack in the Box building before its lease expires, or renew it.**
 
-## Privacy is the highest-priority control
+The site publishes only aggregate, non-identifying findings from official sources. It does
+**not** contain the owner's identity, the tenant contact, the lease, the parcel identifier,
+the loan, or any financial record. See `methodology.html`.
 
-- **No parcel address, APN, owner name, lease file, contact detail or owner financial data
-  appears on the site.** All subject-property fields use `[REDACTED-…]` placeholders.
-- Exact location is used only in a secure, offline adviser workflow to select consistent
-  Census tracts and official planning, traffic, school and competitor evidence.
-- Only aggregate official statistics and anonymised analytical findings are published.
-- See [`pages/privacy.html`](pages/privacy.html) and the
-  [California Attorney General CCPA page](https://oag.ca.gov/privacy/ccpa).
+**Live site:** https://kanlerxz87-cyber.github.io/Jackbox3/
 
-## Site
+## What is here
 
-- Live via GitHub Pages from `main` / root: <https://kanlerxz87-cyber.github.io/Jackbox3/>
-- Landing page: [`index.html`](index.html)
-- Subpages are organised by category under [`pages/`](pages/):
-
-| Category | Pages |
-| --- | --- |
-| Overview | Executive Summary (one-page printable), Decision Gates |
-| Decide | Risks & Decision, Questions & Answers, Suggestions |
-| Evidence | Market & Trade Area, Hazards & Resilience, Data & Sources, Flagged for Review |
-| Tools | Lease & Cash Flow, Private Calculator, Privacy & Data Handling |
-
-The **Private Calculator** runs entirely in the reader's browser: no network requests,
-no cookies, no localStorage/sessionStorage, no analytics. Verified official tax rates are
-pre-filled; all property-specific inputs are blank assumptions.
-
-## Verification rule
-
-> Every table row links to an official source. If a value cannot be confirmed from an
-> official source, the value cell is **left blank** and flagged **Unverified**. Nothing is
-> inferred or filled in.
-
-- [`SOURCES.md`](SOURCES.md) — official source register with links for manual review.
-- [`VERIFICATION.md`](VERIFICATION.md) — line-by-line verification log of every published value.
-- [`data/verified-observations.json`](data/verified-observations.json) — machine-readable observations.
-- [`pages/data-sources.html`](pages/data-sources.html) — combined on-site register.
-- [`pages/flagged.html`](pages/flagged.html) — clearly labelled **Flagged for Review** page
-  for unverified values and irregularities (does not block the merge).
-
-Official sources used include the U.S. Census Bureau (QuickFacts, ACS, CBP, data.census.gov,
-Geocoder, OnTheMap), BLS, NCES, IRS, California FTB, FEMA, USGS, California Geological Survey,
-CAL FIRE / OSFM, California Department of Insurance, SEC EDGAR, SCAG, Caltrans, LA City
-Planning, LA County Assessor, California Legislative Information and the California Attorney
-General.
-
-## Build and check locally
-
-```sh
-python3 tools/build_site.py      # regenerates HTML + source/verification registers
-python3 tools/validate_site.py   # link check, official-source check, privacy scan
-python3 -m http.server 8000 --bind 0.0.0.0   # optional local preview
+```
+index.html                    dashboard
+executive-summary.html        findings, what they support, action sequence
+questions.html                W-03 · 20 decision gates, blocking ones first
+trade-area.html               W-01 · Census-tract figures replacing city/county proxies
+valuation.html                W-02 · sell-versus-hold worksheet, no winner selected
+hazards.html                  W-04 · FEMA flood, CAL FIRE, USGS seismic, FEMA NRI
+tax.html                      after-tax module from verified IRS/FTB rules
+economy.html                  labour, prices, tenant same-store series
+demographics.html             tract income, hardship, tenure
+schools.html                  verified district data + the gap that remains
+tenant-credit.html            the tenant read from its own SEC filings
+risk.html                     risk register, black swans, tripwires
+suggestions.html              twelve improvements, rankable by the owner
+flagged-for-review.html       every unverified and caveated item, with sources
+sources.html                  source register: 27 sources, cited-by column
+methodology.html              verification rules and privacy model
+calculator.html               private in-browser after-tax calculator
+advisor-one-page.html         W-10 · printable one-sheet
 ```
 
-`tools/validate_site.py` fails the build if any internal link is broken, any table row lacks
-an official source link, any Verified row lacks a `.gov` source, any unverified value is not
-blank, or any personal-information pattern is detected.
+Supporting files:
 
-## Decision posture
+```
+data/findings.json            every finding: value, unit, period, geography, status, source
+data/rules.json               verified tax rules + the explicit list of excluded rules
+assets/style.css              all styling; no frameworks, no web fonts
+assets/calculator.js          the only script; no network APIs of any kind
+build.py                      generates every HTML page from the two JSON files
+scripts/check_site.py         integrity checks (links, sources, privacy, calculator)
+COORDINATION.md               shared multi-agent task board and verification log
+```
 
-The site deliberately **does not select a winner** between selling and renewing until verified
-private inputs exist. The best currently supportable decision is to **preserve optionality**:
-close decision gates G1–G8 (private lease abstract, notice calendar, parcel hazard zones,
-engineering/insurance, tax inputs, real short-lease quotes, back-tested cash-flow model,
-trade-area figures), then apply the conditional decision matrix in
-[`pages/risks.html`](pages/risks.html).
+## Rebuilding
 
-## Coordination
+```bash
+python3 build.py          # regenerate all pages + sitemap + robots
+python3 scripts/check_site.py   # must print PASSED before publishing
+```
 
-[`COORDINATION.md`](COORDINATION.md) is the shared task board for parallel agent sessions:
-task status, owner session ID, file scope, sources used, verification performed and
-irregularities. Environment constraint IR-01 records that this Arena session fixes the branch
-to `arena/dd713c44-jackbox3`, so isolation is enforced by non-overlapping file scopes rather
-than per-task branches.
+There are no dependencies beyond the Python standard library.
+
+## The verification rules
+
+1. A value is present only if an official source produced it. Otherwise it is blank and flagged.
+2. Nothing is inferred, interpolated or filled in. A null from a source stays a null.
+3. Arithmetic on verified values is allowed, marked `derived`, and carries its formula.
+4. Observations and assumptions never share a column. Assumptions live only in the calculator.
+5. A proxy is labelled a proxy. The reference coordinate is not the parcel.
+6. A gap is a finding: it names the document that would close it and who holds it.
+
+## Status of the work
+
+No sell-or-renew recommendation is made, because the three inputs that determine the answer —
+market value, adjusted basis, and the lease terms — are not verified and cannot be obtained
+from public sources. `questions.html` lists the twenty gates that stand in the way.
+
+The one firm conclusion, argued in `executive-summary.html` and `risk.html`, is about
+sequencing: the material downside scenarios here are liquidity events that remove the owner's
+ability to choose, so the reserve and the information gates matter more than the timing of a
+listing.
+
+## Privacy
+
+Design choice: **non-collection**, not redaction. The project never gathered the private data,
+so there is nothing to leak. The calculator runs entirely in the browser tab and makes no
+network requests; `scripts/check_site.py` fails the build if that stops being true.
+
+## Additional source-verified audit workspace (`/workspace/`)
+
+Session `dd713c44` added a second, independent, source-linked decision workspace under
+[`workspace/index.html`](workspace/index.html). It keeps the same privacy rules (no personal
+information, redacted placeholders, aggregate official data only) and adds:
+
+- `SOURCES.md` — official source register with links for manual review.
+- `VERIFICATION.md` — line-by-line verification log of every published value.
+- `data/verified-observations.json` — machine-readable verified observations.
+- `tools/build_site.py` — single generator; `tools/validate_site.py` — link / source / privacy checks.
+- `workspace/pages/*` — dashboard subpages by category, including a **Flagged for Review** page
+  and a **Suggestions** page with a review-and-choose workflow.
+- `workspace/assets/calculator.js` — private browser-only after-tax calculator (no network, no storage).
+
+Rebuild and check:
+
+```bash
+python3 tools/build_site.py
+python3 tools/validate_site.py
+python3 scripts/check_site.py
+```
+
+The two workspaces are deliberately complementary: this root dashboard is session `47b70455`'s
+integrated site; `/workspace/` is session `dd713c44`'s independently verified audit trail.
