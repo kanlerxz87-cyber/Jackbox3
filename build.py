@@ -70,14 +70,26 @@ def source_link(sid: str, smap: dict) -> str:
         esc(s["url"]), esc(s["name"]), esc(sid))
 
 
+# Units whose values are plain integers that read better with thousands separators.
+# Codes such as GEOIDs and FIPS are deliberately excluded: a comma would corrupt them.
+THOUSANDS_UNITS = {
+    "USD", "USD/month", "USD per year", "USD/year", "USD total income",
+    "persons", "students", "thousand jobs", "sq ft", "events",
+    "USD taxable income", "USD/sf/year or USD/month",
+}
+
+
 def fmt_value(row: dict) -> str:
     v = row.get("value", "")
     if v == "" or v is None:
         return "<span class='unverified-value'>Not verified</span>"
     unit = row.get("unit", "")
+    shown = str(v)
+    if unit in THOUSANDS_UNITS and shown.isdigit() and len(shown) > 3:
+        shown = "{:,}".format(int(shown))
     if unit and unit not in ("text", "\u2014"):
-        return "<span class='num'>%s</span> <span class='unit'>%s</span>" % (esc(v), esc(unit))
-    return esc(v)
+        return "<span class='num'>%s</span> <span class='unit'>(%s)</span>" % (esc(shown), esc(unit))
+    return esc(shown)
 
 
 def table(headers, rows, cls: str = "data") -> str:
