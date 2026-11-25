@@ -283,7 +283,7 @@ def build(findings, rules):
   </a>
   <a class="card" href="questions.html">
     <h3>2 &middot; Decision gates</h3>
-    <p>@@UNV@@ items are recorded as not verified. Each gate names the question, the document that answers it, and who holds it.</p>
+    <p>@@GATES@@ gates stand between here and a reasonable decision, and @@UNV@@ values are recorded as not verified. Each gate names the question, the document that answers it, and who holds it.</p>
     <span class="card-go">Open the gate board &rarr;</span>
   </a>
   <a class="card" href="trade-area.html">
@@ -327,7 +327,7 @@ def build(findings, rules):
 <h2>How the status labels work</h2>
 @@STATUS_TABLE@@
 """
-    dash = render(dash, KPI=kpi, DOMAIN=domain,
+    dash = render(dash, KPI=kpi, DOMAIN=domain, GATES=20,
                   UNV=counts["unverified"], FLAG=counts["flagged"],
                   STATUS_TABLE=table(["Label", "Means"], [
                       [status_badge("verified"), "Read directly from an official government, state GIS or SEC source during this build. The source link is on the row."],

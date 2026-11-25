@@ -47,7 +47,7 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-19 | Methodology + privacy model | done | `47b70455` | `methodology.html` (generated) |
 | T-20 | Link + integrity check script | done | `47b70455` | `scripts/check_site.py` |
 | T-21 | Integration: merge, re-verify, publish to Pages | done | `47b70455` | `main` |
-| T-22 | Pull request → merge → confirm deploy | done | `47b70455` | `main` |
+| T-22 | Pull request → merge → confirm deploy (PR #1) | done | `47b70455` | `main` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
@@ -100,4 +100,36 @@ Full detail is in `data/findings.json` (machine) and `sources.html` (human). Sum
 
 ## PR + deploy record
 
-_Filled in after merge — see final entry._
+| Field | Value |
+|---|---|
+| Pull request | [#1](https://github.com/kanlerxz87-cyber/Jackbox3/pull/1) — "Property decision workspace: verified findings site, after-tax calculator, and review board" |
+| Base / head | `main` ← `arena/47b70455-jackbox3` |
+| Merge method | squash |
+| Merge result | **MERGED** at 2026-11-25T13:57:56Z |
+| Merge commit | `c5986ceb20f5674e3c99e3f0fa1ce142d9eeff14` |
+| Pages build | **built** — commit `c5986ce`, created 13:57:58Z, completed 13:58:33Z, `error: null` |
+| Live URL | https://kanlerxz87-cyber.github.io/Jackbox3/ |
+| Post-deploy verification | Live HTML fetched over the public internet for `index.html`, `flagged-for-review.html` and `calculator.html`. Content, navigation, styling and source links all render. |
+
+Flagged irregularities and unverified items did not block the merge; they are published on
+`flagged-for-review.html` with source links, as instructed.
+
+### Second verification pass, same session
+
+After the first self-check, three items were reopened and two were improved rather than left as they were:
+
+1. **`TX-07` recovered from unverified to verified.** The FTB 2025 Form 540 instructions were retrievable on a
+   retry, which confirmed the 1% Behavioral Health Services Tax above $1,000,000 (line 62). It is now applied in
+   the calculator instead of excluded.
+2. **California standard deduction verified** from the same document (line 18 chart): $5,706 single, $11,412
+   joint / head of household. Added as `TX-15`. The calculator had been using the federal figure for California,
+   which was wrong and is now corrected.
+3. **Section 1250 treatment corrected.** IRS Topic 409 describes 25% as a *maximum* rate, not a flat rate. The
+   calculator now taxes the recaptured amount at the lesser of the ordinary marginal rate and the 25% ceiling.
+   Worked by hand against the published brackets to confirm.
+4. **California AMT added as a visible exclusion** with its published thresholds (`TX-16`), so the reader knows
+   when to ask a CPA rather than being told nothing.
+5. One stale dashboard sentence ("32 items are recorded as not verified" where the gate count was meant) was
+   corrected to state both counts.
+
+Nothing in this pass changed a published value without a source; each change is traceable to `S24` or `S18`.
