@@ -1,7 +1,7 @@
 {
-  "build_date": "2026-11-25",
-  "model_version": "v0.1-framework",
-  "session": "dd713c44",
+  "build_date": "2026-11-26",
+  "model_version": "v0.2-framework",
+  "session": "dd713c44 (updated 2026-11-26)",
   "verified_observations": [
     {
       "page": "pages/executive-summary.html",
@@ -96,11 +96,14 @@
     {
       "page": "pages/questions.html",
       "indicator": "Q08 \u00b7 What is the tenant's direction, not one quarter?",
-      "value": "FY2025 system same-store sales -4.2%; FY2024 -1.3%; FY2025 31 openings / 86 closures; franchise rental revenues FY2023-2025 $364,591k / $375,428k / $368,643k.",
-      "scope": "Direction is negative across multiple periods.",
+      "value": "Q3 FY2026 SSS -1.1% (40-wk YTD -4.2%); FY2025 SSS -4.2%; unit count fell to 2,115; 40-wk variable percentage rent -18.0%; $1,492.0m securitized debt ARDs in 2029/2031/2032 + $23.3m cash sweep; 2026-27 C-suite turnover.",
+      "scope": "Direction is negative with near-window debt maturities.",
       "sources": [
         "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm",
-        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm"
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm",
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm",
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000090/ex991-q326earningsrelease.htm",
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000100/jack-20261113.htm"
       ]
     },
     {
@@ -258,11 +261,66 @@
     },
     {
       "page": "pages/market.html",
-      "indicator": "Los Angeles Unified students",
-      "value": "408,026",
+      "indicator": "Population estimate (LA County)",
+      "value": "9,694,934",
+      "scope": "Los Angeles County, July 1, 2025 (V2025)",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia,losangelescountycalifornia/RHI125217"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Median household income (LA County)",
+      "value": "$90,112",
+      "scope": "Los Angeles County, 2020-2024 (2024 dollars)",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia,losangelescountycalifornia/RHI125217"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Population estimate (LA County, DOF E-1)",
+      "value": "9,837,286",
+      "scope": "Los Angeles County, Jan 1, 2026 (-0.6% YoY)",
+      "sources": [
+        "https://dof.ca.gov/media/docs/forecasting/demographics/estimates/e-1_2026_press_release.Pdf"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "County SA unemployment & QSR jobs",
+      "value": "4.6% SA unemp / 193,200 NAICS 722513 jobs",
+      "scope": "Los Angeles County, Oct 2026 (prelim)",
+      "sources": [
+        "https://labormarketinfo.edd.ca.gov/file/lfmonth/la$pds.pdf"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "California & AB 1228 fast-food minimum wage",
+      "value": "$16.90 statewide / $20.00 fast-food",
+      "scope": "California statutory floor (2026)",
+      "sources": [
+        "https://www.dir.ca.gov/dlse/minimum_wage.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "County Real GDP & Personal Income",
+      "value": "$802.0B Real GDP (2023) / $818.5B Income (2024)",
+      "scope": "Los Angeles County (#1 US county)",
+      "sources": [
+        "https://www.bea.gov/sites/default/files/2026-02/lagdppi0226.pdf"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Los Angeles Unified students & CAASPP trend",
+      "value": "408,026 students; +3.4 ELA / +3.9 Math / +3.3 Science pp",
       "scope": "2024-2025 school year",
       "sources": [
-        "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710"
+        "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710",
+        "https://www.cde.ca.gov/nr/ne/yr25/yr25rel43.asp"
       ]
     },
     {
@@ -281,6 +339,63 @@
       "scope": "Jack in the Box brand, FY2025",
       "sources": [
         "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Q3 FY2026 & 40-wk YTD same-store sales",
+      "value": "-1.1% Q3 / -4.2% 40-wk YTD",
+      "scope": "Ended July 5, 2026",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm",
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000090/ex991-q326earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Jack in the Box restaurants, Q3 FY2026",
+      "value": "2,115",
+      "scope": "Ended July 5, 2026 (vs 2,168 Q3 FY25)",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm",
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000090/ex991-q326earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Securitized debt stack & ARDs",
+      "value": "$1,492.0m (4.14%-7.62%; $23.3m cash sweep)",
+      "scope": "As of July 5, 2026",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm",
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000079/ex991-pressreleasexdebtclo.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Standard lease terms (10-Q Note 5)",
+      "value": "20-yr initial + 1-20 yr tenant sole-discretion options",
+      "scope": "Q3 FY2026 Form 10-Q",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Del Taco & Qdoba exposures",
+      "value": "$(47.4)m loss + Chancery suit; $22.9m Qdoba lease guarantees",
+      "scope": "Q3 FY2026 Form 10-Q",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm"
+      ]
+    },
+    {
+      "page": "pages/market.html",
+      "indicator": "Governance & C-suite transitions (2026 8-Ks)",
+      "value": "CEO/CFO/CSCO turnover; President Sep 2026; Rights Plan & activist pact to 2028",
+      "scope": "Mar-Nov 2026",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000100/jack-20261113.htm"
       ]
     },
     {
@@ -457,6 +572,15 @@
     },
     {
       "page": "pages/hazards.html",
+      "indicator": "USGS UCERF3 30-year LA earthquake odds",
+      "value": "60% M>=6.7 / 46% M>=7.0 / 31% M>=7.5",
+      "scope": "30-year regional forecast",
+      "sources": [
+        "https://www.usgs.gov/faqs/what-probability-earthquake-will-occur-los-angeles-area-san-francisco-bay-area"
+      ]
+    },
+    {
+      "page": "pages/hazards.html",
       "indicator": "CAL FIRE FHSZ classes",
       "value": "Moderate / High / Very High",
       "scope": "State Responsibility Area",
@@ -475,8 +599,8 @@
     },
     {
       "page": "pages/hazards.html",
-      "indicator": "Insurance oversight",
-      "value": "Wildfire, FAIR Plan and Sustainable Insurance Strategy resources",
+      "indicator": "Insurance oversight & FAIR Plan cap",
+      "value": "$20M/bldg, $100M/loc commercial limits (sunset Jan 1, 2028)",
       "scope": "California Department of Insurance",
       "sources": [
         "https://www.insurance.ca.gov/"
@@ -549,20 +673,22 @@
     },
     {
       "page": "pages/lease-cashflow.html",
-      "indicator": "Federal long-term capital gain rates",
+      "indicator": "Federal long-term capital gain rates (2026)",
       "value": "0% / 15% / 20%",
-      "scope": "2025 tax year",
+      "scope": "Tax year 2026 (Rev. Proc. 2025-32)",
       "sources": [
-        "https://www.irs.gov/taxtopics/tc409"
+        "https://www.irs.gov/taxtopics/tc409",
+        "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf"
       ]
     },
     {
       "page": "pages/lease-cashflow.html",
-      "indicator": "Unrecaptured section 1250 gain",
-      "value": "maximum 25%",
-      "scope": "2025 tax year",
+      "indicator": "Unrecaptured section 1250 gain & Schedule D order",
+      "value": "Maximum 25% (enters Schedule D Line 14)",
+      "scope": "IRS Schedule D Tax Worksheet",
       "sources": [
-        "https://www.irs.gov/taxtopics/tc409"
+        "https://www.irs.gov/taxtopics/tc409",
+        "https://www.irs.gov/instructions/i1040sd"
       ]
     },
     {
@@ -585,38 +711,60 @@
     },
     {
       "page": "pages/lease-cashflow.html",
-      "indicator": "California capital gains",
-      "value": "Taxed as ordinary income",
-      "scope": "California personal income",
+      "indicator": "California capital gains & ordinary brackets",
+      "value": "1% to 12.3% ordinary rates (no LTCG discount)",
+      "scope": "2025 Form 540",
       "sources": [
-        "https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html"
+        "https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html",
+        "https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf",
+        "https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html"
       ]
     },
     {
       "page": "pages/lease-cashflow.html",
-      "indicator": "California personal income tax rates",
-      "value": "1% to 12.3%",
-      "scope": "Nine rates under PITL",
+      "indicator": "California Behavioral Health Services Tax",
+      "value": "+1% over $1,000,000 (13.3% max)",
+      "scope": "Form 540 Line 62",
       "sources": [
-        "https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf"
-      ]
-    },
-    {
-      "page": "pages/lease-cashflow.html",
-      "indicator": "CA maximum personal income tax rate",
-      "value": "13.3%",
-      "scope": "FTB summary of federal changes",
-      "sources": [
+        "https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html",
         "https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "FTB Form 593 closing withholding (prepayment)",
+      "value": "3-1/3% sales price or 12.3% optional gain",
+      "scope": "2026 Form 593",
+      "sources": [
+        "https://www.ftb.ca.gov/forms/2026/2026-593-instructions.html"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "Prop 13 reassessment & LA County avg rate",
+      "value": "Reassessed to sale price; 1.181% LA County avg",
+      "scope": "BOE FY2024-25 Pub 306",
+      "sources": [
+        "https://www.boe.ca.gov/legdiv/2024-2025/pub306.pdf"
+      ]
+    },
+    {
+      "page": "pages/lease-cashflow.html",
+      "indicator": "City of LA Transfer Tax + Measure ULA (post-June 2026)",
+      "value": "0.56% <=$5.4M / 4.56% ($5.4M-$10.9M) / 6.06% >=$10.9M",
+      "scope": "Effective after June 30, 2026",
+      "sources": [
+        "https://finance.lacity.gov/faq/measure-ula"
       ]
     },
     {
       "page": "pages/calculator.html",
       "indicator": "Federal long-term capital gain rate",
-      "value": "15%",
-      "scope": "2025 rate for most individuals",
+      "value": "15% (0% / 15% / 20%)",
+      "scope": "2026 thresholds (Rev. Proc. 2025-32)",
       "sources": [
-        "https://www.irs.gov/taxtopics/tc409"
+        "https://www.irs.gov/taxtopics/tc409",
+        "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf"
       ]
     },
     {
@@ -625,26 +773,37 @@
       "value": "25%",
       "scope": "Maximum rate on section 1250 real property",
       "sources": [
-        "https://www.irs.gov/taxtopics/tc409"
+        "https://www.irs.gov/taxtopics/tc409",
+        "https://www.irs.gov/instructions/i1040sd"
       ]
     },
     {
       "page": "pages/calculator.html",
       "indicator": "Net investment income tax",
       "value": "3.8%",
-      "scope": "Above applicable thresholds",
+      "scope": "Above applicable MAGI thresholds",
       "sources": [
         "https://www.irs.gov/taxtopics/tc559"
       ]
     },
     {
       "page": "pages/calculator.html",
-      "indicator": "California marginal rate",
-      "value": "12.3%",
-      "scope": "Top PITL rate; +1% over $1,000,000",
+      "indicator": "California marginal rate & BHST",
+      "value": "12.3% (+1% >$1,000,000)",
+      "scope": "Form 540 & Line 62 BHST",
       "sources": [
         "https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf",
+        "https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html",
         "https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html"
+      ]
+    },
+    {
+      "page": "pages/calculator.html",
+      "indicator": "City of LA Transfer Tax + Measure ULA",
+      "value": "0.56% base; +4.0% >$5.4M; +5.5% >=$10.9M",
+      "scope": "Effective post-June 30, 2026",
+      "sources": [
+        "https://finance.lacity.gov/faq/measure-ula"
       ]
     },
     {
@@ -667,11 +826,56 @@
     },
     {
       "page": "pages/data-sources.html",
+      "indicator": "CENSUS_COUNTY",
+      "value": "U.S. Census Bureau",
+      "scope": "U.S. Census Bureau QuickFacts \u2014 Los Angeles city & Los Angeles County, California",
+      "sources": [
+        "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia,losangelescountycalifornia/RHI125217"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CA_DOF_E1",
+      "value": "California Department of Finance",
+      "scope": "E-1 Cities, Counties, and State Population Estimates (Jan 1, 2026)",
+      "sources": [
+        "https://dof.ca.gov/media/docs/forecasting/demographics/estimates/e-1_2026_press_release.Pdf"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
       "indicator": "BLS_LA",
       "value": "U.S. Bureau of Labor Statistics",
       "scope": "Economy at a Glance \u2014 Los Angeles-Long Beach-Santa Ana, CA",
       "sources": [
         "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CA_EDD_LA",
+      "value": "California Employment Development Department",
+      "scope": "Los Angeles County Monthly Labor Force & Industry Employment (Oct 2026p)",
+      "sources": [
+        "https://labormarketinfo.edd.ca.gov/file/lfmonth/la$pds.pdf"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CA_DIR",
+      "value": "California Department of Industrial Relations",
+      "scope": "California Minimum Wage & AB 1228 Fast Food Minimum Wage",
+      "sources": [
+        "https://www.dir.ca.gov/dlse/minimum_wage.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "BEA_LA",
+      "value": "U.S. Bureau of Economic Analysis",
+      "scope": "Personal Income & Real GDP by County (BEA 26-08 / BEA 24-60)",
+      "sources": [
+        "https://www.bea.gov/sites/default/files/2026-02/lagdppi0226.pdf"
       ]
     },
     {
@@ -685,11 +889,38 @@
     },
     {
       "page": "pages/data-sources.html",
+      "indicator": "CDE_CAASPP",
+      "value": "California Department of Education",
+      "scope": "2024-25 California Statewide Assessment Results (CAASPP Release yr25rel43)",
+      "sources": [
+        "https://www.cde.ca.gov/nr/ne/yr25/yr25rel43.asp"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
       "indicator": "IRS_409",
       "value": "Internal Revenue Service",
       "scope": "Topic no. 409, Capital gains and losses",
       "sources": [
         "https://www.irs.gov/taxtopics/tc409"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "IRS_REVPROC_2026",
+      "value": "Internal Revenue Service",
+      "scope": "IRS Rev. Proc. 2025-32 \u2014 2026 Inflation-Adjusted Tax Items",
+      "sources": [
+        "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "IRS_SCHED_D",
+      "value": "Internal Revenue Service",
+      "scope": "Instructions for Schedule D (Form 1040) \u2014 Schedule D Tax Worksheet",
+      "sources": [
+        "https://www.irs.gov/instructions/i1040sd"
       ]
     },
     {
@@ -735,6 +966,42 @@
       "scope": "Summary of Federal Income Tax Changes",
       "sources": [
         "https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FTB_540",
+      "value": "California Franchise Tax Board",
+      "scope": "FTB 2025 Instructions for Form 540",
+      "sources": [
+        "https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "FTB_593",
+      "value": "California Franchise Tax Board",
+      "scope": "FTB 2026 Instructions for Form 593 (Real Estate Withholding Statement)",
+      "sources": [
+        "https://www.ftb.ca.gov/forms/2026/2026-593-instructions.html"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "BOE_PUB306",
+      "value": "California State Board of Equalization",
+      "scope": "California Board of Equalization 2024-25 Annual Report (Pub 306)",
+      "sources": [
+        "https://www.boe.ca.gov/legdiv/2024-2025/pub306.pdf"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "LA_ULA",
+      "value": "City of Los Angeles Office of Finance",
+      "scope": "Real Property Transfer Tax and Measure ULA FAQ",
+      "sources": [
+        "https://finance.lacity.gov/faq/measure-ula"
       ]
     },
     {
@@ -829,6 +1096,15 @@
     },
     {
       "page": "pages/data-sources.html",
+      "indicator": "USGS_LA_PROB",
+      "value": "U.S. Geological Survey",
+      "scope": "USGS Earthquake Probabilities \u2014 Los Angeles Area (UCERF3)",
+      "sources": [
+        "https://www.usgs.gov/faqs/what-probability-earthquake-will-occur-los-angeles-area-san-francisco-bay-area"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
       "indicator": "CALFIRE_FHSZ",
       "value": "CAL FIRE / Office of the State Fire Marshal",
       "scope": "Fire Hazard Severity Zones",
@@ -874,6 +1150,42 @@
     },
     {
       "page": "pages/data-sources.html",
+      "indicator": "SEC_Q3_10Q",
+      "value": "U.S. Securities and Exchange Commission",
+      "scope": "Jack in the Box Inc. Q3 FY2026 Form 10-Q (ended 2026-07-05)",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SEC_Q3_PR",
+      "value": "U.S. Securities and Exchange Commission",
+      "scope": "Jack in the Box Inc. Q3 FY2026 Earnings Release (Exhibit 99.1)",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000090/ex991-q326earningsrelease.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SEC_DEBT",
+      "value": "U.S. Securities and Exchange Commission",
+      "scope": "Jack in the Box Inc. Form 8-K Exhibit 99.1 \u2014 Series 2026-1 $500M Debt Refinancing",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000079/ex991-pressreleasexdebtclo.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "SEC_8K_EXEC",
+      "value": "U.S. Securities and Exchange Commission",
+      "scope": "Jack in the Box Inc. Form 8-K \u2014 Governance & Executive Succession (Nov 17, 2026)",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/807882/000080788226000100/jack-20261113.htm"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
       "indicator": "SEC_LIST",
       "value": "U.S. Securities and Exchange Commission",
       "scope": "SEC EDGAR 10-K filing list for CIK 0000807882",
@@ -894,7 +1206,7 @@
       "page": "pages/data-sources.html",
       "indicator": "SCAG_DEMOG",
       "value": "Southern California Association of Governments",
-      "scope": "Connect SoCal 2024 Demographics & Growth Forecast Technical Report",
+      "scope": "Connect SoCal 2024 Demographics & Growth Forecast Technical Report & PEIR Appendix I",
       "sources": [
         "https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf"
       ]
@@ -996,6 +1308,15 @@
       "scope": "California Legislative Information",
       "sources": [
         "https://leginfo.legislature.ca.gov/"
+      ]
+    },
+    {
+      "page": "pages/data-sources.html",
+      "indicator": "CA_PROP13",
+      "value": "State of California Legislative Information",
+      "scope": "California Constitution Article XIII A (Tax Limitation / Proposition 13)",
+      "sources": [
+        "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&division=&title=&part=&chapter=&article=XIII%20A"
       ]
     },
     {

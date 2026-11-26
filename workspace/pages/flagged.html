@@ -32,6 +32,7 @@
 <a href="../pages/market.html">Market &amp; Trade Area</a>
 <a href="../pages/hazards.html">Hazards &amp; Resilience</a>
 <a href="../pages/data-sources.html">Data &amp; Sources</a>
+<a href="../pages/verification.html">Verification Log</a>
 <a href="../pages/flagged.html" aria-current="page">Flagged for Review</a>
 </div>
 <div class="nav-group">
@@ -453,7 +454,7 @@
 <td class="value"></td>
 <td>pages/lease-cashflow.html · Back-test</td>
 <td><span class="badge warn">Unverified</span></td>
-<td class="source-cell"><a href="https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm" target="_blank" rel="noopener noreferrer" title="U.S. Securities and Exchange Commission">Jack in the Box Inc. FY2025 Form 10-K</a><br><a href="https://www.bls.gov/eag/eag.ca_losangeles_msa.htm" target="_blank" rel="noopener noreferrer" title="U.S. Bureau of Labor Statistics">Economy at a Glance — Los Angeles-Long Beach-Santa Ana, CA</a><br><a href="https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf" target="_blank" rel="noopener noreferrer" title="Southern California Association of Governments">Connect SoCal 2024 Demographics &amp; Growth Forecast Technical Report</a></td>
+<td class="source-cell"><a href="https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm" target="_blank" rel="noopener noreferrer" title="U.S. Securities and Exchange Commission">Jack in the Box Inc. FY2025 Form 10-K</a><br><a href="https://www.bls.gov/eag/eag.ca_losangeles_msa.htm" target="_blank" rel="noopener noreferrer" title="U.S. Bureau of Labor Statistics">Economy at a Glance — Los Angeles-Long Beach-Santa Ana, CA</a><br><a href="https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf" target="_blank" rel="noopener noreferrer" title="Southern California Association of Governments">Connect SoCal 2024 Demographics &amp; Growth Forecast Technical Report &amp; PEIR Appendix I</a></td>
 <td>Flagged; not marked verified.</td>
 </tr>
 <tr class="data-row unverified-row" data-unverified="true">
@@ -463,14 +464,6 @@
 <td><span class="badge warn">Unverified</span></td>
 <td class="source-cell"><a href="https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm" target="_blank" rel="noopener noreferrer" title="U.S. Securities and Exchange Commission">Jack in the Box Inc. FY2025 Form 10-K</a><br><a href="https://www.bls.gov/eag/eag.ca_losangeles_msa.htm" target="_blank" rel="noopener noreferrer" title="U.S. Bureau of Labor Statistics">Economy at a Glance — Los Angeles-Long Beach-Santa Ana, CA</a></td>
 <td>Requires verified inputs and sufficient comparable history.</td>
-</tr>
-<tr class="data-row unverified-row" data-unverified="true">
-<td>U52</td>
-<td class="value"></td>
-<td>pages/data-sources.html · CENSUS_COUNTY</td>
-<td><span class="badge warn">Unverified</span></td>
-<td class="source-cell"><a href="https://www.census.gov/quickfacts/fact/table/losangelescountycalifornia/PST045224" target="_blank" rel="noopener noreferrer" title="U.S. Census Bureau">U.S. Census Bureau QuickFacts — Los Angeles County, California</a></td>
-<td>Repeated fetch failure in this environment; see IR-06. County proxy values are left blank.</td>
 </tr>
 </tbody></table></div>
 </section>
@@ -525,10 +518,10 @@
 <tr class="data-row unverified-row" data-unverified="true">
 <td>IR-06</td>
 <td class="value"></td>
-<td>The U.S. Census Bureau QuickFacts page for Los Angeles County repeatedly failed to fetch in this environment; county proxy values were left blank rather than inferred.</td>
+<td>Originally in the 2026-11-25 pass, the single-geography QuickFacts LA County URL failed to fetch. In the 2026-11-26 audit pass, official QuickFacts V2025 LA County figures (9,694,934 pop, $90,112 median HH income) were verified via the combined QuickFacts table; W-01 trade-area values still remain blank until parcel-centred Census tracts are geocoded privately.</td>
 <td><span class="badge bad">Flagged</span></td>
-<td class="source-cell"><a href="https://www.census.gov/quickfacts/fact/table/losangelescountycalifornia/PST045224" target="_blank" rel="noopener noreferrer" title="U.S. Census Bureau">U.S. Census Bureau QuickFacts — Los Angeles County, California</a></td>
-<td>W-01 already replaces city/county proxies, so no county numeric value is published.</td>
+<td class="source-cell"><a href="https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia,losangelescountycalifornia/RHI125217" target="_blank" rel="noopener noreferrer" title="U.S. Census Bureau">U.S. Census Bureau QuickFacts — Los Angeles city &amp; Los Angeles County, California</a></td>
+<td>W-01 still rejects county proxies in favor of parcel trade-area tracts.</td>
 </tr>
 <tr class="data-row unverified-row" data-unverified="true">
 <td>IR-07</td>
@@ -554,11 +547,19 @@
 <td class="source-cell"><a href="https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm" target="_blank" rel="noopener noreferrer" title="U.S. Securities and Exchange Commission">Jack in the Box Inc. FY2025 Form 10-K</a></td>
 <td>Marked Not run, never Verified.</td>
 </tr>
+<tr class="data-row unverified-row" data-unverified="true">
+<td>IR-10</td>
+<td class="value"></td>
+<td>The 2026-11-26 audit pass reconciled 2026 IRS Rev. Proc. 2025-32 ceilings, Schedule D stacking, Form 593, Prop 13 1.181% LA County avg rate, post-June 2026 LA Measure ULA ($5.4M/$10.9M), Q3 FY26 SEC 10-Q/8-K filings, BEA county GDP ($802.0B), CA EDD QSR payrolls (193,200), DIR $20/hr wage floor, CDE CAASPP gains, and USGS 30-year probabilities across both workspaces.</td>
+<td><span class="badge bad">Flagged</span></td>
+<td class="source-cell"><a href="https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm" target="_blank" rel="noopener noreferrer" title="U.S. Securities and Exchange Commission">Jack in the Box Inc. Q3 FY2026 Form 10-Q (ended 2026-07-05)</a></td>
+<td>See COORDINATION.md for synchronized changelog.</td>
+</tr>
 </tbody></table></div>
 </section></main>
 <footer class="footer">
-<p>Build 2026-11-25 · session <code>dd713c44</code> · model <code>v0.1-framework</code> · public anonymous summary only.</p>
-<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the <a href="flagged.html">Flagged for Review</a> page. Raw verification log: <a href="../../VERIFICATION.md">VERIFICATION.md</a>.</p>
+<p>Build 2026-11-26 · session <code>dd713c44 (updated 2026-11-26)</code> · model <code>v0.2-framework</code> · public anonymous summary only · <a href="../../index.html">Main Decision Site (root)</a>.</p>
+<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the <a href="flagged.html">Flagged for Review</a> page. Line-by-line verification log: <a href="verification.html">Verification Log</a> (raw markdown: <a href="../../VERIFICATION.md">VERIFICATION.md</a>).</p>
 </footer>
 <script src="../assets/site.js"></script>
 </body>

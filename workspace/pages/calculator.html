@@ -32,6 +32,7 @@
 <a href="../pages/market.html">Market &amp; Trade Area</a>
 <a href="../pages/hazards.html">Hazards &amp; Resilience</a>
 <a href="../pages/data-sources.html">Data &amp; Sources</a>
+<a href="../pages/verification.html">Verification Log</a>
 <a href="../pages/flagged.html">Flagged for Review</a>
 </div>
 <div class="nav-group">
@@ -64,6 +65,8 @@
 <label>NIIT rate (%) <input type="number" id="niit_rate" value="3.8" min="0" max="10" step="0.1"></label>
 <label>NIIT applies? <select id="niit_applies"><option value="no">No — MAGI threshold not modelled</option><option value="yes">Yes — apply 3.8% to gain</option></select></label>
 <label>CA marginal rate (%) <input type="number" id="ca_rate" value="12.3" min="0" max="20" step="0.1"></label>
+<label>CA 1% BHST (&gt;$1M taxable income)? <select id="bhst_applies"><option value="no">No — exclude 1% BHST surcharge</option><option value="yes">Yes — add 1% Behavioral Health Services Tax above $1M gain</option></select></label>
+<label>LA Transfer Tax &amp; Measure ULA (eff. post-June 30, 2026)? <select id="ula_mode"><option value="manual">Manual — included in Selling costs above</option><option value="la_city_2026">Add City of LA (0.45%) + County (0.11%) + ULA (4% &gt;$5.4M; 5.5% &ge;$10.9M)</option></select></label>
 <label>§1031 deferral? <select id="exchange1031"><option value="no">No</option><option value="yes">Yes — defer recognised gain</option></select></label>
 </fieldset>
 <fieldset><legend>Hold / renewal case (private inputs)</legend>
@@ -107,35 +110,43 @@
 <tbody>
 <tr class="data-row">
 <td>Federal long-term capital gain rate</td>
-<td class="value">15%</td>
-<td>2025 rate for most individuals</td>
+<td class="value">15% (0% / 15% / 20%)</td>
+<td>2026 thresholds (Rev. Proc. 2025-32)</td>
 <td><span class="badge ok">Verified</span></td>
-<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 409, Capital gains and losses</a></td>
-<td>0% / 15% / 20% depending on taxable income.</td>
+<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 409, Capital gains and losses</a><br><a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">IRS Rev. Proc. 2025-32 — 2026 Inflation-Adjusted Tax Items</a></td>
+<td>2026 ceilings: $49,450/$545,500 single; $98,900/$613,700 MFJ. For multi-bracket Schedule D stacking, see root calculator.</td>
 </tr>
 <tr class="data-row">
 <td>Unrecaptured §1250 rate</td>
 <td class="value">25%</td>
 <td>Maximum rate on section 1250 real property</td>
 <td><span class="badge ok">Verified</span></td>
-<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 409, Capital gains and losses</a></td>
-<td>Editable.</td>
+<td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc409" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 409, Capital gains and losses</a><br><a href="https://www.irs.gov/instructions/i1040sd" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Instructions for Schedule D (Form 1040) — Schedule D Tax Worksheet</a></td>
+<td>Editable ceiling.</td>
 </tr>
 <tr class="data-row">
 <td>Net investment income tax</td>
 <td class="value">3.8%</td>
-<td>Above applicable thresholds</td>
+<td>Above applicable MAGI thresholds</td>
 <td><span class="badge ok">Verified</span></td>
 <td class="source-cell"><a href="https://www.irs.gov/taxtopics/tc559" target="_blank" rel="noopener noreferrer" title="Internal Revenue Service">Topic no. 559, Net investment income tax</a></td>
 <td>Editable.</td>
 </tr>
 <tr class="data-row">
-<td>California marginal rate</td>
-<td class="value">12.3%</td>
-<td>Top PITL rate; +1% over $1,000,000</td>
+<td>California marginal rate & BHST</td>
+<td class="value">12.3% (+1% >$1,000,000)</td>
+<td>Form 540 & Line 62 BHST</td>
 <td><span class="badge ok">Verified</span></td>
-<td class="source-cell"><a href="https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf" target="_blank" rel="noopener noreferrer" title="California Franchise Tax Board">Bill Analysis, AB 1219 (Personal Income Tax Reduction)</a><br><a href="https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html" target="_blank" rel="noopener noreferrer" title="California Franchise Tax Board">Summary of Federal Income Tax Changes</a></td>
-<td>California taxes capital gains as ordinary income.</td>
+<td class="source-cell"><a href="https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf" target="_blank" rel="noopener noreferrer" title="California Franchise Tax Board">Bill Analysis, AB 1219 (Personal Income Tax Reduction)</a><br><a href="https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html" target="_blank" rel="noopener noreferrer" title="California Franchise Tax Board">FTB 2025 Instructions for Form 540</a><br><a href="https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html" target="_blank" rel="noopener noreferrer" title="California Franchise Tax Board">Summary of Federal Income Tax Changes</a></td>
+<td>Optional +1% BHST toggle added.</td>
+</tr>
+<tr class="data-row">
+<td>City of LA Transfer Tax + Measure ULA</td>
+<td class="value">0.56% base; +4.0% >$5.4M; +5.5% >=$10.9M</td>
+<td>Effective post-June 30, 2026</td>
+<td><span class="badge ok">Verified</span></td>
+<td class="source-cell"><a href="https://finance.lacity.gov/faq/measure-ula" target="_blank" rel="noopener noreferrer" title="City of Los Angeles Office of Finance">Real Property Transfer Tax and Measure ULA FAQ</a></td>
+<td>Optional transfer-tax estimator if inside City of LA.</td>
 </tr>
 <tr class="data-row">
 <td>§1031 real-property-only rule</td>
@@ -181,8 +192,8 @@
 </tbody></table></div>
 </section></main>
 <footer class="footer">
-<p>Build 2026-11-25 · session <code>dd713c44</code> · model <code>v0.1-framework</code> · public anonymous summary only.</p>
-<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the <a href="flagged.html">Flagged for Review</a> page. Raw verification log: <a href="../../VERIFICATION.md">VERIFICATION.md</a>.</p>
+<p>Build 2026-11-26 · session <code>dd713c44 (updated 2026-11-26)</code> · model <code>v0.2-framework</code> · public anonymous summary only · <a href="../../index.html">Main Decision Site (root)</a>.</p>
+<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the <a href="flagged.html">Flagged for Review</a> page. Line-by-line verification log: <a href="verification.html">Verification Log</a> (raw markdown: <a href="../../VERIFICATION.md">VERIFICATION.md</a>).</p>
 </footer>
 <script src="../assets/site.js"></script>
 </body>

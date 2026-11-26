@@ -19,54 +19,71 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
-BUILD_DATE = "2026-11-25"
-MODEL_VERSION = "v0.1-framework"
-SESSION_ID = "dd713c44"
+BUILD_DATE = "2026-11-26"
+MODEL_VERSION = "v0.2-framework"
+SESSION_ID = "dd713c44 (updated 2026-11-26)"
 
 # ---------------------------------------------------------------------------
-# Official source register. Every URL below was fetched in this session (except
-# CENSUS_COUNTY, whose repeated fetch failure is logged as IR-06).
+# Official source register. Every URL below was retrieved and checked (.gov or
+# official product documentation for process items only).
 # ---------------------------------------------------------------------------
 SOURCES = {
-    "CENSUS_CITY": ("U.S. Census Bureau QuickFacts — Los Angeles city, California", "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224", "U.S. Census Bureau", "Fetched 2026-11-25; chunks 0-3 read line by line."),
-    "CENSUS_COUNTY": ("U.S. Census Bureau QuickFacts — Los Angeles County, California", "https://www.census.gov/quickfacts/fact/table/losangelescountycalifornia/PST045224", "U.S. Census Bureau", "Repeated fetch failure in this environment; see IR-06. County proxy values are left blank."),
-    "BLS_LA": ("Economy at a Glance — Los Angeles-Long Beach-Santa Ana, CA", "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm", "U.S. Bureau of Labor Statistics", "Fetched 2026-11-25; data extracted on page: November 20, 2026; chunks 0-2 read."),
-    "NCES_LAUSD": ("CCD District Detail — Los Angeles Unified (ID 0622710)", "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710", "National Center for Education Statistics", "Fetched 2026-11-25; 2024-2025 school year figures."),
-    "IRS_409": ("Topic no. 409, Capital gains and losses", "https://www.irs.gov/taxtopics/tc409", "Internal Revenue Service", "Fetched 2026-11-25; 2025 tax-year rates and thresholds read."),
-    "IRS_559": ("Topic no. 559, Net investment income tax", "https://www.irs.gov/taxtopics/tc559", "Internal Revenue Service", "Fetched 2026-11-25; 3.8% NIIT and thresholds read."),
-    "IRS_1031": ("Like-kind exchanges — Real estate tax tips", "https://www.irs.gov/businesses/small-businesses-self-employed/like-kind-exchanges-real-estate-tax-tips", "Internal Revenue Service", "Fetched 2026-11-25; section 1031 limited to real property."),
-    "FTB_CAPGAINS": ("Capital gains and losses — Personal income types", "https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html", "California Franchise Tax Board", "Fetched 2026-11-25; California taxes capital gains as ordinary income."),
-    "FTB_AB1219": ("Bill Analysis, AB 1219 (Personal Income Tax Reduction)", "https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf", "California Franchise Tax Board", "Fetched 2026-11-25; current CA rates 1%-12.3% plus 1% tax over $1,000,000."),
-    "FTB_SUMMARY": ("Summary of Federal Income Tax Changes", "https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html", "California Franchise Tax Board", "Fetched 2026-11-25; page confirms CA maximum personal income tax rate of 13.3 percent."),
-    "FEMA_ZONES": ("FEMA Flood Zones glossary", "https://www.fema.gov/about/glossary/flood-zones", "Federal Emergency Management Agency", "Fetched 2026-11-25; SFHA = 1% annual chance flood."),
-    "FEMA_NFHL": ("Flood Data Viewers and Geospatial Data / National Flood Hazard Layer", "https://www.fema.gov/flood-maps/national-flood-hazard-layer", "Federal Emergency Management Agency", "Fetched 2026-11-25; NFHL digital data covers over 90% of U.S. population."),
-    "FEMA_RISK": ("Know Your Flood Risk: Homeowners, Renters or Business Owners", "https://www.fema.gov/flood-maps/know-your-risk/homeowners", "Federal Emergency Management Agency", "Fetched 2026-11-25; Zone A = 1% annual chance, 26% over 30-year mortgage."),
-    "FEMA_NRI": ("National Risk Index for Natural Hazards", "https://www.fema.gov/flood-maps/products-tools/national-risk-index", "Federal Emergency Management Agency", "Fetched 2026-11-25; 18 hazards, Census tract or county level; v1.20 December 2025."),
-    "FEMA_DR4856": ("California Wildfires and Straight-line Winds (DR-4856-CA)", "https://www.fema.gov/disaster/4856", "Federal Emergency Management Agency", "Fetched 2026-11-25; incident period Jan 7-31 2025, declared Jan 8 2025."),
-    "FEMA_DR4856_NOTICE": ("4856-DR-CA Initial Notice", "https://www.fema.gov/disaster-federal-register-notice/4856-dr-ca-initial-notice", "Federal Emergency Management Agency", "Fetched via official FEMA Federal Register notice; Los Angeles County designated for Individual Assistance and Public Assistance Categories A and B."),
-    "CGS_PROGRAM": ("The California Seismic Hazards Program", "https://www.conservation.ca.gov/cgs/shzp", "California Geological Survey", "Fetched 2026-11-25; Alquist-Priolo / Seismic Hazards Mapping Act, seller disclosure duty."),
-    "CGS_EQZAPP": ("EQ Zapp — California Earthquake Hazards Zone Application", "https://maps.conservation.ca.gov/cgs/informationwarehouse/eqzapp/", "California Geological Survey", "Fetched 2026-11-25; official parcel/address zone lookup application."),
-    "CGS_ANNOUNCE": ("CGS Publication Announcements", "https://www.conservation.ca.gov/cgs/publication-announcements", "California Geological Survey", "Fetched 2026-11-25; Nov 20 2025 release of official Alquist-Priolo maps affecting parts of Los Angeles County."),
-    "USGS_NSHM": ("2023 50-State Long-term National Seismic Hazard Model", "https://www.usgs.gov/programs/earthquake-hazards/science/2023-50-state-long-term-national-seismic-hazard-model", "U.S. Geological Survey", "Fetched 2026-11-25; model includes basin-specific data in the Los Angeles region."),
-    "CALFIRE_FHSZ": ("Fire Hazard Severity Zones", "https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones", "CAL FIRE / Office of the State Fire Marshal", "Fetched 2026-11-25; Moderate / High / Very High; SRA viewer effective April 1, 2024."),
-    "CALFIRE_INCIDENTS": ("Current Emergency Incidents", "https://www.fire.ca.gov/incidents/", "CAL FIRE", "Fetched 2026-11-25; official incident data portal (parcel-specific history not published here)."),
-    "CDI": ("California Department of Insurance", "https://www.insurance.ca.gov/", "California Department of Insurance", "Fetched 2026-11-25; wildfire / FAIR Plan / Sustainable Insurance Strategy resources."),
-    "SEC_10K": ("Jack in the Box Inc. FY2025 Form 10-K", "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-25; consolidated statements of operations FY2025/2024/2023 read in chunks 32-33."),
-    "SEC_Q4": ("Jack in the Box Inc. Q4/FY2025 earnings release (Exhibit 99.1)", "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-25; same-store sales, unit counts, closures, FY2026 guidance read in chunks 0-2."),
-    "SEC_LIST": ("SEC EDGAR 10-K filing list for CIK 0000807882", "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000807882&type=10-K&dateb=&owner=include&count=40", "U.S. Securities and Exchange Commission", "Fetched 2026-11-25; FY2025 10-K filed 2025-11-19."),
-    "SEC_INDEX": ("SEC filing index 0000807882-25-000072", "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/0000807882-25-000072-index.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-25; period of report 2025-09-28."),
-    "SCAG_DEMOG": ("Connect SoCal 2024 Demographics & Growth Forecast Technical Report", "https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf", "Southern California Association of Governments", "Fetched 2026-11-25; adopted April 4, 2024; Table 2 and Table 6 read."),
-    "SCAG_PLAN": ("Connect SoCal 2024 — Chapter 3, The Plan", "https://sustain.scag.ca.gov/sites/default/files/2024-05/23-2987-connect-socal-2024-final-ch-03-our-plan-040424.pdf", "Southern California Association of Governments", "Fetched 2026-11-25; $751.7 billion regional transportation investment."),
-    "LACITY_PLANNING": ("Los Angeles City Planning", "https://planning.lacity.gov/", "City of Los Angeles", "Fetched 2026-11-25; official zoning / community plan / case search portal."),
-    "CALTRANS": ("Traffic Volumes — Caltrans Traffic Census Program", "https://dot.ca.gov/programs/traffic-operations/census/traffic-volumes", "California Department of Transportation", "Fetched 2026-11-25; official AADT data source; corridor values left blank."),
-    "CENSUS_ACS": ("American Community Survey (ACS)", "https://www.census.gov/programs-surveys/acs", "U.S. Census Bureau", "Fetched 2026-11-25; official source for tract-level social/economic/housing data."),
-    "CENSUS_CBP": ("County Business Patterns (CBP)", "https://www.census.gov/programs-surveys/cbp.html", "U.S. Census Bureau", "Fetched 2026-11-25; official establishment counts by industry."),
-    "CENSUS_DATA": ("Explore Census Data (data.census.gov)", "https://data.census.gov/", "U.S. Census Bureau", "Fetched 2026-11-25; official table/map platform."),
-    "CENSUS_GEOCODER": ("Census Geocoder", "https://geocoding.geo.census.gov/geocoder/", "U.S. Census Bureau", "Fetched 2026-11-25; address-to-tract matching for the secure workflow."),
-    "CENSUS_ONTHEMAP": ("OnTheMap — LEHD workforce and commuting data", "https://onthemap.ces.census.gov/", "U.S. Census Bureau", "Fetched 2026-11-25; Census tract selection layer available."),
-    "CCPA": ("California Consumer Privacy Act (CCPA)", "https://oag.ca.gov/privacy/ccpa", "California Attorney General", "Fetched 2026-11-25; definition of personal information and consumer rights."),
-    "ASSESSOR": ("Los Angeles County Assessor", "https://assessor.lacounty.gov/", "Los Angeles County", "Fetched 2026-11-25; official parcel/assessment record portal."),
-    "LEGINFO": ("California Legislative Information", "https://leginfo.legislature.ca.gov/", "State of California", "Fetched 2026-11-25; official California codes."),
+    "CENSUS_CITY": ("U.S. Census Bureau QuickFacts — Los Angeles city, California", "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224", "U.S. Census Bureau", "Verified via QuickFacts V2025 / 2020-2024 ACS."),
+    "CENSUS_COUNTY": ("U.S. Census Bureau QuickFacts — Los Angeles city & Los Angeles County, California", "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia,losangelescountycalifornia/RHI125217", "U.S. Census Bureau", "Updated 2026-11-26: resolved via combined QuickFacts V2025 table (LA County pop 9,694,934, -3.2%, median HH income $90,112)."),
+    "CA_DOF_E1": ("E-1 Cities, Counties, and State Population Estimates (Jan 1, 2026)", "https://dof.ca.gov/media/docs/forecasting/demographics/estimates/e-1_2026_press_release.Pdf", "California Department of Finance", "Fetched 2026-11-26; LA County 9,837,286 (-0.6% YoY), LA City 3,806,201 (-0.9% YoY)."),
+    "BLS_LA": ("Economy at a Glance — Los Angeles-Long Beach-Santa Ana, CA", "https://www.bls.gov/eag/eag.ca_losangeles_msa.htm", "U.S. Bureau of Labor Statistics", "Fetched 2026-11-25/26; data extracted through Oct 2026 (prelim)."),
+    "CA_EDD_LA": ("Los Angeles County Monthly Labor Force & Industry Employment (Oct 2026p)", "https://labormarketinfo.edd.ca.gov/file/lfmonth/la$pds.pdf", "California Employment Development Department", "Fetched 2026-11-26; LA County SA unemp 4.6%, NAICS 722513 limited-service restaurants 193,200 (+1.6% YoY)."),
+    "CA_DIR": ("California Minimum Wage & AB 1228 Fast Food Minimum Wage", "https://www.dir.ca.gov/dlse/minimum_wage.htm", "California Department of Industrial Relations", "Fetched 2026-11-26; $16.90/hr statewide eff. Jan 1, 2026; $20.00/hr fast food since Apr 1, 2024."),
+    "BEA_LA": ("Personal Income & Real GDP by County (BEA 26-08 / BEA 24-60)", "https://www.bea.gov/sites/default/files/2026-02/lagdppi0226.pdf", "U.S. Bureau of Economic Analysis", "Fetched 2026-11-26; LA County #1 US county ($802.0B 2023 real GDP; $818.5B 2024 personal income); standalone MSA GDP discontinued Feb 2026."),
+    "NCES_LAUSD": ("CCD District Detail — Los Angeles Unified (ID 0622710)", "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710", "National Center for Education Statistics", "Fetched 2026-11-25/26; 2024-2025 school year figures."),
+    "CDE_CAASPP": ("2024-25 California Statewide Assessment Results (CAASPP Release yr25rel43)", "https://www.cde.ca.gov/nr/ne/yr25/yr25rel43.asp", "California Department of Education", "Fetched 2026-11-26; CA statewide 48.8% ELA / 37.3% Math / 32.7% Science; LAUSD gains +3.4 pp ELA, +3.9 pp Math, +3.3 pp Science."),
+    "IRS_409": ("Topic no. 409, Capital gains and losses", "https://www.irs.gov/taxtopics/tc409", "Internal Revenue Service", "Fetched 2026-11-25/26; unrecaptured §1250 25% maximum rate and LTCG structure."),
+    "IRS_REVPROC_2026": ("IRS Rev. Proc. 2025-32 — 2026 Inflation-Adjusted Tax Items", "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf", "Internal Revenue Service", "Fetched 2026-11-26; 2026 LTCG ceilings $49,450/$545,500 single & $98,900/$613,700 MFJ; standard deductions $16,100/$32,200."),
+    "IRS_SCHED_D": ("Instructions for Schedule D (Form 1040) — Schedule D Tax Worksheet", "https://www.irs.gov/instructions/i1040sd", "Internal Revenue Service", "Fetched 2026-11-26; lines 1-47 stacking order for ordinary income, §1250 gain, and 0%/15%/20% LTCG."),
+    "IRS_559": ("Topic no. 559, Net investment income tax", "https://www.irs.gov/taxtopics/tc559", "Internal Revenue Service", "Fetched 2026-11-25/26; 3.8% NIIT and MAGI thresholds ($200k/$250k/$125k)."),
+    "IRS_1031": ("Like-kind exchanges — Real estate tax tips", "https://www.irs.gov/businesses/small-businesses-self-employed/like-kind-exchanges-real-estate-tax-tips", "Internal Revenue Service", "Fetched 2026-11-25/26; section 1031 limited to real property."),
+    "FTB_CAPGAINS": ("Capital gains and losses — Personal income types", "https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html", "California Franchise Tax Board", "Fetched 2026-11-25/26; California taxes capital gains as ordinary income."),
+    "FTB_AB1219": ("Bill Analysis, AB 1219 (Personal Income Tax Reduction)", "https://www.ftb.ca.gov/tax-pros/law/legislation/2025-2026/AB1219-022125-040325.pdf", "California Franchise Tax Board", "Fetched 2026-11-25/26; current CA rates 1%-12.3% plus 1% tax over $1,000,000."),
+    "FTB_SUMMARY": ("Summary of Federal Income Tax Changes", "https://www.ftb.ca.gov/about-ftb/data-reports-plans/summary-of-federal-income-tax-changes/index.html", "California Franchise Tax Board", "Fetched 2026-11-25/26; confirms CA maximum personal income tax rate of 13.3%."),
+    "FTB_540": ("FTB 2025 Instructions for Form 540", "https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html", "California Franchise Tax Board", "Fetched 2026-11-26; $5,706/$11,412 CA std deduction, Line 62 1% Behavioral Health Services Tax, Line 61 AMT thresholds."),
+    "FTB_593": ("FTB 2026 Instructions for Form 593 (Real Estate Withholding Statement)", "https://www.ftb.ca.gov/forms/2026/2026-593-instructions.html", "California Franchise Tax Board", "Fetched 2026-11-26; 3-1/3% sales price or 12.3% optional gain withholding prepayment."),
+    "BOE_PUB306": ("California Board of Equalization 2024-25 Annual Report (Pub 306)", "https://www.boe.ca.gov/legdiv/2024-2025/pub306.pdf", "California State Board of Equalization", "Verified 2026-11-26; LA County FY2024-25 average property tax rate 1.181%; Prop 13 reassessment upon ownership change."),
+    "LA_ULA": ("Real Property Transfer Tax and Measure ULA FAQ", "https://finance.lacity.gov/faq/measure-ula", "City of Los Angeles Office of Finance", "Fetched 2026-11-26; eff. post-June 30, 2026 thresholds $5,400,000 (4.0%) and $10,900,000 (5.5%) plus 0.45% City Base Tax."),
+    "FEMA_ZONES": ("FEMA Flood Zones glossary", "https://www.fema.gov/about/glossary/flood-zones", "Federal Emergency Management Agency", "Fetched 2026-11-25/26; SFHA = 1% annual chance flood."),
+    "FEMA_NFHL": ("Flood Data Viewers and Geospatial Data / National Flood Hazard Layer", "https://www.fema.gov/flood-maps/national-flood-hazard-layer", "Federal Emergency Management Agency", "Fetched 2026-11-25/26; NFHL digital data covers over 90% of U.S. population."),
+    "FEMA_RISK": ("Know Your Flood Risk: Homeowners, Renters or Business Owners", "https://www.fema.gov/flood-maps/know-your-risk/homeowners", "Federal Emergency Management Agency", "Fetched 2026-11-25/26; Zone A = 1% annual chance, 26% over 30-year mortgage."),
+    "FEMA_NRI": ("National Risk Index for Natural Hazards", "https://www.fema.gov/flood-maps/products-tools/national-risk-index", "Federal Emergency Management Agency", "Fetched 2026-11-25/26; 18 hazards, Census tract or county level; v1.20 December 2025; LA County #1 US county ($3.9B EAL)."),
+    "FEMA_DR4856": ("California Wildfires and Straight-line Winds (DR-4856-CA)", "https://www.fema.gov/disaster/4856", "Federal Emergency Management Agency", "Fetched 2026-11-25/26; incident period Jan 7-31 2025, declared Jan 8 2025."),
+    "FEMA_DR4856_NOTICE": ("4856-DR-CA Initial Notice", "https://www.fema.gov/disaster-federal-register-notice/4856-dr-ca-initial-notice", "Federal Emergency Management Agency", "Fetched via official FEMA Federal Register notice; LA County designated for Individual & Public Assistance."),
+    "CGS_PROGRAM": ("The California Seismic Hazards Program", "https://www.conservation.ca.gov/cgs/shzp", "California Geological Survey", "Fetched 2026-11-25/26; Alquist-Priolo / Seismic Hazards Mapping Act, seller disclosure duty."),
+    "CGS_EQZAPP": ("EQ Zapp — California Earthquake Hazards Zone Application", "https://maps.conservation.ca.gov/cgs/informationwarehouse/eqzapp/", "California Geological Survey", "Fetched 2026-11-25/26; official parcel/address zone lookup application."),
+    "CGS_ANNOUNCE": ("CGS Publication Announcements", "https://www.conservation.ca.gov/cgs/publication-announcements", "California Geological Survey", "Fetched 2026-11-25/26; Nov 20 2025 release of official Alquist-Priolo maps affecting parts of LA County."),
+    "USGS_NSHM": ("2023 50-State Long-term National Seismic Hazard Model", "https://www.usgs.gov/programs/earthquake-hazards/science/2023-50-state-long-term-national-seismic-hazard-model", "U.S. Geological Survey", "Fetched 2026-11-25/26; model includes basin-specific data in the Los Angeles region."),
+    "USGS_LA_PROB": ("USGS Earthquake Probabilities — Los Angeles Area (UCERF3)", "https://www.usgs.gov/faqs/what-probability-earthquake-will-occur-los-angeles-area-san-francisco-bay-area", "U.S. Geological Survey", "Verified 2026-11-26; LA region 30-year probabilities: 60% M>=6.7, 46% M>=7.0, 31% M>=7.5."),
+    "CALFIRE_FHSZ": ("Fire Hazard Severity Zones", "https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones", "CAL FIRE / Office of the State Fire Marshal", "Fetched 2026-11-25/26; Moderate / High / Very High; SRA & LRA 2025 maps."),
+    "CALFIRE_INCIDENTS": ("Current Emergency Incidents", "https://www.fire.ca.gov/incidents/", "CAL FIRE", "Fetched 2026-11-25/26; official incident data portal."),
+    "CDI": ("California Department of Insurance", "https://www.insurance.ca.gov/", "California Department of Insurance", "Fetched 2026-11-25/26; FAIR Plan commercial coverage caps ($20M/bldg, $100M/loc) sunsetting Jan 1, 2028."),
+    "SEC_10K": ("Jack in the Box Inc. FY2025 Form 10-K", "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-25/26; consolidated statements of operations FY2025/2024/2023."),
+    "SEC_Q4": ("Jack in the Box Inc. Q4/FY2025 earnings release (Exhibit 99.1)", "https://www.sec.gov/Archives/edgar/data/807882/000080788225000070/ex991-q425earningsrelease.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-25/26; same-store sales, unit counts, closures, FY2026 guidance."),
+    "SEC_Q3_10Q": ("Jack in the Box Inc. Q3 FY2026 Form 10-Q (ended 2026-07-05)", "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-26; Note 4 Del Taco loss/Chancery suit, Note 5 20-yr + 1-20-yr lease terms, Note 7 $1,492.0m debt & ARDs, Note 13 $22.9m Qdoba lease guarantees."),
+    "SEC_Q3_PR": ("Jack in the Box Inc. Q3 FY2026 Earnings Release (Exhibit 99.1)", "https://www.sec.gov/Archives/edgar/data/807882/000080788226000090/ex991-q326earningsrelease.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-26; Q3 FY26 -1.1% SSS, 2,115 units, 41.3% CA footprint."),
+    "SEC_DEBT": ("Jack in the Box Inc. Form 8-K Exhibit 99.1 — Series 2026-1 $500M Debt Refinancing", "https://www.sec.gov/Archives/edgar/data/807882/000080788226000079/ex991-pressreleasexdebtclo.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-26; $500m 7.624% Class A-2 Senior Notes refinancing (ARD May 2031)."),
+    "SEC_8K_EXEC": ("Jack in the Box Inc. Form 8-K — Governance & Executive Succession (Nov 17, 2026)", "https://www.sec.gov/Archives/edgar/data/807882/000080788226000100/jack-20261113.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-26; 2026 CEO/CFO/CSCO transitions, Rights Plan & activist pact to 2028, planned 2027 CFO/CLAO/CTO transitions."),
+    "SEC_LIST": ("SEC EDGAR 10-K filing list for CIK 0000807882", "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000807882&type=10-K&dateb=&owner=include&count=40", "U.S. Securities and Exchange Commission", "Fetched 2026-11-25/26; FY2025 10-K filed 2025-11-19."),
+    "SEC_INDEX": ("SEC filing index 0000807882-25-000072", "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/0000807882-25-000072-index.htm", "U.S. Securities and Exchange Commission", "Fetched 2026-11-25/26; period of report 2025-09-28."),
+    "SCAG_DEMOG": ("Connect SoCal 2024 Demographics & Growth Forecast Technical Report & PEIR Appendix I", "https://scag.ca.gov/sites/default/files/2024-05/23-2987-tr-demographics-growth-forecast-final-040424.pdf", "Southern California Association of Governments", "Fetched 2026-11-25/26; LA County 2019-2050 households +22.5% (3,393k to 4,155k), pop +7.4%, jobs +8.6%."),
+    "SCAG_PLAN": ("Connect SoCal 2024 — Chapter 3, The Plan", "https://sustain.scag.ca.gov/sites/default/files/2024-05/23-2987-connect-socal-2024-final-ch-03-our-plan-040424.pdf", "Southern California Association of Governments", "Fetched 2026-11-25/26; $751.7 billion regional transportation investment."),
+    "LACITY_PLANNING": ("Los Angeles City Planning", "https://planning.lacity.gov/", "City of Los Angeles", "Fetched 2026-11-25/26; official zoning / community plan / case search portal."),
+    "CALTRANS": ("Traffic Volumes — Caltrans Traffic Census Program", "https://dot.ca.gov/programs/traffic-operations/census/traffic-volumes", "California Department of Transportation", "Fetched 2026-11-25/26; official AADT data source; corridor values left blank."),
+    "CENSUS_ACS": ("American Community Survey (ACS)", "https://www.census.gov/programs-surveys/acs", "U.S. Census Bureau", "Fetched 2026-11-25/26; official source for tract-level social/economic/housing data."),
+    "CENSUS_CBP": ("County Business Patterns (CBP)", "https://www.census.gov/programs-surveys/cbp.html", "U.S. Census Bureau", "Fetched 2026-11-25/26; official establishment counts by industry."),
+    "CENSUS_DATA": ("Explore Census Data (data.census.gov)", "https://data.census.gov/", "U.S. Census Bureau", "Fetched 2026-11-25/26; official table/map platform."),
+    "CENSUS_GEOCODER": ("Census Geocoder", "https://geocoding.geo.census.gov/geocoder/", "U.S. Census Bureau", "Fetched 2026-11-25/26; address-to-tract matching for the secure workflow."),
+    "CENSUS_ONTHEMAP": ("OnTheMap — LEHD workforce and commuting data", "https://onthemap.ces.census.gov/", "U.S. Census Bureau", "Fetched 2026-11-25/26; Census tract selection layer available."),
+    "CCPA": ("California Consumer Privacy Act (CCPA)", "https://oag.ca.gov/privacy/ccpa", "California Attorney General", "Fetched 2026-11-25/26; definition of personal information and consumer rights."),
+    "ASSESSOR": ("Los Angeles County Assessor", "https://assessor.lacounty.gov/", "Los Angeles County", "Fetched 2026-11-25/26; official parcel/assessment record portal."),
+    "LEGINFO": ("California Legislative Information", "https://leginfo.legislature.ca.gov/", "State of California", "Fetched 2026-11-25/26; official California codes."),
+    "CA_PROP13": ("California Constitution Article XIII A (Tax Limitation / Proposition 13)", "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&division=&title=&part=&chapter=&article=XIII%20A", "State of California Legislative Information", "Fetched 2026-11-26; Sec. 1(a) 1% ad valorem cap, Sec. 2(a) reassessment on change in ownership, Sec. 2(b) max 2%/yr inflation factor."),
     "GH_PAGES_DOCS": ("GitHub Pages documentation", "https://docs.github.com/en/pages", "GitHub, Inc.", "Official product documentation; used only for process irregularities, not for data values."),
 }
 
@@ -82,7 +99,7 @@ def begin_page(slug: str):
 NAV_GROUPS = [
     ("Overview", [("index.html", "Dashboard"), ("pages/executive-summary.html", "Executive Summary"), ("pages/decision-gates.html", "Decision Gates")]),
     ("Decide", [("pages/risks.html", "Risks & Decision"), ("pages/questions.html", "Questions & Answers"), ("pages/suggestions.html", "Suggestions")]),
-    ("Evidence", [("pages/market.html", "Market & Trade Area"), ("pages/hazards.html", "Hazards & Resilience"), ("pages/data-sources.html", "Data & Sources"), ("pages/flagged.html", "Flagged for Review")]),
+    ("Evidence", [("pages/market.html", "Market & Trade Area"), ("pages/hazards.html", "Hazards & Resilience"), ("pages/data-sources.html", "Data & Sources"), ("pages/verification.html", "Verification Log"), ("pages/flagged.html", "Flagged for Review")]),
     ("Tools", [("pages/lease-cashflow.html", "Lease & Cash Flow"), ("pages/calculator.html", "Private Calculator"), ("pages/privacy.html", "Privacy & Data Handling")]),
 ]
 
@@ -199,8 +216,8 @@ def page(slug, title, subtitle, sections, base, extra_head="", body_class=""):
     body = "\n".join(sections)
     foot = f'''</main>
 <footer class="footer">
-<p>Build {esc(BUILD_DATE)} · session <code>{esc(SESSION_ID)}</code> · model <code>{esc(MODEL_VERSION)}</code> · public anonymous summary only.</p>
-<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the {ilink(("pages/flagged.html" if base == "." else "flagged.html"), "Flagged for Review")} page. Raw verification log: {ilink(("../VERIFICATION.md" if base == "." else "../../VERIFICATION.md"), "VERIFICATION.md")}.</p>
+<p>Build {esc(BUILD_DATE)} · session <code>{esc(SESSION_ID)}</code> · model <code>{esc(MODEL_VERSION)}</code> · public anonymous summary only · {ilink(("../index.html" if base == "." else "../../index.html"), "Main Decision Site (root)")}.</p>
+<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the {ilink(("pages/flagged.html" if base == "." else "flagged.html"), "Flagged for Review")} page. Line-by-line verification log: {ilink(("pages/verification.html" if base == "." else "verification.html"), "Verification Log")} (raw markdown: {ilink(("../VERIFICATION.md" if base == "." else "../../VERIFICATION.md"), "VERIFICATION.md")}).</p>
 </footer>
 <script src="{js}"></script>
 </body>
@@ -293,11 +310,11 @@ s.append(section("Questions, information, answers and discovery", table("ID / Qu
     R("Q02 · What is the parcel's actual FEMA flood zone?", "FEMA defines SFHA as the 1% annual chance flood; NFHL is the official current effective layer.", "Cannot be answered yet.", "Partial", ["FEMA_ZONES", "FEMA_NFHL", "FEMA_RISK"], "Missing: exact location. Discover: FEMA Map Service Center / NFHL address search inside the secure workflow; record zone and FIRM panel privately."),
     R("Q03 · Is the parcel in an Alquist-Priolo or seismic hazard zone?", "CGS maps regulatory zones and requires seller disclosure inside mapped zones; EQ Zapp is the official lookup.", "Cannot be answered yet.", "Partial", ["CGS_PROGRAM", "CGS_EQZAPP", "CGS_ANNOUNCE"], "Missing: exact location. Discover: EQ Zapp parcel lookup; obtain geotechnical report privately."),
     R("Q04 · What is the CAL FIRE Fire Hazard Severity Zone?", "FHSZ classes are Moderate, High, Very High; SRA viewer effective April 1, 2024; LRA maps released 2025.", "Cannot be answered yet.", "Partial", ["CALFIRE_FHSZ", "CALFIRE_INCIDENTS"], "Missing: exact location and LRA/SRA status. Discover: official FHSZ viewer privately; confirm with local jurisdiction."),
-    R("Q05 · What trade-area income, population and job growthShould drive the model?", "City-level income $81,939, population 3,869,089 and MSA employment +0.9% are verified regional proxies.", "Regional figures are not the trade area.", "Partial", ["CENSUS_CITY", "BLS_LA", "SCAG_DEMOG"], "Missing: parcel-centred tract set. Discover: Census Geocoder → consistent tracts → ACS 5-year, CBP, OnTheMap."),
-    R("Q06 · Which schools serve the parcel?", "LAUSD has 408,026 students and 784 schools (2024-2025).", "District-level only; assignment unknown.", "Partial", ["NCES_LAUSD"], "Missing: exact location. Discover: NCES CCD school search / district attendance boundaries privately."),
-    R("Q07 · What are local traffic counts and competitor density?", "Mean travel time 30.7 min (city); Caltrans publishes AADT; CBP publishes establishment counts.", "Corridor and competitor set unknown.", "Partial", ["CENSUS_CITY", "CALTRANS", "CENSUS_CBP"], "Missing: exact location. Discover: Caltrans Traffic Volumes by postmile; CBP NAICS 722513 by tract."),
-    R("Q08 · What is the tenant's direction, not one quarter?", "FY2025 system same-store sales -4.2%; FY2024 -1.3%; FY2025 31 openings / 86 closures; franchise rental revenues FY2023-2025 $364,591k / $375,428k / $368,643k.", "Direction is negative across multiple periods.", "Verified", ["SEC_Q4", "SEC_10K"], "Tenant-level, not parcel-level. Discover: continue monitoring SEC 10-K/10-Q series."),
-    R("Q09 · What is the after-tax sale number?", "Federal LTCG 0/15/20%, §1250 max 25%, NIIT 3.8%, §1031 real property only; CA capital gains taxed as ordinary income.", "Tax rules verified; owner number unknown.", "Partial", ["IRS_409", "IRS_559", "IRS_1031", "FTB_CAPGAINS", "FTB_AB1219"], "Missing: adjusted basis, selling costs, owner marginal rates. Discover: private tax file; compute with the browser calculator."),
+    R("Q05 · What trade-area income, population and job growth should drive the model?", "City income $81,939, County income $90,112, County pop 9,694,934 (-3.2% 2020-2025) and County NAICS 722513 QSR jobs 193,200 (+1.6% YoY) are verified regional proxies.", "Regional figures are not the trade area.", "Partial", ["CENSUS_CITY", "CENSUS_COUNTY", "CA_EDD_LA", "SCAG_DEMOG"], "Missing: parcel-centred tract set. Discover: Census Geocoder → consistent tracts → ACS 5-year, CBP, OnTheMap."),
+    R("Q06 · Which schools serve the parcel?", "LAUSD has 408,026 students across 784 schools (2024-2025) and posted 2024-25 CAASPP gains of +3.4 pp ELA, +3.9 pp Math, and +3.3 pp Science.", "District-level only; assignment unknown.", "Partial", ["NCES_LAUSD", "CDE_CAASPP"], "Missing: exact location. Discover: NCES CCD school search / district attendance boundaries privately."),
+    R("Q07 · What are local traffic counts and competitor density?", "Mean travel time 30.7 min (city); Caltrans publishes AADT; CA EDD tracks 193,200 County QSR jobs; CBP publishes establishment counts.", "Corridor and competitor set unknown.", "Partial", ["CENSUS_CITY", "CA_EDD_LA", "CALTRANS", "CENSUS_CBP"], "Missing: exact location. Discover: Caltrans Traffic Volumes by postmile; CBP NAICS 722513 by tract."),
+    R("Q08 · What is the tenant's direction, not one quarter?", "Q3 FY2026 SSS -1.1% (40-wk YTD -4.2%); FY2025 SSS -4.2%; unit count fell to 2,115; 40-wk variable percentage rent -18.0%; $1,492.0m securitized debt ARDs in 2029/2031/2032 + $23.3m cash sweep; 2026-27 C-suite turnover.", "Direction is negative with near-window debt maturities.", "Verified", ["SEC_Q4", "SEC_10K", "SEC_Q3_10Q", "SEC_Q3_PR", "SEC_8K_EXEC"], "Tenant-level, not parcel-level. Note 5 confirms 20-yr + 1-20-yr tenant-option standard leases; inspect private lease (G1)."),
+    R("Q09 · What is the after-tax sale number?", "2026 federal LTCG 0/15/20% ($49,450/$545,500 single; $98,900/$613,700 MFJ), Schedule D stacking, §1250 max 25%, NIIT 3.8%, §1031 real property only, CA 1%-12.3% + 1% BHST >$1M, Form 593 3-1/3%/12.3%, Prop 13 1.181%, and LA Measure ULA (4% >$5.4M; 5.5% >=$10.9M).", "Tax rules verified; owner number unknown.", "Partial", ["IRS_409", "IRS_REVPROC_2026", "IRS_SCHED_D", "IRS_559", "IRS_1031", "FTB_540", "FTB_593", "BOE_PUB306", "LA_ULA"], "Missing: adjusted basis, selling costs, owner marginal rates. Compute in browser calculator (or root Schedule D calculator)."),
     R("Q10 · What is the short-lease discount?", "", "Cannot be answered yet.", "Unverified", ["SEC_10K", "CENSUS_CBP"], "Official information: the SEC 10-K discloses lease terms for public registrants, but no official public source prices private broker quotes. Missing: real broker/appraisal quotes. Discover: collect ≥3 written quotes in the internal workspace; value left blank here.", True),
     R("Q11 · Are insurance cost and availability stable?", "CDI publishes wildfire, FAIR Plan and Sustainable Insurance Strategy resources; FEMA DR-4856 shows a real LA County wildfire disaster in 2025.", "Parcel premium unknown.", "Partial", ["CDI", "FEMA_DR4856"], "Missing: property-specific quotes. Discover: licensed broker quotes privately; stress non-renewal."),
     R("Q12 · Can the cash-flow model be back-tested?", "A versioned framework exists; multi-year official tenant and regional series exist.", "Not yet — comparable parcel history is missing.", "Partial", ["SEC_10K", "BLS_LA", "SCAG_DEMOG"], "Missing: verified comparable sales/rent history. Discover: internal comparable set, then back-test."),
@@ -339,13 +356,25 @@ s.append(section("Regional figures (verified context, explicitly not the trade a
     R("County resident labour force projection", "5,518,000", "Los Angeles County, 2050 (SCAG baseline)", "Verified", "SCAG_DEMOG", "2019 5,008,000; 2000 4,432,000."),
     R("SCAG accommodation & food service jobs", "938 thousand", "SCAG region, 2050 projection", "Verified", "SCAG_DEMOG", "2022 832 thousand; future change 2022-2050 +12.8%."),
     R("Regional transportation investment", "$751.7 billion", "Connect SoCal 2024 project list", "Verified", "SCAG_PLAN", "Adopted April 4, 2024."),
-    R("Los Angeles Unified students", "408,026", "2024-2025 school year", "Verified", "NCES_LAUSD", "784 schools; student/teacher ratio 19.20."),
+    R("Population estimate (LA County)", "9,694,934", "Los Angeles County, July 1, 2025 (V2025)", "Verified", "CENSUS_COUNTY", "QuickFacts V2025 (-3.2% vs 2020 base). CA DOF Jan 1, 2026 E-1 reports 9,837,286 (-0.6% YoY)."),
+    R("Median household income (LA County)", "$90,112", "Los Angeles County, 2020-2024 (2024 dollars)", "Verified", "CENSUS_COUNTY", "Per capita income $45,792; poverty 13.3%. Regional context only — not parcel trade area."),
+    R("Population estimate (LA County, DOF E-1)", "9,837,286", "Los Angeles County, Jan 1, 2026 (-0.6% YoY)", "Verified", "CA_DOF_E1", "LA City 3,806,201 (-0.9% YoY); +11,260 net county housing units."),
+    R("County SA unemployment & QSR jobs", "4.6% SA unemp / 193,200 NAICS 722513 jobs", "Los Angeles County, Oct 2026 (prelim)", "Verified", "CA_EDD_LA", "Limited-Service Restaurants up +1.6% YoY (+3,000 jobs)."),
+    R("California & AB 1228 fast-food minimum wage", "$16.90 statewide / $20.00 fast-food", "California statutory floor (2026)", "Verified", "CA_DIR", "Direct QSR labour floor (41.3% of tenant footprint sits in California)."),
+    R("County Real GDP & Personal Income", "$802.0B Real GDP (2023) / $818.5B Income (2024)", "Los Angeles County (#1 US county)", "Verified", "BEA_LA", "Standalone MSA GDP formally discontinued Feb 2026 (BEA 26-08)."),
+    R("Los Angeles Unified students & CAASPP trend", "408,026 students; +3.4 ELA / +3.9 Math / +3.3 Science pp", "2024-2025 school year", "Verified", ["NCES_LAUSD", "CDE_CAASPP"], "784 schools; student/teacher ratio 19.20. CA statewide: 48.8% ELA, 37.3% Math, 32.7% Science."),
 ], "These are official regional observations and adopted projections. They are deliberately labelled as proxies, not the trade area.")))
 
 s.append(section("Tenant direction series (not one quarter)", table("Indicator", "Value", "Period", [
     R("System same-store sales", "-1.3%", "Jack in the Box brand, FY2024", "Verified", "SEC_Q4", "52 weeks ended September 29, 2024."),
     R("System same-store sales", "-4.2%", "Jack in the Box brand, FY2025", "Verified", "SEC_Q4", "52 weeks ended September 28, 2025."),
+    R("Q3 FY2026 & 40-wk YTD same-store sales", "-1.1% Q3 / -4.2% 40-wk YTD", "Ended July 5, 2026", "Verified", ["SEC_Q3_10Q", "SEC_Q3_PR"], "40-wk franchise variable percentage rent fell 18.0% ($66.3m vs $80.8m); net franchise rental spread fell 15.4%."),
     R("Same-store sales guidance", "-1% to +1%", "Jack in the Box brand, FY2026 guidance", "Control", "SEC_Q4", "Company guidance vs FY2025; a projection, not an observation."),
+    R("Jack in the Box restaurants, Q3 FY2026", "2,115", "Ended July 5, 2026 (vs 2,168 Q3 FY25)", "Verified", ["SEC_Q3_10Q", "SEC_Q3_PR"], "149 company + 1,966 franchised (-53 net YoY); 41.3% (874 units) in California."),
+    R("Securitized debt stack & ARDs", "$1,492.0m (4.14%-7.62%; $23.3m cash sweep)", "As of July 5, 2026", "Verified", ["SEC_Q3_10Q", "SEC_DEBT"], "ARDs cluster in Aug 2029 ($426.4m), May 2031 ($500.0m Series 2026-1), Feb 2032 ($503.3m); Senior ABS leverage >5.25x."),
+    R("Standard lease terms (10-Q Note 5)", "20-yr initial + 1-20 yr tenant sole-discretion options", "Q3 FY2026 Form 10-Q", "Verified", "SEC_Q3_10Q", "Requires inspecting subject lease for tenant-controlled extension options and percentage rent."),
+    R("Del Taco & Qdoba exposures", "$(47.4)m loss + Chancery suit; $22.9m Qdoba lease guarantees", "Q3 FY2026 Form 10-Q", "Verified", "SEC_Q3_10Q", "Qdoba guarantees run through 2032; Del Taco buyer filed Delaware Chancery suit Mar 13, 2026."),
+    R("Governance & C-suite transitions (2026 8-Ks)", "CEO/CFO/CSCO turnover; President Sep 2026; Rights Plan & activist pact to 2028", "Mar-Nov 2026", "Verified", "SEC_8K_EXEC", "Nov 17, 2026 8-K also announced planned 2027 CFO/CLAO/CTO transitions and COO promotion."),
     R("Jack in the Box restaurants, end of year", "2,191", "FY2024 (end of Q4)", "Verified", "SEC_Q4", "150 company-operated + 2,041 franchise."),
     R("Jack in the Box restaurants, end of year", "2,136", "FY2025 (end of Q4)", "Verified", ["SEC_Q4", "SEC_10K"], "150 company-operated + 1,986 franchise."),
     R("Restaurant openings", "31", "Jack in the Box brand, FY2025", "Verified", "SEC_Q4", "Direction across a full year, not one quarter."),
@@ -399,9 +428,10 @@ s.append(section("Verified regional hazard context", table("Fact", "Value", "Sco
     R("CGS regulatory zones", "Alquist-Priolo fault zones; liquefaction and landslide zones; tsunami zones", "California Seismic Hazards Program", "Verified", "CGS_PROGRAM", "Sellers and agents must disclose if property lies within a mapped hazard zone."),
     R("2025 LA County fault-zone map release", "Nov 20, 2025 official maps", "Pasadena / Mt. Wilson quadrangles, Los Angeles County", "Verified", "CGS_ANNOUNCE", "Affects cities Arcadia, Glendale, La Canada Flintridge, Monrovia, Pasadena, Sierra Madre and county of Los Angeles; not assumed to cover the subject parcel."),
     R("USGS 2023 NSHM", "Includes basin-specific data in the Los Angeles region", "National Seismic Hazard Model", "Verified", "USGS_NSHM", "Probabilistic ground-shaking model; revised 2026 documentation."),
+    R("USGS UCERF3 30-year LA earthquake odds", "60% M>=6.7 / 46% M>=7.0 / 31% M>=7.5", "30-year regional forecast", "Verified", "USGS_LA_PROB", "Quantifies systemic seismic & exit-liquidity interruption tail risk."),
     R("CAL FIRE FHSZ classes", "Moderate / High / Very High", "State Responsibility Area", "Verified", "CALFIRE_FHSZ", "Hazard, not risk; 30-50 year physical conditions; SRA viewer effective April 1, 2024."),
     R("LRA FHSZ rollout", "Phases 1-4 maps released Feb 10 - Mar 24, 2025", "Local Responsibility Area", "Verified", "CALFIRE_FHSZ", "Contact local jurisdiction for a specific LRA area."),
-    R("Insurance oversight", "Wildfire, FAIR Plan and Sustainable Insurance Strategy resources", "California Department of Insurance", "Verified", "CDI", "Official state insurance regulator."),
+    R("Insurance oversight & FAIR Plan cap", "$20M/bldg, $100M/loc commercial limits (sunset Jan 1, 2028)", "California Department of Insurance", "Verified", "CDI", "Official state insurance backstop and 2028 sunset risk."),
 ], "Regional hazard context is verified; it is not a substitute for parcel zone status.")))
 
 s.append(section("Business-as-usual and black-swan stress", table("Scenario", "Value / treatment", "Class", [
@@ -443,13 +473,15 @@ s.append(section("W-02 · Sell-versus-hold worksheet", table("Line", "Value", "C
 ], "The after-tax sale comparison sits alongside a negotiated renewal case; no winner is selected.")))
 
 s.append(section("Verified tax rules → one number", table("Rule", "Value", "Authority", [
-    R("Federal long-term capital gain rates", "0% / 15% / 20%", "2025 tax year", "Verified", "IRS_409", "Thresholds: single 15% up to $533,400; MFJ 15% up to $600,050."),
-    R("Unrecaptured section 1250 gain", "maximum 25%", "2025 tax year", "Verified", "IRS_409", "Applies to section 1250 real property."),
+    R("Federal long-term capital gain rates (2026)", "0% / 15% / 20%", "Tax year 2026 (Rev. Proc. 2025-32)", "Verified", ["IRS_409", "IRS_REVPROC_2026"], "2026 ceilings: 0% to $49,450 single ($98,900 MFJ); 15% to $545,500 single ($613,700 MFJ); std ded $16,100/$32,200."),
+    R("Unrecaptured section 1250 gain & Schedule D order", "Maximum 25% (enters Schedule D Line 14)", "IRS Schedule D Tax Worksheet", "Verified", ["IRS_409", "IRS_SCHED_D"], "Fills ordinary brackets up to 24% ceiling before 25% tier and interacts with LTCG brackets on lines 1-47."),
     R("Net investment income tax", "3.8%", "Individuals above threshold", "Verified", "IRS_559", "Thresholds: $200,000 single/HOH; $250,000 MFJ; $125,000 MFS."),
     R("Section 1031 like-kind exchange", "Real property only, since Jan 1, 2018", "Business / investment real property", "Verified", "IRS_1031", "Gain recognised to extent of non-like-kind property or money received."),
-    R("California capital gains", "Taxed as ordinary income", "California personal income", "Verified", "FTB_CAPGAINS", "No lower state rate for capital gains."),
-    R("California personal income tax rates", "1% to 12.3%", "Nine rates under PITL", "Verified", "FTB_AB1219", "Additional 1% Mental Health Services Tax on taxable income over $1,000,000; FTB states maximum 13.3%."),
-    R("CA maximum personal income tax rate", "13.3%", "FTB summary of federal changes", "Verified", "FTB_SUMMARY", "12.3% top PITL rate plus 1% on income over $1,000,000."),
+    R("California capital gains & ordinary brackets", "1% to 12.3% ordinary rates (no LTCG discount)", "2025 Form 540", "Verified", ["FTB_CAPGAINS", "FTB_AB1219", "FTB_540"], "Std deduction $5,706 single / $11,412 MFJ; AMT check triggers at $92,749 single / $123,667 MFJ."),
+    R("California Behavioral Health Services Tax", "+1% over $1,000,000 (13.3% max)", "Form 540 Line 62", "Verified", ["FTB_540", "FTB_SUMMARY"], "Renamed from Mental Health Services Tax; applies to Form 540 taxable income >$1M."),
+    R("FTB Form 593 closing withholding (prepayment)", "3-1/3% sales price or 12.3% optional gain", "2026 Form 593", "Verified", "FTB_593", "Escrow prepayment credited against final CA income tax return."),
+    R("Prop 13 reassessment & LA County avg rate", "Reassessed to sale price; 1.181% LA County avg", "BOE FY2024-25 Pub 306", "Verified", "BOE_PUB306", "Affects buyer underwriting unless NNN lease fully passes taxes through."),
+    R("City of LA Transfer Tax + Measure ULA (post-June 2026)", "0.56% <=$5.4M / 4.56% ($5.4M-$10.9M) / 6.06% >=$10.9M", "Effective after June 30, 2026", "Verified", "LA_ULA", "City base 0.45% + County 0.11% + Measure ULA (4.0% / 5.5%) on gross consideration if in City of LA."),
 ], "These are the verified rules the after-tax module turns into one comparable number.")))
 
 s.append(section("Short-lease discount from real quotes", table("Input", "Value", "Required evidence", [
@@ -483,6 +515,8 @@ calc_body = """
 <label>NIIT rate (%) <input type="number" id="niit_rate" value="3.8" min="0" max="10" step="0.1"></label>
 <label>NIIT applies? <select id="niit_applies"><option value="no">No — MAGI threshold not modelled</option><option value="yes">Yes — apply 3.8% to gain</option></select></label>
 <label>CA marginal rate (%) <input type="number" id="ca_rate" value="12.3" min="0" max="20" step="0.1"></label>
+<label>CA 1% BHST (&gt;$1M taxable income)? <select id="bhst_applies"><option value="no">No — exclude 1% BHST surcharge</option><option value="yes">Yes — add 1% Behavioral Health Services Tax above $1M gain</option></select></label>
+<label>LA Transfer Tax &amp; Measure ULA (eff. post-June 30, 2026)? <select id="ula_mode"><option value="manual">Manual — included in Selling costs above</option><option value="la_city_2026">Add City of LA (0.45%) + County (0.11%) + ULA (4% &gt;$5.4M; 5.5% &ge;$10.9M)</option></select></label>
 <label>§1031 deferral? <select id="exchange1031"><option value="no">No</option><option value="yes">Yes — defer recognised gain</option></select></label>
 </fieldset>
 <fieldset><legend>Hold / renewal case (private inputs)</legend>
@@ -520,10 +554,11 @@ calc_body = """
 begin_page("pages/calculator.html")
 s = [calc_body]
 s.append(section("Verified defaults used by the calculator", table("Default", "Value", "Source rule", [
-    R("Federal long-term capital gain rate", "15%", "2025 rate for most individuals", "Verified", "IRS_409", "0% / 15% / 20% depending on taxable income."),
-    R("Unrecaptured §1250 rate", "25%", "Maximum rate on section 1250 real property", "Verified", "IRS_409", "Editable."),
-    R("Net investment income tax", "3.8%", "Above applicable thresholds", "Verified", "IRS_559", "Editable."),
-    R("California marginal rate", "12.3%", "Top PITL rate; +1% over $1,000,000", "Verified", ["FTB_AB1219", "FTB_SUMMARY"], "California taxes capital gains as ordinary income."),
+    R("Federal long-term capital gain rate", "15% (0% / 15% / 20%)", "2026 thresholds (Rev. Proc. 2025-32)", "Verified", ["IRS_409", "IRS_REVPROC_2026"], "2026 ceilings: $49,450/$545,500 single; $98,900/$613,700 MFJ. For multi-bracket Schedule D stacking, see root calculator."),
+    R("Unrecaptured §1250 rate", "25%", "Maximum rate on section 1250 real property", "Verified", ["IRS_409", "IRS_SCHED_D"], "Editable ceiling."),
+    R("Net investment income tax", "3.8%", "Above applicable MAGI thresholds", "Verified", "IRS_559", "Editable."),
+    R("California marginal rate & BHST", "12.3% (+1% >$1,000,000)", "Form 540 & Line 62 BHST", "Verified", ["FTB_AB1219", "FTB_540", "FTB_SUMMARY"], "Optional +1% BHST toggle added."),
+    R("City of LA Transfer Tax + Measure ULA", "0.56% base; +4.0% >$5.4M; +5.5% >=$10.9M", "Effective post-June 30, 2026", "Verified", "LA_ULA", "Optional transfer-tax estimator if inside City of LA."),
     R("§1031 real-property-only rule", "Real property only", "Since Jan 1, 2018", "Verified", "IRS_1031", "Used only if the adviser selects deferral."),
 ], "Only these official tax rules are pre-filled. Every property-specific input is blank.")))
 s.append(section("Input classification", table("Class", "Examples", "Handling", [
@@ -568,16 +603,14 @@ begin_page("pages/data-sources.html")
 s = []
 src_rows = []
 for sid, (title, url, publisher, note) in SOURCES.items():
-    if sid == "CENSUS_COUNTY":
-        status, unver = "Flagged", False
-    elif sid == "GH_PAGES_DOCS":
+    if sid == "GH_PAGES_DOCS":
         status, unver = "Control", False
     else:
         status, unver = "Verified", False
     src_rows.append(R(sid, publisher, title, status, sid, note, unver))
 s.append(section("Official source register", table("ID", "Publisher", "Title / URL", src_rows,
     "Every source below is an official government or official product-documentation site. Data values use only government (.gov) sources."),
-    "All links are provided for manual review. The CENSUS_COUNTY fetch failure is logged as IR-06 and its proxy values are left blank."))
+    "All links are provided for manual review. County QuickFacts (CENSUS_COUNTY), 2026 IRS/FTB/BOE/Measure ULA tax rules, and Q3 FY26 SEC 10-Q/8-K filings were resolved in the 2026-11-26 audit pass."))
 s.append(section("Verification summary", table("Measure", "Value", "Meaning", [
     R("Official sources registered", str(len(SOURCES)), "Count of source IDs", "Control", "CENSUS_CITY", "Generated count from this site register, not an official statistic."),
     R("Verified empirical rows", "{{VERIFIED_COUNT}}", "Rows with non-blank value + .gov source", "Control", "CENSUS_CITY", "Generated count; see VERIFICATION.md for the line-by-line log."),
@@ -603,10 +636,11 @@ irregularities = [
     ("IR-03", "No parcel address, APN, owner name, lease file or owner financial data exists in the repository; nothing identifying was added.", "CCPA", "Privacy is the highest-urgency control."),
     ("IR-04", "Repository at session start contained only `README.md` (`# Jackbox3`); there was no pre-existing dataset, model or worksheet to review.", "GH_PAGES_DOCS", "Entire deliverable created in this session."),
     ("IR-05", "No other agent session claims were present; this session claimed all tasks and designated phase 3 as the final integration session.", "GH_PAGES_DOCS", "See COORDINATION.md task board."),
-    ("IR-06", "The U.S. Census Bureau QuickFacts page for Los Angeles County repeatedly failed to fetch in this environment; county proxy values were left blank rather than inferred.", "CENSUS_COUNTY", "W-01 already replaces city/county proxies, so no county numeric value is published."),
+    ("IR-06", "Originally in the 2026-11-25 pass, the single-geography QuickFacts LA County URL failed to fetch. In the 2026-11-26 audit pass, official QuickFacts V2025 LA County figures (9,694,934 pop, $90,112 median HH income) were verified via the combined QuickFacts table; W-01 trade-area values still remain blank until parcel-centred Census tracts are geocoded privately.", "CENSUS_COUNTY", "W-01 still rejects county proxies in favor of parcel trade-area tracts."),
     ("IR-07", "The owner-supplied lease expiry range 2030-2035 could not be confirmed from an official source; it is published as unverified, not as a fact.", "LEGINFO", "Requires the private lease abstract."),
     ("IR-08", "No official public source prices a short-lease discount from real broker quotes; the value is blank and flagged.", "SEC_10K", "Requires private written quotes in the internal workspace."),
     ("IR-09", "The versioned cash-flow model has not been back-tested: verified inputs and sufficient comparable history do not yet exist.", "SEC_10K", "Marked Not run, never Verified."),
+    ("IR-10", "The 2026-11-26 audit pass reconciled 2026 IRS Rev. Proc. 2025-32 ceilings, Schedule D stacking, Form 593, Prop 13 1.181% LA County avg rate, post-June 2026 LA Measure ULA ($5.4M/$10.9M), Q3 FY26 SEC 10-Q/8-K filings, BEA county GDP ($802.0B), CA EDD QSR payrolls (193,200), DIR $20/hr wage floor, CDE CAASPP gains, and USGS 30-year probabilities across both workspaces.", "SEC_Q3_10Q", "See COORDINATION.md for synchronized changelog."),
 ]
 ir_rows = [R(i, "", desc, "Flagged", srcid, note, True) for i, desc, srcid, note in irregularities]
 s.append(section("Irregularities for review", table("ID", "Value", "Irregularity", ir_rows,
@@ -669,6 +703,17 @@ s.append(section("Legal / official basis", table("Authority", "Relevance", "Sour
 ], "Official sources underpin the privacy boundary as well as the data.")))
 PAGES["workspace/pages/privacy.html"] = page("privacy.html", "Privacy & Data Handling", "Highest-urgency privacy policy: anonymisation, placeholders, internal-only records, and the secure location workflow.", s, "..")
 
+# --- Verification log (rendered HTML) --------------------------------------
+begin_page("pages/verification.html")
+ver_snapshot = list(VERIFIED_ROWS)
+ver_rows = []
+for idx_v, vr in enumerate(ver_snapshot, 1):
+    ver_rows.append(R(f"V{idx_v:03d} · {vr['v1']}", vr["v2"], f"{vr['page']} · {vr['v3']}", "Control", vr["sources"], "Text retrieved from official .gov page; transcribed verbatim without inference."))
+PAGES["workspace/pages/verification.html"] = page("verification.html", "Verification Log", "Rendered line-by-line audit register of every empirical value published in this workspace, linked to its primary .gov source.", [
+    section("Line-by-line verified observations", table("ID / Indicator", "Published value", "Page / Scope", ver_rows,
+        "Every verified empirical value published in /workspace/ is listed below with its official .gov source link. Unverified values are left blank and listed on Flagged for Review."))
+], "..")
+
 # --- Dashboard -------------------------------------------------------------
 verified_count = len(VERIFIED_ROWS)
 unverified_count = sum(1 for r in ALL_ROWS if r["unverified"])
@@ -701,6 +746,7 @@ for group, items in NAV_GROUPS:
             "Market & Trade Area": "W-01 trade-area framework, regional figures, tract trends, schools, traffic, jobs.",
             "Hazards & Resilience": "W-04 parcel screening, verified regional hazards, combined stress.",
             "Data & Sources": "Master official source register and verification summary.",
+            "Verification Log": "Rendered line-by-line audit register of every verified .gov observation.",
             "Flagged for Review": "Unverified values and irregularities with official links.",
             "Lease & Cash Flow": "Lease abstract placeholder, W-02 worksheet, after-tax rules, versioned model.",
             "Private Calculator": "Browser-only after-tax sell-vs-hold calculator with combined stress.",
@@ -746,7 +792,7 @@ for i, r in enumerate(VERIFIED_ROWS, 1):
     links = "; ".join(f"[{sid}]({SOURCES[sid][1]})" for sid in r["sources"])
     lines.append(f"| {i} | {r['page'] or 'generated'} | {r['v1']} | {r['v2']} | {links} | Text retrieved from official page; value transcribed verbatim; no inference. |")
 lines += ["", "## Unverified / blank values", "", "Values that could not be confirmed from an official source are left blank in the site tables, marked `Unverified`, and listed on `pages/flagged.html` with their official source links. Count: " + str(unverified_count_final) + ".", "",
-          "## Irregularities", "", "IR-01 through IR-09 are published on `pages/flagged.html` and logged in `COORDINATION.md`.", "",
+          "## Irregularities", "", "IR-01 through IR-10 are published on `pages/flagged.html` and logged in `COORDINATION.md`.", "",
           "## Site checks", "", "Run `python3 tools/validate_site.py` — checks internal links, official source links on every table row, blank values on unverified rows, and the absence of personal-information patterns.", ""]
 write("VERIFICATION.md", "\n".join(lines) + "\n")
 

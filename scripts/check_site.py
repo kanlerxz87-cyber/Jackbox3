@@ -22,6 +22,7 @@ Run:  python3 scripts/check_site.py
 
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 import re
@@ -156,10 +157,27 @@ def main() -> int:
         (r"\b\d{4}-\d{4}-\d{4}-\d{4}\b", "card-shaped number"),
         (r"(?i)\b(?:apn|parcel number|ssn|social security)\b\s*[:#]?\s*\d", "labelled personal identifier"),
     ]
+    redacted_name_sha256 = {
+        "14e379c21085cb2f8d69d9e916fc2b6deda26d41c6ea8ff8da5c90b68a84f3b4",
+        "2926b796dd57a8a0d61202a2a75690e97cfd15a4726556d7fcce3e46425b3776",
+        "4336147ecb1865b4481334f89950eef3cef24156c18eb7a4a0660c4a40bbeff1",
+        "4ab69fb837470bf18f0058cc2ec3b4afff63bf68b6281ee45965212b63796f07",
+        "7641c2091b94f808b0509dce737d6f35a9c1ac38c6561863e96714d9d1486704",
+        "7b95c7ebccc2aaff86426e5ca32758bc5943fde2731a259b9cf403381791e187",
+        "d839fcb6191232d878d750c21ab7e4cc00fba94a30b6b6d0b952ff2fe13cd3a3",
+        "dd97732a53c7705af46437fec9d6beb629974efa7e15da1a0e95d2e34ffd09ed",
+        "e8411d933ec669f3fc987f2205c948c046f93b419c8f615f83111274757de87c",
+    }
+    name_token_re = re.compile(r"\b[A-Z][a-z]+\s+[A-Z][a-z]+\b")
     for page, content in html_by_page.items():
         for pat, label in private_patterns:
             for m in re.finditer(pat, content):
                 err("%s: possible %s leaked: %s" % (page, label, m.group(0)[:60]))
+        for cand in name_token_re.findall(content):
+            norm = re.sub(r"\s+", " ", cand.strip())
+            digest = hashlib.sha256(norm.encode("utf-8")).hexdigest()
+            if digest in redacted_name_sha256:
+                err("%s: non-anonymised individual name leaked (digest %s)" % (page, digest[:12]))
 
     # ---------------------------------------------------------------- 6. calculator has no network API
     calc_page = html_by_page.get("calculator.html", "")
