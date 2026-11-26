@@ -1,6 +1,6 @@
 # COORDINATION.md — Shared Task Board
 
-Last updated: 2026-11-26 (session `arena/57054140-jackbox3`; post-merge audit complete)
+Last updated: 2026-11-26 (session `arena/0e787678-jackbox3`; follow-up citation audit)
 
 > This file is the single shared task board for all agent sessions working on this repo.
 > Read it before starting any task. Claim a task before you touch files, then commit and
@@ -12,6 +12,7 @@ Last updated: 2026-11-26 (session `arena/57054140-jackbox3`; post-merge audit co
 |---|---|---|---|
 | `47b70455` | `arena/47b70455-jackbox3` | Original build and integration scope (historical; completed) | done |
 | `57054140` | `arena/57054140-jackbox3` | Post-merge audit; `COORDINATION.md` only | done |
+| `0e787678` | `arena/0e787678-jackbox3` | T-24 follow-up source-link correction; `COORDINATION.md`, `data/findings.json`, generated root HTML | active |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -50,6 +51,8 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-21 | Integration: merge, re-verify, publish to Pages | done | `47b70455` | `main` |
 | T-22 | Pull request → merge → confirm deploy (PR #1) | done | `47b70455` | `main` |
 | T-23 | Post-merge repository and deployment audit; reconcile stale coordination status | done | `57054140` | `COORDINATION.md` |
+| T-24 | Follow-up source-link audit; correct demonstrated citation mismatch and re-validate | done | `0e787678` | `COORDINATION.md`, `data/findings.json`, generated root HTML |
+| T-25 | Integrate the citation correction; PR, merge, and confirm Pages deployment | in progress | `0e787678` | `COORDINATION.md`, current branch → `main` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
@@ -249,6 +252,14 @@ U.S. Census Bureau (QuickFacts, ACS, CBP, data.census.gov, Geocoder, OnTheMap), 
 ### Irregularities (published on `workspace/pages/flagged.html`)
 
 IR-01 fixed branch (no per-task branches); IR-02 legacy Pages build from `main`; IR-03 no personal data in repo; IR-04 repo was only `README.md` at start; IR-05 no other claims at start; IR-06 Census LA County QuickFacts fetch failed → county proxy values blank; IR-07 owner-supplied 2030-2035 expiry unverified; IR-08 no official public short-lease discount quotes → blank; IR-09 cash-flow back-test NOT RUN. Plus the merge-conflict handoff logged above.
+
+### Session `0e787678` — follow-up source-link audit (2026-11-26)
+
+- **Issue found:** source `S13` was a CAL FIRE positive-control query at Griffith Park (34.1180, -118.3400), but it was cited for `H-03`, whose stated geography is the central-LA reference point (34.0537, -118.2428). The source link could not support that specific location.
+- **Correction:** the dataset now separates the actual reference-point query as `S28`, updates `H-03` to cite `S28`, and labels `S13` explicitly as the Griffith Park positive control supporting `H-04`. The H-03 finding remains flagged; the follow-up could not retrieve the live GIS response, so no new claim of independent verification is made.
+- **Checks:** `python3 build.py` succeeded (18 root pages regenerated); `python3 scripts/check_site.py` passed; `python3 tools/validate_site.py` passed (13 workspace pages, 236 internal links, 523 external links, 321 sourced table rows, 115 verified observations, 114 blank/unverified observations, no detected personal-information patterns). Findings values and parcel-identifying data were not added.
+- **Source:** official CAL FIRE state GIS service link in `data/findings.json` (`S28`), with the failed follow-up retrieval recorded in its source metadata.
+- **Coordination incident:** PR #9 merged on `main` while PR #10 was open, causing a conflict in `COORDINATION.md` during the required rebase. The existing post-merge audit (`57054140`) and this session's task records were both retained; task IDs were adjusted to avoid collision. No data or page changes were discarded.
 
 ### PR / merge record
 
