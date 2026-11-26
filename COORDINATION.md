@@ -495,3 +495,12 @@ Rebased cleanly onto `origin/main` (`4fc1496`, preserving 100% of PRs #1–#19 a
 | Live URL | https://kanlerxz87-cyber.github.io/Jackbox3/ |
 | Checks on merged tree | `python3 build.py` OK; `python3 scripts/check_site.py` PASSED; `python3 tools/validate_site.py` OK (14 files, 296 internal links, 751 external links, 503 table rows, 149 verified rows, 114 blank/unverified rows, no personal information detected) |
 | Merge conflicts | Resolved twice without discarding any session's work; task-ID collision handled by renumbering this session's tasks to T-33…T-37. Logged in the merge reconciliation section above. |
+
+### PR & GitHub Pages deployment record (`b544c65d`)
+
+- **PR:** [#21](https://github.com/kanlerxz87-cyber/Jackbox3/pull/21) (`arena/b544c65d-jackbox3` → `main`) — **MERGED** at `2026-11-26T13:47:29Z`, merge commit `99dc316c99689b39c01993a667d4a0e0e45b50f1`.
+- **GitHub Pages build:** `status: "built"` for commit `99dc316c99689b39c01993a667d4a0e0e45b50f1` at `2026-11-26T13:47:52Z`.
+- **Live deployment verified:** retrieved `https://kanlerxz87-cyber.github.io/Jackbox3/tenant-credit.html` (showing the 3-year Franchise Rental Revenues series `$364.6m / $375.4m / $368.6m`, `S59`), `https://kanlerxz87-cyber.github.io/Jackbox3/workspace/pages/verification.html` (149 verified `.gov` rows), and `https://kanlerxz87-cyber.github.io/Jackbox3/calculator.html` (Schedule D Tax Worksheet + W-02 Hold/Stress calculator). Zero personal names in repository or live HTML; no sell-vs-hold winner declared.
+
+
+
