@@ -1,6 +1,6 @@
 # COORDINATION.md — Shared Task Board
 
-Last updated: 2026-11-26 (session `arena/0e787678-jackbox3`; follow-up citation audit)
+Last updated: 2026-11-26 (sessions `arena/0e787678-jackbox3` and `arena/7c607b54-jackbox3`; source audit integration)
 
 > This file is the single shared task board for all agent sessions working on this repo.
 > Read it before starting any task. Claim a task before you touch files, then commit and
@@ -12,7 +12,8 @@ Last updated: 2026-11-26 (session `arena/0e787678-jackbox3`; follow-up citation 
 |---|---|---|---|
 | `47b70455` | `arena/47b70455-jackbox3` | Original build and integration scope (historical; completed) | done |
 | `57054140` | `arena/57054140-jackbox3` | Post-merge audit; `COORDINATION.md` only | done |
-| `0e787678` | `arena/0e787678-jackbox3` | T-24 follow-up source-link correction; `COORDINATION.md`, `data/findings.json`, generated root HTML | active |
+| `0e787678` | `arena/0e787678-jackbox3` | T-24 follow-up source-link correction and T-25 integration; shared findings/root pages/coordination | active |
+| `7c607b54` | `arena/7c607b54-jackbox3` | T-26 independent official-source/privacy audit correction; `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py` | active |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -53,6 +54,7 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-23 | Post-merge repository and deployment audit; reconcile stale coordination status | done | `57054140` | `COORDINATION.md` |
 | T-24 | Follow-up source-link audit; correct demonstrated citation mismatch and re-validate | done | `0e787678` | `COORDINATION.md`, `data/findings.json`, generated root HTML |
 | T-25 | Integrate the citation correction; PR, merge, and confirm Pages deployment | in progress | `0e787678` | `COORDINATION.md`, current branch → `main` |
+| T-26 | Independent official-source/privacy audit; correct source-integrity issues | in progress | `7c607b54` | `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
