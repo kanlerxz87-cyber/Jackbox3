@@ -1,6 +1,6 @@
 # COORDINATION.md — Shared Task Board
 
-Last updated: 2026-11-25 (session `arena/47b70455-jackbox3`)
+Last updated: 2026-11-26 (session `arena/57054140-jackbox3`; post-merge audit in progress)
 
 > This file is the single shared task board for all agent sessions working on this repo.
 > Read it before starting any task. Claim a task before you touch files, then commit and
@@ -10,7 +10,8 @@ Last updated: 2026-11-25 (session `arena/47b70455-jackbox3`)
 
 | Session ID | Branch | Scope (files it may edit) | Status |
 |---|---|---|---|
-| `47b70455` | `arena/47b70455-jackbox3` | Everything in this table below; sole active session at time of writing | active |
+| `47b70455` | `arena/47b70455-jackbox3` | Original build and integration scope (historical; completed) | done |
+| `57054140` | `arena/57054140-jackbox3` | Post-merge audit; `COORDINATION.md` only | active |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -48,6 +49,7 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-20 | Link + integrity check script | done | `47b70455` | `scripts/check_site.py` |
 | T-21 | Integration: merge, re-verify, publish to Pages | done | `47b70455` | `main` |
 | T-22 | Pull request → merge → confirm deploy (PR #1) | done | `47b70455` | `main` |
+| T-23 | Post-merge repository and deployment audit; reconcile stale coordination status | in progress | `57054140` | `COORDINATION.md` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
