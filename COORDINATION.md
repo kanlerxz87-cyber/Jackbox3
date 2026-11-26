@@ -289,10 +289,51 @@ No personal data is collected or published in this session either.
 
 | Task | Description | Status | Owner | Files touched |
 |---|---|---|---|---|
-| A-01 | Repo audit + coordination claim | in progress | `4a251c0f` | `COORDINATION.md` |
-| A-02 | Line-by-line re-verification: findings + rules vs official sources | unclaimed | `4a251c0f` | `data/findings.json`, `data/rules.json` |
-| A-03 | Privacy + calculator network/storage audit | unclaimed | `4a251c0f` | `assets/calculator.js`, `workspace/assets/calculator.js` |
-| A-04 | Fix verified inconsistencies (stale suggestions, counts, dates) | unclaimed | `4a251c0f` | `build.py`, generated `*.html` |
-| A-05 | Rebuild, run both checkers, PR → merge → confirm Pages deploy | unclaimed | `4a251c0f` | `main` via PR |
+| A-01 | Repo audit + coordination claim | done | `4a251c0f` | `COORDINATION.md` |
+| A-02 | Line-by-line re-verification: findings + rules vs official sources | done | `4a251c0f` | `data/findings.json`, `data/rules.json`, `VERIFICATION.md` |
+| A-03 | Privacy + calculator network/storage audit | done | `4a251c0f` | `assets/calculator.js` (no network/storage calls; checker rule 7 green) |
+| A-04 | Fix verified inconsistencies (surcharge drift, FTB thresholds, stale suggestion, dashboard cross-link, build stamp) | done | `4a251c0f` | `build.py`, `data/rules.json`, generated `*.html` |
+| A-05 | Rebuild, run both checkers, PR → merge → confirm Pages deploy | in progress | `4a251c0f` | `main` via PR |
+
+### A-02 verification performed (detail in `VERIFICATION.md`, "Re-verification pass — 2026-11-26")
+
+Re-pulled live on 2026-11-26 and compared row by row against the published figure:
+
+- **BLS** `LNS14000000`, `LASST060000000000003`, `LAUMT063108000000003`, `SMU06310800000000001`, `CUUR0000SA0`,
+  `CUUR0000SEFV` — 14 economy rows, all identical, including the preliminary and 11-month footnotes.
+- **Census** geocoder (tract/block/districts re-confirmed) and the Census Reporter `acs2024_5yr` mirror for county, MSA
+  and tract — 20 rows identical, margins of error as published, `B25077` genuinely null for the tract so `TA-12` stays blank.
+- **USGS** ASCE 7-16 at 34.05/−118.24 RC III site class D — `sds` 1.311, `pga` 0.843, `sdcs` D identical; `sd1`/`sm1`/`sdc1`
+  still null, so `H-08` stays blank.
+- **FEMA** NFHL layer 28 → Zone X / AREA OF MINIMAL FLOOD HAZARD / DFIRM 06037C; NRI tract query → 97.92 composite,
+  EAL building $3,648,243.87, rate 0.2176%, resilience Very Low — all identical.
+- **CAL FIRE** LRA FHSZ — empty at the reference point, "Very High" at the Griffith Park control (proves the query works).
+- **SEC EDGAR** CIK 0000807882 — XBRL Revenues FY2024/FY2025, Q3 FY2026 release (same-store sales, counts, closures,
+  refinancing), FY2025 DEF 14A XBRL pay-versus-performance (net loss, adjusted EBITDA), 8-K index (Item 5.02 filed 2026-11-17).
+- **IRS** Rev. Proc. 2025-32 (2026 brackets, LTCG ceilings, standard deduction), Topics 409/559, Pubs 537/544.
+- **FTB** 2025 Tax Rate Schedules (all nine band edges) and 2025 Form 540 instructions (line 18 standard deduction,
+  line 61 AMT thresholds, line 62 Behavioral Health Services Tax).
+- **Federal Reserve** October 2025 Beige Book national summary — both quoted phrases verbatim.
+
+All 20 `derived` rows were recomputed from their own recorded formulas and reproduce the published value.
+
+### A-04 irregularities corrected (all were self-inflicted drift, none changed a sourced value)
+
+| # | Where | What was wrong | Fix |
+|---|---|---|---|
+| 1 | `data/rules.json` | superseded `mental_health_services_tax` block still said "unverified, not applied" while `behavioral_health_services_tax` said the opposite | duplicate block removed |
+| 2 | `data/rules.json`, `tax.html` | credit-limitation thresholds printed as 347,808 / 463,745 / 231,868; not on the published page | replaced with the published line 32 values 252,203 / 504,411 / 378,310 |
+| 3 | `tax.html` | applied surcharge listed under "Excluded rules" | moved to "Rules it applies" |
+| 4 | `risk.html`, `methodology.html`, `flagged-for-review.html`, `suggestions.html` | four statements that the surcharge is an unverified omission | rewritten to verified-and-applied; IR-08 now records the retrieval failure and the successful retry |
+| 5 | `suggestions.html` S-05 | top suggestion was to add the surcharge, already applied | re-pointed at the property-tax reassessment gap |
+| 6 | `index.html` | cross-link to the preserved `/workspace/` audit site was dropped by a regeneration | restored; page reachable again |
+| 7 | all pages, `sitemap.xml` | build stamp read 2026-11-25 | 2026-11-26 |
+
+### A-05 checks
+
+`python3 build.py` → 18 pages + sitemap + robots, no unreplaced tokens, no empty cells.
+`python3 scripts/check_site.py` → **PASSED**. `python3 tools/validate_site.py` → **OK** (13 files, 236 internal links,
+523 external links, 321 rows, 115 verified, 114 blank/unverified, no personal-information patterns).
+No sell-versus-renew winner is stated anywhere; flagged and unverified items remain published, not resolved by assertion.
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
