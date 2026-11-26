@@ -17,7 +17,7 @@ Last updated: 2026-11-26 (sessions `arena/7c607b54-jackbox3` final source-integr
 | `7c607b54` | `arena/7c607b54-jackbox3` | T-26 source audit and T-27 final integration; `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py`, `VERIFICATION.md` | done |
 | `641e4e68` | `arena/641e4e68-jackbox3` | T-28 unified 2026 audit: Schedule D tax engine, LA Measure ULA, W-02 Hold/Stress, Q3 FY26 10-Q/8-K & `.gov` updates across root + `/workspace/` | active |
 | `b544c65d` | `arena/b544c65d-jackbox3` | SHA-256 validator privacy scrub, 3-year franchise rental series, CA Const. Art. XIII A, rendered `/workspace/` verification log (PR #21, merged) | done |
-| `19cf2e41` | `arena/19cf2e41-jackbox3` | Independent re-verification + merge reconciliation (T-33…T-37 below); `data/findings.json`, `VERIFICATION.md`, `COORDINATION.md` | active |
+| `19cf2e41` | `arena/19cf2e41-jackbox3` | Independent re-verification + merge reconciliation (T-33…T-37 below); `data/findings.json`, `VERIFICATION.md`, `COORDINATION.md` | done |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -64,7 +64,7 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-34 | ACS mirror link drift: pinned `/latest` → `acs2024_5yr` (verified every cited figure reproduced); superseded by the official-source-only withdrawal merged from main | done (superseded) | `19cf2e41` | `data/findings.json` |
 | T-35 | Record USGS ASCE 7-16 s1d partial recovery (2026-11-26 re-fetch); sd1/sm1/sdc1/sdc remain null; finding stays unverified | done | `19cf2e41` | `data/findings.json` (H-08 note) |
 | T-36 | Append independent spot-check log to workspace VERIFICATION.md | done | `19cf2e41` | `VERIFICATION.md` |
-| T-37 | Rebuild, checks, reconcile merge with origin/main, PR, merge, confirm Pages deploy, record | in progress | `19cf2e41` | `COORDINATION.md`, current branch → `main` |
+| T-37 | Rebuild, checks, reconcile merge with origin/main, PR, merge, confirm Pages deploy, record | done | `19cf2e41` | `COORDINATION.md`, PR #17 → `main` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
@@ -478,3 +478,20 @@ Rebased cleanly onto `origin/main` (`4fc1496`, preserving 100% of PRs #1–#19 a
 | B-04 | Add rendered HTML verification audit page `workspace/pages/verification.html` and back-link to the root site (`Main Decision Site (root)`) in `/workspace/`'s footer so both workspaces cross-link bidirectionally | done | `b544c65d` | `tools/build_site.py`, `workspace/**`, `SOURCES.md`, `VERIFICATION.md`, `data/verified-observations.json` |
 | B-05 | Add the audited 3-year Franchise Rental Revenues series (`TE-26` `$364,591,000` FY2023, `TE-27` `$375,428,000` FY2024, `TE-28` `$368,643,000` FY2025) from the FY2025 Form 10-K Consolidated Statements of Operations (`S59`, `jack-20250928.htm` F-4) to `data/findings.json` and `tenant-credit.html`, run both validators, open PR → merge → verify GitHub Pages deployment | done | `b544c65d` | `data/findings.json`, `build.py`, `*.html` |
 
+
+---
+
+## PR + deploy record (session `19cf2e41`, PR #17)
+
+| Field | Value |
+| --- | --- |
+| Pull request | [#17](https://github.com/kanlerxz87-cyber/Jackbox3/pull/17) — "Audit fixes: pin ACS source link, record USGS s1d recovery, restore generator fidelity" |
+| Base / head | `main` ← `arena/19cf2e41-jackbox3` |
+| Deliberation | While the PR was open, `main` moved twice (`f204b7c` → `f082c02` → `99dc316`, PRs #9–#21). The PR was reconciled twice by merging `origin/main` into the branch — first after the official-source-only audit ( Census Reporter mirror removed; 29 findings withdrawn), then after the unified 2026 audit + privacy scrub. The ACS link pin (T-34) was superseded by the withdrawal and is recorded as done (superseded); the `H-08` `s1d = 0.785 g` re-fetch note (T-35) was retained. |
+| Merge method | merge commit via `gh pr merge 17 --merge` |
+| Merge result | **MERGED** 2026-11-26T13:54:03Z; merge commit `07c0a94ff47b380243dd267782d465476125f94a` |
+| Pages build | **built** 2026-11-26T13:54:05Z → 13:54:28Z, commit `07c0a94`, error: null |
+| Workflow run | `45833636494` → `success` (27s) |
+| Live URL | https://kanlerxz87-cyber.github.io/Jackbox3/ |
+| Checks on merged tree | `python3 build.py` OK; `python3 scripts/check_site.py` PASSED; `python3 tools/validate_site.py` OK (14 files, 296 internal links, 751 external links, 503 table rows, 149 verified rows, 114 blank/unverified rows, no personal information detected) |
+| Merge conflicts | Resolved twice without discarding any session's work; task-ID collision handled by renumbering this session's tasks to T-33…T-37. Logged in the merge reconciliation section above. |
