@@ -293,7 +293,7 @@ No personal data is collected or published in this session either.
 | A-02 | Line-by-line re-verification: findings + rules vs official sources | done | `4a251c0f` | `data/findings.json`, `data/rules.json`, `VERIFICATION.md` |
 | A-03 | Privacy + calculator network/storage audit | done | `4a251c0f` | `assets/calculator.js` (no network/storage calls; checker rule 7 green) |
 | A-04 | Fix verified inconsistencies (surcharge drift, FTB thresholds, stale suggestion, dashboard cross-link, build stamp) | done | `4a251c0f` | `build.py`, `data/rules.json`, generated `*.html` |
-| A-05 | Rebuild, run both checkers, PR → merge → confirm Pages deploy | in progress | `4a251c0f` | `main` via PR |
+| A-05 | Rebuild, run both checkers, PR → merge → confirm Pages deploy | done | `4a251c0f` | `main` via PR #14 |
 
 ### A-02 verification performed (detail in `VERIFICATION.md`, "Re-verification pass — 2026-11-26")
 
@@ -337,3 +337,27 @@ All 20 `derived` rows were recomputed from their own recorded formulas and repro
 No sell-versus-renew winner is stated anywhere; flagged and unverified items remain published, not resolved by assertion.
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
+
+### A-05 result — PR, merge and deploy (session `4a251c0f`)
+
+| Field | Value |
+|---|---|
+| Pull request | [#14](https://github.com/kanlerxz87-cyber/Jackbox3/pull/14) — "Line-by-line re-verification of every published finding, with five drift corrections" |
+| Base / head | `main` ← `arena/4a251c0f-jackbox3` |
+| Mergeable at merge time | `MERGEABLE` / `CLEAN`, no required checks on the branch |
+| Merge method | merge commit via `gh pr merge 14 --merge` |
+| Merge result | **MERGED** 2026-11-26T13:16:11Z |
+| Merge commit | `775173af3df55318923b783f689cfb1735cf46f1` |
+| Pages build | **built**, no error, created 13:16:13Z, updated 13:16:34Z, commit `775173a` |
+| Workflow run | `45827512009` → `success` on `775173a` |
+| Live URL | https://kanlerxz87-cyber.github.io/Jackbox3/ |
+
+Post-deploy verification fetched the live HTML over the public internet and confirmed the published content:
+`tax.html` shows the corrected exemption-credit limitation line ($252,203 / $504,411 / $378,310 — the old 347,808 figures are
+gone) and lists the Behavioral Health Services Tax under "Rules it applies"; `index.html` renders the restored
+`/workspace/` cross-link and the 2026-11-26 build stamp; `workspace/index.html` still loads, so the preserved second
+workspace is reachable again. Direct TLS from this sandbox to `github.io` is blocked by the network allowlist, so the live
+check was done with the fetch tool rather than `urllib`; that is a sandbox limitation, not a site fault.
+
+No sell-versus-renew winner is stated. Nothing was removed from another session's work: `57054140`'s `S28` split is kept,
+with its retrieval status re-tested and corrected to "retrieved, empty feature set".
