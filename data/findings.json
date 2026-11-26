@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Verified findings dataset",
-    "compiled": "2026-11-25",
+    "compiled": "2026-11-26",
     "session": "arena/47b70455-jackbox3",
     "status_vocabulary": {
       "verified": "Value read directly from an official government or SEC source during this session. Source URL recorded.",
@@ -11,80 +11,71 @@
       "assumption": "A modelling assumption, not a fact. Supplied by the reader in the private calculator. Never presented as data."
     },
     "geography_note": "The parcel's real address and coordinates are NOT in this repository and have deliberately not been researched. All spatial figures are computed for a CENTRAL LOS ANGELES REFERENCE POINT at latitude 34.0537, longitude -118.2428 (the Los Angeles Civic Center). These are trade-area proxies for 'central Los Angeles', not parcel-level facts.",
-    "revision": "2026-11-25 second pass: TX-07 moved from unverified to verified, and TX-15 and TX-16 added, after the FTB 2025 Form 540 instructions were successfully retrieved. The section 1250 treatment in rules.json was corrected from a flat 25% rate to a 25% ceiling in the same pass."
+    "revision": "2026-11-26 independent source-integrity audit: 29 ACS findings previously sourced from a third-party API mirror were withdrawn and left blank pending official direct verification. LAUSD enrollment replaced with the 2024–2025 value retrieved from the official NCES district detail page. Existing CAL FIRE reference-point correction from session 0e787678 (S28) is preserved. No parcel or owner data added. Official discovery links were added for blank public-source rows; private lease, mortgage, quote and replacement-cost inputs remain marked private."
   },
   "sources": [
     {
       "id": "S01",
-      "name": "U.S. Census Bureau \u2014 Census Geocoder (coordinates \u2192 2020 Census block, tract, county, districts)",
+      "name": "U.S. Census Bureau — Census Geocoder (coordinates → 2020 Census block, tract, county, districts)",
       "publisher": "U.S. Census Bureau",
       "url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-118.2428&y=34.0537&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
-      "tier": "Primary \u2014 retrieving endpoint",
+      "tier": "Primary — retrieving endpoint",
       "retrieved": "2026-11-25"
     },
     {
-      "id": "S02",
-      "name": "American Community Survey 2020\u20132024 5-year estimates (release id acs2024_5yr) via the Census Reporter API mirror of Census tables",
-      "publisher": "U.S. Census Bureau (ACS); mirror operated by Census Reporter",
-      "url": "https://api.censusreporter.org/1.0/data/show/acs2024_5yr?table_ids=B01003,B19013,B25077,B25064,B25003,B23025,B15003,B17001,B19301,B25002&geo_ids=05000US06037,31000US31080,14000US06037207400",
-      "tier": "Official data, third-party API mirror",
-      "retrieved": "2026-11-25",
-      "caveat": "api.census.gov requires an API key and rejected keyless requests, so ACS values were read from this mirror of the same acs2024_5yr release. The link was pinned to the acs2024_5yr release on 2026-11-26 after the /latest alias was observed to return the acs2024_1yr release instead; /latest no longer reproduces the values on this site. Cross-check against data.census.gov before any decision."
-    },
-    {
       "id": "S03",
-      "name": "Census Bureau Profile \u2014 Los Angeles County, California (g=050XX00US06037)",
+      "name": "Census Bureau Profile — Los Angeles County, California (g=050XX00US06037)",
       "publisher": "U.S. Census Bureau",
       "url": "https://data.census.gov/profile/Los_Angeles_County,_California?g=050XX00US06037",
-      "tier": "Primary \u2014 official site",
+      "tier": "Primary — official site",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S04",
-      "name": "BLS Public Data API v1 \u2014 series LNS14000000 (national unemployment rate)",
+      "name": "BLS Public Data API v1 — series LNS14000000 (national unemployment rate)",
       "publisher": "U.S. Bureau of Labor Statistics",
       "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/LNS14000000",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S05",
-      "name": "BLS Public Data API v1 \u2014 series LASST060000000000003 (California unemployment rate)",
+      "name": "BLS Public Data API v1 — series LASST060000000000003 (California unemployment rate)",
       "publisher": "U.S. Bureau of Labor Statistics",
       "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/LASST060000000000003",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S06",
-      "name": "BLS Public Data API v1 \u2014 series LAUMT063108000000003 (Los Angeles\u2013Long Beach\u2013Anaheim MSA unemployment rate)",
+      "name": "BLS Public Data API v1 — series LAUMT063108000000003 (Los Angeles–Long Beach–Anaheim MSA unemployment rate)",
       "publisher": "U.S. Bureau of Labor Statistics",
       "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/LAUMT063108000000003",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S07",
-      "name": "BLS Public Data API v1 \u2014 series SMU06310800000000001 (Los Angeles MSA total nonfarm employment, thousands)",
+      "name": "BLS Public Data API v1 — series SMU06310800000000001 (Los Angeles MSA total nonfarm employment, thousands)",
       "publisher": "U.S. Bureau of Labor Statistics",
       "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/SMU06310800000000001",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S08",
-      "name": "BLS Public Data API v1 \u2014 series CUUR0000SA0 (CPI-U, U.S. city average, all items, 1982-84=100)",
+      "name": "BLS Public Data API v1 — series CUUR0000SA0 (CPI-U, U.S. city average, all items, 1982-84=100)",
       "publisher": "U.S. Bureau of Labor Statistics",
       "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/CUUR0000SA0",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S09",
-      "name": "BLS Public Data API v1 \u2014 series CUUR0000SEFV (CPI-U, food away from home)",
+      "name": "BLS Public Data API v1 — series CUUR0000SEFV (CPI-U, food away from home)",
       "publisher": "U.S. Bureau of Labor Statistics",
       "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/CUUR0000SEFV",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
@@ -92,55 +83,64 @@
       "name": "USGS ASCE 7-16 Seismic Design Maps web service (Risk Category III, Site Class D)",
       "publisher": "U.S. Geological Survey",
       "url": "https://earthquake.usgs.gov/ws/designmaps/asce7-16.json?latitude=34.05&longitude=-118.24&riskCategory=III&siteClass=D&title=central-los-angeles-reference",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S11",
-      "name": "FEMA National Flood Hazard Layer \u2014 NFHL MapServer layer 28 (Flood Hazard Zones) point query",
+      "name": "FEMA National Flood Hazard Layer — NFHL MapServer layer 28 (Flood Hazard Zones) point query",
       "publisher": "Federal Emergency Management Agency",
       "url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?where=1%3D1&geometry=-118.2428,34.0537&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=FLD_ZONE,ZONE_SUBTY,DFIRM_ID&returnGeometry=false&f=json",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S12",
-      "name": "FEMA National Risk Index \u2014 Census Tracts (layer NRI_CensusTracts_Prod)",
+      "name": "FEMA National Risk Index — Census Tracts (layer NRI_CensusTracts_Prod)",
       "publisher": "Federal Emergency Management Agency",
       "url": "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/National_Risk_Index_Census_Tracts/FeatureServer/0/query?where=TRACTFIPS%3D%2706037207400%27&outFields=TRACTFIPS,RISK_SCORE,RISK_RATNG,EAL_RATNG,EAL_VALB,ALR_VALB,SOVI_RATNG,RESL_RATNG,POPULATION,BUILDVALUE&returnGeometry=false&f=json",
-      "tier": "Primary \u2014 official API",
+      "tier": "Primary — official API",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S13",
-      "name": "CAL FIRE Fire Hazard Severity Zones \u2014 Local Responsibility Areas layer (MapServer layer 1)",
+      "name": "CAL FIRE Fire Hazard Severity Zones — Local Responsibility Areas positive-control query (Griffith Park)",
       "publisher": "California Department of Forestry and Fire Protection, via services.gis.ca.gov",
       "url": "https://services.gis.ca.gov/arcgis/rest/services/Environment/Fire_Severity_Zones/MapServer/1/query?where=1%3D1&geometry=-118.3400,34.1180&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=SRA,INCORP,HAZ_CODE,HAZ_CLASS&returnGeometry=false&f=json",
-      "tier": "Primary \u2014 official state GIS service",
+      "tier": "Primary — official state GIS service",
       "retrieved": "2026-11-25"
     },
     {
+      "id": "S28",
+      "name": "CAL FIRE Fire Hazard Severity Zones — Local Responsibility Areas reference-point query (retrieved 2026-11-26; returned an empty feature set, not an error)",
+      "publisher": "California Department of Forestry and Fire Protection, via services.gis.ca.gov",
+      "url": "https://services.gis.ca.gov/arcgis/rest/services/Environment/Fire_Severity_Zones/MapServer/1/query?where=1%3D1&geometry=-118.2428,34.0537&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=SRA,INCORP,HAZ_CODE,HAZ_CLASS&returnGeometry=false&f=json",
+      "tier": "Primary — official state GIS service",
+      "retrieved": "2026-11-26",
+      "retrieval_note": "Re-pulled twice on 2026-11-26: HTTP 200 with \"features\":[]. An empty result means the published LRA layer has no polygon covering this point; it is not proof the point is outside every fire hazard severity zone. The Griffith Park control (S13) returns Very High, proving the query works. An earlier attempt by another session did fail; the endpoint answers again."
+    },
+    {
       "id": "S14",
-      "name": "SEC EDGAR XBRL company concept \u2014 Jack in the Box Inc. (CIK 0000807882), us-gaap:Revenues",
+      "name": "SEC EDGAR XBRL company concept — Jack in the Box Inc. (CIK 0000807882), us-gaap:Revenues",
       "publisher": "U.S. Securities and Exchange Commission",
       "url": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000807882/us-gaap/Revenues.json",
-      "tier": "Primary \u2014 official filing data",
+      "tier": "Primary — official filing data",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S15",
-      "name": "Jack in the Box Inc. Form 10-Q exhibit 99.1 \u2014 \u201cReports Third Quarter 2026 Earnings\u201d (filed 2026-08-12, accession 0000807882-26-000090)",
+      "name": "Jack in the Box Inc. Form 10-Q exhibit 99.1 — “Reports Third Quarter 2026 Earnings” (filed 2026-08-12, accession 0000807882-26-000090)",
       "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
       "url": "https://www.sec.gov/Archives/edgar/data/807882/000080788226000090/ex991-q326earningsrelease.htm",
-      "tier": "Primary \u2014 company filing",
+      "tier": "Primary — company filing",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S16",
-      "name": "Jack in the Box Inc. Form DEF 14A (filed 2025-12-30, accession 0000807882-25-000086) \u2014 Pay Versus Performance table, table R2",
+      "name": "Jack in the Box Inc. Form DEF 14A (filed 2025-12-30, accession 0000807882-25-000086) — Pay Versus Performance table, table R2",
       "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
       "url": "https://www.sec.gov/Archives/edgar/data/807882/000080788225000086/R2.htm",
-      "tier": "Primary \u2014 company filing",
+      "tier": "Primary — company filing",
       "retrieved": "2026-11-25"
     },
     {
@@ -148,31 +148,31 @@
       "name": "SEC EDGAR full-text filing index for Jack in the Box Inc. (8-K list)",
       "publisher": "U.S. Securities and Exchange Commission",
       "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000807882&type=8-K&dateb=&owner=include&count=10&output=atom",
-      "tier": "Primary \u2014 official filing index",
+      "tier": "Primary — official filing index",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S18",
-      "name": "IRS Topic no. 409 \u2014 Capital gains and losses (2025 rates and thresholds)",
+      "name": "IRS Topic no. 409 — Capital gains and losses (2025 rates and thresholds)",
       "publisher": "Internal Revenue Service",
       "url": "https://www.irs.gov/taxtopics/tc409",
-      "tier": "Primary \u2014 official guidance",
+      "tier": "Primary — official guidance",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S19",
-      "name": "IRS \u2014 Net Investment Income Tax",
+      "name": "IRS — Net Investment Income Tax",
       "publisher": "Internal Revenue Service",
       "url": "https://www.irs.gov/individuals/net-investment-income-tax",
-      "tier": "Primary \u2014 official guidance",
+      "tier": "Primary — official guidance",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S20",
-      "name": "IRS Rev. Proc. 2025-32 \u2014 2026 inflation-adjusted tax items (rate tables \u00a74.01, maximum capital gains rate \u00a74.03)",
+      "name": "IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)",
       "publisher": "Internal Revenue Service",
       "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
-      "tier": "Primary \u2014 official guidance",
+      "tier": "Primary — official guidance",
       "retrieved": "2026-11-25"
     },
     {
@@ -180,7 +180,7 @@
       "name": "IRS Publication 537 (2025), Installment Sales",
       "publisher": "Internal Revenue Service",
       "url": "https://www.irs.gov/pub/irs-pdf/p537.pdf",
-      "tier": "Primary \u2014 official guidance",
+      "tier": "Primary — official guidance",
       "retrieved": "2026-11-25"
     },
     {
@@ -188,49 +188,167 @@
       "name": "IRS Publication 544 (2025), Sales and Other Dispositions of Assets",
       "publisher": "Internal Revenue Service",
       "url": "https://www.irs.gov/publications/p544",
-      "tier": "Primary \u2014 official guidance",
+      "tier": "Primary — official guidance",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S23",
-      "name": "California Franchise Tax Board \u2014 2025 California Tax Rate Schedules (Form 540)",
+      "name": "California Franchise Tax Board — 2025 California Tax Rate Schedules (Form 540)",
       "publisher": "California Franchise Tax Board",
       "url": "https://www.ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf",
-      "tier": "Primary \u2014 official guidance",
+      "tier": "Primary — official guidance",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S24",
-      "name": "California Franchise Tax Board \u2014 2025 Instructions for Form 540",
+      "name": "California Franchise Tax Board — 2025 Instructions for Form 540",
       "publisher": "California Franchise Tax Board",
       "url": "https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html",
-      "tier": "Primary \u2014 official guidance",
-      "retrieved": "2026-11-25"
-    },
-    {
-      "id": "S25",
-      "name": "Urban Institute Education Data Portal \u2014 NCES Common Core of Data, school-district directory and enrollment (2022)",
-      "publisher": "Urban Institute (mirror of U.S. Dept. of Education NCES CCD)",
-      "url": "https://educationdata.urban.org/api/v1/school-districts/ccd/enrollment/2022/grade-99/?leaid=0622710",
-      "tier": "Official data, third-party API mirror",
+      "tier": "Primary — official guidance",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S26",
-      "name": "Federal Reserve Beige Book, October 2025 \u2014 National Summary",
+      "name": "Federal Reserve Beige Book, October 2025 — National Summary",
       "publisher": "Board of Governors of the Federal Reserve System",
       "url": "https://www.federalreserve.gov/monetarypolicy/beigebook202510-summary.htm",
-      "tier": "Primary \u2014 official narrative",
+      "tier": "Primary — official narrative",
       "retrieved": "2026-11-25"
     },
     {
       "id": "S27",
-      "name": "NCES Search for Public Schools (Common Core of Data school directory)",
+      "name": "NCES CCD District Detail — Los Angeles Unified School District (LEAID 0622710)",
       "publisher": "National Center for Education Statistics",
-      "url": "https://nces.ed.gov/ccd/schoolsearch/",
-      "tier": "Primary \u2014 official site",
-      "retrieved": "2026-11-25",
-      "caveat": "The site is JavaScript-driven; a scripted query returned zero rows, so no school-level proficiency data could be captured here."
+      "url": "https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710",
+      "tier": "Primary — official NCES district detail page",
+      "retrieved": "2026-11-26",
+      "caveat": "Page directly reports 408,026 students for school year 2024–2025. This is district-level context, not confirmation of the subject parcel’s attendance area."
+    },
+    {
+      "id": "S29",
+      "name": "U.S. Census Bureau — American Community Survey data and data.census.gov portal (2024 ACS 5-year tables)",
+      "publisher": "U.S. Census Bureau",
+      "url": "https://data.census.gov/",
+      "tier": "Primary — official Census data portal; numeric values not retrieved in this audit",
+      "retrieved": "2026-11-26",
+      "caveat": "The Census API returned “A valid key must be included”; the official data portal was retrieved but did not expose the selected table values through this review interface. ACS values previously sourced from a third-party API mirror were withdrawn and left blank."
+    },
+    {
+      "id": "S30",
+      "name": "Caltrans Traffic Volumes — Traffic Census Program",
+      "publisher": "California Department of Transportation",
+      "url": "https://dot.ca.gov/programs/traffic-operations/census/traffic-volumes",
+      "tier": "Primary — official data source for state highway counts; no parcel-specific count selected",
+      "retrieved": "2026-11-26",
+      "caveat": "Caltrans traffic volume page confirms traffic counts and AADT data files. No parcel-specific nearest-station count was selected."
+    },
+    {
+      "id": "S31",
+      "name": "California Department of Finance — Demographics and official population projections",
+      "publisher": "California Department of Finance",
+      "url": "https://dof.ca.gov/forecasting/demographics/",
+      "tier": "Primary — official demographics and projections portal; no value used here",
+      "retrieved": "2026-11-26",
+      "caveat": "The official portal identifies state/county estimates and projections. No parcel-area projection is asserted."
+    },
+    {
+      "id": "S32",
+      "name": "Bureau of Economic Analysis — GDP data portal",
+      "publisher": "U.S. Bureau of Economic Analysis",
+      "url": "https://www.bea.gov/data/gdp",
+      "tier": "Primary — official GDP data landing page; no metro GDP value used here",
+      "retrieved": "2026-11-26",
+      "caveat": "Discovery link only; the Los Angeles MSA GDP observation was not retrieved in this audit."
+    },
+    {
+      "id": "S33",
+      "name": "Los Angeles Department of Building and Safety — Online Services / permit and parcel profile lookup",
+      "publisher": "City of Los Angeles",
+      "url": "https://www.ladbsservices2.lacity.org/OnlineServices/",
+      "tier": "Primary — official City permit and property-record lookup",
+      "retrieved": "2026-11-26",
+      "caveat": "Address/APN search is private-workflow-only. Does not disclose subject parcel details in this public site."
+    },
+    {
+      "id": "S34",
+      "name": "California Department of Insurance — Wildfire Recovery and Readiness",
+      "publisher": "California Department of Insurance",
+      "url": "https://www.insurance.ca.gov/01-consumers/200-wrr/",
+      "tier": "Primary — official insurance guidance and resources",
+      "retrieved": "2026-11-26",
+      "caveat": "General risk and insurance resource. The property policy, premium, terms and availability remain private and unverified."
+    },
+    {
+      "id": "S35",
+      "name": "California Geological Survey — Seismic Hazards Program",
+      "publisher": "California Geological Survey",
+      "url": "https://www.conservation.ca.gov/cgs/shzp",
+      "tier": "Primary — official state seismic hazard maps and program",
+      "retrieved": "2026-11-26",
+      "caveat": "Official program page identifies liquefaction and other hazard mapping. No parcel-specific result is asserted."
+    },
+    {
+      "id": "S36",
+      "name": "CAL FIRE — Current Emergency Incidents and fire-history tools",
+      "publisher": "California Department of Forestry and Fire Protection",
+      "url": "https://www.fire.ca.gov/incidents/",
+      "tier": "Primary — official fire incident portal",
+      "retrieved": "2026-11-26",
+      "caveat": "Portal includes incident and fire-history layers; no parcel-specific fire history is asserted."
+    },
+    {
+      "id": "S37",
+      "name": "California State Board of Equalization — Property tax propositions",
+      "publisher": "California State Board of Equalization",
+      "url": "https://www.boe.ca.gov/proptaxes/propositions.htm",
+      "tier": "Primary — official state property-tax portal; not independently retrieved in this audit",
+      "retrieved": "2026-11-26",
+      "caveat": "Page retrieval failed in this session. No Proposition 13 calculation or rule is asserted from this link."
+    },
+    {
+      "id": "S38",
+      "name": "California Franchise Tax Board — Real estate withholding",
+      "publisher": "California Franchise Tax Board",
+      "url": "https://www.ftb.ca.gov/pay/withholding/real-estate-withholding.html",
+      "tier": "Primary — official guidance; retrieved 2026-11-26",
+      "retrieved": "2026-11-26",
+      "caveat": "Explains California Form 593 withholding as a prepayment; owner-specific withholding not calculated."
+    },
+    {
+      "id": "S39",
+      "name": "Los Angeles County Assessor — official parcel and assessment portal",
+      "publisher": "Los Angeles County Assessor",
+      "url": "https://assessor.lacounty.gov/",
+      "tier": "Primary — official assessment and property-data portal",
+      "retrieved": "2026-11-26",
+      "caveat": "Address/APN lookup belongs in the secure adviser workflow; no parcel ID or parcel-level record is published here."
+    },
+    {
+      "id": "S40",
+      "name": "Los Angeles County Treasurer and Tax Collector — property tax bills and payments",
+      "publisher": "Los Angeles County Treasurer and Tax Collector",
+      "url": "https://ttc.lacounty.gov/",
+      "tier": "Primary — official property-tax portal",
+      "retrieved": "2026-11-26",
+      "caveat": "Bill and payment data are parcel-specific/private; no value is asserted."
+    },
+    {
+      "id": "S41",
+      "name": "California Bureau of Real Estate Appraisers — licensed appraiser search",
+      "publisher": "California Bureau of Real Estate Appraisers",
+      "url": "https://www.brea.ca.gov/",
+      "tier": "Primary — official licensing and appraiser lookup",
+      "retrieved": "2026-11-26",
+      "caveat": "Provides an official route to locate a licensed appraiser; does not provide an appraisal or market quote."
+    },
+    {
+      "id": "S42",
+      "name": "IRS Publication 551 — Basis of Assets",
+      "publisher": "Internal Revenue Service",
+      "url": "https://www.irs.gov/publications/p551",
+      "tier": "Primary — official IRS basis guidance",
+      "retrieved": "2026-11-26",
+      "caveat": "Guidance on basis; actual purchase, improvement, and depreciation records remain owner-held and unverified."
     }
   ],
   "findings": [
@@ -313,220 +431,214 @@
       "value": "31080",
       "unit": "CBSA code",
       "period": "Current",
-      "geo": "Los Angeles\u2013Long Beach\u2013Anaheim, CA MSA",
+      "geo": "Los Angeles–Long Beach–Anaheim, CA MSA",
       "status": "verified",
       "source": "S01",
-      "note": "Combined statistical area 348, Los Angeles\u2013Long Beach, CA."
+      "note": "Combined statistical area 348, Los Angeles–Long Beach, CA."
     },
     {
       "id": "TA-01",
       "section": "Trade area (W-01)",
-      "metric": "Median household income \u2014 Census Tract 2074",
-      "value": "78482",
+      "metric": "Median household income — Census Tract 2074",
+      "value": "",
       "unit": "USD",
-      "period": "2020\u20132024 ACS 5-year, 2024 dollars",
+      "period": "2020–2024 ACS 5-year, 2024 dollars",
       "geo": "Tract 06037207400",
-      "status": "flagged",
-      "source": "S02",
-      "note": "Margin of error \u00b1$29,379, which is 37.4% of the estimate. Too imprecise to anchor a rent assumption. See TA-02."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-02",
       "section": "Trade area (W-01)",
-      "metric": "Margin of error as share of estimate \u2014 tract median household income",
-      "value": "37.4",
+      "metric": "Margin of error as share of estimate — tract median household income",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "derived",
-      "source": "S02",
-      "formula": "29379 / 78482",
-      "note": "A coefficient this large means the tract estimate should be treated as directional only."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-03",
       "section": "Trade area (W-01)",
-      "metric": "Median household income \u2014 Los Angeles County",
-      "value": "90112",
+      "metric": "Median household income — Los Angeles County",
+      "value": "",
       "unit": "USD",
-      "period": "2020\u20132024 ACS 5-year, 2024 dollars",
+      "period": "2020–2024 ACS 5-year, 2024 dollars",
       "geo": "County 06037",
-      "status": "verified",
-      "source": "S02",
-      "note": "Margin of error \u00b1$392."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-04",
       "section": "Trade area (W-01)",
-      "metric": "Median household income \u2014 Los Angeles\u2013Long Beach\u2013Anaheim MSA",
-      "value": "95958",
+      "metric": "Median household income — Los Angeles–Long Beach–Anaheim MSA",
+      "value": "",
       "unit": "USD",
-      "period": "2020\u20132024 ACS 5-year, 2024 dollars",
+      "period": "2020–2024 ACS 5-year, 2024 dollars",
       "geo": "CBSA 31080",
-      "status": "verified",
-      "source": "S02",
-      "note": "Margin of error \u00b1$378."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-05",
       "section": "Trade area (W-01)",
       "metric": "Tract median household income as share of county median",
-      "value": "87.1",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract vs county",
-      "status": "derived",
-      "source": "S02",
-      "formula": "78482 / 90112",
-      "note": "The reference trade area is slightly BELOW the county median, not above it. This is the sort of conclusion a city-name proxy would hide."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-06",
       "section": "Trade area (W-01)",
-      "metric": "Median gross rent \u2014 Census Tract 2074",
-      "value": "3154",
+      "metric": "Median gross rent — Census Tract 2074",
+      "value": "",
       "unit": "USD/month",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "verified",
-      "source": "S02",
-      "note": "Margin of error \u00b1$237. 100% renter-occupied tenure in the tract (TA-14)."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-07",
       "section": "Trade area (W-01)",
-      "metric": "Median gross rent \u2014 Los Angeles County",
-      "value": "1954",
+      "metric": "Median gross rent — Los Angeles County",
+      "value": "",
       "unit": "USD/month",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "verified",
-      "source": "S02",
-      "note": "Margin of error \u00b1$6."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-08",
       "section": "Trade area (W-01)",
-      "metric": "Median gross rent \u2014 Los Angeles\u2013Long Beach\u2013Anaheim MSA",
-      "value": "2063",
+      "metric": "Median gross rent — Los Angeles–Long Beach–Anaheim MSA",
+      "value": "",
       "unit": "USD/month",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "CBSA 31080",
-      "status": "verified",
-      "source": "S02",
-      "note": "Margin of error \u00b1$6."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-09",
       "section": "Trade area (W-01)",
       "metric": "Tract median gross rent as multiple of county median",
-      "value": "1.61",
+      "value": "",
       "unit": "ratio",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract vs county",
-      "status": "derived",
-      "source": "S02",
-      "formula": "3154 / 1954",
-      "note": "Residential rents in the tract run well above the county, while household income runs below it. That combination is a warning for rent-growth assumptions."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-10",
       "section": "Trade area (W-01)",
-      "metric": "Median home value \u2014 Los Angeles County",
-      "value": "834200",
+      "metric": "Median home value — Los Angeles County",
+      "value": "",
       "unit": "USD",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "verified",
-      "source": "S02",
-      "note": "Owner-occupied units. Margin of error \u00b1$2,194."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-11",
       "section": "Trade area (W-01)",
-      "metric": "Median home value \u2014 Los Angeles\u2013Long Beach\u2013Anaheim MSA",
-      "value": "871300",
+      "metric": "Median home value — Los Angeles–Long Beach–Anaheim MSA",
+      "value": "",
       "unit": "USD",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "CBSA 31080",
-      "status": "verified",
-      "source": "S02",
-      "note": "Margin of error \u00b1$1,892."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-12",
       "section": "Trade area (W-01)",
-      "metric": "Median home value \u2014 Census Tract 2074",
+      "metric": "Median home value — Census Tract 2074",
       "value": "",
       "unit": "USD",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
       "status": "unverified",
-      "source": "S02",
-      "note": "The source returns null \u2014 the tract has no owner-occupied sample. Blank by design; not estimated."
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-13",
       "section": "Trade area (W-01)",
-      "metric": "Population \u2014 Census Tract 2074",
-      "value": "2598",
+      "metric": "Population — Census Tract 2074",
+      "value": "",
       "unit": "persons",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "flagged",
-      "source": "S02",
-      "note": "Margin of error \u00b1502 (19% of estimate). FEMA's NRI reports 2,002 for the same tract on a 2020 base (see H-09). The two are not averaged."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-14",
       "section": "Trade area (W-01)",
-      "metric": "Renter-occupied share \u2014 Census Tract 2074",
-      "value": "100.0",
+      "metric": "Renter-occupied share — Census Tract 2074",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "flagged",
-      "source": "S02",
-      "note": "967 of 967 occupied units renter-occupied; owner-occupied estimate is 0 with margin of error \u00b114. Effectively all-rental tenure."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-15",
       "section": "Trade area (W-01)",
-      "metric": "Renter-occupied share \u2014 Los Angeles County",
-      "value": "54.1",
+      "metric": "Renter-occupied share — Los Angeles County",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "derived",
-      "source": "S02",
-      "formula": "1848466 / 3416449",
-      "note": "1,848,466 renter-occupied of 3,416,449 occupied units."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-16",
       "section": "Trade area (W-01)",
-      "metric": "Housing vacancy rate \u2014 Los Angeles County",
-      "value": "6.4",
+      "metric": "Housing vacancy rate — Los Angeles County",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "derived",
-      "source": "S02",
-      "formula": "234017 / 3650466",
-      "note": "234,017 vacant of 3,650,466 total housing units. A tight market supports rent, but this is residential \u2014 not commercial \u2014 supply."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-17",
       "section": "Trade area (W-01)",
-      "metric": "Monthly household income \u2014 Census Tract 2074",
-      "value": "6540",
+      "metric": "Monthly household income — Census Tract 2074",
+      "value": "",
       "unit": "USD/month",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "derived",
-      "source": "S02",
-      "formula": "78482 / 12",
-      "note": "Reference figure for a co-tenancy / spending-power argument. Inherits the 37.4% margin-of-error problem in TA-02."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "TA-18",
@@ -534,11 +646,11 @@
       "metric": "Trade-area radius definition (walk / drive time)",
       "value": "",
       "unit": "minutes",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Reference point",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "No official source publishes a restaurant trade-area boundary. This must be set by the reader using traffic-count and drive-time evidence (see GATE-14). Not estimated here."
+      "source": "S30",
+      "note": "No official agency defines a restaurant trade-area radius. Caltrans traffic data can inform an adviser-defined catchment; the radius remains blank and must be selected as a model assumption."
     },
     {
       "id": "TA-19",
@@ -546,16 +658,16 @@
       "metric": "Traffic counts (AADT) on the nearest arterial",
       "value": "",
       "unit": "vehicles/day",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Reference point",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Caltrans and LADOT count stations could not be queried in this session. Requires the parcel address."
+      "source": "S30",
+      "note": "Official Caltrans traffic-volume source. No nearest station could be selected without the parcel location; value remains blank."
     },
     {
       "id": "EC-01",
       "section": "Economy & labour",
-      "metric": "Unemployment rate \u2014 United States",
+      "metric": "Unemployment rate — United States",
       "value": "4.1",
       "unit": "%",
       "period": "October 2026",
@@ -567,7 +679,7 @@
     {
       "id": "EC-02",
       "section": "Economy & labour",
-      "metric": "Unemployment rate \u2014 California",
+      "metric": "Unemployment rate — California",
       "value": "5.0",
       "unit": "%",
       "period": "October 2026 (preliminary)",
@@ -579,7 +691,7 @@
     {
       "id": "EC-03",
       "section": "Economy & labour",
-      "metric": "Unemployment rate \u2014 Los Angeles\u2013Long Beach\u2013Anaheim MSA",
+      "metric": "Unemployment rate — Los Angeles–Long Beach–Anaheim MSA",
       "value": "4.4",
       "unit": "%",
       "period": "September 2026 (preliminary)",
@@ -591,7 +703,7 @@
     {
       "id": "EC-04",
       "section": "Economy & labour",
-      "metric": "Unemployment rate \u2014 Los Angeles MSA, annual average",
+      "metric": "Unemployment rate — Los Angeles MSA, annual average",
       "value": "5.3",
       "unit": "%",
       "period": "2025",
@@ -603,10 +715,10 @@
     {
       "id": "EC-05",
       "section": "Economy & labour",
-      "metric": "Unemployment rate \u2014 Los Angeles MSA, monthly peak in the last 3 years",
+      "metric": "Unemployment rate — Los Angeles MSA, monthly peak in the last 3 years",
       "value": "6.1",
       "unit": "%",
-      "period": "July\u2013August 2024",
+      "period": "July–August 2024",
       "geo": "CBSA 31080",
       "status": "verified",
       "source": "S06",
@@ -615,7 +727,7 @@
     {
       "id": "EC-06",
       "section": "Economy & labour",
-      "metric": "Total nonfarm employment \u2014 Los Angeles MSA",
+      "metric": "Total nonfarm employment — Los Angeles MSA",
       "value": "6371.5",
       "unit": "thousand jobs",
       "period": "October 2026 (preliminary)",
@@ -627,7 +739,7 @@
     {
       "id": "EC-07",
       "section": "Economy & labour",
-      "metric": "Total nonfarm employment \u2014 Los Angeles MSA, annual average",
+      "metric": "Total nonfarm employment — Los Angeles MSA, annual average",
       "value": "6281.3",
       "unit": "thousand jobs",
       "period": "2025",
@@ -728,26 +840,26 @@
     {
       "id": "EC-15",
       "section": "Economy & labour",
-      "metric": "Seasonally adjusted unemployment rate \u2014 Los Angeles MSA",
+      "metric": "Seasonally adjusted unemployment rate — Los Angeles MSA",
       "value": "",
       "unit": "%",
       "period": "October 2026",
       "geo": "CBSA 31080",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "The BLS v1 API returns unadjusted local-area rates only for this series. Not converted; conversion is not an official figure."
+      "source": "S06",
+      "note": "Official BLS metro labour series reference; the seasonally adjusted observation was not independently retrieved for this finding, so it remains blank."
     },
     {
       "id": "EC-16",
       "section": "Economy & labour",
-      "metric": "GDP by metropolitan area \u2014 Los Angeles MSA",
+      "metric": "GDP by metropolitan area — Los Angeles MSA",
       "value": "",
       "unit": "USD",
-      "period": "\u2014",
+      "period": "—",
       "geo": "CBSA 31080",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Bureau of Economic Analysis data could not be retrieved in this session."
+      "source": "S32",
+      "note": "Official BEA GDP portal for manual review. The MSA-specific observation was not retrieved; value remains blank."
     },
     {
       "id": "EC-17",
@@ -764,166 +876,158 @@
     {
       "id": "DM-01",
       "section": "Demographics",
-      "metric": "Population \u2014 Los Angeles County",
-      "value": "9808667",
+      "metric": "Population — Los Angeles County",
+      "value": "",
       "unit": "persons",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "verified",
-      "source": "S02",
-      "note": ""
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-02",
       "section": "Demographics",
-      "metric": "Population \u2014 Los Angeles\u2013Long Beach\u2013Anaheim MSA",
-      "value": "12974487",
+      "metric": "Population — Los Angeles–Long Beach–Anaheim MSA",
+      "value": "",
       "unit": "persons",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "CBSA 31080",
-      "status": "verified",
-      "source": "S02",
-      "note": ""
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-03",
       "section": "Demographics",
-      "metric": "Unemployment rate \u2014 Los Angeles County (ACS, civilian labour force)",
-      "value": "7.27",
+      "metric": "Unemployment rate — Los Angeles County (ACS, civilian labour force)",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "derived",
-      "source": "S02",
-      "formula": "378125 / 5200656",
-      "note": "ACS 5-year average, NOT a current rate. It spans 2020\u20132024 and therefore embeds the pandemic shock. Do not compare to the current BLS rate in EC-01\u2026EC-03."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-04",
       "section": "Demographics",
-      "metric": "Unemployment rate \u2014 Census Tract 2074 (ACS)",
-      "value": "8.16",
+      "metric": "Unemployment rate — Census Tract 2074 (ACS)",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "flagged",
-      "source": "S02",
-      "formula": "113 / 1384",
-      "note": "Unemployed 113 with margin of error \u00b183. The ratio is unstable; treat as directional."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-05",
       "section": "Demographics",
-      "metric": "Poverty rate \u2014 Los Angeles County",
-      "value": "13.7",
+      "metric": "Poverty rate — Los Angeles County",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "derived",
-      "source": "S02",
-      "formula": "1326437 / 9656697",
-      "note": "Population for whom poverty status is determined."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-06",
       "section": "Demographics",
-      "metric": "Poverty rate \u2014 Census Tract 2074",
-      "value": "29.4",
+      "metric": "Poverty rate — Census Tract 2074",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "flagged",
-      "source": "S02",
-      "formula": "576 / 1958",
-      "note": "More than double the county rate. Margin of error \u00b1223. Materially changes the plausible restaurant customer base."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-07",
       "section": "Demographics",
-      "metric": "Per capita income \u2014 Los Angeles County",
-      "value": "45792",
+      "metric": "Per capita income — Los Angeles County",
+      "value": "",
       "unit": "USD",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "verified",
-      "source": "S02",
-      "note": "Margin of error \u00b1$239."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-08",
       "section": "Demographics",
-      "metric": "Per capita income \u2014 Census Tract 2074",
-      "value": "68487",
+      "metric": "Per capita income — Census Tract 2074",
+      "value": "",
       "unit": "USD",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "flagged",
-      "source": "S02",
-      "note": "Margin of error \u00b1$8,334. Note this is ABOVE the county while household income is below it \u2014 consistent with small households and high earners mixed with deep poverty."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-09",
       "section": "Demographics",
-      "metric": "Bachelor's degree or higher \u2014 Los Angeles County",
-      "value": "36.0",
+      "metric": "Bachelor's degree or higher — Los Angeles County",
+      "value": "",
       "unit": "% of population 25+",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "County 06037",
-      "status": "derived",
-      "source": "S02",
-      "formula": "(1590181 + 608104 + 185424 + 107457) / 6917487",
-      "note": "Bachelor's, master's, professional school and doctorate holders over the 25+ population."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-10",
       "section": "Demographics",
-      "metric": "Bachelor's degree or higher \u2014 Census Tract 2074",
-      "value": "37.3",
+      "metric": "Bachelor's degree or higher — Census Tract 2074",
+      "value": "",
       "unit": "% of population 25+",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "flagged",
-      "source": "S02",
-      "formula": "(231 + 316 + 66 + 57) / 1798",
-      "note": "Margin of error \u00b1352 on the 25+ base. Essentially at parity with the county."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-11",
       "section": "Demographics",
-      "metric": "Household income distribution \u2014 share of households at $150,000 or more, Census Tract 2074",
-      "value": "22.6",
+      "metric": "Household income distribution — share of households at $150,000 or more, Census Tract 2074",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "derived",
-      "source": "S02",
-      "formula": "(76 + 143) / 967",
-      "note": "B19001 brackets $150,000\u2013$199,999 plus $200,000+. Contrast with DM-12."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-12",
       "section": "Demographics",
-      "metric": "Household income distribution \u2014 share of households below $25,000, Census Tract 2074",
-      "value": "27.1",
+      "metric": "Household income distribution — share of households below $25,000, Census Tract 2074",
+      "value": "",
       "unit": "%",
-      "period": "2020\u20132024 ACS 5-year",
+      "period": "2020–2024 ACS 5-year",
       "geo": "Tract 06037207400",
-      "status": "derived",
-      "source": "S02",
-      "formula": "(123 + 33 + 35 + 71) / 967",
-      "note": "The tract is strongly bimodal: roughly a quarter low-income and a quarter high-income. That is an unusual demand profile for a value QSR."
+      "status": "unverified",
+      "source": "S29",
+      "note": "Value withdrawn in the 2026-11-26 source-integrity audit: it was transcribed from a third-party API mirror and could not be independently confirmed from a direct official Census table/API response in this session. See the linked official ACS portal; do not use until independently verified."
     },
     {
       "id": "DM-13",
       "section": "Demographics",
-      "metric": "Population change \u2014 Los Angeles County, 2019\u20132023 ACS",
+      "metric": "Population change — Los Angeles County, 2019–2023 ACS",
       "value": "",
       "unit": "%",
       "period": "2019 vs 2023 ACS 5-year",
       "geo": "County 06037",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "The acs2019_5yr release could not be retrieved in this session, so no multi-year population trend is asserted. Trend claims would have to rest on raw Census counts, which were not pulled."
+      "source": "S29",
+      "note": "Official Census ACS portal. The 2019–2023 trend was not independently verified from a direct official table/API response; value remains blank."
     },
     {
       "id": "DM-14",
@@ -931,23 +1035,23 @@
       "metric": "Household growth projection",
       "value": "",
       "unit": "%",
-      "period": "\u2014",
+      "period": "—",
       "geo": "County 06037",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "No official Department of Finance or SCAG projection was retrieved. Not projected here."
+      "source": "S31",
+      "note": "Official California Department of Finance demographics/projections portal. No household-growth figure is asserted."
     },
     {
       "id": "SC-01",
       "section": "Schools",
       "metric": "Los Angeles Unified School District enrolment (NCES LEAID 0622710)",
-      "value": "427795",
+      "value": "408026",
       "unit": "students",
-      "period": "2022 school year",
-      "geo": "LAUSD",
+      "period": "2024–2025 school year",
+      "geo": "Los Angeles Unified School District (LEAID 0622710)",
       "status": "verified",
-      "source": "S25",
-      "note": "NCES Common Core of Data total enrolment, grade 99 (all grades) record."
+      "source": "S27",
+      "note": "Current enrollment shown in the official NCES District Detail page retrieved 2026-11-26. LAUSD is a central-Los-Angeles district proxy; parcel attendance area remains unverified."
     },
     {
       "id": "SC-02",
@@ -958,8 +1062,8 @@
       "period": "2022",
       "geo": "County 06037",
       "status": "unverified",
-      "source": "S25",
-      "note": "The county_code filter on this endpoint did not apply \u2014 the response returned Alameda County districts and a count matching all of California. The count was therefore discarded rather than reported."
+      "source": "S27",
+      "note": "No countywide district count is asserted. The official NCES district directory is provided for review; the public-data query previously used was not a valid county-level verification."
     },
     {
       "id": "SC-03",
@@ -967,7 +1071,7 @@
       "metric": "Academic performance index / proficiency rate for schools serving the reference tract",
       "value": "",
       "unit": "% meeting standard",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Reference tract",
       "status": "unverified",
       "source": "S27",
@@ -979,7 +1083,7 @@
       "metric": "School-level enrolment for schools within the trade area",
       "value": "",
       "unit": "students",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Reference tract",
       "status": "unverified",
       "source": "S27",
@@ -989,7 +1093,7 @@
       "id": "H-01",
       "section": "Hazard screening (W-04)",
       "metric": "FEMA flood zone at the reference point",
-      "value": "X \u2014 Area of Minimal Flood Hazard",
+      "value": "X — Area of Minimal Flood Hazard",
       "unit": "NFHL flood zone",
       "period": "DFIRM panel set 06037C",
       "geo": "34.0537, -118.2428",
@@ -1003,7 +1107,7 @@
       "metric": "FEMA flood zone for the actual parcel",
       "value": "",
       "unit": "NFHL flood zone",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
       "source": "S11",
@@ -1018,13 +1122,13 @@
       "period": "LRA layer as published",
       "geo": "34.0537, -118.2428",
       "status": "flagged",
-      "source": "S13",
+      "source": "S28",
       "note": "An empty result is NOT the same as a confirmed 'not in a zone'. It means the published LRA Very High layer has no polygon covering this point. Read together with H-04."
     },
     {
       "id": "H-04",
       "section": "Hazard screening (W-04)",
-      "metric": "Positive control \u2014 CAL FIRE FHSZ class at Griffith Park (34.1180, -118.3400)",
+      "metric": "Positive control — CAL FIRE FHSZ class at Griffith Park (34.1180, -118.3400)",
       "value": "Very High",
       "unit": "FHSZ class",
       "period": "LRA layer as published",
@@ -1079,12 +1183,12 @@
       "geo": "34.05, -118.24",
       "status": "unverified",
       "source": "S10",
-      "note": "Re-fetched 2026-11-26: the service now returns s1d = 0.785 g (s1uh = 0.781, model v4.0.x), which was null at the 2026-11-25 build. sd1, sm1, sdc1 and sdc are still null for this latitude/longitude and site class, while SDS and SDC (short period, 'D') are populated. The nulls are reported as-is and have NOT been back-filled; s1d alone is not a design value."
+      "note": "Re-fetched 2026-11-26 (session 19cf2e41): the service now returns s1d = 0.785 g (s1uh = 0.781, model v4.0.x), which was null at the 2026-11-25 build. sd1, sm1, sdc1 and sdc are still null for this latitude/longitude and site class, while SDS and SDC (short period, \u2018D\u2019) are populated. The nulls are reported as-is and have NOT been back-filled; s1d alone is not a design value."
     },
     {
       "id": "H-09",
       "section": "Hazard screening (W-04)",
-      "metric": "FEMA National Risk Index composite rating \u2014 Census Tract 2074",
+      "metric": "FEMA National Risk Index composite rating — Census Tract 2074",
       "value": "Very High",
       "unit": "rating",
       "period": "NRI current published release",
@@ -1096,7 +1200,7 @@
     {
       "id": "H-10",
       "section": "Hazard screening (W-04)",
-      "metric": "FEMA NRI expected annual loss rating \u2014 Census Tract 2074",
+      "metric": "FEMA NRI expected annual loss rating — Census Tract 2074",
       "value": "Very High",
       "unit": "rating",
       "period": "NRI current published release",
@@ -1108,7 +1212,7 @@
     {
       "id": "H-11",
       "section": "Hazard screening (W-04)",
-      "metric": "FEMA NRI expected annual loss \u2014 building value, tract total",
+      "metric": "FEMA NRI expected annual loss — building value, tract total",
       "value": "3648244",
       "unit": "USD per year",
       "period": "NRI current published release",
@@ -1120,7 +1224,7 @@
     {
       "id": "H-12",
       "section": "Hazard screening (W-04)",
-      "metric": "FEMA NRI expected annual loss rate \u2014 buildings",
+      "metric": "FEMA NRI expected annual loss rate — buildings",
       "value": "0.218",
       "unit": "% of building value per year",
       "period": "NRI current published release",
@@ -1187,19 +1291,19 @@
       "geo": "Tract 06037207400",
       "status": "flagged",
       "source": "S12",
-      "note": "Conflicts with the ACS 2020\u20132024 estimate of 2,598 (TA-13). Different vintage and universe. Both reported; neither averaged."
+      "note": "FEMA NRI reports this tract population using its 2020 Census base. The previous comparison to a third-party ACS estimate has been removed because that ACS value is not directly verified from an official Census source; do not treat this as a current population estimate."
     },
     {
       "id": "H-18",
       "section": "Hazard screening (W-04)",
       "metric": "Property-specific seismic retrofit status and structural system",
       "value": "",
-      "unit": "\u2014",
-      "period": "\u2014",
+      "unit": "—",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Requires a structural engineer's report and the building permit history. No official dataset publishes this."
+      "source": "S33",
+      "note": "Official LADBS permit/property-record portal is a discovery source only. Building system and retrofit status still require private engineering/owner records; no parcel lookup was performed."
     },
     {
       "id": "H-19",
@@ -1207,11 +1311,11 @@
       "metric": "Current property insurance premium and coverage limits",
       "value": "",
       "unit": "USD/year",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Only the owner's declarations page can supply this. Blank by design."
+      "source": "S34",
+      "note": "Official DOI resource page is general context only. Premium, exclusions, limits and renewal availability require the private policy and insurer/broker quotes."
     },
     {
       "id": "H-20",
@@ -1219,40 +1323,40 @@
       "metric": "Liquefaction susceptibility at the reference point",
       "value": "",
       "unit": "class",
-      "period": "\u2014",
+      "period": "—",
       "geo": "34.0537, -118.2428",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "The USGS liquefaction web service did not respond in this session. Not estimated. Site Class D was assumed for the seismic query and is itself unverified for the parcel."
+      "source": "S35",
+      "note": "Official California Geological Survey program/map portal. No parcel-specific liquefaction-zone result is asserted."
     },
     {
       "id": "H-21",
       "section": "Hazard screening (W-04)",
       "metric": "Wildfire history for the reference area",
       "value": "",
-      "unit": "\u2014",
-      "period": "\u2014",
+      "unit": "—",
+      "period": "—",
       "geo": "Reference area",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "No official per-parcel wildfire history was retrieved. CAL FIRE's zone layer (H-03/H-04) is a hazard designation, not a loss history."
+      "source": "S36",
+      "note": "Official CAL FIRE incident and fire-history portal. No parcel-specific fire history is asserted."
     },
     {
       "id": "TX-01",
       "section": "After-tax rules",
-      "metric": "Federal long-term capital gain \u2014 0% bracket ceiling, single filer",
+      "metric": "Federal long-term capital gain — 0% bracket ceiling, single filer",
       "value": "49450",
       "unit": "USD taxable income",
       "period": "Tax year 2026",
       "geo": "Federal",
       "status": "verified",
       "source": "S20",
-      "note": "Rev. Proc. 2025-32 \u00a74.03 'Maximum Zero Rate Amount'."
+      "note": "Rev. Proc. 2025-32 §4.03 'Maximum Zero Rate Amount'."
     },
     {
       "id": "TX-02",
       "section": "After-tax rules",
-      "metric": "Federal long-term capital gain \u2014 15% bracket ceiling, single filer",
+      "metric": "Federal long-term capital gain — 15% bracket ceiling, single filer",
       "value": "545500",
       "unit": "USD taxable income",
       "period": "Tax year 2026",
@@ -1264,7 +1368,7 @@
     {
       "id": "TX-03",
       "section": "After-tax rules",
-      "metric": "Unrecaptured section 1250 gain \u2014 maximum rate",
+      "metric": "Unrecaptured section 1250 gain — maximum rate",
       "value": "25",
       "unit": "%",
       "period": "Current law",
@@ -1349,7 +1453,7 @@
       "id": "TX-10",
       "section": "After-tax rules",
       "metric": "Adjusted basis and amount realized definitions",
-      "value": "Gain = amount realized \u2212 adjusted basis",
+      "value": "Gain = amount realized − adjusted basis",
       "unit": "text",
       "period": "2025 guidance",
       "geo": "Federal",
@@ -1362,24 +1466,24 @@
       "section": "After-tax rules",
       "metric": "Property tax reassessment on change of ownership (Proposition 13 base-year rules)",
       "value": "",
-      "unit": "\u2014",
-      "period": "\u2014",
+      "unit": "—",
+      "period": "—",
       "geo": "Los Angeles County",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "The County Assessor and Board of Equalization pages could not be retrieved. Property tax after a sale is a material cost to a BUYER and therefore to the achievable price. Excluded, flagged for professional confirmation."
+      "source": "S37",
+      "note": "Official BOE property-tax portal supplied for manual review; page could not be retrieved in this audit. No Prop 13 reassessment computation is asserted."
     },
     {
       "id": "TX-12",
       "section": "After-tax rules",
       "metric": "California source rules and nonresident withholding on the sale",
       "value": "",
-      "unit": "\u2014",
-      "period": "\u2014",
+      "unit": "—",
+      "period": "—",
       "geo": "California",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "FTB Form 593 withholding requirements were not retrieved. Not modelled."
+      "source": "S38",
+      "note": "Official FTB real-estate withholding guidance. Owner/entity-specific withholding treatment remains for CPA review."
     },
     {
       "id": "TX-13",
@@ -1387,11 +1491,11 @@
       "metric": "Depreciation taken to date on the property",
       "value": "",
       "unit": "USD",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Only the owner's depreciation schedules supply this, and it drives most of the tax result. Blank by design."
+      "source": "S22",
+      "note": "IRS Publication 544 is official tax guidance; the depreciation schedule and amount taken are private owner tax records and are not published."
     },
     {
       "id": "TX-14",
@@ -1399,11 +1503,11 @@
       "metric": "Original cost basis of the property",
       "value": "",
       "unit": "USD",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Owner records only. Blank by design."
+      "source": "S42",
+      "note": "IRS Publication 551 is official basis guidance; actual cost basis is an owner-held record and remains blank."
     },
     {
       "id": "TE-01",
@@ -1452,7 +1556,7 @@
       "geo": "Company-wide",
       "status": "verified",
       "source": "S15",
-      "note": "Franchise \u22121.2%, company-owned \u22120.9%. The company attributes the decline primarily to lower transactions, partly offset by higher price."
+      "note": "Franchise −1.2%, company-owned −0.9%. The company attributes the decline primarily to lower transactions, partly offset by higher price."
     },
     {
       "id": "TE-05",
@@ -1464,7 +1568,7 @@
       "geo": "Company-wide",
       "status": "verified",
       "source": "S15",
-      "note": "Franchise \u22127.2%, company-owned \u22126.4%. The rate of decline has narrowed year over year but sales are still falling."
+      "note": "Franchise −7.2%, company-owned −6.4%. The rate of decline has narrowed year over year but sales are still falling."
     },
     {
       "id": "TE-06",
@@ -1583,7 +1687,7 @@
       "metric": "Jack in the Box reported revenue trend reversal risk",
       "value": "Revenue fell in FY2025 and in the latest quarter; same-store sales negative in both the latest quarter and the year-earlier quarter",
       "unit": "text",
-      "period": "FY2024 \u2013 Q3 FY2026",
+      "period": "FY2024 – Q3 FY2026",
       "geo": "Company-wide",
       "status": "verified",
       "source": "S15",
@@ -1595,11 +1699,11 @@
       "metric": "Jack in the Box senior unsecured credit rating",
       "value": "",
       "unit": "rating",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Company",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Rating-agency publications are behind paywalls or logins and were not retrieved. Neither rating nor outlook is asserted."
+      "source": "S17",
+      "note": "SEC EDGAR is the official filing repository, not a credit-rating agency. No public rating was verified; no rating is asserted."
     },
     {
       "id": "TE-17",
@@ -1630,11 +1734,11 @@
       "section": "Tenant & franchise credit",
       "metric": "Subject lease terms: base rent, escalations, options, assignment and recapture rights",
       "value": "",
-      "unit": "\u2014",
-      "period": "\u2014",
+      "unit": "—",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
+      "source": "PRIVATE",
       "note": "The single most important input in the whole analysis and it is not public. Requires the private lease abstract (GATE-01)."
     },
     {
@@ -1643,10 +1747,10 @@
       "metric": "Actual rent paid by an arm's-length Jack in the Box tenant in this submarket",
       "value": "",
       "unit": "USD/sf/year or USD/month",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Submarket",
       "status": "unverified",
-      "source": "\u2014",
+      "source": "PRIVATE",
       "note": "No official source publishes private commercial rents. Requires broker rent comps. This is the gap behind the request to 'price the short-lease discount from real quotes'."
     },
     {
@@ -1655,11 +1759,11 @@
       "metric": "Going-concern market value of the property",
       "value": "",
       "unit": "USD",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "No appraisal, listing or official valuation exists in this repo. Every sell-vs-hold conclusion depends on it. Not estimated."
+      "source": "S41",
+      "note": "Official appraiser licensing portal is a discovery source only. No appraisal or market value is published."
     },
     {
       "id": "VA-02",
@@ -1667,11 +1771,11 @@
       "metric": "Capitalisation rate applied to a QSR ground/net-leased asset in central Los Angeles",
       "value": "",
       "unit": "%",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Submarket",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "No official source publishes cap rates. Private brokerage surveys are not official. Excluded rather than assumed."
+      "source": "S41",
+      "note": "Official appraiser licensing portal is a discovery source only. No official cap-rate series or comparable quote was verified."
     },
     {
       "id": "VA-03",
@@ -1679,11 +1783,11 @@
       "metric": "Comparable sale evidence",
       "value": "",
       "unit": "USD",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Submarket",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "No comparable sales were retrieved. County assessor and recorder data could not be reached in this session."
+      "source": "S39",
+      "note": "Official county assessor property-record portal can assist private comparable-sale research; no comparable sale or sale price is asserted."
     },
     {
       "id": "VA-04",
@@ -1691,11 +1795,11 @@
       "metric": "Parcel land area and building area",
       "value": "",
       "unit": "sq ft",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Required to convert any rent comp or replacement cost into a property-level figure."
+      "source": "S39",
+      "note": "Official county assessor property-record portal is a source for parcel/building records in a secure workflow; no parcel details are published."
     },
     {
       "id": "VA-05",
@@ -1703,10 +1807,10 @@
       "metric": "Outstanding mortgage balance, rate, and any prepayment penalty",
       "value": "",
       "unit": "USD",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
+      "source": "PRIVATE",
       "note": "Determines net proceeds and whether a sale is even optional before the lease expires."
     },
     {
@@ -1715,11 +1819,11 @@
       "metric": "Property tax amount and assessed value",
       "value": "",
       "unit": "USD/year",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Assessor data unreachable in this session."
+      "source": "S40",
+      "note": "Official County Treasurer and Tax Collector portal; property-specific bill must be retrieved privately by an authorized adviser."
     },
     {
       "id": "VA-07",
@@ -1727,10 +1831,10 @@
       "metric": "Remaining lease term",
       "value": "",
       "unit": "years",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
+      "source": "PRIVATE",
       "note": "Reported to expire between 2030 and 2035. The exact date and any renewal options are unverified. The spread between 2030 and 2035 alone spans most of a market cycle."
     },
     {
@@ -1739,10 +1843,10 @@
       "metric": "Replacement cost of the building",
       "value": "",
       "unit": "USD",
-      "period": "\u2014",
+      "period": "—",
       "geo": "Parcel",
       "status": "unverified",
-      "source": "\u2014",
+      "source": "PRIVATE",
       "note": "Required to convert the FEMA expected-annual-loss rate (H-12) into dollars."
     },
     {
