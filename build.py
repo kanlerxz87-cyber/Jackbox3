@@ -1305,10 +1305,11 @@ need for marginal sites and faces refinancing scrutiny inside the exact 2030&nda
 """
     tc_body = render(
         tc_body,
-        REV=table(["Measure", "FY2024", "FY2025", "Change", "Source"], [
-            ["Total revenues", "$1,571.3m", "$1,465.3m", "&minus;6.7%", source_link("S14", smap)],
-            ["Net income / (loss)", "$(36.7)m", "$(80.7)m", "worse", source_link("S16", smap)],
-            ["Adjusted EBITDA", "$322.3m", "$270.9m", "&minus;15.9%", source_link("S16", smap)],
+        REV=table(["Measure", "FY2023", "FY2024", "FY2025", "Change", "Source"], [
+            ["Franchise rental revenues", "$364.6m", "$375.4m", "$368.6m", "+3.0% then &minus;1.8%", source_link("S59", smap)],
+            ["Total revenues", "&mdash;", "$1,571.3m", "$1,465.3m", "&minus;6.7%", source_link("S14", smap)],
+            ["Net income / (loss)", "&mdash;", "$(36.7)m", "$(80.7)m", "worse", source_link("S16", smap)],
+            ["Adjusted EBITDA", "&mdash;", "$322.3m", "$270.9m", "&minus;15.9%", source_link("S16", smap)],
         ]),
         SSS=table(["Measure", "Q3 FY2025", "Q3 FY2026", "Change", "Source"], [
             ["System same-store sales", "&minus;7.1%", "&minus;1.1%", "improving but still negative", source_link("S15", smap)],

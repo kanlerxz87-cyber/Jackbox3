@@ -417,3 +417,24 @@ Merged `origin/main` (`f082c02`, preserving PRs #9–#16) into `arena/641e4e68-j
 - `python3 tools/validate_site.py`: **PASSED** (13 files, 236 internal links, 577 external `.gov`/docs links, 353 rows, 148 verified rows, 114 unverified blank rows, zero PII).
 - Node.js unit suites on both `assets/calculator.js` and `workspace/assets/calculator.js`: **PASSED**.
 - Merged via PR #18 (`5c0efab`) with follow-up dashboard cleanup; live GitHub Pages deployment confirmed.
+
+---
+
+## Session `b544c65d` — SHA-256 validator privacy scrub, 3-year franchise rental revenue series & rendered `/workspace/` verification log (2026-11-26)
+
+Rebased cleanly onto `origin/main` (`4fc1496`, preserving 100% of PRs #1–#19 across sessions `47b70455`, `dd713c44`, `57054140`, `0e787678`, `4a251c0f`, `7c607b54`, and `641e4e68`; earlier rebase conflicts on `COORDINATION.md` were resolved by keeping every prior session's work intact).
+
+| Session ID | Branch | Scope | Status |
+|---|---|---|---|
+| `b544c65d` | `arena/b544c65d-jackbox3` | `COORDINATION.md`, `tools/validate_site.py`, `scripts/check_site.py`, `data/findings.json`, `build.py`, `tools/build_site.py`, `workspace/**`, `SOURCES.md`, `VERIFICATION.md`, `data/verified-observations.json`, regenerated `*.html` | complete |
+
+### Task board — session `b544c65d`
+
+| Task | Description | Status | Owner | Files touched |
+|---|---|---|---|---|
+| B-01 | Register session `b544c65d` claim and coordinate cleanly across concurrent merges (PRs #12, #14–#16, #18–#19) without discarding any session's work | done | `b544c65d` | `COORDINATION.md` |
+| B-02 | Privacy scrub in both validators: replace the 8 hardcoded literal personal names in `tools/validate_site.py` with 9 SHA-256 digests (`REDACTED_NAME_SHA256`) and add the identical SHA-256 check to `scripts/check_site.py` so zero personal names reside anywhere in source code or HTML | done | `b544c65d` | `tools/validate_site.py`, `scripts/check_site.py` |
+| B-03 | Independently verify IRS Schedule D Tax Worksheet (lines 1–47, `https://www.irs.gov/instructions/i1040sd`), 2026 FTB Form 593 (`https://www.ftb.ca.gov/forms/2026/2026-593-instructions.html`), and California Constitution Art. XIII A (`https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&division=&title=&part=&chapter=&article=XIII%20A`); confirm root & `/workspace/` calculators pass incremental Schedule D / NIIT / BHST / W-02 Hold & Stress checks | done | `b544c65d` | `data/findings.json` (`S60`, `TX-11`), `tools/build_site.py` (`CA_PROP13`) |
+| B-04 | Add rendered HTML verification audit page `workspace/pages/verification.html` and back-link to the root site (`Main Decision Site (root)`) in `/workspace/`'s footer so both workspaces cross-link bidirectionally | done | `b544c65d` | `tools/build_site.py`, `workspace/**`, `SOURCES.md`, `VERIFICATION.md`, `data/verified-observations.json` |
+| B-05 | Add the audited 3-year Franchise Rental Revenues series (`TE-26` `$364,591,000` FY2023, `TE-27` `$375,428,000` FY2024, `TE-28` `$368,643,000` FY2025) from the FY2025 Form 10-K Consolidated Statements of Operations (`S59`, `jack-20250928.htm` F-4) to `data/findings.json` and `tenant-credit.html`, run both validators, open PR → merge → verify GitHub Pages deployment | done | `b544c65d` | `data/findings.json`, `build.py`, `*.html` |
+
