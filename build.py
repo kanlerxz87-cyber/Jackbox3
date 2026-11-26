@@ -333,10 +333,10 @@ def build(findings, rules):
 
 <div class="callout callout-privacy">
   <h3>Independent source-verified audit workspace</h3>
-  <p>A second, independently verified decision workspace was contributed by session <code>dd713c44</code>. It keeps the same
-  privacy rules, adds a line-by-line <code>VERIFICATION.md</code>, an official <code>SOURCES.md</code> register, a
-  browser-only after-tax calculator and its own Flagged for Review and Suggestions pages. It is preserved intact under
-  <a href="workspace/index.html"><code>/workspace/</code></a> so neither session's work is discarded.</p>
+  <p>A second, independently verified decision workspace was contributed by session <code>dd713c44</code> and updated in the
+  <code>2026-11-26</code> audit pass. It keeps the same privacy rules, adds a line-by-line <code>VERIFICATION.md</code>, an
+  official <code>SOURCES.md</code> register, a Hold-vs-Sell browser calculator and its own Flagged for Review / Suggestions pages.
+  It is preserved intact under <a href="workspace/index.html"><code>/workspace/</code></a> so neither session's work is discarded.</p>
 </div>
 
 <div class="callout callout-privacy">
@@ -352,14 +352,6 @@ def build(findings, rules):
 
 <h2>How the status labels work</h2>
 @@STATUS_TABLE@@
-
-<div class="callout callout-privacy">
-  <h3>Independent source-verified audit workspace</h3>
-  <p>A second, independently verified decision workspace was contributed by session <code>dd713c44</code> and updated in the
-  <code>2026-11-26</code> audit pass. It keeps the same privacy rules, adds a line-by-line <code>VERIFICATION.md</code>, an
-  official <code>SOURCES.md</code> register, a Hold-vs-Sell browser calculator and its own Flagged for Review / Suggestions pages.
-  It is preserved intact under <a href="workspace/index.html"><code>/workspace/</code></a> so neither session's work is discarded.</p>
-</div>
 """
     dash = render(dash, KPI=kpi, DOMAIN=domain, GATES=20,
                   UNV=counts["unverified"], FLAG=counts["flagged"],

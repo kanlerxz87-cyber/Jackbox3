@@ -416,3 +416,4 @@ Merged `origin/main` (`f082c02`, preserving PRs #9–#16) into `arena/641e4e68-j
 - `python3 scripts/check_site.py`: **PASSED** (100% `.gov`/official ArcGIS/municipal hosts on all 56 sources in `data/findings.json`).
 - `python3 tools/validate_site.py`: **PASSED** (13 files, 236 internal links, 577 external `.gov`/docs links, 353 rows, 148 verified rows, 114 unverified blank rows, zero PII).
 - Node.js unit suites on both `assets/calculator.js` and `workspace/assets/calculator.js`: **PASSED**.
+- Merged via PR #18 (`5c0efab`) with follow-up dashboard cleanup; live GitHub Pages deployment confirmed.
