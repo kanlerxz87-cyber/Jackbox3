@@ -134,3 +134,128 @@ IR-01 through IR-09 are published on `pages/flagged.html` and logged in `COORDIN
 
 Run `python3 tools/validate_site.py` — checks internal links, official source links on every table row, blank values on unverified rows, and the absence of personal-information patterns.
 
+
+---
+
+# Re-verification pass — 2026-11-26 (session `4a251c0f`)
+
+Independent line-by-line re-check of the **root** dashboard (`data/findings.json` + `data/rules.json` → `build.py`).
+Every value below was re-pulled from the live official endpoint on 2026-11-26 and compared to the published figure.
+Where the published figure and the source disagreed, the site was corrected (corrections listed at the end).
+
+## Rates and prices — U.S. Bureau of Labor Statistics
+
+| Published | Value | Re-pull result | Verdict |
+| --- | --- | --- | --- |
+| `EC-01` U.S. unemployment, Oct 2026 | 4.1% | `LNS14000000` M10 2026 = 4.1 | matches |
+| `EC-02` California unemployment, Oct 2026 (preliminary) | 5.0% | `LASST060000000000003` M10 2026 = 5.0, footnote "Preliminary" | matches |
+| `EC-03` LA MSA unemployment, Sep 2026 (preliminary) | 4.4% | `LAUMT063108000000003` M09 2026 = 4.4, footnote "Preliminary" | matches |
+| `EC-04` LA MSA annual average unemployment, 2025 | 5.3% | M13 2025 = 5.3, footnote G: 11-month average excluding October | matches, caveat correct |
+| `EC-05` monthly peak, last 3 years | 6.1% | M08 2024 and M07 2024 = 6.1 | matches |
+| `EC-06` nonfarm employment, Oct 2026 | 6,371.5 thousand | `SMU06310800000000001` M10 2026 = 6371.5 | matches |
+| `EC-07` nonfarm employment, 2025 average | 6,281.3 thousand | M13 2025 = 6281.3 | matches |
+| `EC-08` employment change 2025 vs 2024 | −0.1% | 6281.3 / 6288.0 − 1 = −0.106% | matches |
+| `EC-09` Oct 2026 vs 2024 average | +1.3% | 6371.5 / 6288.0 − 1 = +1.33% | matches |
+| `EC-10` CPI-U all items, Oct 2026 | 337.511 | `CUUR0000SA0` M10 2026 = 337.511 | matches |
+| `EC-11` CPI-U annual inflation 2025 | 2.63% | 321.943 / 313.689 − 1 = 2.631% | matches |
+| `EC-12` CPI-U food away from home, Oct 2026 | 400.850 | `CUUR0000SEFV` M10 2026 = 400.850 | matches |
+| `EC-13` food-away-from-home inflation 2025 | 3.70% | 382.378 / 368.743 − 1 = 3.698% | matches |
+| `EC-14` food-away-from-home, Sep 2026 y/y | 3.46% | 398.783 / 385.451 − 1 = 3.459% (Sep pair, Oct 2025 unpublished) | matches |
+
+## Census / ACS 2020–2024 5-year — Census Reporter mirror of `acs2024_5yr`
+
+Reference GEOID `06037207400` re-confirmed from the Census Geocoder, together with block `060372074001025`,
+county `06037`, CD 34, SD 26, AD 54 and place `0644000`. Then, for county `05000US06037`,
+MSA `31000US31080` and tract `14000US06037207400`:
+
+| Published | Value | Re-pull result | Verdict |
+| --- | --- | --- | --- |
+| `TA-01` / `TA-03` / `TA-04` median household income | 78,482 / 90,112 / 95,958 | 78482 ±29,379 / 90112 ±392 / 95958 ±378 | matches, MoE as published |
+| `TA-06` / `TA-07` / `TA-08` median gross rent | 3,154 / 1,954 / 2,063 | 3154 / 1954 / 2063 | matches |
+| `TA-10` / `TA-11` median home value | 834,200 / 871,300 | 834200 / 871300 | matches |
+| `TA-12` tract median home value | blank | `B25077001` = null for the tract (no owner-occupied units) | correctly blank |
+| `TA-13` tract population | 2,598 | 2598 ±502 | matches |
+| `TA-14` tract renter share | 100.0% | occupied 967, owner 0, renter 967 | matches |
+| `DM-01` / `DM-02` population | 9,808,667 / 12,974,487 | 9808667 / 12974487 | matches |
+| `DM-07` county per-capita income | 45,792 | 45792 ±239 | matches |
+| `DM-08` tract per-capita income | 68,487 | 68487 ±8,334 | matches |
+| `DM-14` / `DM-11` tract income mix | 27.1% under $25k, 22.6% at $150k+ | B19001: (123+33+35+71)/967 and (76+143)/967 | matches |
+| `SC-01` LAUSD enrolment | 427,795 | Urban Institute CCD API, LEAID 0622710, year 2022 = 427795 | matches |
+
+## Hazards — USGS, FEMA, CAL FIRE
+
+| Published | Value | Re-pull result | Verdict |
+| --- | --- | --- | --- |
+| `H-05` ASCE 7-16 `S_DS` | 1.311 g | 1.311 (34.05, −118.24, RC III, site class D) | matches |
+| `H-06` seismic design category | D | `sdcs` = D | matches |
+| `H-07` PGA | 0.843 g | `pga` = 0.843 (site-adjusted, F_PGA 1.1) | matches |
+| `H-08` `s1d`/`sd1`/`sm1`/`sdc1` | blank | `s1d` 0.785 but `sd1`, `sm1`, `sdc1` = null | correctly blank (nulls reported as nulls) |
+| `H-01` FEMA flood zone | X, area of minimal flood hazard | NFHL layer 28 returns `FLD_ZONE` X, `ZONE_SUBTY` AREA OF MINIMAL FLOOD HAZARD, `DFIRM_ID` 06037C | matches |
+| `H-09`–`H-15` FEMA NRI tract ratings | Very High composite / Very High EAL / $3,648,244 / 0.218% / Very Low resilience / Relatively Low SOVI / building value 1,882,281,008 | `RISK_SCORE` 97.92, `EAL_VALB` 3,648,243.87, `ALR_VALB` 0.002176, `RESL_RATNG` Very Low, `SOVI_RATNG` Relatively Low, `BUILDVALUE` 1,882,281,008 | matches |
+| `H-03` CAL FIRE FHSZ at reference point | "No polygon returned" | query returns `"features":[]` | matches |
+| `H-04` positive control at Griffith Park | Very High | LRA / INCORP Y / HAZ_CODE 3 / Very High | matches |
+
+## Tenant credit — SEC EDGAR (CIK 0000807882)
+
+| Published | Value | Re-pull result | Verdict |
+| --- | --- | --- | --- |
+| `TE-01` / `TE-02` revenue FY2024 / FY2025 | 1,571,306,000 / 1,465,314,000 | XBRL `Revenues.json`, FY2024 `0000807882-24-000052`, FY2025 `0000807882-25-000072` | matches |
+| `TE-04` / `TE-05` system same-store sales | −1.1% / −7.1% | Q3 FY2026 release: System (1.1%), prior year (7.1%) | matches |
+| `TE-06` quarterly revenue | 257,657,000 | release: $257.7m vs $262.4m | matches |
+| `TE-08` / `TE-09` restaurant counts | 2,115 / 2,168 | release count table: 2,115 and 2,168 | matches |
+| `TE-12` openings / closures | 4 opened, 17 closed | release: 4 openings, 17 closures | matches |
+| `TE-13` / `TE-14` net loss / adjusted EBITDA FY2025 | −80,719,000 / 270,931,000 | FY2025 DEF 14A XBRL R2 pay-versus-performance table, thousands: (80,719) and 270,931 | matches |
+| `TE-15` revenue trend narrative | falling | continuous from the two 10-Ks and the Q3 release | matches |
+| `TE-17` refinancing | "described as complete" | Q3 release: "With our refinancing now complete"; 8-K Item 2.03 filed 2026-06-23 | matches, terms deliberately not read |
+| `TE-18` officer change | Item 5.02 8-K filed 2026-11-17 | EDGAR 8-K index: accession `0000807882-26-000100`, filed 2026-11-17, items 5.02 and 9.01 | matches |
+
+## Tax rules
+
+| Published | Value | Re-pull result | Verdict |
+| --- | --- | --- | --- |
+| `TX-05` 2026 ordinary brackets | 10/12/22/24/32/35/37 with the published thresholds | Rev. Proc. 2025-32 §4.01 Tables 1–4, every band edge matches all four filing statuses | matches |
+| `TX-01` / `TX-02` 2026 LTCG ceilings, single | 49,450 / 545,500 | §4.03: All Other Individuals $49,450 / $545,500 | matches |
+| Joint, separate and HoH ceilings in `rules.json` | 98,900 / 613,700; 49,450 / 306,850; 66,200 / 579,600 | §4.03 table | matches |
+| 2026 standard deduction | 16,100 / 32,200 / 24,150 / 16,100 | §4.14 table | matches |
+| `TX-03` unrecaptured §1250 | 25% *maximum* | IRS Topic 409: "taxed at a maximum 25% rate" | matches (ceiling, not flat rate) |
+| `TX-04` NIIT | 3.8% above 200k / 250k / 125k | IRS NIIT page thresholds | matches |
+| `TX-06` 2025 California brackets | 1 … 12.3% at 11,079 / 26,264 / 41,452 / 57,542 / 72,724 / 371,479 / 445,771 / 742,953 | FTB 2025 Tax Rate Schedules, Schedule X, every band edge identical | matches |
+| `TX-07` Behavioral Health Services Tax | 1% above $1,000,000 | FTB 2025 Form 540 instructions, line 62 worksheet | matches |
+| `TX-15` California standard deduction | 5,706 / 11,412 | instructions, line 18 chart | matches |
+| `TX-16` California AMT thresholds | 92,749 / 123,667 / 61,830 | instructions, line 61 | matches |
+| `TX-08` installment method | available | Pub. 537 (2025) | matches |
+| `TX-09` like-kind exchange | real property only | Pub. 537 "Like-Kind Exchange"; Pub. 544 chapter 1 | matches |
+| `TX-10` gain formula | amount realised − adjusted basis | Pub. 544; IRS Topic 409 | matches |
+| `EC-17` Beige Book narrative | "changed little on balance", labour demand "generally muted" | Federal Reserve Beige Book national summary, October 2025 — both phrases verbatim | matches |
+
+## Derived rows recomputed
+
+All 20 `derived` rows were recomputed from the verified inputs in their own `formula` field. Each reproduces the
+published value at the stated rounding and unit scale (percent, ratio, USD/month, count). No derived row is unverifiable.
+
+## Corrections made in this pass
+
+1. **`data/rules.json`** — removed a superseded `mental_health_services_tax` block that still described the 1% surcharge
+   as unverified and not applied, while `behavioral_health_services_tax` records the same tax as verified and applied.
+   Two records contradicting each other is exactly the kind of drift this board exists to catch.
+2. **`data/rules.json`** — the `credit_limitation_thresholds_2025` record carried 252,203-class figures reversed
+   (347,808 / 463,745 / 231,868). The published FTB line 32 table gives **252,203** single or married filing separately,
+   **504,411** joint or qualifying surviving spouse, **378,310** head of household. Record and printed row corrected.
+3. **`tax.html`** — the surcharge was listed under "Excluded rules" although the calculator applies it. It is now under
+   "Rules it applies", and the excluded list keeps only genuinely excluded items (AMT, reassessment, Form 593, 199A, ORI).
+4. **`risk.html`, `methodology.html`, `flagged-for-review.html`, `suggestions.html`** — four places still said the
+   surcharge was an unverified omission. All four now describe it as verified and applied, and the self-assessment row
+   and irregularity IR-08 say what actually happened (the FTB page failed twice, then loaded, and was used).
+5. **`suggestions.html` S-05** — the top-ranked suggestion was "add the surcharge", which is done. It is now
+   "close the property-tax reassessment gap", the largest remaining omission in the after-tax number.
+6. **`index.html`** — restored the cross-link to the preserved `/workspace/` audit site; it had been dropped by a
+   regeneration of the root page, so a published page became unreachable from the dashboard while the file still existed.
+7. **Build stamp** — every page, `sitemap.xml` and the footer date now read 2026-11-26.
+
+## Unchanged by design
+
+`VA-01`–`VA-08` (value, cap rate, comparables, areas, mortgage, tax bill, remaining term, replacement cost),
+`TE-19` (lease terms), `TE-20` (arm's-length rent), `TX-11`–`TX-14` (basis, depreciation, reassessment, withholding),
+`TA-18`/`TA-19` (trade-area radius, traffic counts), `SC-02`–`SC-04` (school counts and performance),
+`EC-15`/`EC-16`, `DM-13`/`DM-14`, `H-02`, `H-16`, `H-18`–`H-21`, `TE-16`. No official public source publishes these for a
+private parcel or a private owner, so they stay blank, and no winner between sell and renew is stated.
