@@ -1,6 +1,6 @@
 # COORDINATION.md — Shared Task Board
 
-Last updated: 2026-11-26 (session `arena/0e787678-jackbox3`; follow-up citation audit)
+Last updated: 2026-11-26 (session `arena/7c607b54-jackbox3`; final source-integrity integration)
 
 > This file is the single shared task board for all agent sessions working on this repo.
 > Read it before starting any task. Claim a task before you touch files, then commit and
@@ -12,7 +12,9 @@ Last updated: 2026-11-26 (session `arena/0e787678-jackbox3`; follow-up citation 
 |---|---|---|---|
 | `47b70455` | `arena/47b70455-jackbox3` | Original build and integration scope (historical; completed) | done |
 | `57054140` | `arena/57054140-jackbox3` | Post-merge audit; `COORDINATION.md` only | done |
-| `0e787678` | `arena/0e787678-jackbox3` | T-24 follow-up source-link correction; `COORDINATION.md`, `data/findings.json`, generated root HTML | active |
+| `0e787678` | `arena/0e787678-jackbox3` | T-24 follow-up source-link correction and T-25 integration; shared findings/root pages/coordination | done |
+| `4a251c0f` | `arena/4a251c0f-jackbox3` | A-01–A-05 line-by-line re-verification + integration, PR #14 | done |
+| `7c607b54` | `arena/7c607b54-jackbox3` | T-26 source audit and T-27 final integration; `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py`, `VERIFICATION.md` | active |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -52,7 +54,9 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-22 | Pull request → merge → confirm deploy (PR #1) | done | `47b70455` | `main` |
 | T-23 | Post-merge repository and deployment audit; reconcile stale coordination status | done | `57054140` | `COORDINATION.md` |
 | T-24 | Follow-up source-link audit; correct demonstrated citation mismatch and re-validate | done | `0e787678` | `COORDINATION.md`, `data/findings.json`, generated root HTML |
-| T-25 | Integrate the citation correction; PR, merge, and confirm Pages deployment | in progress | `0e787678` | `COORDINATION.md`, current branch → `main` |
+| T-25 | Integrate the citation correction; PR, merge, and confirm Pages deployment | done | `0e787678` | PR #10; deployment documented by PR #13 |
+| T-26 | Independent official-source/privacy audit; correct source-integrity issues | done | `7c607b54` | `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py`, `VERIFICATION.md` |
+| T-27 | Final integration: preserve parallel fixes, merge official-source correction, verify Pages | in progress | `7c607b54` | `COORDINATION.md`, current branch → `main` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
@@ -283,7 +287,7 @@ No personal data is collected or published in this session either.
 
 | Session ID | Branch | Scope (files it may edit) | Status |
 |---|---|---|---|
-| `4a251c0f` | `arena/4a251c0f-jackbox3` | `COORDINATION.md`, `build.py`, `data/findings.json`, `data/rules.json`, generated `*.html`, `scripts/check_site.py`, `tools/validate_site.py`, `README.md` | active |
+| `4a251c0f` | `arena/4a251c0f-jackbox3` | `COORDINATION.md`, `build.py`, `data/findings.json`, `data/rules.json`, generated `*.html`, `scripts/check_site.py`, `tools/validate_site.py`, `README.md` | done |
 
 ### Task board — session `4a251c0f`
 
@@ -362,27 +366,28 @@ check was done with the fetch tool rather than `urllib`; that is a sandbox limit
 No sell-versus-renew winner is stated. Nothing was removed from another session's work: `57054140`'s `S28` split is kept,
 with its retrieval status re-tested and corrected to "retrieved, empty feature set".
 
-### Open concurrency note for whichever session integrates PR #12
+### Concurrent PR #12 integration (resolved locally; final merge pending)
 
-PR [#12](https://github.com/kanlerxz87-cyber/Jackbox3/pull/12) ("Require direct official sources for public property findings",
-session `7c607b54`) was still open when #14 and #15 merged. Its diff was cut from a `main` that predates #14, and as written it
-would undo five of the corrections #14 published. Please rebase and resolve deliberately rather than merging it as-is:
+PR [#12](https://github.com/kanlerxz87-cyber/Jackbox3/pull/12) was opened from an older `main` while sessions `0e787678` and `4a251c0f` were also integrating shared findings/pages. `git pull --rebase origin main` was run before push as required. The rebase conflicts were resolved by keeping all changes from main and re-generating root pages from the merged `build.py` and `data/findings.json`. The rebased branch preserves PR #14's tax fixes/thresholds, the corrected `S28` reference-point finding, its build stamp, and `/workspace/` link.
 
-| #14 correction | What #12 would do to it |
-| --- | --- |
-| Behavioral Health Services Tax verified and **applied** (`TX-07`) | restores the old text that the surcharge is "excluded from the calculator" and that the FTB page "could not be retrieved" (IR-08), which is no longer true |
-| FTB exemption-credit thresholds 252,203 / 504,411 / 378,310 | regenerated pages come from a `build.py` that still prints 347,808 / 463,745 / 231,868 |
-| `tax.html` listing the surcharge under "Rules it applies" | reverts the callout to the old "Excluded rules" structure |
-| `S28` recorded as retrieved, empty feature set | restores "response flagged; not independently retrievable during follow-up" |
-| `/workspace/` cross-link on the dashboard | its `build.py` no longer contains the callout |
+The 2026-11-26 same-mirror ACS re-pull in PR #14 confirms the third-party mirror's consistency, but not direct official-source verification. Under this project's strict official-source-only policy, the 29 Census Reporter-derived findings and dependent arithmetic remain blank/unverified until a direct official Census table/API pull is available. This explicitly keeps the user requirement above the non-official mirror's corroboration.
 
-**On the ACS withdrawal specifically** — #12 withdraws 29 Census rows because they came from the Census Reporter API mirror
-rather than `api.census.gov`. That is a defensible standard, but the premise it rests on does not hold up on re-test:
-`api.censusreporter.org/1.0/data/show/latest` resolves to release `acs2024_5yr` ("ACS 2024 5-year", 2020–2024), the same
-release, and on 2026-11-26 it returned every published figure exactly — 78,482 / 90,112 / 95,958 income, 3,154 / 1,954 / 2,063
-rent, 834,200 / 871,300 home value, 9,808,667 / 12,974,487 population, 45,792 / 68,487 per-capita income, 2,598 tract
-population, plus the published margins of error. `B25077` also returned a genuine `null` for the tract, which is why `TA-12`
-is blank. Blanking 29 verified rows would remove correct evidence from the site; keeping them with the mirror disclosed
-(which #14 does, on every row and on the flagged page) preserves the evidence and the caveat at the same time. If the
-strict standard is the one the owner wants, the right fix is to re-pull the same tables from `api.census.gov` with a key and
-then swap the source labels — not to delete the values in the meantime.
+### Session `7c607b54` — official-source correction (2026-11-26)
+
+T-26 completed. Root ACS values previously read through the Census Reporter API mirror were withdrawn because the requested evidence standard is direct official sources. The source is removed from `data/findings.json`; all 29 impacted estimates/derived findings are blank and unverified. The previous LAUSD enrollment value from a third-party mirror was replaced by **408,026 students for 2024–2025**, directly checked on the [official NCES District Detail page](https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710). This is regional district context only, not a confirmed parcel school assignment.
+
+Official discovery links were added for blank public-source inputs. Five values available only from owner/adviser records or private quotes (subject lease terms, local arm's-length rents, mortgage terms, precise expiry, and building replacement cost) are explicitly marked `private record (not public)`; they are not given false public citations. No personal or parcel-identifying data was added. All narrative statements previously derived from mirror ACS figures were removed from the dashboard, summary, trade-area page, demographics page, risk list, and printable advisor sheet.
+
+The Census keyless API request returned “A valid key must be included”; the official [Census API key request page](https://api.census.gov/data/key_signup.html) and [data.census.gov portal](https://data.census.gov/) were reviewed. The data portal did not expose selected table values through this review interface. Additional official discovery pages checked include [Caltrans traffic volumes](https://dot.ca.gov/programs/traffic-operations/census/traffic-volumes), [California DOF demographics/projections](https://dof.ca.gov/forecasting/demographics/), [LADBS online services](https://www.ladbsservices2.lacity.org/OnlineServices/), [California DOI wildfire resources](https://www.insurance.ca.gov/01-consumers/200-wrr/), [CGS seismic hazards](https://www.conservation.ca.gov/cgs/shzp), [CAL FIRE incidents](https://www.fire.ca.gov/incidents/), [FTB real-estate withholding](https://www.ftb.ca.gov/pay/withholding/real-estate-withholding.html), [LA County Assessor](https://assessor.lacounty.gov/), [LA County Treasurer and Tax Collector](https://ttc.lacounty.gov/), [California BREA](https://www.brea.ca.gov/), and [IRS Publication 551](https://www.irs.gov/publications/p551). BEA and BOE are discovery links only; no metro GDP value or Proposition 13 computation is asserted from them.
+
+### Checks
+
+- `python3 build.py`: 18 root pages regenerated; repeated hashes matched for checked key pages.
+- `python3 scripts/check_site.py`: **PASSED**.
+- `python3 tools/validate_site.py`: **PASSED** for `/workspace/` — 13 files, 236 internal links, 523 external links, 321 rows; every row has an official source link, unverified values are blank, and no personal-information patterns were detected.
+- Root dataset: 126 findings (53 verified, 9 derived, 4 flagged, 60 unverified); no unverified row contains a value. Five source cells identify private-only records rather than a public source.
+- Existing BLS, SEC, IRS/FTB, FEMA and USGS values remain under prior session source logs; this session does not claim to have freshly re-fetched every such value.
+
+### PR / deployment record
+
+PR #12 is being updated on its existing head branch after the main-branch integration. Pages deployment for this final correction is pending.
