@@ -866,7 +866,7 @@
       "geo": "CBSA 31080",
       "status": "verified",
       "source": "S06",
-      "note": "Local labour-market trough of this cycle. Useful as a stress-case anchor."
+      "note": "Re-verified 2026-11-26 against BLS series LAUMT063108000000003: 6.1% in July 2024 and August 2024, the highest monthly value in the January 2024-October 2026 window returned by the BLS v1 API. Local labour-market trough of this cycle. Useful as a stress-case anchor."
     },
     {
       "id": "EC-06",

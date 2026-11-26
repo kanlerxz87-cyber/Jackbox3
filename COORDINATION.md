@@ -504,3 +504,42 @@ Rebased cleanly onto `origin/main` (`4fc1496`, preserving 100% of PRs #1–#19 a
 
 
 
+
+---
+
+## Session `60fa27c2` — reconciliation with `main` (2026-11-26, final)
+
+Branch `arena/60fa27c2-jackbox3`; merges `origin/main` through PR #23 (`b2c8265`). This session
+audited `f204b7c` in parallel with six other sessions (`0e787678`, `4a251c0f`, `7c607b54`,
+`57054140`/`641e4e68`, `19cf2e41`, `b544c65d`), whose combined work constitutes the
+official-source-only, 2026-updated audit now on `main`.
+
+**Conflict resolution (logged per protocol).** PR #20 conflicted twice. Resolution both times:
+all shared files (`data/findings.json`, `build.py`, every generated page) taken from `main`;
+this session's dashboard-callout edit dropped (identical to `641e4e68`'s generator change,
+PR #19); this session's `EC-16`/`TX-11`/`TX-12`/`S28–S30` edits dropped as superseded by `main`
+(TX-11/TX-12 already verified there with richer sourcing — BOE Pub 29 + Pub 306 1.181% LA
+rate, FTB 2026 Form 593 3⅓%/12.3% election; BEA 26-08 county figures as `EC-22`); this
+session's `H-08` s1d observation independently corroborated by `19cf2e41` (`s1d = 0.785 g`,
+`sd1`/`sm1`/`sdc1` still null — main's note retained). Retained from this session: the `EC-05`
+verification-window note (6.1% in July and August 2024, highest monthly value in the
+Jan 2024–Oct 2026 BLS `LAUMT063108000000003` window; corroborates the `EC-04` 2025
+11-month-average flag). Nothing from any session was discarded.
+
+**Verification performed live 2026-11-26:** Census geocoder (tract 06037207400), Census/BLS/
+USGS/FEMA/CAL FIRE/SEC EDGAR/IRS/FTB/Fed Beige Book re-queries — all reproduced `main`'s
+values exactly (FY2025 revenues $1,465,314k; net loss $80,719k; adjusted EBITDA $270,931k;
+Q3 FY2026 SSS −1.1%, 2,115 restaurants; LA MSA unemployment Sep 2026p 4.4; LA nonfarm
+Oct 2026p 6,371.5k; FEMA NRI Very High 97.92; flood Zone X; TY2026 LTCG $49,450/$545,500;
+CA 2025 rate schedules 9.3% @ $72,724 single).
+
+**Checks on merged tree:** `python3 build.py` + `tools/build_site.py` regenerate cleanly;
+`python3 scripts/check_site.py` → PASSED; `python3 tools/validate_site.py` → OK.
+
+| Task | Description | Status | Owner | Files touched |
+|---|---|---|---|---|
+| T-30 | Board registration + claim | done | `60fa27c2` | `COORDINATION.md` |
+| T-31 | Live re-verification against official sources | done — corroborates `main`; see note | `60fa27c2` | none retained |
+| T-32 | Recover unverified public values | superseded by `main` (EC-18 ↔ EC-22; TX-11/TX-12 richer on `main`) | `60fa27c2` | none retained |
+| T-33 | Correct published values that fail re-verification | done — no value on `main` failed; `EC-05` note retained | `60fa27c2` | `data/findings.json` |
+| T-34 | Integration: rebuild, checks, PR → merge → confirm Pages deploy | in progress | `60fa27c2` | this branch |

@@ -794,6 +794,17 @@ for i, r in enumerate(VERIFIED_ROWS, 1):
 lines += ["", "## Unverified / blank values", "", "Values that could not be confirmed from an official source are left blank in the site tables, marked `Unverified`, and listed on `pages/flagged.html` with their official source links. Count: " + str(unverified_count_final) + ".", "",
           "## Irregularities", "", "IR-01 through IR-10 are published on `pages/flagged.html` and logged in `COORDINATION.md`.", "",
           "## Site checks", "", "Run `python3 tools/validate_site.py` — checks internal links, official source links on every table row, blank values on unverified rows, and the absence of personal-information patterns.", ""]
+# Preserve any additive, session-maintained addenda (blocks separated by a `---` rule, e.g. independent spot-check logs)
+# from an existing VERIFICATION.md. The template above owns only its generated sections.
+_prev_verification = ROOT / "VERIFICATION.md"
+_addendum = ""
+if _prev_verification.exists():
+    _prev_text = _prev_verification.read_text(encoding="utf-8")
+    _i = _prev_text.find("\n---\n")
+    if _i != -1:
+        _addendum = _prev_text[_i:].lstrip("\n")
+if _addendum:
+    lines += ["", _addendum.rstrip("\n")]
 write("VERIFICATION.md", "\n".join(lines) + "\n")
 
 # Machine-readable verified observations
