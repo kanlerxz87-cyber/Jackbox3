@@ -56,7 +56,7 @@ reserves</strong> rather than about sell-versus-renew. Close the information gat
 is survivable without a forced sale, and the sell-or-renew question becomes a genuine choice instead of a response to pressure.</p>
 
 <h2>Delivery risks in this analysis itself</h2>
-<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>Risk</th><th scope='col'>Effect on the conclusions</th><th scope='col'>Mitigation</th></tr></thead><tbody><tr><td>The reference point is not the parcel</td><td>Every spatial figure could shift once the real address is used</td><td>Re-run the three services at the parcel; all are one-query operations</td></tr><tr><td>ACS figures came through a mirror, not api.census.gov</td><td>Some values could differ slightly from the primary release</td><td>Cross-check on data.census.gov; see the flagged page</td></tr><tr><td>Several rule sets are excluded from the tax module</td><td>After-tax numbers understate tax on very large gains</td><td>CPA review before any commitment</td></tr><tr><td>No market value, cap rate or rent exists in this repository</td><td>No valuation conclusion is possible</td><td>GATE-02, GATE-05</td></tr></tbody></table></div>
+<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>Risk</th><th scope='col'>Effect on the conclusions</th><th scope='col'>Mitigation</th></tr></thead><tbody><tr><td>The reference point is not the parcel</td><td>Every spatial figure could shift once the real address is used</td><td>Re-run the three services at the parcel; all are one-query operations</td></tr><tr><td>ACS figures came through a mirror, not api.census.gov</td><td>Some values could differ slightly from the primary release</td><td>Cross-check on data.census.gov; see the flagged page</td></tr><tr><td>Several rule sets are excluded from the tax module</td><td>The federal and California figures are computed, but AMT, property-tax reassessment and Section 199A are not, so the number is a floor on tax rather than a total</td><td>CPA review before any commitment</td></tr><tr><td>No market value, cap rate or rent exists in this repository</td><td>No valuation conclusion is possible</td><td>GATE-02, GATE-05</td></tr></tbody></table></div>
 
 <h2>Suggested improvements</h2>
 <ul class="suggest">
@@ -72,7 +72,7 @@ is survivable without a forced sale, and the sell-or-renew question becomes a ge
   <div class="wrap">
     <p><strong>Privacy.</strong> This site publishes only aggregate, non-identifying findings. No owner name, tenant contact, lease document, parcel identifier, loan figure or financial record appears here. Those belong in the owner's access-controlled internal workspace with authorised advisers.</p>
     <p><strong>Nature of this site.</strong> It is a research and decision-gate register. It is not an appraisal, a tax opinion, a legal opinion, or investment advice. A blank means "not verified", not "zero".</p>
-    <p class="foot-meta">Built 2026-11-25 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
+    <p class="foot-meta">Built 2026-11-26 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
   </div>
 </footer>
 </body>

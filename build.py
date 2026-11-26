@@ -26,7 +26,7 @@ from collections import OrderedDict
 ROOT = pathlib.Path(__file__).resolve().parent
 DATA = ROOT / "data"
 
-BUILT = "2026-11-25"
+BUILT = "2026-11-26"
 
 STATUS_LABEL = {
     "verified": "Verified",
@@ -326,6 +326,14 @@ def build(findings, rules):
 </div>
 
 <div class="callout callout-privacy">
+  <h3>Independent source-verified audit workspace</h3>
+  <p>A second, independently verified decision workspace was contributed by session <code>dd713c44</code>. It keeps the same
+  privacy rules, adds a line-by-line <code>VERIFICATION.md</code>, an official <code>SOURCES.md</code> register, a
+  browser-only after-tax calculator and its own Flagged for Review and Suggestions pages. It is preserved intact under
+  <a href="workspace/index.html"><code>/workspace/</code></a> so neither session's work is discarded.</p>
+</div>
+
+<div class="callout callout-privacy">
   <h3>Privacy model, in one paragraph</h3>
   <p>Personal information is the highest-priority constraint here and it is handled by <em>non-collection</em>, not by
   redaction. This project never researched the owner, the franchisee, the landlord entity, the guarantors, the loan, or the
@@ -376,8 +384,8 @@ def build(findings, rules):
          "<code>H-05, H-07, H-09, H-10</code>", "Insurance adequacy review; do not assume a sale will be possible after an event at any price."],
         ["7", "<strong>Black swan: tenant insolvency</strong>", "A leveraged, loss-making parent with a shrinking unit base is a real restructuring candidate.",
          "<code>TE-13, TE-14, TE-16</code>", "Guarantee and franchisee financials; security deposit; a credit review."],
-        ["8", "<strong>Regulatory and tax change</strong>", "Property-tax reassessment on sale and the mental-health surcharge both affect net proceeds, and both are unverified here.",
-         "<code>TX-07, TX-11</code>", "Confirm with a CPA and a property-tax consultant before setting a reserve price."],
+        ["8", "<strong>Regulatory and tax change</strong>", "Property-tax reassessment on sale is unverified and affects net proceeds. The 1% California surcharge above $1,000,000 is verified and applied, so a large gain is modelled as heavily taxed.",
+         "<code>TX-07, TX-11</code>", "Confirm the reassessment with a property-tax consultant, and have a CPA check the after-tax figure, before setting a reserve price."],
     ])
 
     exec_body = """
@@ -946,6 +954,15 @@ California.</strong> The gain is added to ordinary income and taxed at the ordin
 schedules are encoded in <code>data/rules.json</code> and used by the calculator.</p>
 
 <h2>What this module deliberately does not do</h2>
+<div class="callout callout-key">
+  <h3>Rules it applies, including the one that was hard to verify</h3>
+  <ul>
+    <li><strong>California Behavioral Health Services Tax</strong> &mdash; verified from the FTB instructions (line 62) and <em>applied</em>: 1% of
+    taxable income above $1,000,000. <code>TX-07</code></li>
+    <li><strong>Unrecaptured section 1250 gain</strong> &mdash; taxed at the lesser of the ordinary marginal rate and 25%, because the
+    IRS describes 25% as a maximum rather than a flat rate. <code>TX-03</code></li>
+  </ul>
+</div>
 <div class="callout callout-warn">
   <h3>Excluded rules &mdash; and the direction of the error</h3>
   <ul>
@@ -974,7 +991,8 @@ only. They are labelled as invented and must not be read as an estimate of this 
 
 <h2>Suggested improvements</h2>
 <ul class="suggest">
-  <li><strong>Verify and add the mental-health surcharge</strong> &mdash; the single largest known omission in the after-tax number.</li>
+  <li><strong>Have a CPA confirm the applied surcharge</strong> &mdash; the 1% California tax above $1,000,000 is verified against the FTB
+  instructions and applied in the calculator; only the owner-specific inputs remain unverified.</li>
   <li><strong>Add a side-by-side installment-sale scenario</strong>, since spreading gain across years can move it into lower brackets
   and IRS Publication 537 confirms the method is available.</li>
   <li><strong>Add an exchange-versus-sale comparison</strong> once a replacement property is identified, remembering that an exchange
@@ -1009,8 +1027,8 @@ only. They are labelled as invented and must not be read as an estimate of this 
              "Form 540 instructions, line 62", source_link("S24", smap)],
             ["Alternative minimum tax threshold", "$92,749 single or head of household; $123,667 joint; $61,830 separate",
              "Form 540 instructions, line 61", source_link("S24", smap)],
-            ["Credit limitation thresholds", "Credits are limited above $347,808 single or head of household; $463,745 joint",
-             "Form 540 instructions, Box C", source_link("S24", smap)],
+            ["Exemption-credit limitation (AGI)", "Exemption credits are reduced above $252,203 single or married filing separately; $504,411 joint; $378,310 head of household",
+             "Form 540 instructions, line 32, AGI Limitation Worksheet", source_link("S24", smap)],
         ]),
         WORKED=table(["Step", "Basis of the figure", "Value"], [
             ["Contract price", "<span class='badge badge-assumption'>invented</span>", "$2,000,000"],
@@ -1422,7 +1440,7 @@ is survivable without a forced sale, and the sell-or-renew question becomes a ge
              "Re-run the three services at the parcel; all are one-query operations"],
             ["ACS figures came through a mirror, not api.census.gov", "Some values could differ slightly from the primary release",
              "Cross-check on data.census.gov; see the flagged page"],
-            ["Several rule sets are excluded from the tax module", "After-tax numbers understate tax on very large gains",
+            ["Several rule sets are excluded from the tax module", "The federal and California figures are computed, but AMT, property-tax reassessment and Section 199A are not, so the number is a floor on tax rather than a total",
              "CPA review before any commitment"],
             ["No market value, cap rate or rent exists in this repository", "No valuation conclusion is possible", "GATE-02, GATE-05"],
         ]),
@@ -1446,9 +1464,9 @@ is survivable without a forced sale, and the sell-or-renew question becomes a ge
         ("S-04", "Obtain a Census API key and pull a genuine multi-year tract series", "Medium", "Very low",
          "Without it, population and income trend cannot be established and every tract figure is a single five-year blend.",
          "Request a key from api.census.gov, then re-pull B19013 and B01003 by year.", "Demographics"),
-        ("S-05", "Verify and add the California mental-health surcharge to the tax module", "High", "Low",
-         "It is the largest known omission in the after-tax number, and it only bites on large gains &mdash; exactly the case where the decision is close.",
-         "Retrieve the FTB page or a CPA's confirmation, then add the bracket to data/rules.json.", "After-tax module"),
+        ("S-05", "Close the property-tax reassessment gap in the after-tax module", "High", "Medium",
+         "It is now the largest remaining omission: a sale resets the assessed base for the buyer, which caps what a buyer can pay, and it is not modelled anywhere.",
+         "Get the Assessor's assessed value and the current tax bill from the owner, then have a property-tax consultant quantify the reassessment a buyer would face before setting a reserve price.", "After-tax module"),
         ("S-06", "Replace the single tract with a drive-time catchment of three to five tracts", "Medium", "Medium",
          "One tract with a &plusmn;236-household sample is carrying too much weight in the trade-area story.",
          "Define the catchment from the parcel with a drive-time analysis and weight the tracts by population.", "W-01 Trade area"),
@@ -1552,7 +1570,7 @@ estimate of analyst and adviser time. Select the ones you want to pursue, then t
 <h2>What would close each of these</h2>
 <ul class="suggest">
   <li><strong>A Census API key</strong> closes the ACS-mirror concern and unlocks the multi-year tract series.</li>
-  <li><strong>A CPA</strong> closes the tax-rule exclusions and confirms the surcharge treatment.</li>
+  <li><strong>A CPA</strong> closes the remaining tax-rule exclusions, including AMT and the property-tax reassessment on sale.</li>
   <li><strong>The parcel address</strong> closes every spatial caveat in one pass.</li>
   <li><strong>The four owner documents</strong> close the value, basis, loan and lease gaps.</li>
   <li><strong>A broker and an engineer</strong> close the rent, cap-rate and structural gaps.</li>
@@ -1573,8 +1591,8 @@ estimate of analyst and adviser time. Select the ones you want to pursue, then t
          "A positive control at Griffith Park returned \"Very High\", proving the query works. The empty result is reported as indirect rather than as a clearance (<code>H-03</code>, <code>H-04</code>)."],
         ["7", "The NCES school-district endpoint ignored the county filter and returned Alameda County districts with a statewide count.",
          "The count was discarded and recorded as unverified (<code>SC-02</code>)."],
-        ["8", "The California Franchise Tax Board mental-health surcharge page could not be retrieved.",
-         "The surcharge is excluded from the calculator rather than assumed, and the direction of the resulting error is stated (<code>TX-07</code>)."],
+        ["8", "The California Franchise Tax Board 2025 Form 540 instructions did not load on the first two attempts.",
+         "Retrieved on a later attempt. The 1% Behavioral Health Services Tax above $1,000,000 (line 62), the standard deduction chart (line 18) and the AMT thresholds (line 61) are all read from it, so the surcharge is <em>applied</em>, not excluded (<code>TX-07</code>, <code>TX-15</code>, <code>TX-16</code>)."],
         ["9", "The Jack in the Box DEF 14A accession was filed 2025-12-30 but covers the fiscal year ended 2025-09-28, so filing dates and fiscal-year labels do not line up intuitively.",
          "The covered fiscal year is stated explicitly on every affected row."],
         ["10", "<code>data.sec.gov</code> XBRL <code>Revenues</code> returns restated values for the same period across different accessions.",

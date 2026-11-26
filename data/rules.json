@@ -2,8 +2,8 @@
   "meta": {
     "title": "Verified after-tax rule set used by the private calculator",
     "purpose": "Encodes ONLY rules that were read from an official IRS or California Franchise Tax Board publication in this session. Anything not verified is absent, and the calculator refuses to guess.",
-    "compiled": "2026-11-25",
-    "verification_note": "Every bracket below is traceable to an S-source in data/findings.json. If a rule is not in this file, the calculator does not apply it and the UI says so. Updated in the same session to add the verified California standard deduction and the Behavioral Health Services Tax, and to correct the section 1250 treatment from a flat 25% rate to a 25% ceiling."
+    "compiled": "2026-11-26",
+    "verification_note": "Every bracket below is traceable to an S-source in data/findings.json. If a rule is not in this file, the calculator does not apply it and the UI says so. Re-verified line by line on 2026-11-26 against Rev. Proc. 2025-32, IRS Topics 409/559, Pubs 537/544 and the FTB 2025 Form 540 schedules and instructions. A superseded duplicate block that still described the 1% surcharge as unverified was removed, since the same tax is verified and applied under behavioral_health_services_tax."
   },
   "federal": {
     "source_ordinary": "S20",
@@ -137,7 +137,7 @@
       ]
     },
     "long_term_capital_gain_2026": {
-      "note": "Rev. Proc. 2025-32 \u00a74.03. The 0% band and the 15% band ceilings are given; above the 15% ceiling the rate is 20%.",
+      "note": "Rev. Proc. 2025-32 §4.03. The 0% band and the 15% band ceilings are given; above the 15% ceiling the rate is 20%.",
       "single": {
         "zero_ceiling": 49450,
         "fifteen_ceiling": 545500
@@ -203,7 +203,7 @@
   },
   "california": {
     "source": "S23",
-    "note": "2025 California Tax Rate Schedules, Form 540. These are the latest schedules published by the FTB at the time of this build. There is NO preferential long-term capital gains rate in California \u2014 gain is taxed as ordinary income.",
+    "note": "2025 California Tax Rate Schedules, Form 540. These are the latest schedules published by the FTB at the time of this build. There is NO preferential long-term capital gains rate in California — gain is taxed as ordinary income.",
     "capital_gains_treated_as_ordinary": true,
     "brackets_2025": {
       "single": [
@@ -359,11 +359,6 @@
         ]
       ]
     },
-    "mental_health_services_tax": {
-      "status": "unverified",
-      "applied": false,
-      "reason": "The 1% surcharge above $1,000,000 could not be confirmed from an official FTB page in this session. It is therefore NOT applied by the calculator. On very large gains this will UNDERSTATE California tax. Confirm with a CPA before relying on the after-tax figure."
-    },
     "excluded": [
       {
         "item": "Property tax reassessment on sale (base-year value reset)",
@@ -409,11 +404,12 @@
       "reason_not_applied": "The AMT computation requires preference items (Schedule P (540)) that depend on the owner's full return. The threshold is shown so the reader knows when to ask a CPA."
     },
     "credit_limitation_thresholds_2025": {
-      "note": "FTB 2025 Form 540 instructions, Box C. Above these Form 540 line 17 amounts, credits are limited by tentative minimum tax.",
-      "single_or_head_of_household": 347808,
-      "married_joint": 463745,
-      "married_separate": 231868,
-      "source": "S24"
+      "note": "FTB 2025 Form 540 instructions, line 32 'AGI Limitation Worksheet'. If federal AGI (Form 540 line 13) exceeds these amounts for the filing status, exemption credits are reduced by $6 for each $2,500 of excess.",
+      "single_or_married_separate": 252203,
+      "married_joint_or_qualifying_surviving_spouse": 504411,
+      "head_of_household": 378310,
+      "source": "S24",
+      "corrected": "2026-11-26 — the previous record carried 347,808 / 463,745 / 231,868, which do not appear on the published FTB page. The values above are transcribed from the line 32 table."
     }
   },
   "disclaimer": "This calculator applies published brackets to numbers YOU supply. It is arithmetic, not tax advice. It deliberately omits rules that could not be verified, and it tells you which ones. Every input you type stays in this browser tab: the page has no network calls, no analytics and no storage. Nothing you enter is transmitted, logged or saved."
