@@ -113,11 +113,19 @@
     },
     {
       "id": "S13",
-      "name": "CAL FIRE Fire Hazard Severity Zones \u2014 Local Responsibility Areas layer (MapServer layer 1)",
+      "name": "CAL FIRE Fire Hazard Severity Zones \u2014 Local Responsibility Areas positive-control query (Griffith Park)",
       "publisher": "California Department of Forestry and Fire Protection, via services.gis.ca.gov",
       "url": "https://services.gis.ca.gov/arcgis/rest/services/Environment/Fire_Severity_Zones/MapServer/1/query?where=1%3D1&geometry=-118.3400,34.1180&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=SRA,INCORP,HAZ_CODE,HAZ_CLASS&returnGeometry=false&f=json",
       "tier": "Primary \u2014 official state GIS service",
       "retrieved": "2026-11-25"
+    },
+    {
+      "id": "S28",
+      "name": "CAL FIRE Fire Hazard Severity Zones \u2014 Local Responsibility Areas reference-point query (response flagged; not independently retrievable during follow-up)",
+      "publisher": "California Department of Forestry and Fire Protection, via services.gis.ca.gov",
+      "url": "https://services.gis.ca.gov/arcgis/rest/services/Environment/Fire_Severity_Zones/MapServer/1/query?where=1%3D1&geometry=-118.2428,34.0537&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=SRA,INCORP,HAZ_CODE,HAZ_CLASS&returnGeometry=false&f=json",
+      "tier": "Primary \u2014 official state GIS service",
+      "retrieved": "Not retrieved \u2014 follow-up fetch failed 2026-11-26"
     },
     {
       "id": "S14",
@@ -1018,7 +1026,7 @@
       "period": "LRA layer as published",
       "geo": "34.0537, -118.2428",
       "status": "flagged",
-      "source": "S13",
+      "source": "S28",
       "note": "An empty result is NOT the same as a confirmed 'not in a zone'. It means the published LRA Very High layer has no polygon covering this point. Read together with H-04."
     },
     {
