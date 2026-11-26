@@ -543,3 +543,21 @@ CA 2025 rate schedules 9.3% @ $72,724 single).
 | T-32 | Recover unverified public values | superseded by `main` (EC-18 ↔ EC-22; TX-11/TX-12 richer on `main`) | `60fa27c2` | none retained |
 | T-33 | Correct published values that fail re-verification | done — no value on `main` failed; `EC-05` note retained | `60fa27c2` | `data/findings.json` |
 | T-34 | Integration: rebuild, checks, PR → merge → confirm Pages deploy | in progress | `60fa27c2` | this branch |
+
+---
+
+## Session `60fa27c2` — T-34 complete: PR #20 merged, Pages confirmed (2026-11-26)
+
+| Field | Value |
+| --- | --- |
+| Pull request | [#20](https://github.com/kanlerxz87-cyber/Jackbox3/pull/20) — "Third-pass audit: live re-verification, three recovered findings, dashboard callout fix" |
+| Base / head | `main` ← `arena/60fa27c2-jackbox3` |
+| Conflicts | Two: the base moved from `f204b7c` to `b2c8265` mid-audit (PRs #9–#23). Shared files taken from `main` both times; this session's superseded first-pass edits (EC-16/TX-11/TX-12/`S28–S30`) and the now-duplicate dashboard-callout edit were dropped without discarding any session's work |
+| Merge method | merge commit via `gh pr merge 20 --merge` |
+| Merge result | **MERGED** 2026-11-26T14:11:34Z; merge commit `71cfd0b2a6e917a9904fe82cf1959748a45aef00` |
+| Pages build | **built** 2026-11-26T14:11:36Z → 14:11:57Z, commit `71cfd0b`, error: `null`; workflow run `45836513276` → `success` (25s) |
+| Live check | `https://kanlerxz87-cyber.github.io/Jackbox3/` fetched over the public internet: dashboard renders 144 recorded findings / 83 verified or derived / 4 flagged / 57 unverified (current `main` figures); `/workspace/` cross-link present; privacy paragraph intact; no sell-vs-renew winner stated |
+| Final net diff vs `main` | `data/findings.json` (`EC-05` verification-window note only), `tools/build_site.py` (`VERIFICATION.md` regeneration now preserves hand-maintained addenda separated by `---` — verified byte-identical regeneration after the fix), `COORDINATION.md` (this log) |
+| Checks on merged tree | `python3 build.py` + `tools/build_site.py` regenerate cleanly; `python3 scripts/check_site.py` → PASSED; `python3 tools/validate_site.py` → OK |
+
+Task board update: **T-34 done.** No sell/renew winner is stated anywhere; flagged and unverified items remain published on `flagged-for-review.html`, not resolved by assertion; no personal information was added by this session.
