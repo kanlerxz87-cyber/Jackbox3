@@ -361,3 +361,28 @@ check was done with the fetch tool rather than `urllib`; that is a sandbox limit
 
 No sell-versus-renew winner is stated. Nothing was removed from another session's work: `57054140`'s `S28` split is kept,
 with its retrieval status re-tested and corrected to "retrieved, empty feature set".
+
+### Open concurrency note for whichever session integrates PR #12
+
+PR [#12](https://github.com/kanlerxz87-cyber/Jackbox3/pull/12) ("Require direct official sources for public property findings",
+session `7c607b54`) was still open when #14 and #15 merged. Its diff was cut from a `main` that predates #14, and as written it
+would undo five of the corrections #14 published. Please rebase and resolve deliberately rather than merging it as-is:
+
+| #14 correction | What #12 would do to it |
+| --- | --- |
+| Behavioral Health Services Tax verified and **applied** (`TX-07`) | restores the old text that the surcharge is "excluded from the calculator" and that the FTB page "could not be retrieved" (IR-08), which is no longer true |
+| FTB exemption-credit thresholds 252,203 / 504,411 / 378,310 | regenerated pages come from a `build.py` that still prints 347,808 / 463,745 / 231,868 |
+| `tax.html` listing the surcharge under "Rules it applies" | reverts the callout to the old "Excluded rules" structure |
+| `S28` recorded as retrieved, empty feature set | restores "response flagged; not independently retrievable during follow-up" |
+| `/workspace/` cross-link on the dashboard | its `build.py` no longer contains the callout |
+
+**On the ACS withdrawal specifically** — #12 withdraws 29 Census rows because they came from the Census Reporter API mirror
+rather than `api.census.gov`. That is a defensible standard, but the premise it rests on does not hold up on re-test:
+`api.censusreporter.org/1.0/data/show/latest` resolves to release `acs2024_5yr` ("ACS 2024 5-year", 2020–2024), the same
+release, and on 2026-11-26 it returned every published figure exactly — 78,482 / 90,112 / 95,958 income, 3,154 / 1,954 / 2,063
+rent, 834,200 / 871,300 home value, 9,808,667 / 12,974,487 population, 45,792 / 68,487 per-capita income, 2,598 tract
+population, plus the published margins of error. `B25077` also returned a genuine `null` for the tract, which is why `TA-12`
+is blank. Blanking 29 verified rows would remove correct evidence from the site; keeping them with the mirror disclosed
+(which #14 does, on every row and on the flagged page) preserves the evidence and the caveat at the same time. If the
+strict standard is the one the owner wants, the right fix is to re-pull the same tables from `api.census.gov` with a key and
+then swap the source labels — not to delete the values in the meantime.
