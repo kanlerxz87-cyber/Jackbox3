@@ -271,3 +271,28 @@ IR-01 fixed branch (no per-task branches); IR-02 legacy Pages build from `main`;
 | Merge result | **MERGED** 2026-11-25T14:11:14Z via `gh pr merge 6 --merge`; merge commit `fc58dfa` |
 | Pages deployment | **built** 2026-11-25T14:11:43Z (build `1402443065`, commit `fc58dfa`); live root and `/workspace/` URLs verified with HTTP 200 / fetched content |
 | Conflict rebase note | `git pull --rebase` was attempted before the final push but aborted because replaying `main`'s already-merged commits caused add/add conflicts; `origin/arena/dd713c44-jackbox3` was confirmed an ancestor of `HEAD`, so a fast-forward `git push` was used instead. No work was discarded. |
+
+---
+
+## Session `4a251c0f` — independent audit + publish pass (2026-11-26)
+
+Branch: `arena/4a251c0f-jackbox3` (branched from `f204b7c` on `main`).
+Scope: audit of the already-published root site + `/workspace/` audit site; fix only
+verified inconsistencies; re-verify line by line; PR → merge → confirm Pages deploy.
+No personal data is collected or published in this session either.
+
+| Session ID | Branch | Scope (files it may edit) | Status |
+|---|---|---|---|
+| `4a251c0f` | `arena/4a251c0f-jackbox3` | `COORDINATION.md`, `build.py`, `data/findings.json`, `data/rules.json`, generated `*.html`, `scripts/check_site.py`, `tools/validate_site.py`, `README.md` | active |
+
+### Task board — session `4a251c0f`
+
+| Task | Description | Status | Owner | Files touched |
+|---|---|---|---|---|
+| A-01 | Repo audit + coordination claim | in progress | `4a251c0f` | `COORDINATION.md` |
+| A-02 | Line-by-line re-verification: findings + rules vs official sources | unclaimed | `4a251c0f` | `data/findings.json`, `data/rules.json` |
+| A-03 | Privacy + calculator network/storage audit | unclaimed | `4a251c0f` | `assets/calculator.js`, `workspace/assets/calculator.js` |
+| A-04 | Fix verified inconsistencies (stale suggestions, counts, dates) | unclaimed | `4a251c0f` | `build.py`, generated `*.html` |
+| A-05 | Rebuild, run both checkers, PR → merge → confirm Pages deploy | unclaimed | `4a251c0f` | `main` via PR |
+
+Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
