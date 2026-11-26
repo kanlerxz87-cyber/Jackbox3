@@ -438,3 +438,10 @@ Rebased cleanly onto `origin/main` (`4fc1496`, preserving 100% of PRs #1–#19 a
 | B-04 | Add rendered HTML verification audit page `workspace/pages/verification.html` and back-link to the root site (`Main Decision Site (root)`) in `/workspace/`'s footer so both workspaces cross-link bidirectionally | done | `b544c65d` | `tools/build_site.py`, `workspace/**`, `SOURCES.md`, `VERIFICATION.md`, `data/verified-observations.json` |
 | B-05 | Add the audited 3-year Franchise Rental Revenues series (`TE-26` `$364,591,000` FY2023, `TE-27` `$375,428,000` FY2024, `TE-28` `$368,643,000` FY2025) from the FY2025 Form 10-K Consolidated Statements of Operations (`S59`, `jack-20250928.htm` F-4) to `data/findings.json` and `tenant-credit.html`, run both validators, open PR → merge → verify GitHub Pages deployment | done | `b544c65d` | `data/findings.json`, `build.py`, `*.html` |
 
+### PR & GitHub Pages deployment record (`b544c65d`)
+
+- **PR:** [#21](https://github.com/kanlerxz87-cyber/Jackbox3/pull/21) (`arena/b544c65d-jackbox3` → `main`) — **MERGED** at `2026-11-26T13:47:29Z`, merge commit `99dc316c99689b39c01993a667d4a0e0e45b50f1`.
+- **GitHub Pages build:** `status: "built"` for commit `99dc316c99689b39c01993a667d4a0e0e45b50f1` at `2026-11-26T13:47:52Z`.
+- **Live deployment verified:** retrieved `https://kanlerxz87-cyber.github.io/Jackbox3/tenant-credit.html` (showing the 3-year Franchise Rental Revenues series `$364.6m / $375.4m / $368.6m`, `S59`), `https://kanlerxz87-cyber.github.io/Jackbox3/workspace/pages/verification.html` (149 verified `.gov` rows), and `https://kanlerxz87-cyber.github.io/Jackbox3/calculator.html` (Schedule D Tax Worksheet + W-02 Hold/Stress calculator). Zero personal names in repository or live HTML; no sell-vs-hold winner declared.
+
+
