@@ -49,10 +49,10 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-20 | Link + integrity check script | done | `47b70455` | `scripts/check_site.py` |
 | T-21 | Integration: merge, re-verify, publish to Pages | done | `47b70455` | `main` |
 | T-22 | Pull request → merge → confirm deploy (PR #1) | done | `47b70455` | `main` |
-| T-23 | Independent re-verification of published findings against official sources (spot audit) | in progress | `19cf2e41` | `data/findings.json`, generated HTML |
-| T-24 | Fix ACS mirror source link drift (`/latest` → pinned `acs2024_5yr`) | in progress | `19cf2e41` | `data/findings.json`, `sources.html` |
-| T-25 | Record USGS ASCE 7-16 s1d partial recovery (2026-11-26 re-fetch) | in progress | `19cf2e41` | `data/findings.json`, `hazards.html` |
-| T-26 | Append independent spot-check log to workspace VERIFICATION.md | in progress | `19cf2e41` | `VERIFICATION.md` |
+| T-23 | Independent re-verification of published findings against official sources (spot audit) | done | `19cf2e41` | `data/findings.json`, generated HTML |
+| T-24 | Fix ACS mirror source link drift (`/latest` → pinned `acs2024_5yr`) | done | `19cf2e41` | `data/findings.json`, `sources.html` |
+| T-25 | Record USGS ASCE 7-16 s1d partial recovery (2026-11-26 re-fetch) | done | `19cf2e41` | `data/findings.json`, `hazards.html` |
+| T-26 | Append independent spot-check log to workspace VERIFICATION.md | done | `19cf2e41` | `VERIFICATION.md` |
 | T-27 | Rebuild, checks, PR, merge, confirm Pages deploy, record | in progress | `19cf2e41` | `main` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
@@ -252,3 +252,25 @@ IR-01 fixed branch (no per-task branches); IR-02 legacy Pages build from `main`;
 | Merge result | **MERGED** 2026-11-25T14:11:14Z via `gh pr merge 6 --merge`; merge commit `fc58dfa` |
 | Pages deployment | **built** 2026-11-25T14:11:43Z (build `1402443065`, commit `fc58dfa`); live root and `/workspace/` URLs verified with HTTP 200 / fetched content |
 | Conflict rebase note | `git pull --rebase` was attempted before the final push but aborted because replaying `main`'s already-merged commits caused add/add conflicts; `origin/arena/dd713c44-jackbox3` was confirmed an ancestor of `HEAD`, so a fast-forward `git push` was used instead. No work was discarded. |
+
+---
+
+## Session `19cf2e41` — independent audit and re-verification pass (2026-11-26)
+
+The user re-issued the master task to this session. Both prior builds (root site, `/workspace/` audit) were already merged and live. Rather than rebuild from scratch and discard that work, this session performed an independent line-level audit: it re-fetched every network source it could reach and checked the published values, derivations and generator against them. All checks and validators pass.
+
+**Re-verified against official sources (2026-11-26, this environment):** ACS 2024 5-year mirror (county / tract / MSA population, income, rent, tenure, poverty, education, vacancy) — all match; BLS LAU/CES/CPI series (LA MSA unemployment 4.4% Sep 2026 prelim, 2025 = 5.3 % 11-month avg excluding October 2025, 2024 = 5.3%, peak 6.1% Jul–Aug 2024; nonfarm 6,371.5k prelim, 2025 avg 6,281.3k, 2024 avg 6,288.0k; US 4.1% Oct 2026; CA 5.0% Oct 2026 prelim; CPI-U 337.511, 2025 vs 2024 +2.63%) — all match; BLS Economy at a Glance page — match; FEMA NFHL (Zone X, DFIRM 06037C) — match; FEMA NRI tract 2074 (Very High composite 97.92; EAL Very High; SOVI Relatively Low; RESL Very Low; pop 2,002; building value $1.88B) — match; CAL FIRE FHSZ (no LRA polygon at reference point; Griffith Park control "Very High") — match; USGS ASCE 7-16 (SDS 1.311 g, PGA 0.843 g, category D) — match; California FTB / IRS figures re-read by the prior session were not re-fetched line by line.
+
+**Arithmetic re-checked:** every `derived` value recomputed from its raw inputs; all match (DM-03 7.27%, DM-05 13.7%, DM-09 36.0%, TA-05 87.1%, TA-09 1.61, TA-15 54.1%, TA-16 6.4%, TA-17 6,540, EC-08 −0.1%, EC-09 1.3%, EC-11 2.63%, EC-13 3.70%, EC-14 3.46%).
+
+**Defects found and fixed:**
+
+1. Root `S02` source link (`/show/latest`) drifted: the alias now serves `acs2024_1yr`, not the cited `acs2024_5yr`. Pinned to `/show/acs2024_5yr` and re-fetched; every cited value reproduces. Without this, every ACS-linked source link on the site would have shown a reviewer different numbers than the site prints.
+2. USGS ASCE 7-16 service changed since the 2026-11-25 build: `s1d` is now returned (0.785 g, model v4.0.x). Root finding `H-08` updated with the dated re-fetch; `sd1`, `sm1`, `sdc1`, `sdc` remain null and remain unverified. No value back-filled; the finding is not reclassified.
+3. Root `build.py` did not reproduce the published `index.html`: the audit-workspace callout had been hand-inserted after generation and was dropped by a rebuild. It is now part of the generator; rebuilds are stable.
+
+**Not verifiable here (unchanged; left blank / flagged as before):** `api.census.gov` (key required), historical ACS vintages (multi-year trend still not asserted), LA County QuickFacts (fetch fails; workspace IR-06 unchanged), BEA MSA GDP (EC-16), BLS local SA unemployment (EC-15), BLS QCEW, parcel-level flood/fire/seismic zone status, appraisal, cap rate, rent comps, comparable sales, property tax, insurance premium, basis, depreciation, mortgage payoff, lease terms, and the short-lease discount. No value was invented for any of these.
+
+**Privacy:** no personal information was researched or published. The site still represents the property only by the anonymous Civic Center reference coordinate.
+
+**Checks:** `python3 build.py` regenerated all pages; `python3 scripts/check_site.py` → PASSED; `python3 tools/validate_site.py` → OK (13 files, 236 internal links, 523 external links, 321 table rows, no personal information).
