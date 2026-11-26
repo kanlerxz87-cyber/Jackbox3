@@ -1411,7 +1411,7 @@
       "geo": "34.05, -118.24",
       "status": "unverified",
       "source": "S10",
-      "note": "The service returned null for these fields for this latitude/longitude and site class, while SDS and SDC were populated. The nulls are reported as-is and have NOT been back-filled."
+      "note": "Re-fetched 2026-11-26 (session 19cf2e41): the service now returns s1d = 0.785 g (s1uh = 0.781, model v4.0.x), which was null at the 2026-11-25 build. sd1, sm1, sdc1 and sdc are still null for this latitude/longitude and site class, while SDS and SDC (short period, \u2018D\u2019) are populated. The nulls are reported as-is and have NOT been back-filled; s1d alone is not a design value."
     },
     {
       "id": "H-09",
