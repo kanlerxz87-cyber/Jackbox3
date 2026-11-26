@@ -1,9 +1,9 @@
 {
   "meta": {
     "title": "Verified after-tax rule set used by the private calculator",
-    "purpose": "Encodes ONLY rules that were read from an official IRS or California Franchise Tax Board publication in this session. Anything not verified is absent, and the calculator refuses to guess.",
-    "compiled": "2026-11-25",
-    "verification_note": "Every bracket below is traceable to an S-source in data/findings.json. If a rule is not in this file, the calculator does not apply it and the UI says so. Updated in the same session to add the verified California standard deduction and the Behavioral Health Services Tax, and to correct the section 1250 treatment from a flat 25% rate to a 25% ceiling."
+    "purpose": "Encodes ONLY rules that were read from an official IRS, California Franchise Tax Board, California BOE, or City of Los Angeles publication. Anything not verified is absent, and the calculator refuses to guess.",
+    "compiled": "2026-11-26",
+    "verification_note": "Every bracket below is traceable to an S-source in data/findings.json. Combines line-by-line re-verification of Rev. Proc. 2025-32, FTB Form 540 Line 32 credit limitation thresholds (252,203 / 504,411 / 378,310), and duplicate MHST block removal (session 4a251c0f) with verified IRS Schedule D Tax Worksheet lines 1-47 stacking (S55), BOE Prop 13 LA County rate (S52), FTB 2026 Form 593 withholding (S38/S57), and post-June 30, 2026 LA City Measure ULA thresholds (S54)."
   },
   "federal": {
     "source_ordinary": "S20",
@@ -11,133 +11,50 @@
     "source_capital_2026": "S20",
     "source_niit": "S19",
     "source_1250": "S18",
+    "source_schedule_d_worksheet": "S55",
     "source_installment": "S21",
     "source_1031": "S21",
     "source_basis": "S22",
     "ordinary_brackets_2026": {
       "single": [
-        [
-          12400,
-          0.1
-        ],
-        [
-          50400,
-          0.12
-        ],
-        [
-          105700,
-          0.22
-        ],
-        [
-          201775,
-          0.24
-        ],
-        [
-          256225,
-          0.32
-        ],
-        [
-          640600,
-          0.35
-        ],
-        [
-          Infinity,
-          0.37
-        ]
+        [12400, 0.1],
+        [50400, 0.12],
+        [105700, 0.22],
+        [201775, 0.24],
+        [256225, 0.32],
+        [640600, 0.35],
+        [Infinity, 0.37]
       ],
       "married_joint": [
-        [
-          24800,
-          0.1
-        ],
-        [
-          100800,
-          0.12
-        ],
-        [
-          211400,
-          0.22
-        ],
-        [
-          403550,
-          0.24
-        ],
-        [
-          512450,
-          0.32
-        ],
-        [
-          768700,
-          0.35
-        ],
-        [
-          Infinity,
-          0.37
-        ]
+        [24800, 0.1],
+        [100800, 0.12],
+        [211400, 0.22],
+        [403550, 0.24],
+        [512450, 0.32],
+        [768700, 0.35],
+        [Infinity, 0.37]
       ],
       "head_of_household": [
-        [
-          17700,
-          0.1
-        ],
-        [
-          67450,
-          0.12
-        ],
-        [
-          105700,
-          0.22
-        ],
-        [
-          201750,
-          0.24
-        ],
-        [
-          256200,
-          0.32
-        ],
-        [
-          640600,
-          0.35
-        ],
-        [
-          Infinity,
-          0.37
-        ]
+        [17700, 0.1],
+        [67450, 0.12],
+        [105700, 0.22],
+        [201750, 0.24],
+        [256200, 0.32],
+        [640600, 0.35],
+        [Infinity, 0.37]
       ],
       "married_separate": [
-        [
-          12400,
-          0.1
-        ],
-        [
-          50400,
-          0.12
-        ],
-        [
-          105700,
-          0.22
-        ],
-        [
-          201775,
-          0.24
-        ],
-        [
-          256225,
-          0.32
-        ],
-        [
-          384350,
-          0.35
-        ],
-        [
-          Infinity,
-          0.37
-        ]
+        [12400, 0.1],
+        [50400, 0.12],
+        [105700, 0.22],
+        [201775, 0.24],
+        [256225, 0.32],
+        [384350, 0.35],
+        [Infinity, 0.37]
       ]
     },
     "long_term_capital_gain_2026": {
-      "note": "Rev. Proc. 2025-32 \u00a74.03. The 0% band and the 15% band ceilings are given; above the 15% ceiling the rate is 20%.",
+      "note": "Rev. Proc. 2025-32 §4.03. The 0% band and the 15% band ceilings are given; above the 15% ceiling the rate is 20%.",
       "single": {
         "zero_ceiling": 49450,
         "fifteen_ceiling": 545500
@@ -156,6 +73,11 @@
       }
     },
     "unrecaptured_section_1250_max_rate": 0.25,
+    "schedule_d_worksheet": {
+      "status": "verified",
+      "source": "S55",
+      "note": "IRS Instructions for Schedule D (Form 1040) Schedule D Tax Worksheet lines 1-47: unrecaptured section 1250 gain enters Line 14 (reducing 0% LTCG room and filling ordinary brackets up to the 24% ceiling on Lines 19-21), while remaining 15%/20% LTCG fills Lines 23-34 and excess section 1250 gain is taxed at 25% on Lines 35-40."
+    },
     "niit": {
       "rate": 0.038,
       "thresholds": {
@@ -174,204 +96,56 @@
     },
     "installment_available": true,
     "like_kind_available": true,
-    "like_kind_note": "Real property only, held for business or investment; defers rather than eliminates gain.",
+    "like_kind_note": "Real property only, held for business or investment; defers rather than eliminates gain. Under Form 6252 / Schedule D instructions, unrecaptured section 1250 gain is recognized before 0%/15%/20% capital gain as principal payments are received.",
     "excluded": [
       {
         "item": "Section 199A qualified business income deduction",
-        "reason": "Not verified against an official publication in this session. Excluding it may overstate tax on ordinary income."
+        "reason": "Depends on individual QBI thresholds and rental safe-harbor eligibility; not verified for this taxpayer."
       },
       {
         "item": "Opportunity Zone deferral and step-up",
-        "reason": "Rules are date-dependent and were not verified here. Not applied."
+        "reason": "Date- and fund-dependent rules; excluded."
       },
       {
-        "item": "Depreciation recapture under section 1250 beyond the 25% unrecaptured ceiling",
-        "reason": "Only the maximum 25% unrecaptured rate was verified (S18). Additional depreciation may be recaptured as ordinary income under other rules that were not verified."
+        "item": "Ordinary section 1245/1250 recapture above straight-line depreciation",
+        "reason": "Only the 25% unrecaptured section 1250 ceiling is modelled; any accelerated depreciation recapture above straight-line or pre-1981 rules requires owner depreciation schedules."
       },
       {
-        "item": "State depreciation conformity adjustments",
-        "reason": "Not verified."
+        "item": "California Alternative Minimum Tax (Schedule P 540)",
+        "reason": "Thresholds are published (TX-16), but computation requires owner preference items."
+      },
+      {
+        "item": "California state depreciation conformity differences and Form 3840 out-of-state 1031 tracking",
+        "reason": "Depends on historical depreciation method and whether any 1031 replacement property sits outside California."
       }
-    ],
-    "depreciation_recapture": {
-      "status": "verified",
-      "rule": "Unrecaptured section 1250 gain is taxed at a MAXIMUM rate of 25%. That 25% is a ceiling, not a flat rate: the gain is added to the taxpayer's other income and taxed at the lesser of the ordinary marginal rate and 25%.",
-      "source": "S18",
-      "implementation": "The calculator takes the recaptured amount, adds it to the taxpayer's other taxable income, and applies min(ordinary marginal rate, 25%) to it.",
-      "limitation": "Depreciation allowed or allowable in years before 1981 or under straight-line methods can recapture at ordinary rates as section 1245/1250 ordinary income, and additional depreciation beyond straight-line can be recaptured as ordinary income above the 25% ceiling. Those rules were not verified here, so the calculator treats the whole recaptured amount under the 25% ceiling and says so."
-    }
+    ]
   },
   "california": {
     "source": "S23",
-    "note": "2025 California Tax Rate Schedules, Form 540. These are the latest schedules published by the FTB at the time of this build. There is NO preferential long-term capital gains rate in California \u2014 gain is taxed as ordinary income.",
+    "note": "2025 California Tax Rate Schedules, Form 540. These are the latest schedules published by the FTB at the time of this build. There is NO preferential long-term capital gains rate in California — gain is taxed as ordinary income.",
     "capital_gains_treated_as_ordinary": true,
     "brackets_2025": {
       "single": [
-        [
-          11079,
-          0.01
-        ],
-        [
-          26264,
-          0.02
-        ],
-        [
-          41452,
-          0.04
-        ],
-        [
-          57542,
-          0.06
-        ],
-        [
-          72724,
-          0.08
-        ],
-        [
-          371479,
-          0.093
-        ],
-        [
-          445771,
-          0.103
-        ],
-        [
-          742953,
-          0.113
-        ],
-        [
-          Infinity,
-          0.123
-        ]
+        [11079, 0.01], [26264, 0.02], [41452, 0.04], [57542, 0.06], [72724, 0.08],
+        [371479, 0.093], [445771, 0.103], [742953, 0.113], [Infinity, 0.123]
       ],
       "married_joint": [
-        [
-          22158,
-          0.01
-        ],
-        [
-          52528,
-          0.02
-        ],
-        [
-          82904,
-          0.04
-        ],
-        [
-          115084,
-          0.06
-        ],
-        [
-          145448,
-          0.08
-        ],
-        [
-          742958,
-          0.093
-        ],
-        [
-          891542,
-          0.103
-        ],
-        [
-          1485906,
-          0.113
-        ],
-        [
-          Infinity,
-          0.123
-        ]
+        [22158, 0.01], [52528, 0.02], [82904, 0.04], [115084, 0.06], [145448, 0.08],
+        [742958, 0.093], [891542, 0.103], [1485906, 0.113], [Infinity, 0.123]
       ],
       "head_of_household": [
-        [
-          22173,
-          0.01
-        ],
-        [
-          52530,
-          0.02
-        ],
-        [
-          67716,
-          0.04
-        ],
-        [
-          83805,
-          0.06
-        ],
-        [
-          98990,
-          0.08
-        ],
-        [
-          505208,
-          0.093
-        ],
-        [
-          606251,
-          0.103
-        ],
-        [
-          1010417,
-          0.113
-        ],
-        [
-          Infinity,
-          0.123
-        ]
+        [22173, 0.01], [52530, 0.02], [67716, 0.04], [83805, 0.06], [98990, 0.08],
+        [505208, 0.093], [606251, 0.103], [1010417, 0.113], [Infinity, 0.123]
       ],
       "married_separate": [
-        [
-          11079,
-          0.01
-        ],
-        [
-          26264,
-          0.02
-        ],
-        [
-          41452,
-          0.04
-        ],
-        [
-          57542,
-          0.06
-        ],
-        [
-          72724,
-          0.08
-        ],
-        [
-          371479,
-          0.093
-        ],
-        [
-          445771,
-          0.103
-        ],
-        [
-          742953,
-          0.113
-        ],
-        [
-          Infinity,
-          0.123
-        ]
+        [11079, 0.01], [26264, 0.02], [41452, 0.04], [57542, 0.06], [72724, 0.08],
+        [371479, 0.093], [445771, 0.103], [742953, 0.113], [Infinity, 0.123]
       ]
-    },
-    "mental_health_services_tax": {
-      "status": "unverified",
-      "applied": false,
-      "reason": "The 1% surcharge above $1,000,000 could not be confirmed from an official FTB page in this session. It is therefore NOT applied by the calculator. On very large gains this will UNDERSTATE California tax. Confirm with a CPA before relying on the after-tax figure."
     },
     "excluded": [
       {
-        "item": "Property tax reassessment on sale (base-year value reset)",
-        "reason": "Assessor sources were unreachable. This is a cost to the buyer and therefore affects achievable price, but it is not modelled."
-      },
-      {
-        "item": "FTB Form 593 withholding at close",
-        "reason": "Not verified. Not modelled."
+        "item": "Parcel-specific property tax reassessment bill on sale (buyer base-year reset)",
+        "reason": "LA County FY2024-25 average rate (1.181%, BOE Pub 306) is verified (TX-11), but actual parcel tax-rate-area surcharges and current tax bill require owner/assessor records; buyer underwriting impact is not auto-subtracted from seller proceeds."
       },
       {
         "item": "Alternative Minimum Tax",
@@ -380,7 +154,7 @@
     ],
     "source_deduction": "S24",
     "standard_deduction_2025": {
-      "note": "FTB 2025 Form 540 instructions, 'California Standard Deduction Chart for Most People' (Line 18).",
+      "note": "FTB 2025 Form 540 instructions, California Standard Deduction Chart for Most People (Line 18).",
       "single": 5706,
       "married_separate": 5706,
       "married_joint": 11412,
@@ -391,9 +165,8 @@
       "applied": true,
       "rate": 0.01,
       "threshold": 1000000,
-      "basis": "Taxable income on Form 540 line 19 in excess of $1,000,000",
-      "source": "S24",
-      "note": "FTB 2025 Form 540 instructions, Line 62. This is the 1% surcharge commonly called the Mental Health Services Tax."
+      "basis": "Taxable income on Form 540 line 19 in excess of $1,000,000 (renamed from Mental Health Services Tax for 2025+).",
+      "source": "S24"
     },
     "alternative_minimum_tax": {
       "status": "verified",
@@ -404,17 +177,43 @@
         "head_of_household": 92749,
         "married_separate": 61830
       },
-      "threshold_basis": "Total income on Form 540 line 19",
+      "threshold_basis": "Total income thresholds triggering California AMT check (Form 540 Line 61).",
       "source": "S24",
-      "reason_not_applied": "The AMT computation requires preference items (Schedule P (540)) that depend on the owner's full return. The threshold is shown so the reader knows when to ask a CPA."
+      "reason_not_applied": "Requires Schedule P (540) preference items from the owner's full return."
     },
     "credit_limitation_thresholds_2025": {
-      "note": "FTB 2025 Form 540 instructions, Box C. Above these Form 540 line 17 amounts, credits are limited by tentative minimum tax.",
-      "single_or_head_of_household": 347808,
-      "married_joint": 463745,
-      "married_separate": 231868,
-      "source": "S24"
+      "note": "FTB 2025 Form 540 instructions, line 32 'AGI Limitation Worksheet'. If federal AGI (Form 540 line 13) exceeds these amounts for the filing status, exemption credits are reduced by $6 for each $2,500 of excess.",
+      "single_or_married_separate": 252203,
+      "married_joint_or_qualifying_surviving_spouse": 504411,
+      "head_of_household": 378310,
+      "source": "S24",
+      "corrected": "2026-11-26 — the previous record carried 347,808 / 463,745 / 231,868, which do not appear on the published FTB page. The values above are transcribed from the line 32 table."
+    },
+    "form_593_withholding_2026": {
+      "status": "verified",
+      "source": "S38, S57",
+      "total_sale_price_rate": 0.0333333333,
+      "alternative_max_tax_rate_individual": 0.123,
+      "corporate_rate": 0.0884,
+      "s_corp_rate": 0.138,
+      "note": "FTB 2026 Form 593 closing withholding (prepayment toward final CA income tax, not an additional tax): 3-1/3% of total sales price or optional gain election at maximum applicable rate; installment buyers withhold on principal portions."
+    },
+    "prop_13_and_transfer_tax": {
+      "status": "verified",
+      "source": "S52, S54",
+      "la_county_avg_property_tax_rate_2024_25": 0.01181,
+      "prop_13_base_rate": 0.01,
+      "prop_13_annual_inflation_cap": 0.02,
+      "la_city_base_transfer_rate": 0.0045,
+      "la_county_transfer_rate": 0.0011,
+      "measure_ula_effective_2026_07_01": {
+        "tier1_threshold": 5400000,
+        "tier1_rate": 0.04,
+        "tier2_threshold": 10900000,
+        "tier2_rate": 0.055,
+        "basis": "Gross consideration (including liens/encumbrances remaining at sale) for City of Los Angeles conveyances closing after June 30, 2026."
+      }
     }
   },
-  "disclaimer": "This calculator applies published brackets to numbers YOU supply. It is arithmetic, not tax advice. It deliberately omits rules that could not be verified, and it tells you which ones. Every input you type stays in this browser tab: the page has no network calls, no analytics and no storage. Nothing you enter is transmitted, logged or saved."
+  "disclaimer": "This calculator applies published brackets to numbers YOU supply. It is arithmetic, not tax advice. It deliberately omits unverified or owner-specific preference rules and tells you which ones. Every input stays in this browser tab: no network calls, no analytics, no storage."
 }

@@ -45,7 +45,7 @@ hand from those schedules.</p></noscript>
 
 <form id="calc" class="calc" autocomplete="off">
   <fieldset>
-    <legend>Filing status</legend>
+    <legend>Filing status &amp; sale structure</legend>
     <label for="status">Filing status
       <select id="status" name="status">
         <option value="single">Single</option>
@@ -54,6 +54,18 @@ hand from those schedules.</p></noscript>
         <option value="head_of_household">Head of household</option>
       </select>
     </label>
+    <label for="structure">Sale structure
+      <select id="structure" name="structure">
+        <option value="outright">Outright taxable sale</option>
+        <option value="installment">Installment sale (illustrative equal principal tranches, Pub. 537)</option>
+        <option value="exchange1031">&sect;1031 like-kind exchange (100% reinvestment deferred)</option>
+      </select>
+    </label>
+    <div id="installYearsWrap" hidden>
+      <label for="installYears">Installment note term (years, 2&ndash;30)
+        <input type="number" id="installYears" value="5" min="2" max="30" step="1">
+      </label>
+    </div>
   </fieldset>
 
   <fieldset>
@@ -65,11 +77,30 @@ hand from those schedules.</p></noscript>
   <fieldset>
     <legend>The sale</legend>
     <label for="price">Contract sale price <input type="number" id="price" value="0" min="0" step="1000"></label>
-    <label for="costs">Selling costs &mdash; commission, transfer tax, legal <input type="number" id="costs" value="0" min="0" step="1000"></label>
+    <label for="costs">Selling costs (brokerage, legal, title, etc.) <input type="number" id="costs" value="0" min="0" step="1000"></label>
+    <label for="ulaMode">Los Angeles transfer tax &amp; Measure ULA (eff. post-June 30, 2026)
+      <select id="ulaMode" name="ulaMode">
+        <option value="manual">Manual &mdash; transfer taxes already included in Selling costs above</option>
+        <option value="la_city_2026">Add City of LA (0.45%) + County (0.11%) + Measure ULA (4% &gt;$5.4M; 5.5% &ge;$10.9M)</option>
+      </select>
+    </label>
     <label for="payoff">Mortgage pay-off including any penalty <input type="number" id="payoff" value="0" min="0" step="1000"></label>
     <label for="basis">Original cost basis <input type="number" id="basis" value="0" min="0" step="1000"></label>
     <label for="improvements">Capitalised improvements added to basis <input type="number" id="improvements" value="0" min="0" step="1000"></label>
     <label for="depreciation">Depreciation taken or allowable since acquisition <input type="number" id="depreciation" value="0" min="0" step="1000"></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Optional W-02 Hold / renewal &amp; combined-stress comparison <span class="hint">leave at 0 to compute Sell case only</span></legend>
+    <label for="annualRent">Expected annual gross rent on renewal ($/yr) <input type="number" id="annualRent" value="0" min="0" step="1000"></label>
+    <label for="annualCosts">Annual landlord non-reimbursed holding costs ($/yr) <input type="number" id="annualCosts" value="0" min="0" step="500"></label>
+    <label for="holdYears">Renewal / hold horizon (years) <input type="number" id="holdYears" value="0" min="0" max="40" step="1"></label>
+    <label for="discountRate">Discount rate (%, like-for-like across both cases) <input type="number" id="discountRate" value="7.0" min="0" max="30" step="0.25"></label>
+    <label for="terminalValue">Assumed un-taxed terminal property value at horizon end ($) <input type="number" id="terminalValue" value="0" min="0" step="10000"></label>
+    <label for="ordinaryRate">Assumed combined ordinary tax rate on annual net rent (%) <input type="number" id="ordinaryRate" value="35" min="0" max="60" step="1"></label>
+    <label for="downtimeMonths">Combined stress: rent-interruption / vacancy months <input type="number" id="downtimeMonths" value="0" min="0" max="60" step="1"></label>
+    <label for="repairCost">Combined stress: seismic / capital repair reserve ($) <input type="number" id="repairCost" value="0" min="0" step="5000"></label>
+    <label for="exitHaircut">Combined stress: terminal exit liquidity haircut (%) <input type="number" id="exitHaircut" value="0" min="0" max="100" step="1"></label>
   </fieldset>
 
   <p class="calc-actions">
@@ -81,17 +112,19 @@ hand from those schedules.</p></noscript>
 <div id="result" class="calc-result" hidden aria-live="polite"></div>
 
 <h2>Rules this calculator applies</h2>
-<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>Rule</th><th scope='col'>Applied value</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>Federal ordinary brackets</td><td>10 / 12 / 22 / 24 / 32 / 35 / 37% (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>Federal long-term capital gain</td><td>0% up to the zero ceiling, 15% to the fifteen ceiling, 20% above (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>Unrecaptured section 1250 gain</td><td>25% maximum</td><td><a class='src' href='https://www.irs.gov/taxtopics/tc409' rel='noopener noreferrer' target='_blank' title='IRS Topic no. 409 — Capital gains and losses (2025 rates and thresholds)'>S18</a></td></tr><tr><td>Net investment income tax</td><td>3.8% above $200,000 single or $250,000 joint MAGI</td><td><a class='src' href='https://www.irs.gov/individuals/net-investment-income-tax' rel='noopener noreferrer' target='_blank' title='IRS — Net Investment Income Tax'>S19</a></td></tr><tr><td>California income tax</td><td>Ordinary brackets 1% to 12.3% (2025 schedules); gain taxed as ordinary income</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 California Tax Rate Schedules (Form 540)'>S23</a></td></tr><tr><td>Federal standard deduction</td><td>$16,100 single; $32,200 joint (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>California standard deduction</td><td>$5,706 single; $11,412 joint, head of household (2025)</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 Instructions for Form 540'>S24</a></td></tr><tr><td>California Behavioral Health Services Tax</td><td>1% of California taxable income above $1,000,000</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 Instructions for Form 540'>S24</a></td></tr><tr><td>Section 1250 treatment</td><td>Taxed at the lesser of the ordinary marginal rate and the 25% ceiling</td><td><a class='src' href='https://www.irs.gov/taxtopics/tc409' rel='noopener noreferrer' target='_blank' title='IRS Topic no. 409 — Capital gains and losses (2025 rates and thresholds)'>S18</a></td></tr></tbody></table></div>
+<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>Rule</th><th scope='col'>Applied value</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>Federal ordinary brackets</td><td>10 / 12 / 22 / 24 / 32 / 35 / 37% (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>Federal long-term capital gain</td><td>0% up to the zero ceiling, 15% to the fifteen ceiling, 20% above (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>Unrecaptured section 1250 &amp; Schedule D stacking</td><td>Exact IRS Schedule D Tax Worksheet lines 1&ndash;47 (25% ceiling)</td><td><a class='src' href='https://www.irs.gov/taxtopics/tc409' rel='noopener noreferrer' target='_blank' title='IRS Topic no. 409 — Capital gains and losses (2025 rates and thresholds)'>S18</a> <a class='src' href='https://www.irs.gov/instructions/i1040sd' rel='noopener noreferrer' target='_blank' title='IRS — Instructions for Schedule D (Form 1040) Schedule D Tax Worksheet'>S55</a></td></tr><tr><td>Net investment income tax</td><td>3.8% incremental above $200,000 single / $250,000 joint MAGI</td><td><a class='src' href='https://www.irs.gov/individuals/net-investment-income-tax' rel='noopener noreferrer' target='_blank' title='IRS — Net Investment Income Tax'>S19</a></td></tr><tr><td>California income tax</td><td>Ordinary brackets 1% to 12.3% (2025 schedules); incremental gain taxed as ordinary income</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 California Tax Rate Schedules (Form 540)'>S23</a></td></tr><tr><td>Federal standard deduction</td><td>$16,100 single; $32,200 joint; $24,150 HoH (2026)</td><td><a class='src' href='https://www.irs.gov/pub/irs-drop/rp-25-32.pdf' rel='noopener noreferrer' target='_blank' title='IRS Rev. Proc. 2025-32 — 2026 inflation-adjusted tax items (rate tables §4.01, maximum capital gains rate §4.03)'>S20</a></td></tr><tr><td>California standard deduction</td><td>$5,706 single; $11,412 joint / HoH (2025)</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 Instructions for Form 540'>S24</a></td></tr><tr><td>California Behavioral Health Services Tax</td><td>Incremental 1% of California taxable income above $1,000,000</td><td><a class='src' href='https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html' rel='noopener noreferrer' target='_blank' title='California Franchise Tax Board — 2025 Instructions for Form 540'>S24</a></td></tr><tr><td>City of LA Transfer Tax &amp; Measure ULA (optional)</td><td>0.56% City+County; +4.0% (&gt;$5.4M) or +5.5% (&ge;$10.9M) eff. post-June 30, 2026</td><td><a class='src' href='https://finance.lacity.gov/faq/measure-ula' rel='noopener noreferrer' target='_blank' title='City of Los Angeles Office of Finance — Real Property Transfer Tax &amp; Measure ULA FAQ (eff. post-June 30, 2026)'>S54</a></td></tr><tr><td>Installment sale &amp; &sect;1031 deferral</td><td>Pub. 537 equal-principal tranches (&sect;1250 first) or 100% &sect;1031 deferral</td><td><a class='src' href='https://www.irs.gov/pub/irs-pdf/p537.pdf' rel='noopener noreferrer' target='_blank' title='IRS Publication 537 (2025), Installment Sales'>S21</a> <a class='src' href='https://www.irs.gov/instructions/i1040sd' rel='noopener noreferrer' target='_blank' title='IRS — Instructions for Schedule D (Form 1040) Schedule D Tax Worksheet'>S55</a></td></tr></tbody></table></div>
 
 <h2>Rules this calculator does not apply</h2>
 <div class="callout callout-warn">
   <ul>
     <li><strong>California alternative minimum tax</strong> &mdash; the threshold is applied as a warning only, because the computation
     needs Schedule P (540) preference items from your full return. <code>TX-16</code></li>
-    <li><strong>Property-tax reassessment on sale</strong> &mdash; a cost to the buyer. Not modelled. <code>TX-11</code></li>
-    <li><strong>FTB Form 593 withholding</strong> &mdash; not modelled. <code>TX-12</code></li>
-    <li><strong>Section 199A, Opportunity Zone provisions, itemised deductions, credits and exemption credits, and any depreciation
-    recapture beyond the 25% ceiling</strong> &mdash; not verified, so not applied.</li>
+    <li><strong>Property-tax reassessment on sale (Prop 13)</strong> &mdash; the 1.181% LA County FY24&ndash;25 average rate is
+    verified (<code>TX-11</code>) and affects buyer underwriting rather than seller income tax directly.</li>
+    <li><strong>FTB Form 593 closing withholding</strong> &mdash; displayed as an informational prepayment check (3&#8531;% gross or
+    12.3% individual gain election), not added onto final California tax. <code>TX-12</code></li>
+    <li><strong>Section 199A, Opportunity Zone provisions, itemised deductions, credits, IRC &sect;453A installment interest,
+    California Form 3840 out-of-state &sect;1031 tracking, and any recapture beyond the 25% &sect;1250 ceiling</strong> &mdash; not verified, so not applied.</li>
   </ul>
   <p>The full machine-readable list of exclusions is in <code>data/rules.json</code>. Have a CPA review any number before it is
   used in a commitment.</p>
@@ -102,7 +135,7 @@ hand from those schedules.</p></noscript>
   <div class="wrap">
     <p><strong>Privacy.</strong> This site publishes only aggregate, non-identifying findings. No owner name, tenant contact, lease document, parcel identifier, loan figure or financial record appears here. Those belong in the owner's access-controlled internal workspace with authorised advisers.</p>
     <p><strong>Nature of this site.</strong> It is a research and decision-gate register. It is not an appraisal, a tax opinion, a legal opinion, or investment advice. A blank means "not verified", not "zero".</p>
-    <p class="foot-meta">Built 2026-11-25 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
+    <p class="foot-meta">Built 2026-11-26 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
   </div>
 </footer>
 </body>

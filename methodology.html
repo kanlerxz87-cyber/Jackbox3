@@ -60,8 +60,7 @@
 summary of private data is still private data.</p>
 
 <h3>What is published, and why that is safe</h3>
-<p>Everything on this site is one of three things: a public aggregate (a Census tract statistic covering 2,598 anonymous
-residents), a public legal or tax rule (an IRS bracket), or a public company filing (a revenue figure from an SEC 10-Q). None of
+<p>Everything on this site is one of three things: a public aggregate (when directly verified and sufficiently non-identifying), a public legal or tax rule (an IRS bracket), or a public company filing (a revenue figure from an SEC 10-Q). None of
 the three identifies a person, and none becomes identifying when combined with the others, because none of them is specific to
 this property.</p>
 
@@ -73,7 +72,7 @@ Everything you type stays in the browser tab's memory and disappears when you cl
 while using the form.</p>
 
 <h2>How each finding was produced</h2>
-<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>Method</th><th scope='col'>Where it was used</th><th scope='col'>What it guarantees</th></tr></thead><tbody><tr><td>Live query against an official REST or ArcGIS service</td><td>Census geocoder, BLS, USGS, FEMA NFHL, FEMA NRI, CAL FIRE</td><td>The number is what the agency's own system returns today</td></tr><tr><td>Reading an official publication</td><td>IRS topics and publications, Rev. Proc. 2025-32, FTB schedules</td><td>The rule is what the tax authority published, quoted rather than paraphrased</td></tr><tr><td>Reading an SEC filing exhibit</td><td>Jack in the Box 10-Q exhibit 99.1, DEF 14A</td><td>The company's own reported figure, with the accession recorded</td></tr><tr><td>Arithmetic on verified values</td><td>All rows marked derived</td><td>Reproducible; the formula is on the row</td></tr><tr><td>Third-party API mirror of an official dataset</td><td>ACS via Census Reporter; NCES CCD via the Urban Institute</td><td>Labelled as a mirror, with a primary cross-check requested</td></tr></tbody></table></div>
+<div class='table-wrap'><table class='data'><thead><tr><th scope='col'>Method</th><th scope='col'>Where it was used</th><th scope='col'>What it guarantees</th></tr></thead><tbody><tr><td>Live query against an official REST or ArcGIS service</td><td>Census geocoder, BLS, USGS, FEMA NFHL, FEMA NRI, CAL FIRE</td><td>The number is what the agency's own system returns today</td></tr><tr><td>Reading an official publication</td><td>IRS topics and publications, Rev. Proc. 2025-32, FTB schedules</td><td>The rule is what the tax authority published, quoted rather than paraphrased</td></tr><tr><td>Reading an SEC filing exhibit</td><td>Jack in the Box 10-Q exhibit 99.1, DEF 14A</td><td>The company's own reported figure, with the accession recorded</td></tr><tr><td>Arithmetic on verified values</td><td>All rows marked derived</td><td>Reproducible; the formula is on the row</td></tr><tr><td>Third-party API mirror rejected during the source-integrity audit</td><td>Previously used for ACS and NCES enrollment; none of those mirror-derived values remain published</td><td>ACS values blank pending direct verification; LAUSD enrollment replaced with the official NCES district detail value</td></tr></tbody></table></div>
 
 <h2>What this site is not</h2>
 <ul>
@@ -87,14 +86,14 @@ while using the form.</p>
 <h2>Reproducing this build</h2>
 <p>Everything is static and generated. <code>python3 build.py</code> regenerates every page from <code>data/findings.json</code>
 and <code>data/rules.json</code>; <code>python3 scripts/check_site.py</code> validates that every table row carries a source and
-that no internal link is broken. The verification date is stamped on every page as 2026-11-25.</p>
+that no internal link is broken. The verification date is stamped on every page as 2026-11-26.</p>
 
 </main>
 <footer class="site-foot">
   <div class="wrap">
     <p><strong>Privacy.</strong> This site publishes only aggregate, non-identifying findings. No owner name, tenant contact, lease document, parcel identifier, loan figure or financial record appears here. Those belong in the owner's access-controlled internal workspace with authorised advisers.</p>
     <p><strong>Nature of this site.</strong> It is a research and decision-gate register. It is not an appraisal, a tax opinion, a legal opinion, or investment advice. A blank means "not verified", not "zero".</p>
-    <p class="foot-meta">Built 2026-11-25 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
+    <p class="foot-meta">Built 2026-11-26 &middot; every table row links to its source &middot; <a href="flagged-for-review.html">flagged for review</a> &middot; <a href="sources.html">source register</a> &middot; <a href="methodology.html">methodology</a></p>
   </div>
 </footer>
 </body>
