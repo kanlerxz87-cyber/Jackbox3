@@ -14,7 +14,8 @@ Last updated: 2026-11-26 (session `arena/7c607b54-jackbox3`; final source-integr
 | `57054140` | `arena/57054140-jackbox3` | Post-merge audit; `COORDINATION.md` only | done |
 | `0e787678` | `arena/0e787678-jackbox3` | T-24 follow-up source-link correction and T-25 integration; shared findings/root pages/coordination | done |
 | `4a251c0f` | `arena/4a251c0f-jackbox3` | A-01–A-05 line-by-line re-verification + integration, PR #14 | done |
-| `7c607b54` | `arena/7c607b54-jackbox3` | T-26 source audit and T-27 final integration; `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py`, `VERIFICATION.md` | active |
+| `7c607b54` | `arena/7c607b54-jackbox3` | T-26 source audit and T-27 final integration; `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py`, `VERIFICATION.md` | done |
+| `641e4e68` | `arena/641e4e68-jackbox3` | T-28 unified 2026 audit: Schedule D tax engine, LA Measure ULA, W-02 Hold/Stress, Q3 FY26 10-Q/8-K & `.gov` updates across root + `/workspace/` | active |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -391,3 +392,27 @@ The Census keyless API request returned “A valid key must be included”; the 
 ### PR / deployment record
 
 PR #12 is being updated on its existing head branch after the main-branch integration. Pages deployment for this final correction is pending.
+
+---
+
+## Session `641e4e68` — unified verification, Schedule D tax engine & 2026 refresh (2026-11-26)
+
+### Integration & Audit Findings Resolved
+
+Merged `origin/main` (`f082c02`, preserving PRs #9–#16) into `arena/641e4e68-jackbox3` so **zero** work from sessions `57054140`, `0e787678`, `4a251c0f`, and `7c607b54` was lost (including withdrawal of the third-party Census Reporter mirror on `TA-01`–`TA-17`/`DM-01`–`DM-12`, the `S28` CAL FIRE reference-point split, `.gov` source enforcement in `scripts/check_site.py`, and FTB Form 540 line 32 credit limitation thresholds `252,203 / 504,411 / 378,310`), and layered the following verified 2026 updates on top:
+
+1. **Fixed `assets/calculator.js` & synchronized `workspace/assets/calculator.js`**:
+   - Eliminated silent subtraction of non-sale `fedOrdTax` from sale `netProceeds` (computes strict incremental federal tax `withSale - preSale`).
+   - Implemented exact **IRS Schedule D (Form 1040) Schedule D Tax Worksheet (lines 1–47)** (`S55`) so unrecaptured §1250 gain fills Line 14 and ordinary brackets up to the 24% ceiling before 0%/15%/20% LTCG and 25% §1250 slicing.
+   - Fixed NIIT (`otherGain` included in baseline MAGI/NII) and CA BHST (`otherGain` + `ordinaryIncome` baseline) incremental calculations.
+   - Added **City of LA Transfer Tax + Measure ULA** (post-June 30, 2026 thresholds `$5.4M` 4.0% / `$10.9M` 5.5% + `0.56%` base), **FTB 2026 Form 593** prepayment display (`3-1/3%` / `12.3%`), **Installment sale** equal-principal tranche preview, **§1031 deferral**, and side-by-side **W-02 Hold/Renewal + Combined Stress** comparison on root `calculator.html`, plus matching `#bhst_applies` and `#ula_mode` controls in `/workspace/pages/calculator.html`.
+2. **Closed remaining `.gov` & SEC EDGAR gaps (`S43`–`S58`)**:
+   - SEC EDGAR Q3 FY26 Form 10-Q (`S43`), Series 2026-1 `$500M` 7.624% refinancing (`S44`), and 2026 8-K governance/succession filings (`S45`, role titles only): `$1,492.0M` securitized debt (`$23.3M` cash sweep; ARDs 2029/2031/2032), Note 5 standard 20-yr + 1–20-yr sole-discretion tenant option leases, `-18.0%` YTD variable rent, Del Taco `$(47.4)M` loss + March 2026 Chancery suit, Qdoba `$22.9M` guarantees.
+   - Official `.gov` macro/regional context (labelled as County/City proxies, never parcel trade area): Census QuickFacts V2025 (`S46`), CA DOF Jan 2026 E-1 (`S47`), SCAG 2024 PEIR 2050 (`S48`), BEA County GDP/Income (`S49`, noting BEA 26-08 standalone MSA GDP discontinuation), CA EDD Oct 2026p `193,200` NAICS 722513 QSR jobs (`S50`), CA DIR `$16.90/$20.00` wages (`S51`), BOE Pub 306 `1.181%` LA property tax rate (`S52`), CDE 2024–25 CAASPP (`S53`), LA Office of Finance Measure ULA (`S54`), IRS Schedule D (`S55`), USGS UCERF3 30-yr earthquake odds (`S56`), FTB 2026 Form 593 (`S57`), and CDI FAIR Plan 2028 sunset (`S58`).
+
+### Automated Verification
+
+- `python3 build.py && python3 tools/build_site.py`: regenerated all 18 root pages + 13 `/workspace/` pages.
+- `python3 scripts/check_site.py`: **PASSED** (100% `.gov`/official ArcGIS/municipal hosts on all 56 sources in `data/findings.json`).
+- `python3 tools/validate_site.py`: **PASSED** (13 files, 236 internal links, 577 external `.gov`/docs links, 353 rows, 148 verified rows, 114 unverified blank rows, zero PII).
+- Node.js unit suites on both `assets/calculator.js` and `workspace/assets/calculator.js`: **PASSED**.

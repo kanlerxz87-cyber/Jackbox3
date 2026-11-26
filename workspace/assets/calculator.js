@@ -29,6 +29,16 @@
   }
   function pow(r, t) { return Math.pow(1 + r, t); }
 
+  function estimateLaTransfer(price) {
+    if (!(price > 100)) return 0;
+    var blocks500 = Math.ceil(price / 500);
+    var base = blocks500 * (0.55 + 2.25); /* County $1.10/$1k + City $2.25/$500 */
+    var ulaRate = 0;
+    if (price >= 10900000) ulaRate = 0.055;
+    else if (price > 5400000) ulaRate = 0.04;
+    return base + price * ulaRate;
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     blanks.length = 0;
@@ -36,12 +46,17 @@
     // ---- Sale case -------------------------------------------------------
     var salePrice = num('sale_price');
     var basis = num('basis');
-    var sellingCosts = num('selling_costs');
+    var manualCosts = num('selling_costs');
+    var ulaMode = sel('ula_mode');
+    var ulaCost = ulaMode === 'la_city_2026' ? estimateLaTransfer(salePrice) : 0;
+    var sellingCosts = manualCosts + ulaCost;
+
     var gain1250Input = num('gain_1250');
     var fedRate = num('fed_rate') / 100;
     var rate1250 = num('rate_1250') / 100;
     var niitRate = num('niit_rate') / 100;
     var caRate = num('ca_rate') / 100;
+    var bhstApplies = sel('bhst_applies') === 'yes';
     var niitApplies = sel('niit_applies') === 'yes';
     var defer1031 = sel('exchange1031') === 'yes';
 
@@ -50,7 +65,8 @@
     var otherGain = Math.max(0, gain - gain1250);
     var fedTax = gain1250 * rate1250 + otherGain * fedRate;
     var niitTax = niitApplies ? gain * niitRate : 0;
-    var caTax = gain * caRate;
+    var bhstTax = bhstApplies ? Math.max(0, gain - 1000000) * 0.01 : 0;
+    var caTax = gain * caRate + bhstTax;
     if (defer1031) { fedTax = 0; niitTax = 0; caTax = 0; }
     var atse = salePrice - sellingCosts - fedTax - niitTax - caTax;
 
@@ -83,10 +99,10 @@
     set('out_diff', money.format(diff));
     set('out_stress', money.format(stressNPV));
     set('out_status',
-      'Computed from assumptions only. Blank inputs treated as zero: ' +
-      (blanks.length ? blanks.join(', ') : 'none') +
-      '. NIIT MAGI thresholds, §1031 boot, and terminal-value gain tax are not modelled. ' +
-      'No winner is selected.');
+      'Computed from assumptions only (flat effective-rate mode; use root Schedule D calculator for multi-bracket incremental stacking). ' +
+      (ulaCost > 0 ? 'LA transfer + ULA est. ' + money.format(ulaCost) + ' included. ' : '') +
+      'Blank inputs treated as zero: ' + (blanks.length ? blanks.join(', ') : 'none') +
+      '. NIIT MAGI baseline, §1031 boot, and terminal-value gain tax are not modelled. No winner is selected.');
 
     var warn = document.getElementById('calc-warning');
     if (warn) {
