@@ -1,6 +1,6 @@
 # COORDINATION.md — Shared Task Board
 
-Last updated: 2026-11-26 (session `arena/57054140-jackbox3`; post-merge audit in progress)
+Last updated: 2026-11-26 (session `arena/57054140-jackbox3`; post-merge audit complete)
 
 > This file is the single shared task board for all agent sessions working on this repo.
 > Read it before starting any task. Claim a task before you touch files, then commit and
@@ -11,7 +11,7 @@ Last updated: 2026-11-26 (session `arena/57054140-jackbox3`; post-merge audit in
 | Session ID | Branch | Scope (files it may edit) | Status |
 |---|---|---|---|
 | `47b70455` | `arena/47b70455-jackbox3` | Original build and integration scope (historical; completed) | done |
-| `57054140` | `arena/57054140-jackbox3` | Post-merge audit; `COORDINATION.md` only | active |
+| `57054140` | `arena/57054140-jackbox3` | Post-merge audit; `COORDINATION.md` only | done |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -49,10 +49,19 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-20 | Link + integrity check script | done | `47b70455` | `scripts/check_site.py` |
 | T-21 | Integration: merge, re-verify, publish to Pages | done | `47b70455` | `main` |
 | T-22 | Pull request → merge → confirm deploy (PR #1) | done | `47b70455` | `main` |
-| T-23 | Post-merge repository and deployment audit; reconcile stale coordination status | in progress | `57054140` | `COORDINATION.md` |
+| T-23 | Post-merge repository and deployment audit; reconcile stale coordination status | done | `57054140` | `COORDINATION.md` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
+
+## Current post-merge audit — 2026-11-26
+
+- The current repository branch starts at `f204b7c78a6dd603d164cc901d8d977bd2cf69f1`, the current `main` commit at audit time. PR #6 is **merged**, not open; the earlier statement at lines below describes its state before the later final-integration addendum. The addendum's merge record is authoritative. No new site-content changes were made in this audit.
+- Re-ran `python3 scripts/check_site.py`: **PASSED**. Re-ran `python3 tools/validate_site.py`: **13 HTML files, 236 internal links, 523 external links, 321 table rows, 115 verified observations, 114 unverified observations**; no broken internal links, no empty unverified values, and no personal-information patterns detected.
+- The root site’s calculator source is client-only by code inspection: it uses no network APIs, cookies, `localStorage`, or `sessionStorage`. This is not a secure record store. GitHub Pages and `/workspace/` are public pages, not an access-controlled owner/adviser vault. Keep lease, parcel, tax, financing, and owner records offline or in a separately secured adviser system; do not enter identifying data into a browser/device that is shared or managed by others.
+- The latest GitHub Pages deployment reported by `gh run view` is **success** on `main`, commit `f204b7c78a6dd603d164cc901d8d977bd2cf69f1`, run [45631895587](https://github.com/kanlerxz87-cyber/Jackbox3/actions/runs/45631895587), completed 2026-11-25T14:14:56Z. This check confirms the Actions result; it is not a new external HTTP availability test.
+- **Outstanding evidence qualification (already disclosed as IR-01):** ACS observations use the Census Reporter API mirror because the keyless Census API request failed. The mirror is not an official government endpoint, so those values are not independently confirmed against the official release in this audit. The source register and flagged pages disclose this; obtain a direct official Census table/API verification before treating those values as decision-grade. Similar NCES enrollment data uses a third-party mirror (S25). Values and classifications have not been changed here.
+- The stated location/lease window is not parcel-verified; the public findings use a central-LA reference point. Property-level hazards, trade area, lease abstract/notices, sale value, real rent/cap-rate quotes, tax basis, payoff and insurance remain missing. No sell-versus-renew winner is supportable from this public dataset.
 
 ## Verification performed
 
@@ -146,6 +155,7 @@ it should be done deliberately rather than automatically.
 - **2026-11-25** — Session `47b70455` created the board, claimed T-01…T-22, and completed the
   full build on `arena/47b70455-jackbox3`. No other sessions were present, so no conflicts arose.
 - **2026-11-25** — Integration (T-21/T-22): see the PR record at the bottom of this file.
+- **2026-11-26** — Session `57054140` claimed and completed T-23, touching only `COORDINATION.md`. Re-ran both validators successfully and confirmed latest Pages Actions result via `gh run view 45631895587`. Reconciled the historical open/conflict note for PR #6 against its later merged record; documented that all site routes are public and that private records require storage outside GitHub Pages. Reiterated the existing Census/NCES mirror limitations and parcel-specific gaps; no values or public site content were changed. Claim commit `94a7404` was pushed to the current branch after `git pull --rebase origin main`.
 
 ## PR + deploy record
 
