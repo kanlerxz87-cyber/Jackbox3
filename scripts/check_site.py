@@ -26,6 +26,7 @@ import json
 import pathlib
 import re
 import sys
+from urllib.parse import urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -193,6 +194,20 @@ def main() -> int:
             err("%s: table without header scopes" % page)
 
     # ---------------------------------------------------------------- 8. data integrity
+    # Every cited source must be an official government/SEC domain. FEMA's
+    # National Risk Index is hosted on an ArcGIS domain controlled for FEMA;
+    # this is the only explicitly approved non-.gov host in the register.
+    official_arcgis_publishers = {"Federal Emergency Management Agency"}
+    official_municipal_hosts = {"ladbsservices2.lacity.org": "City of Los Angeles"}
+    for source in findings["sources"]:
+        host = re.sub(r"^www\.", "", urlparse(source.get("url", "")).hostname or "").lower()
+        is_gov = host.endswith(".gov")
+        is_official_arcgis = host == "services.arcgis.com" and source.get("publisher") in official_arcgis_publishers
+        is_official_municipal = host in official_municipal_hosts and source.get("publisher") == official_municipal_hosts.get(host)
+        if not (is_gov or is_official_arcgis or is_official_municipal):
+            err("source %s is not on an official .gov host or approved FEMA ArcGIS endpoint: %s"
+                % (source.get("id"), source.get("url")))
+
     for f in findings["findings"]:
         if f["status"] == "verified" and not f["source"]:
             err("finding %s is marked verified but has no source" % f["id"])
@@ -202,7 +217,7 @@ def main() -> int:
             err("finding %s is marked unverified but has a value — it must be blank" % f["id"])
         if f["status"] == "derived" and not f.get("formula"):
             err("finding %s is derived but records no formula" % f["id"])
-        if f["source"] and f["source"] != "\u2014":
+        if f["source"] and f["source"] not in ("\u2014", "PRIVATE"):
             known = {s["id"] for s in findings["sources"]}
             for sref in [x.strip() for x in f["source"].split(",")]:
                 if sref and sref not in known:

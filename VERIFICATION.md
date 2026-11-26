@@ -162,25 +162,19 @@ Where the published figure and the source disagreed, the site was corrected (cor
 | `EC-13` food-away-from-home inflation 2025 | 3.70% | 382.378 / 368.743 − 1 = 3.698% | matches |
 | `EC-14` food-away-from-home, Sep 2026 y/y | 3.46% | 398.783 / 385.451 − 1 = 3.459% (Sep pair, Oct 2025 unpublished) | matches |
 
-## Census / ACS 2020–2024 5-year — Census Reporter mirror of `acs2024_5yr`
+## Census / ACS 2020–2024 5-year — direct official confirmation not available
 
-Reference GEOID `06037207400` re-confirmed from the Census Geocoder, together with block `060372074001025`,
-county `06037`, CD 34, SD 26, AD 54 and place `0644000`. Then, for county `05000US06037`,
-MSA `31000US31080` and tract `14000US06037207400`:
+The Census Geocoder's reference-point result was re-confirmed from the official Census service; that does not verify ACS estimates. A direct keyless request to the [official Census API](https://api.census.gov/data/2024/acs/acs5?get=NAME%2CB19013_001E&for=tract%3A207400&in=state%3A06%20county%3A037) returned “A valid key must be included.” The official [data.census.gov portal](https://data.census.gov/) was retrieved, but the requested table values were not exposed through this review interface.
 
-| Published | Value | Re-pull result | Verdict |
-| --- | --- | --- | --- |
-| `TA-01` / `TA-03` / `TA-04` median household income | 78,482 / 90,112 / 95,958 | 78482 ±29,379 / 90112 ±392 / 95958 ±378 | matches, MoE as published |
-| `TA-06` / `TA-07` / `TA-08` median gross rent | 3,154 / 1,954 / 2,063 | 3154 / 1954 / 2063 | matches |
-| `TA-10` / `TA-11` median home value | 834,200 / 871,300 | 834200 / 871300 | matches |
-| `TA-12` tract median home value | blank | `B25077001` = null for the tract (no owner-occupied units) | correctly blank |
-| `TA-13` tract population | 2,598 | 2598 ±502 | matches |
-| `TA-14` tract renter share | 100.0% | occupied 967, owner 0, renter 967 | matches |
-| `DM-01` / `DM-02` population | 9,808,667 / 12,974,487 | 9808667 / 12974487 | matches |
-| `DM-07` county per-capita income | 45,792 | 45792 ±239 | matches |
-| `DM-08` tract per-capita income | 68,487 | 68487 ±8,334 | matches |
-| `DM-14` / `DM-11` tract income mix | 27.1% under $25k, 22.6% at $150k+ | B19001: (123+33+35+71)/967 and (76+143)/967 | matches |
-| `SC-01` LAUSD enrolment | 427,795 | Urban Institute CCD API, LEAID 0622710, year 2022 = 427795 | matches |
+A prior session compared ACS values against the Census Reporter API mirror and reported matching values. That only confirms agreement with the same third-party mirror, not direct confirmation from the official Census endpoint. Therefore all mirror-dependent ACS estimates and derived figures have been **withdrawn from the public findings dataset**; related value cells are blank, marked Unverified, and linked to official Census review portals. No figures from that mirror are repeated here.
+
+| Finding group | Current public handling | Official source / next check |
+| --- | --- | --- |
+| `TA-01`–`TA-17`, `DM-01`–`DM-12` | Values blank; status Unverified; derived values also removed | [U.S. Census Bureau ACS portal](https://data.census.gov/) — direct table-by-table confirmation required |
+| `DM-13` population change | Blank; status Unverified | [U.S. Census Bureau ACS portal](https://data.census.gov/) — verify consistent vintages |
+| `SC-01` LAUSD enrollment | 408,026 students, 2024–2025; district context only | [Official NCES District Detail](https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710) |
+
+Until direct official values are retrieved and checked, no neighborhood income, rent, population, poverty, education, or tenure conclusion is asserted. The public site uses the Census Geocoder reference only as a proxy; the actual property location and selected tract set remain private.
 
 ## Hazards — USGS, FEMA, CAL FIRE
 
