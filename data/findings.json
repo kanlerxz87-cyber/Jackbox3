@@ -26,10 +26,10 @@
       "id": "S02",
       "name": "American Community Survey 2020\u20132024 5-year estimates (release id acs2024_5yr) via the Census Reporter API mirror of Census tables",
       "publisher": "U.S. Census Bureau (ACS); mirror operated by Census Reporter",
-      "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01003,B19013,B25077,B25064,B25003,B23025,B15003,B17001,B19301,B25002&geo_ids=05000US06037,31000US31080,14000US06037207400",
+      "url": "https://api.censusreporter.org/1.0/data/show/acs2024_5yr?table_ids=B01003,B19013,B25077,B25064,B25003,B23025,B15003,B17001,B19301,B25002&geo_ids=05000US06037,31000US31080,14000US06037207400",
       "tier": "Official data, third-party API mirror",
       "retrieved": "2026-11-25",
-      "caveat": "api.census.gov requires an API key and rejected keyless requests, so ACS values were read from this mirror of the same acs2024_5yr release. Cross-check against data.census.gov before any decision."
+      "caveat": "api.census.gov requires an API key and rejected keyless requests, so ACS values were read from this mirror of the same acs2024_5yr release. The link was pinned to the acs2024_5yr release on 2026-11-26 after the /latest alias was observed to return the acs2024_1yr release instead; /latest no longer reproduces the values on this site. Cross-check against data.census.gov before any decision."
     },
     {
       "id": "S03",
@@ -1079,7 +1079,7 @@
       "geo": "34.05, -118.24",
       "status": "unverified",
       "source": "S10",
-      "note": "The service returned null for these fields for this latitude/longitude and site class, while SDS and SDC were populated. The nulls are reported as-is and have NOT been back-filled."
+      "note": "Re-fetched 2026-11-26: the service now returns s1d = 0.785 g (s1uh = 0.781, model v4.0.x), which was null at the 2026-11-25 build. sd1, sm1, sdc1 and sdc are still null for this latitude/longitude and site class, while SDS and SDC (short period, 'D') are populated. The nulls are reported as-is and have NOT been back-filled; s1d alone is not a design value."
     },
     {
       "id": "H-09",
