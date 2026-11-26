@@ -61,6 +61,8 @@ def sources_map(findings: dict) -> dict:
 
 
 def source_link(sid: str, smap: dict) -> str:
+    if sid == "PRIVATE":
+        return "<span class='src-none' title='Private owner/adviser record; never publish it'>private record (not public)</span>"
     if not sid or sid == "\u2014":
         return "<span class='src-none' title='No official source was retrieved'>none</span>"
     links = []
@@ -304,7 +306,7 @@ def build(findings, rules):
   </a>
   <a class="card" href="trade-area.html">
     <h3>3 &middot; Trade area, not city averages</h3>
-    <p>Census-tract figures replace the city and county proxies, and they change the story: the tract sits below county income but far above county rent.</p>
+    <p>Census tract statistics remain blank until direct official ACS values are verified for the private parcel geography; no neighborhood income or rent conclusion is asserted.</p>
     <span class="card-go">See W-01 &rarr;</span>
   </a>
   <a class="card" href="hazards.html">
@@ -327,6 +329,14 @@ def build(findings, rules):
     <p>@@UNV@@ unverified items and @@FLAG@@ caveated ones, in the open, with source links, so the list can be challenged after publication.</p>
     <span class="card-go">Open the review list &rarr;</span>
   </a>
+</div>
+
+<div class="callout callout-privacy">
+  <h3>Independent source-verified audit workspace</h3>
+  <p>A second, independently verified decision workspace was contributed by session <code>dd713c44</code>. It keeps the same
+  privacy rules, adds a line-by-line <code>VERIFICATION.md</code>, an official <code>SOURCES.md</code> register, a
+  browser-only after-tax calculator and its own Flagged for Review and Suggestions pages. It is preserved intact under
+  <a href="workspace/index.html"><code>/workspace/</code></a> so neither session's work is discarded.</p>
 </div>
 
 <div class="callout callout-privacy">
@@ -415,14 +425,10 @@ $20.00/hr &mdash; directly impacting store margins where 41.3% of Jack in the Bo
 <strong>What it does not support:</strong> aggressive rent-escalation assumptions. Flat payrolls plus +3.46% menu-price inflation and a
 $20/hr fast-food wage floor match what the tenant reports: higher menu prices offsetting fewer transactions.</p>
 
-<h3>2. The trade area is not the county, and the difference matters</h3>
-<p>Using Census Tract 2074 as the trade-area proxy for central Los Angeles: median household income is $78,482 (margin of
-error &plusmn;$29,379) against $90,112 county-wide (87.1%). Median gross rent is $3,154 against $1,954 county-wide (1.61&times;).
-Poverty is 29.4% against 13.7%, tenure is 100% renter-occupied, and income is bimodal (22.6% &ge;$150k vs 27.1% &lt;$25k). At
-macro level, recent net out-migration (&minus;3.2% County 2020&ndash;2025 per QuickFacts V2025; &minus;0.6% YoY per DOF Jan 2026 E-1)
-diverges from SCAG's long-range 2019&ndash;2050 adopted projection (+22.5% households, +7.4% population).</p>
-<p><strong>What this supports:</strong> a dense, all-rental catchment with bifurcated spending power.
-<strong>What it does not support:</strong> assuming uniform central-LA affluence or anchoring rent solely on tract income (37.4% MOE).</p>
+<h3>2. Neighborhood ACS evidence is not decision-grade yet; regional trends diverge</h3>
+<p>The parcel address is intentionally absent from this public site, and prior tract-level ACS mirror estimates were withdrawn pending direct official Census confirmation (no tract income or rent ratio is asserted). At regional level (clearly labelled as macro proxies, not parcel trade area), U.S. Census QuickFacts V2025 and CA DOF January 2026 E-1 show mild net population contraction (&minus;0.6% YoY in LA County; &minus;0.9% YoY in LA City), contrasting with SCAG Connect SoCal 2024's long-range 2019&ndash;2050 forecast (+22.5% County households).</p>
+<p><strong>What this supports:</strong> completing the secure W-01 parcel-centred Census tract pull before relying on neighborhood figures.
+<strong>What it does not support:</strong> a demand, rent-growth, or renewal conclusion from city/county averages alone.</p>
 
 <h3>3. The tenant is the credit, and the Q3 FY26 10-Q adds hard numbers</h3>
 <p>Jack in the Box Inc. reported system same-store sales of &minus;1.1% in Q3 FY2026 (&minus;4.2% for 40 weeks YTD), following
@@ -636,9 +642,9 @@ and the notice calendar, and recorded in the internal workspace.</p>
             ["The reference location is in FEMA flood Zone X with design-category-D seismic demand.",
              "No. It sizes the insurance and reserve requirement, not the price.",
              "<code>H-01, H-05, H-06</code>", source_link("S11", smap) + " " + source_link("S10", smap)],
-            ["Tract income is 87.1% of the county while tract rent is 161% of the county.",
+            ["ACS tract and county observations are withdrawn pending direct official verification; no local income or rent ratio is used.",
              "No. It constrains the rent-growth story; it does not produce a rent figure.",
-             "<code>TA-03, TA-05, TA-09</code>", source_link("S02", smap)],
+             "<code>TA-03, TA-05, TA-09</code>", source_link("S29", smap)],
             ["Federal and California brackets for the after-tax comparison are verified.",
              "No. Brackets without basis are inert.",
              "<code>TX-01, TX-02, TX-06</code>", source_link("S20", smap) + " " + source_link("S23", smap)],
@@ -653,86 +659,37 @@ and the notice calendar, and recorded in the internal workspace.</p>
     ta_body = """
 <div class="callout callout-key">
   <h3>Why this page exists</h3>
-  <p>An earlier framing of this analysis used city and county averages as a stand-in for the neighbourhood. That is the wrong
-  unit of analysis for a restaurant: a county of ten million people is not a trade area, and a city of four million is not
-  either. This page replaces those proxies with Census-tract figures and puts the margin of error next to every estimate,
-  because at tract level a point estimate without its margin is close to meaningless.</p>
+  <p>A restaurant should be evaluated against a parcel-centred trade area, not city or county averages. The exact parcel location is intentionally not published. Earlier ACS values taken from a third-party mirror have been withdrawn pending direct official verification; the tables below therefore leave those values blank rather than presenting unconfirmed neighbourhood evidence.</p>
 </div>
 
-<h2>Trade area versus the county and the metro</h2>
+<h2>Official ACS evidence required for the parcel-centred trade area</h2>
 @@COMPARE@@
-<p class="muted">ACS 2020&ndash;2024 five-year estimates, 2024 dollars. A dash means the source does not publish that figure at
-that geography &mdash; not that it is zero.</p>
+<p class="muted">Status: unverified. The official Census portal is linked on each row for manual review. The Census API returned a key-required response; no value from the third-party mirror remains published.</p>
 
-<h2>What this changes about the decision</h2>
-<div class="grid-2">
-  <div class="panel panel-good">
-    <h3>Findings that help the renewal case</h3>
-    <ul>
-      <li><strong>Rents run far above the county.</strong> $3,154 against $1,954 is a 61% premium &mdash; real evidence of location
-      value that a county average entirely hides.</li>
-      <li><strong>A dense renter catchment.</strong> 100% renter-occupied tenure in the tract, with 2,598 residents packed into
-      roughly a third of a square mile. Renters are the core quick-service customer.</li>
-      <li><strong>High earners are present.</strong> 22.6% of households clear $150,000, and per capita income is 150% of the
-      county, so there is a segment that will pay full menu price.</li>
-    </ul>
-  </div>
-  <div class="panel panel-bad">
-    <h3>Findings that hurt the renewal case</h3>
-    <ul>
-      <li><strong>Household income is below the county, not above it.</strong> 87.1% of the county median is the opposite of the
-      intuition a "central Los Angeles" label creates.</li>
-      <li><strong>Poverty is 29.4%, more than double the county.</strong> That constrains average ticket and makes the site
-      dependent on value promotions &mdash; precisely the mix the tenant is retreating from.</li>
-      <li><strong>The distribution is bimodal.</strong> A quarter rich and a quarter poor is a hard catchment to serve
-      profitably with a single format.</li>
-      <li><strong>The income margin of error is 37%.</strong> Even the below-county finding is soft.</li>
-    </ul>
-  </div>
+<h2>What this means for the decision</h2>
+<div class="panel panel-warn">
+  <p>No income, rent, poverty, population, housing-tenure, or school-related conclusion about the immediate neighbourhood is supported yet. Do not use the withdrawn values to justify either a renewal rent or a sale premium. The central-LA reference coordinate is not the parcel.</p>
 </div>
 
 <h2>What is still missing before this becomes a rent figure</h2>
-<p>Nothing on this page is a rent conclusion, and it should not be read as one. Converting a trade area into a rent requires
-three things this page does not have: a defined catchment boundary (GATE-14), traffic counts on the street the site fronts
-(GATE-13), and actual comparable rents paid by comparable tenants (GATE-05). The first two could in principle be assembled
-from public sources once the parcel address exists. The third cannot, because private commercial rents are not published by
-any official body.</p>
+<p>The secure workflow must select consistent Census tracts from the parcel location, verify official ACS estimates and margins of error, and then combine them with official traffic counts, planning evidence, school attendance areas, and competitor research. A demographic measure is not a rent comparable: short-lease pricing still requires written broker/appraisal quotes and actual lease terms, kept in the private adviser workspace.</p>
 
 <h2>Evidence rows</h2>
 @@ROWS@@
 
 <h2>Suggested improvements</h2>
 <ul class="suggest">
-  <li><strong>Run the tract lookup at the parcel, not the Civic Center.</strong> One coordinate change re-runs every figure on
-  this page; it is a five-minute task once the address exists.</li>
-  <li><strong>Add ACS one-year estimates where the tract publishes them</strong>, so the 2020 pandemic years stop contaminating the
-  five-year average.</li>
-  <li><strong>Replace the single tract with a weighted ring of three to five tracts</strong> along the actual drive-time
-  catchment, so one small sample does not drive the whole story.</li>
-  <li><strong>Add competitor density</strong> from a licensed point-of-interest dataset and label it as non-official, or omit it. Do
-  not substitute a web scrape for an official count.</li>
+  <li><strong>Run the tract lookup at the parcel in the secure adviser workflow.</strong> Keep the address and selected tract IDs offline; publish only aggregate non-identifying results.</li>
+  <li><strong>Pull the 2020–2024 ACS tables directly from Census.</strong> Record the table, geography, vintage, estimate, margin of error, and retrieval date; no mirror substitutions.</li>
+  <li><strong>Compare multiple consistent tracts only after direct verification.</strong> Document why each tract belongs in the drive-time catchment and distinguish observations from assumptions.</li>
+  <li><strong>Add official traffic counts and local planning evidence.</strong> Label gaps where an agency does not publish the data; obtain competitor and rent evidence privately from qualified advisers.</li>
 </ul>
 """
-    ta_body = render(ta_body,
-                     COMPARE=table(["Measure", "Tract 2074", "Los Angeles County", "LA&ndash;Long Beach&ndash;Anaheim MSA",
-                                    "Tract vs county"], [
-                         ["Median household income", "$78,482 <span class='moe'>&plusmn;$29,379</span>",
-                          "$90,112 <span class='moe'>&plusmn;$392</span>", "$95,958 <span class='moe'>&plusmn;$378</span>",
-                          "<strong>87.1%</strong>"],
-                         ["Median gross rent", "$3,154 <span class='moe'>&plusmn;$237</span>",
-                          "$1,954 <span class='moe'>&plusmn;$6</span>", "$2,063 <span class='moe'>&plusmn;$6</span>",
-                          "<strong>161%</strong>"],
-                         ["Median home value", "no owner-occupied sample", "$834,200", "$871,300", "&mdash;"],
-                         ["Population", "2,598 <span class='moe'>&plusmn;502</span>", "9,808,667", "12,974,487", "0.03%"],
-                         ["Poverty rate", "29.4%", "13.7%", "&mdash;", "<strong>2.1&times;</strong>"],
-                         ["Per capita income", "$68,487 <span class='moe'>&plusmn;$8,334</span>",
-                          "$45,792 <span class='moe'>&plusmn;$239</span>", "&mdash;", "<strong>150%</strong>"],
-                         ["Bachelor's degree or higher", "37.3%", "36.0%", "&mdash;", "1.04&times;"],
-                         ["Renter-occupied share", "100.0%", "54.1%", "51.6%", "<strong>1.85&times;</strong>"],
-                         ["Households at $150k or more", "22.6%", "&mdash;", "&mdash;", "&mdash;"],
-                         ["Households below $25k", "27.1%", "&mdash;", "&mdash;", "&mdash;"],
-                     ]),
-                     ROWS=table(FINDING_HEADERS, finding_rows(fs, smap, section="Trade area (W-01)")))
+    ta_body = render(
+        ta_body,
+        COMPARE=table(FINDING_HEADERS, finding_rows(fs, smap, ids=["TA-01", "TA-03", "TA-06", "TA-13", "TA-18", "TA-19"])),
+        ROWS=table(FINDING_HEADERS, finding_rows(fs, smap, section="Trade area (W-01)")),
+    )
     pages["trade-area.html"] = page(
         "trade-area.html", "W-01 \u00b7 Trade-area figures", "Findings", ta_body,
         "City and county proxies replaced with Census-tract evidence, with margins of error shown on every estimate.")
@@ -909,13 +866,13 @@ a filled-in number would look exactly like a measured one.</p>
              "FEMA NFHL, panel set 06037C (" + source_link("S11", smap) + ")",
              "<span class='badge badge-verified'>High</span>", "A lender-accepted flood determination for the parcel (GATE-10)"],
             ["Wildfire", "<strong>No mapped LRA severity zone at this point</strong>",
-             "CAL FIRE FHSZ, LRA layer (" + source_link("S13", smap) + ")",
+             "CAL FIRE FHSZ, LRA layer (" + source_link("S28", smap) + ")",
              "<span class='badge badge-flagged'>Indirect</span>", "A query at the parcel plus the adopting ordinance (GATE-11)"],
             ["Seismic demand", "<strong>S<sub>DS</sub> 1.311 g, design category D, PGA 0.843 g</strong>",
              "USGS ASCE 7-16 design maps (" + source_link("S10", smap) + ")",
              "<span class='badge badge-verified'>High</span>", "A structural evaluation of this building (GATE-06)"],
             ["Regional earthquake odds", "<strong>30-yr: 60% (M&ge;6.7), 46% (M&ge;7.0), 31% (M&ge;7.5)</strong>",
-             "USGS UCERF3 (" + source_link("S39", smap) + ")",
+             "USGS UCERF3 (" + source_link("S56", smap) + ")",
              "<span class='badge badge-verified'>High</span>", "Nothing &mdash; frames systemic liquidity &amp; loss-of-rent risk"],
             ["Composite risk", "<strong>Very High (score 97.92 / 100)</strong>",
              "FEMA National Risk Index, tract level (" + source_link("S12", smap) + ")",
@@ -927,7 +884,7 @@ a filled-in number would look exactly like a measured one.</p>
              "FEMA National Risk Index (" + source_link("S12", smap) + ")",
              "<span class='badge badge-verified'>High</span>", "Nothing &mdash; sizes the post-event reserve (GATE-20)"],
             ["Commercial insurance backstop", "<strong>CA FAIR Plan: $20M/bldg, $100M/loc (sunsets Jan 2028)</strong>",
-             "CA Dept. of Insurance (" + source_link("S39", smap) + ")",
+             "CA Dept. of Insurance (" + source_link("S58", smap) + ")",
              "<span class='badge badge-verified'>High</span>", "Actual parcel declarations &amp; broker renewal quote (GATE-07)"],
             ["Liquefaction", "not retrieved", "USGS service did not respond",
              "<span class='badge badge-unverified'>None</span>", "A geotechnical report"],
@@ -964,6 +921,15 @@ schedules are encoded in <code>data/rules.json</code> and used by the calculator
 @@CA_CLOSING@@
 
 <h2>What this module deliberately does not do</h2>
+<div class="callout callout-key">
+  <h3>Rules it applies, including the one that was hard to verify</h3>
+  <ul>
+    <li><strong>California Behavioral Health Services Tax</strong> &mdash; verified from the FTB instructions (line 62) and <em>applied</em>: 1% of
+    taxable income above $1,000,000. <code>TX-07</code></li>
+    <li><strong>Unrecaptured section 1250 gain</strong> &mdash; taxed at the lesser of the ordinary marginal rate and 25%, because the
+    IRS describes 25% as a maximum rather than a flat rate. <code>TX-03</code></li>
+  </ul>
+</div>
 <div class="callout callout-warn">
   <h3>Excluded rules &mdash; and the direction of the error</h3>
   <ul>
@@ -1013,12 +979,12 @@ stacking, optional LA Measure ULA transfer-tax estimates, installment spread, an
             ["Long-term capital gain, 0% ceiling, single", "$49,450 of taxable income", "2026", source_link("S20", smap)],
             ["Long-term capital gain, 15% ceiling, single", "$545,500 of taxable income; 20% above", "2026", source_link("S20", smap)],
             ["Long-term capital gain ceilings, married filing jointly", "$98,900 and $613,700", "2026", source_link("S20", smap)],
-            ["Unrecaptured section 1250 gain", "Maximum 25% rate; enters Schedule D Line 14 above 24% ordinary ceiling", "Current", source_link("S18, S40", smap)],
-            ["Schedule D Tax Worksheet ordering", "Lines 1&ndash;47 stack ordinary + &sect;1250 gain up to 24% ceiling before 15%/20% LTCG", "2025/2026", source_link("S40", smap)],
+            ["Unrecaptured section 1250 gain", "Maximum 25% rate; enters Schedule D Line 14 above 24% ordinary ceiling", "Current", source_link("S18, S55", smap)],
+            ["Schedule D Tax Worksheet ordering", "Lines 1&ndash;47 stack ordinary + &sect;1250 gain up to 24% ceiling before 15%/20% LTCG", "2025/2026", source_link("S55", smap)],
             ["Net investment income tax", "3.8% above $200,000 single or $250,000 joint MAGI", "Current", source_link("S19", smap)],
             ["Ordinary brackets", "10 / 12 / 22 / 24 / 32 / 35 / 37%", "2026", source_link("S20", smap)],
             ["Standard deduction", "$16,100 single; $32,200 joint; $24,150 head of household", "2026", source_link("S20", smap)],
-            ["Installment method", "Gain reported as payments are received (&sect;1250 recognised first)", "2025", source_link("S21, S40", smap)],
+            ["Installment method", "Gain reported as payments are received (&sect;1250 recognised first)", "2025", source_link("S21, S55", smap)],
             ["Like-kind exchange", "Real property held for business or investment only", "Post-2017", source_link("S21", smap)],
             ["Basis rules", "Gain = amount realised &minus; adjusted basis", "2025", source_link("S22", smap)],
         ]),
@@ -1034,16 +1000,16 @@ stacking, optional LA Measure ULA transfer-tax estimates, installment spread, an
              "Form 540 instructions, line 62", source_link("S24", smap)],
             ["Alternative minimum tax threshold", "$92,749 single or head of household; $123,667 joint; $61,830 separate",
              "Form 540 instructions, line 61", source_link("S24", smap)],
-            ["Credit limitation thresholds", "Credits are limited above $347,808 single or head of household; $463,745 joint",
-             "Form 540 instructions, Box C", source_link("S24", smap)],
+            ["Exemption-credit limitation (AGI)", "Exemption credits are reduced above $252,203 single or married filing separately; $504,411 joint; $378,310 head of household",
+             "Form 540 instructions, line 32, AGI Limitation Worksheet", source_link("S24", smap)],
         ]),
         CA_CLOSING=table(["Rule", "Verified figure (effective 2026)", "Impact on transaction", "Source"], [
             ["Prop 13 reassessment &amp; LA County average property tax rate", "1.181% LA County FY24&ndash;25 avg; 2% max annual cap prior to sale",
-             "Buyer reassessment to sale price upon change of ownership (BOE Pub 29 / Pub 306)", source_link("S38", smap)],
+             "Buyer reassessment to sale price upon change of ownership (BOE Pub 29 / Pub 306)", source_link("S52", smap)],
             ["FTB Form 593 closing withholding", "3&#8531;% of sales price or 12.3% optional gain election (8.84% corp / 13.8% S-corp)",
-             "Escrow prepayment credited against final CA income tax return", source_link("S38", smap)],
+             "Escrow prepayment credited against final CA income tax return", source_link("S38, S57", smap)],
             ["City of LA Transfer Tax + Measure ULA (eff. post-June 30, 2026)", "0.56% City+County &le;$5.4M; 4.56% ($5.4M&ndash;$10.9M); 6.06% (&ge;$10.9M)",
-             "Applies on gross consideration (incl. assumed liens) if inside City of LA", source_link("S38", smap)],
+             "Applies on gross consideration (incl. assumed liens) if inside City of LA", source_link("S54", smap)],
         ]),
         WORKED=table(["Step", "Basis of the figure", "Value"], [
             ["Contract price", "<span class='badge badge-assumption'>invented</span>", "$2,000,000"],
@@ -1092,7 +1058,7 @@ less often and pay more when they do.</p>
   <cite>Federal Reserve Beige Book, National Summary, October 2025 (@@SRC_FED@@)</cite>
 </blockquote>
 <p>The same summary notes that lower- and middle-income households "continued to seek discounts and promotions in the face of
-rising prices", which is directly relevant to a value-oriented QSR in a tract where 27.1% of households earn under $25,000.</p>
+rising prices", which may challenge value-oriented QSR demand; local household-income evidence is currently unverified and no tract-specific income claim is made.</p>
 
 <h2>Building a projection system &mdash; and why none is published yet</h2>
 <p>The instruction was to build a reliable projection system for the area. The precondition attached to that instruction was
@@ -1114,8 +1080,7 @@ would make one defensible:</p>
 
 <h2>Suggested improvements</h2>
 <ul class="suggest">
-  <li><strong>Obtain a Census API key</strong> so ACS can be pulled as a genuine multi-year tract-level series rather than read
-  through a mirror of a single release.</li>
+  <li><strong>Obtain direct official ACS values</strong> from data.census.gov or the Census API after an authorized API key is available; keep values blank until the same geography and vintage are confirmed.</li>
   <li><strong>Add BLS QCEW annual data</strong> for Los Angeles County by industry, which would show whether food-service employment
   itself is growing or shrinking.</li>
   <li><strong>Separate observations from assumptions in distinct columns</strong> when a projection is eventually published, so no
@@ -1131,13 +1096,13 @@ would make one defensible:</p>
             ["Nonfarm employment (LA MSA latest month)", "6,371.5 thousand (Oct 2026, preliminary)", "6,288.0 thousand (2024 average)",
              "up 1.3%, single month", source_link("S07", smap)],
             ["Unemployment rate (LA MSA unadjusted)", "4.4% (Sep 2026, preliminary)", "5.3% (2025 average)", "improving", source_link("S06", smap)],
-            ["Unemployment rate (LA County seasonally adjusted)", "4.6% (Oct 2026, preliminary)", "5.9% (Oct 2025)", "improving (CA EDD)", source_link("S35", smap)],
+            ["Unemployment rate (LA County seasonally adjusted)", "4.6% (Oct 2026, preliminary)", "5.9% (Oct 2025)", "improving (CA EDD)", source_link("S50", smap)],
             ["Limited-Service Restaurants payrolls (NAICS 722513, LA County)", "193,200 jobs (Oct 2026, preliminary)", "190,200 (Oct 2025)",
-             "+1.6% YoY QSR jobs", source_link("S35", smap)],
+             "+1.6% YoY QSR jobs", source_link("S50", smap)],
             ["LA County Real GDP (chained 2017$) &amp; Personal Income", "$802.0B Real GDP (2023) / $818.5B Income (2024)", "#1 U.S. county (+1.0% real GDP YoY)",
-             "MSA GDP discontinued Feb 2026 (BEA 26-08)", source_link("S34", smap)],
+             "MSA GDP discontinued Feb 2026 (BEA 26-08)", source_link("S49", smap)],
             ["California minimum wage &amp; AB 1228 fast-food floor", "$16.90/hr statewide (2026) / $20.00/hr fast-food", "$16.50 / $20.00 (2025)",
-             "Direct store-margin pressure (41.3% units in CA)", source_link("S36", smap)],
+             "Direct store-margin pressure (41.3% units in CA)", source_link("S51", smap)],
             ["California unemployment rate", "5.0% (Oct 2026, preliminary)", "5.5% (Dec 2025)", "improving", source_link("S05", smap)],
             ["United States unemployment rate", "4.1% (Oct 2026)", "4.4% (Dec 2025)", "improving", source_link("S04", smap)],
         ]),
@@ -1161,75 +1126,43 @@ would make one defensible:</p>
     # ------------------------------------------------------------------ demographics
     demo_body = """
 <div class="callout callout-key">
-  <h3>Who is actually around the site</h3>
-  <p>Demographics are easy to make say anything. This page sticks to what the ACS publishes for the tract and the county, puts
-  the margin of error next to every tract estimate, and refuses to compare a five-year average that includes 2020 with a current
-  monthly rate.</p>
+  <h3>Demographic conclusions are on hold</h3>
+  <p>The 2020–2024 ACS values previously copied through a third-party API mirror were withdrawn during the official-source audit. The keyless Census API response requires a valid API key, and this review interface did not expose the requested data.census.gov table values. These sections intentionally show blank, unverified values with official Census links.</p>
 </div>
 
-<h2>Income and hardship</h2>
+<h2>Income, population, hardship and education</h2>
 @@INCOME@@
 
-<h2>Tenure and housing</h2>
+<h2>Housing tenure and household characteristics</h2>
 @@TENURE@@
 
-<h2>Education</h2>
-<p>Bachelor's degree or higher is 37.3% in the tract against 36.0% in the county &mdash; essentially at parity. The tract's 25+
-population is 1,798 with a margin of error of &plusmn;352, so treat the comparison as approximate rather than exact.</p>
+<h2>Decision use</h2>
+<p>No claim about local purchasing power, poverty, education, or renter concentration is made from tract-level ACS figures until official Census tables are retrieved directly for the parcel-centred geography. Below are the verified official macro/regional proxies (QuickFacts V2025, CA DOF E-1, SCAG 2024 PEIR), explicitly separated from parcel trade-area cells.</p>
 
-<h2>Population trends vs. long-range official projections</h2>
+<h2>Regional macro trends vs. long-range official projections (proxies only)</h2>
 @@TREND@@
-
-<h2>Why the margin of error is not a footnote here</h2>
-<p>The tract median household income is $78,482 with a margin of error of &plusmn;$29,379. That is 37.4% of the estimate. It
-means the true value plausibly lies anywhere from roughly $49,000 to roughly $108,000 &mdash; a range that spans from well below
-to comfortably above the county median. Any conclusion that depends on the tract sitting at 87.1% of the county is therefore
-soft, and a decision should not rest on it. The county and metro figures have margins of a few hundred dollars and can carry
-weight.</p>
-
-<h2>The one comparison this page refuses to make</h2>
-<p>The ACS county "unemployment rate" derived here is 7.27%, and the current BLS rate is 4.4%. It would be easy to present
-those side by side as a trend. It would also be wrong: the ACS figure is a five-year average (2020&ndash;2024) that includes the
-pandemic, and the BLS figure is a current monthly estimate. They measure different things. Both are reported here, and the
-reader is told not to subtract one from the other.</p>
 
 <h2>Evidence rows</h2>
 @@ROWS@@
 
 <h2>Suggested improvements</h2>
 <ul class="suggest">
-  <li><strong>Pull ACS one-year estimates</strong> for the tract where published, to get a current picture rather than a five-year blend.</li>
-  <li><strong>Obtain a Census API key</strong> to build a genuine year-over-year tract series and settle population and income trend.</li>
-  <li><strong>Add SCAG or state Department of Finance projections</strong> for the area, clearly labelled as projections rather than
-  observations.</li>
-  <li><strong>Widen the geography to a three-to-five tract catchment</strong> so a single &plusmn;236-household sample is not load-bearing.</li>
+  <li><strong>Retrieve official ACS values directly</strong> from Census with a valid API key or a table-level data.census.gov review; retain table IDs, estimate, margin of error, geography, vintage, and retrieval date.</li>
+  <li><strong>Build a versioned tract trend series only after the direct pull succeeds.</strong> Do not join inconsistent geographies or treat a five-year ACS average as a one-year observation.</li>
+  <li><strong>Use California DOF projections separately from ACS observations.</strong> Label projections and their baseline/vintage clearly.</li>
 </ul>
 """
     demo_body = render(
         demo_body,
-        INCOME=table(["Measure", "Tract 2074", "Los Angeles County", "Read"], [
-            ["Median household income", "$78,482 <span class='moe'>&plusmn;$29,379</span>", "$90,112 <span class='moe'>&plusmn;$392</span>",
-             "Below the county, but with a margin so wide it is directional only"],
-            ["Per capita income", "$68,487 <span class='moe'>&plusmn;$8,334</span>", "$45,792 <span class='moe'>&plusmn;$239</span>",
-             "Above the county, consistent with small high-earning households"],
-            ["Poverty rate", "29.4%", "13.7%", "More than double the county"],
-            ["Households below $25,000", "27.1%", "&mdash;", "A quarter of the catchment is low-income"],
-            ["Households at $150,000 or more", "22.6%", "&mdash;", "A quarter is high-income"],
-        ]),
-        TENURE=table(["Measure", "Tract 2074", "Los Angeles County", "Read"], [
-            ["Occupied housing units", "967 <span class='moe'>&plusmn;236</span>", "3,416,449", "Small tract sample"],
-            ["Renter-occupied", "100.0%", "54.1%", "Effectively all-rental"],
-            ["Median gross rent", "$3,154 <span class='moe'>&plusmn;$237</span>", "$1,954 <span class='moe'>&plusmn;$6</span>",
-             "A 61% premium over the county"],
-            ["Vacancy rate (county)", "&mdash;", "6.4%", "Tight residential market &mdash; not commercial"],
-        ]),
+        INCOME=table(FINDING_HEADERS, finding_rows(fs, smap, ids=["DM-01", "DM-03", "DM-05", "DM-07", "DM-09"])),
+        TENURE=table(FINDING_HEADERS, finding_rows(fs, smap, ids=["TA-13", "TA-14", "TA-15", "TA-16"])),
         TREND=table(["Series", "Geography", "Latest reading", "Trend / horizon", "Source"], [
             ["Census QuickFacts V2025 (Jul 1, 2025 vs 2020 base)", "LA County / LA City", "9,694,934 / 3,869,089",
-             "&minus;3.2% County / &minus;0.8% City", source_link("S31", smap)],
+             "&minus;3.2% County / &minus;0.8% City", source_link("S46", smap)],
             ["CA Dept. of Finance E-1 (Jan 1, 2026)", "LA County / LA City", "9,837,286 / 3,806,201",
-             "&minus;0.6% YoY County / &minus;0.9% YoY City (+11,260 county housing units)", source_link("S32", smap)],
+             "&minus;0.6% YoY County / &minus;0.9% YoY City (+11,260 county housing units)", source_link("S47", smap)],
             ["SCAG Connect SoCal 2024 PEIR Table 12 (planning projection)", "LA County", "10.79M pop / 4.16M HH (2050)",
-             "+22.5% households, +7.4% pop, +8.6% jobs (2019&ndash;2050)", source_link("S33", smap)],
+             "+22.5% households, +7.4% pop, +8.6% jobs (2019&ndash;2050)", source_link("S48", smap)],
         ]),
         ROWS=table(FINDING_HEADERS, finding_rows(fs, smap, section="Demographics")),
     )
@@ -1282,9 +1215,9 @@ drawn overwhelmingly from a drive-time catchment rather than a school catchment.
     sch_body = render(
         sch_body,
         VERIFIED=table(["Measure", "Value", "Period", "Source"], [
-            ["Los Angeles Unified School District enrolment (NCES LEAID 0622710)", "408,026 students across 784 schools (vs 427,795 in 2022; FY22&ndash;23 rev $14.77B)", "2024&ndash;2025", source_link("S25, S37", smap)],
-            ["LAUSD 2024&ndash;25 CAASPP proficiency (met or exceeded standard)", "46.46% ELA (+3.40 pp) / 36.76% Math (+3.93 pp) / 27.28% Science (+3.32 pp)", "2024&ndash;2025", source_link("S37", smap)],
-            ["California statewide 2024&ndash;25 CAASPP benchmark (CDE)", "48.8% ELA (+1.8 pp) / 37.3% Math (+1.8 pp) / 32.7% Science", "2024&ndash;2025", source_link("S37", smap)],
+            ["Los Angeles Unified School District enrolment (NCES LEAID 0622710)", "408,026 students", "2024&ndash;2025", source_link("S27", smap)],
+            ["LAUSD 2024&ndash;25 CAASPP YoY gains (CDE official release yr25rel43)", "+3.4 pp ELA / +3.9 pp Math / +3.3 pp Science (strongest since Smarter Balanced launch)", "2024&ndash;2025", source_link("S53", smap)],
+            ["California statewide 2024&ndash;25 CAASPP proficiency (CDE)", "48.8% ELA (+1.8 pp) / 37.3% Math (+1.76 pp) / 32.7% Science", "2024&ndash;2025", source_link("S53", smap)],
         ]),
         MISSING=table(["Missing measure", "Why it matters to this decision", "Official source that would answer it", "Status"], [
             ["Proficiency rates for the attendance-area schools",
@@ -1320,7 +1253,7 @@ discontinued operations, so later periods exclude a business that earlier period
 
 <h2>Same-store sales, lease spread &amp; unit count</h2>
 @@SSS@@
-<p>For the 40 weeks ended July 5, 2026 (<code>S28</code> Q3 FY26 10-Q), system same-store sales ran &minus;4.2%. Crucially for an owner
+<p>For the 40 weeks ended July 5, 2026 (<code>S43</code> Q3 FY26 10-Q), system same-store sales ran &minus;4.2%. Crucially for an owner
 under a triple-net or sublease structure, <strong>franchise variable/percentage rental income fell 18.0% YoY</strong> ($66.3m vs $80.8m)
 while occupancy costs stayed nearly flat (&minus;2.3%), compressing JACK's net franchise rental spread by 15.4% ($76.5m vs $90.4m).
 Operating cash flow dropped to $15.0m (from $91.6m prior year) partly due to ~$11.0m of franchisee rent/royalty deferrals.
@@ -1393,14 +1326,14 @@ need for marginal sites and faces refinancing scrutiny inside the exact 2030&nda
             ["Franchised restaurants", "2,026", "1,966", "&minus;60", source_link("S15", smap)],
             ["Company-operated restaurants", "142", "149", "+7", source_link("S15", smap)],
             ["Total revenues", "$262.4m", "$257.7m", "&minus;1.8%", source_link("S15", smap)],
-            ["40-week franchise rental spread (rental rev minus occupancy)", "$90.4m", "$76.5m", "&minus;15.4% (variable rent &minus;18.0%)", source_link("S28", smap)],
+            ["40-week franchise rental spread (rental rev minus occupancy)", "$90.4m", "$76.5m", "&minus;15.4% (variable rent &minus;18.0%)", source_link("S43", smap)],
         ]),
         DEBT=table(["Tranche / Governance Item", "Amount / Status", "ARD / Timeline", "Key Implication", "Source"], [
-            ["Series 2019-1 Class A-2-III", "$426.4m @ 4.970%", "Aug 2029", "Clusters ahead of 2030&ndash;2035 lease expiry", source_link("S28", smap)],
-            ["Series 2026-1 Class A-2 (new Jun 2026)", "$500.0m @ 7.624%", "May 2031", "Replaces lower-coupon debt at 7.624% coupon", source_link("S28, S29", smap)],
-            ["Series 2022-1 Class A-2-II", "$503.3m @ 4.136%", "Feb 2032", "Major refinancing hurdle inside lease window", source_link("S28", smap)],
-            ["Series 2019-1 Class A-2-II &amp; VFN", "$23.4m @ 3.445% / $39.0m @ 6.946%", "Feb 2027 / Jul 2029", "Total $1,492.0m; >5.25x ABS leverage triggers $23.3m sweep", source_link("S28", smap)],
-            ["Governance &amp; leadership (2026 8-Ks)", "CEO/CFO/CSCO turnover; President Sep 2026; 2027 CFO/CLAO/CTO shifts", "Rights Plan &amp; GreenWood pact to 2028", "Material executive turnover &amp; activist oversight", source_link("S30", smap)],
+            ["Series 2019-1 Class A-2-III", "$426.4m @ 4.970%", "Aug 2029", "Clusters ahead of 2030&ndash;2035 lease expiry", source_link("S43", smap)],
+            ["Series 2026-1 Class A-2 (new Jun 2026)", "$500.0m @ 7.624%", "May 2031", "Replaces lower-coupon debt at 7.624% coupon", source_link("S43, S44", smap)],
+            ["Series 2022-1 Class A-2-II", "$503.3m @ 4.136%", "Feb 2032", "Major refinancing hurdle inside lease window", source_link("S43", smap)],
+            ["Series 2019-1 Class A-2-II &amp; VFN", "$23.4m @ 3.445% / $39.0m @ 6.946%", "Feb 2027 / Jul 2029", "Total $1,492.0m; >5.25x ABS leverage triggers $23.3m sweep", source_link("S43", smap)],
+            ["Governance &amp; leadership (2026 8-Ks)", "CEO/CFO/CSCO turnover; President Sep 2026; 2027 CFO/CLAO/CTO shifts", "Rights Plan &amp; GreenWood pact to 2028", "Material executive turnover &amp; activist oversight", source_link("S45", smap)],
         ]),
         ROWS=table(FINDING_HEADERS, finding_rows(fs, smap, section="Tenant & franchise credit")),
     )
@@ -1484,9 +1417,9 @@ is survivable without a forced sale, and the sell-or-renew question becomes a ge
         SELF=table(["Risk", "Effect on the conclusions", "Mitigation"], [
             ["The reference point is not the parcel", "Every spatial figure could shift once the real address is used",
              "Re-run the three services at the parcel; all are one-query operations"],
-            ["ACS figures came through a mirror, not api.census.gov", "Some values could differ slightly from the primary release",
-             "Cross-check on data.census.gov; see the flagged page"],
-            ["Several rule sets are excluded from the tax module", "After-tax numbers understate tax on very large gains",
+            ["Prior ACS figures relied on a third-party mirror", "Those figures cannot meet the official-source-only verification rule",
+             "Withdrawn and left blank pending a direct official Census table/API response; see the flagged page"],
+            ["Several rule sets are excluded from the tax module", "The federal and California figures are computed, but AMT, property-tax reassessment and Section 199A are not, so the number is a floor on tax rather than a total",
              "CPA review before any commitment"],
             ["No market value, cap rate or rent exists in this repository", "No valuation conclusion is possible", "GATE-02, GATE-05"],
         ]),
@@ -1615,8 +1548,8 @@ estimate of analyst and adviser time. Select the ones you want to pursue, then t
 
 <h2>What would close each of these</h2>
 <ul class="suggest">
-  <li><strong>A Census API key</strong> closes the ACS-mirror concern and unlocks the multi-year tract series.</li>
-  <li><strong>A CPA</strong> closes the tax-rule exclusions and confirms the surcharge treatment.</li>
+  <li><strong>A direct official Census pull</strong> closes the ACS source gap; values remain blank until an adviser verifies table, geography, vintage, and margin of error.</li>
+  <li><strong>A CPA</strong> closes the remaining tax-rule exclusions, including AMT and the property-tax reassessment on sale.</li>
   <li><strong>The parcel address</strong> closes every spatial caveat in one pass.</li>
   <li><strong>The four owner documents</strong> close the value, basis, loan and lease gaps.</li>
   <li><strong>A broker and an engineer</strong> close the rent, cap-rate and structural gaps.</li>
@@ -1624,9 +1557,9 @@ estimate of analyst and adviser time. Select the ones you want to pursue, then t
 """
     irregular = [
         ["1", "<code>api.census.gov</code> rejected keyless requests with \"A valid key must be included\".",
-         "Tract-level ACS figures remain sourced from Census Reporter's mirror of <code>acs2024_5yr</code>, cross-checked against official Census QuickFacts V2025 for LA County &amp; City (<code>S31</code>). Multi-year tract ACS series stays unverified (<code>DM-15</code>)."],
+         "ACS tract values previously sourced from a third-party mirror were withdrawn and left blank pending direct official Census verification (<code>S29</code>); regional macro proxies are verified directly via Census QuickFacts V2025 (<code>S46</code>) and CA DOF E-1 (<code>S47</code>)."],
         ["2", "The BLS QCEW CSV endpoints returned HTTP 500, and the BLS MSA industry series IDs did not resolve.",
-         "Resolved at county level via official CA EDD LA County monthly payroll tables (<code>S35</code>: Limited-Service Restaurants NAICS 722513 = 193,200 jobs, +1.6% YoY)."],
+         "Resolved at county level via official CA EDD LA County monthly payroll tables (<code>S50</code>: Limited-Service Restaurants NAICS 722513 = 193,200 jobs, +1.6% YoY)."],
         ["3", "The BLS LAUS series reported October 2025 as unavailable due to the 2025 lapse in appropriations, and the 2025 annual average as an eleven-month figure.",
          "Recorded as a footnote on the affected row (<code>EC-04</code>) instead of being smoothed over."],
         ["4", "The USGS ASCE 7-16 service returned <code>null</code> for <code>s1d</code>, <code>sd1</code>, <code>sm1</code> and <code>sdc1</code> while populating <code>sds</code> and <code>sdc</code>.",
@@ -1634,19 +1567,19 @@ estimate of analyst and adviser time. Select the ones you want to pursue, then t
         ["5", "The FEMA NRI <code>WFIR_EVNTS</code> field returned <code>null</code> for the tract.",
          "Recorded as unverified (<code>H-16</code>), not as zero."],
         ["6", "The CAL FIRE LRA layer returned no polygon at the reference point.",
-         "A positive control at Griffith Park returned \"Very High\", proving the query works. The empty result is reported as indirect rather than as a clearance (<code>H-03</code>, <code>H-04</code>)."],
+         "A positive control at Griffith Park (<code>S13</code>) returned \"Very High\", proving the query works; the Civic Center query is logged separately under <code>S28</code> as empty feature set rather than clearance (<code>H-03</code>, <code>H-04</code>)."],
         ["7", "The NCES school-district endpoint ignored the county filter and returned Alameda County districts with a statewide count.",
-         "The count was discarded and recorded as unverified (<code>SC-02</code>); district-wide LAUSD 2024&ndash;25 enrolment (408,026) and CAASPP scores (46.46% ELA / 36.76% Math) were verified directly via NCES &amp; CDE (<code>S37</code>)."],
+         "The count was discarded and recorded as unverified (<code>SC-02</code>); district-wide LAUSD 2024&ndash;25 enrolment (408,026, <code>S27</code>) and CDE CAASPP statewide benchmarks &amp; LAUSD gains (<code>S53</code>) were verified directly via official .gov releases."],
         ["8", "BEA formally discontinued standalone MSA GDP estimates in February 2026 (BEA 26-08).",
-         "MSA GDP remains blank/unverified (<code>EC-16</code>) while verified LA County Real GDP ($802.0B) and Personal Income ($818.5B) are published in <code>EC-21</code> and <code>EC-22</code> (<code>S34</code>)."],
+         "MSA GDP remains blank/unverified (<code>EC-16</code>) while verified LA County Real GDP ($802.0B) and Personal Income ($818.5B) are published in <code>EC-21</code> and <code>EC-22</code> (<code>S49</code>)."],
         ["9", "The Jack in the Box DEF 14A accession was filed 2025-12-30 but covers the fiscal year ended 2025-09-28, so filing dates and fiscal-year labels do not line up intuitively.",
          "The covered fiscal year is stated explicitly on every affected row."],
         ["10", "<code>data.sec.gov</code> XBRL <code>Revenues</code> returns restated values for the same period across different accessions.",
-         "The FY2025 10-K value is used and its accession recorded (<code>TE-02</code>), alongside direct Q3 FY26 10-Q verification (<code>S28</code>)."],
+         "The FY2025 10-K value is used and its accession recorded (<code>TE-02</code>), alongside direct Q3 FY26 10-Q verification (<code>S43</code>)."],
         ["11", "Del Taco was sold on 22 December 2025 and moved to discontinued operations (with March 2026 Delaware Chancery litigation disclosed in Q3 10-Q Note 4), so year-over-year revenue comparisons are not like for like.",
          "Stated on <code>TE-03</code>, <code>TE-23</code>, and in the tenant-credit narrative."],
         ["12", "Earlier calculator versions mixed non-sale ordinary income tax into sale proceeds and stacked &sect;1250 gain independently of LTCG.",
-         "Fixed on 2026-11-26 in <code>assets/calculator.js</code> using exact IRS Schedule D Tax Worksheet lines 1&ndash;47 (<code>S40</code>) and strict incremental sale-vs-baseline math."],
+         "Fixed on 2026-11-26 in <code>assets/calculator.js</code> using exact IRS Schedule D Tax Worksheet lines 1&ndash;47 (<code>S55</code>) and strict incremental sale-vs-baseline math."],
         ["13", "The parcel address is not in this repository, by design.",
          "All spatial analysis uses an anonymous Civic Center reference point, labelled as a proxy everywhere it appears."],
         ["14", "No market value, capitalisation rate, rent comparable, property-tax bill, insurance premium or mortgage balance could be obtained from an official source.",
@@ -1699,13 +1632,13 @@ estimate of analyst and adviser time. Select the ones you want to pursue, then t
         NSRC=len(findings["sources"]),
         SRC_TABLE=table(["ID", "Source", "Publisher", "Tier", "Retrieved", "Caveat", "Cited by"], src_rows),
         FAILED=table(["Source", "What happened", "Effect"], [
-            ["<code>api.census.gov</code>", "Rejected all keyless requests.", "ACS tract series read via Census Reporter mirror; county/city trends cross-checked on official QuickFacts (<code>S31</code>) &amp; CA DOF E-1 (<code>S32</code>)."],
+            ["<code>api.census.gov</code>", "Rejected keyless requests with a requirement for a valid key; third-party mirror ACS values were withdrawn.", "Tract ACS rows remain blank/unverified (<code>S29</code>); macro LA County &amp; City trends verified via QuickFacts (<code>S46</code>) &amp; CA DOF E-1 (<code>S47</code>)."],
             ["FRED (St. Louis Fed)", "Series page and CSV endpoint returned fetch errors.", "BLS &amp; BEA official tables used directly instead."],
-            ["BLS QCEW CSV endpoints", "HTTP 500.", "County QSR payrolls resolved via CA EDD NAICS 722513 (<code>S35</code>)."],
-            ["BEA standalone MSA GDP tables", "Formally discontinued by BEA in Feb 2026 (BEA 26-08).", "MSA GDP left blank (<code>EC-16</code>); LA County GDP ($802.0B) &amp; Personal Income ($818.5B) added (<code>S34</code>)."],
-            ["LA County Assessor parcel portal", "Parcel-specific lookup withheld by privacy design.", "No parcel APN, assessed value or tax bill; LA County avg tax rate (1.181%) verified via BOE Pub 306 (<code>S38</code>)."],
+            ["BLS QCEW CSV endpoints", "HTTP 500.", "County QSR payrolls resolved via CA EDD NAICS 722513 (<code>S50</code>)."],
+            ["BEA standalone MSA GDP tables", "Formally discontinued by BEA in Feb 2026 (BEA 26-08).", "MSA GDP left blank (<code>EC-16</code>); LA County GDP ($802.0B) &amp; Personal Income ($818.5B) added (<code>S49</code>)."],
+            ["LA County Assessor parcel portal", "Parcel-specific lookup withheld by privacy design.", "No parcel APN, assessed value or tax bill; LA County avg tax rate (1.181%) verified via BOE Pub 306 (<code>S52</code>)."],
             ["Credit rating agencies", "Paywalled or login-gated.", "No rating or outlook asserted (<code>TE-16</code>)."],
-            ["USGS liquefaction web service", "No response / parcel Site Class unverified.", "Liquefaction left unverified (<code>H-20</code>); UCERF3 30-yr rupture odds added (<code>S39</code>)."],
+            ["USGS liquefaction web service", "No response / parcel Site Class unverified.", "Liquefaction left unverified (<code>H-20</code>); UCERF3 30-yr rupture odds added (<code>S56</code>)."],
         ]),
     )
     pages["sources.html"] = page(
@@ -1743,8 +1676,7 @@ estimate of analyst and adviser time. Select the ones you want to pursue, then t
 summary of private data is still private data.</p>
 
 <h3>What is published, and why that is safe</h3>
-<p>Everything on this site is one of three things: a public aggregate (a Census tract statistic covering 2,598 anonymous
-residents), a public legal or tax rule (an IRS bracket), or a public company filing (a revenue figure from an SEC 10-Q). None of
+<p>Everything on this site is one of three things: a public aggregate (when directly verified and sufficiently non-identifying), a public legal or tax rule (an IRS bracket), or a public company filing (a revenue figure from an SEC 10-Q). None of
 the three identifies a person, and none becomes identifying when combined with the others, because none of them is specific to
 this property.</p>
 
@@ -1786,9 +1718,9 @@ that no internal link is broken. The verification date is stamped on every page 
              "Jack in the Box 10-Q exhibit 99.1, DEF 14A",
              "The company's own reported figure, with the accession recorded"],
             ["Arithmetic on verified values", "All rows marked derived", "Reproducible; the formula is on the row"],
-            ["Third-party API mirror of an official dataset",
-             "ACS via Census Reporter; NCES CCD via the Urban Institute",
-             "Labelled as a mirror, with a primary cross-check requested"],
+            ["Third-party API mirror rejected during the source-integrity audit",
+             "Previously used for ACS and NCES enrollment; none of those mirror-derived values remain published",
+             "ACS values blank pending direct verification; LAUSD enrollment replaced with the official NCES district detail value"],
         ]),
     )
     pages["methodology.html"] = page(
@@ -1900,14 +1832,14 @@ hand from those schedules.</p></noscript>
         APPLIED=table(["Rule", "Applied value", "Source"], [
             ["Federal ordinary brackets", "10 / 12 / 22 / 24 / 32 / 35 / 37% (2026)", source_link("S20", smap)],
             ["Federal long-term capital gain", "0% up to the zero ceiling, 15% to the fifteen ceiling, 20% above (2026)", source_link("S20", smap)],
-            ["Unrecaptured section 1250 &amp; Schedule D stacking", "Exact IRS Schedule D Tax Worksheet lines 1&ndash;47 (25% ceiling)", source_link("S18, S40", smap)],
+            ["Unrecaptured section 1250 &amp; Schedule D stacking", "Exact IRS Schedule D Tax Worksheet lines 1&ndash;47 (25% ceiling)", source_link("S18, S55", smap)],
             ["Net investment income tax", "3.8% incremental above $200,000 single / $250,000 joint MAGI", source_link("S19", smap)],
             ["California income tax", "Ordinary brackets 1% to 12.3% (2025 schedules); incremental gain taxed as ordinary income", source_link("S23", smap)],
             ["Federal standard deduction", "$16,100 single; $32,200 joint; $24,150 HoH (2026)", source_link("S20", smap)],
             ["California standard deduction", "$5,706 single; $11,412 joint / HoH (2025)", source_link("S24", smap)],
             ["California Behavioral Health Services Tax", "Incremental 1% of California taxable income above $1,000,000", source_link("S24", smap)],
-            ["City of LA Transfer Tax &amp; Measure ULA (optional)", "0.56% City+County; +4.0% (&gt;$5.4M) or +5.5% (&ge;$10.9M) eff. post-June 30, 2026", source_link("S38", smap)],
-            ["Installment sale &amp; &sect;1031 deferral", "Pub. 537 equal-principal tranches (&sect;1250 first) or 100% &sect;1031 deferral", source_link("S21, S40", smap)],
+            ["City of LA Transfer Tax &amp; Measure ULA (optional)", "0.56% City+County; +4.0% (&gt;$5.4M) or +5.5% (&ge;$10.9M) eff. post-June 30, 2026", source_link("S54", smap)],
+            ["Installment sale &amp; &sect;1031 deferral", "Pub. 537 equal-principal tranches (&sect;1250 first) or 100% &sect;1031 deferral", source_link("S21, S55", smap)],
         ]),
     )
     pages["calculator.html"] = page(
@@ -1949,7 +1881,7 @@ hand from those schedules.</p></noscript>
         <li>Securitized debt $1,492.0m (4.14%&ndash;7.62%, $23.3m cash sweep) with ARDs in Aug 2029, May 2031, Feb 2032 inside the 2030&ndash;2035 lease window; Note 5 standard leases allow 1&ndash;20 yr tenant sole-discretion options.</li>
         <li>Reference location: FEMA flood Zone X; Design Category D (S<sub>DS</sub> 1.311 g); USGS 30-yr EQ odds 60% M&ge;6.7 / 46% M&ge;7.0; FEMA NRI Very High / community resilience Very Low; FAIR Plan commercial cap ($20M/$100M) sunsets Jan 2028.</li>
         <li>Tax &amp; transfer friction: Prop 13 avg LA County rate 1.181%; FTB Form 593 3&#8531;% / 12.3%; LA Measure ULA post-June 2026 4.0% (&gt;$5.4M) / 5.5% (&ge;$10.9M) + 0.56% base.</li>
-        <li>Tract income 87.1% of county; tract rent 161% of county; poverty 29.4%; QuickFacts/DOF county pop mildly contracting vs SCAG 2050 growth plan.</li>
+        <li>Tract ACS measures remain blank/unverified pending direct Census pull; macro QuickFacts/DOF county population mildly contracts (&minus;0.6% YoY) vs SCAG 2050 growth plan (+22.5% HH).</li>
       </ul>
     </section>
 

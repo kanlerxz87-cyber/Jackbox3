@@ -26,7 +26,7 @@ tenant-credit.html            the tenant read from its own SEC filings
 risk.html                     risk register, black swans, tripwires
 suggestions.html              twelve improvements, rankable by the owner
 flagged-for-review.html       every unverified and caveated item, with sources
-sources.html                  source register: 40 sources, cited-by column
+sources.html                  source register: 56 sources, cited-by column
 methodology.html              verification rules and privacy model
 calculator.html               private in-browser after-tax & W-02 Hold-vs-Sell calculator
 advisor-one-page.html         W-10 · printable one-sheet

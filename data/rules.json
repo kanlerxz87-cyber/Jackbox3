@@ -3,7 +3,7 @@
     "title": "Verified after-tax rule set used by the private calculator",
     "purpose": "Encodes ONLY rules that were read from an official IRS, California Franchise Tax Board, California BOE, or City of Los Angeles publication. Anything not verified is absent, and the calculator refuses to guess.",
     "compiled": "2026-11-26",
-    "verification_note": "Every bracket below is traceable to an S-source in data/findings.json. Updated 2026-11-26: removed stale pass-1 unverified MHST artifact (TX-07 was verified and applied via Form 540 Line 62), verified exact IRS Schedule D Tax Worksheet lines 1-47 stacking (S40), and added verified BOE Prop 13 LA County rate (S38), FTB Form 593 withholding (S38), and July 1, 2026 LA City Measure ULA thresholds (S38)."
+    "verification_note": "Every bracket below is traceable to an S-source in data/findings.json. Combines line-by-line re-verification of Rev. Proc. 2025-32, FTB Form 540 Line 32 credit limitation thresholds (252,203 / 504,411 / 378,310), and duplicate MHST block removal (session 4a251c0f) with verified IRS Schedule D Tax Worksheet lines 1-47 stacking (S55), BOE Prop 13 LA County rate (S52), FTB 2026 Form 593 withholding (S38/S57), and post-June 30, 2026 LA City Measure ULA thresholds (S54)."
   },
   "federal": {
     "source_ordinary": "S20",
@@ -11,7 +11,7 @@
     "source_capital_2026": "S20",
     "source_niit": "S19",
     "source_1250": "S18",
-    "source_schedule_d_worksheet": "S40",
+    "source_schedule_d_worksheet": "S55",
     "source_installment": "S21",
     "source_1031": "S21",
     "source_basis": "S22",
@@ -54,16 +54,28 @@
       ]
     },
     "long_term_capital_gain_2026": {
-      "note": "Rev. Proc. 2025-32 section 4.03. 0% and 15% ceilings; above the 15% ceiling the rate is 20%.",
-      "single": { "zero_ceiling": 49450, "fifteen_ceiling": 545500 },
-      "married_joint": { "zero_ceiling": 98900, "fifteen_ceiling": 613700 },
-      "married_separate": { "zero_ceiling": 49450, "fifteen_ceiling": 306850 },
-      "head_of_household": { "zero_ceiling": 66200, "fifteen_ceiling": 579600 }
+      "note": "Rev. Proc. 2025-32 §4.03. The 0% band and the 15% band ceilings are given; above the 15% ceiling the rate is 20%.",
+      "single": {
+        "zero_ceiling": 49450,
+        "fifteen_ceiling": 545500
+      },
+      "married_joint": {
+        "zero_ceiling": 98900,
+        "fifteen_ceiling": 613700
+      },
+      "married_separate": {
+        "zero_ceiling": 49450,
+        "fifteen_ceiling": 306850
+      },
+      "head_of_household": {
+        "zero_ceiling": 66200,
+        "fifteen_ceiling": 579600
+      }
     },
     "unrecaptured_section_1250_max_rate": 0.25,
     "schedule_d_worksheet": {
       "status": "verified",
-      "source": "S40",
+      "source": "S55",
       "note": "IRS Instructions for Schedule D (Form 1040) Schedule D Tax Worksheet lines 1-47: unrecaptured section 1250 gain enters Line 14 (reducing 0% LTCG room and filling ordinary brackets up to the 24% ceiling on Lines 19-21), while remaining 15%/20% LTCG fills Lines 23-34 and excess section 1250 gain is taxed at 25% on Lines 35-40."
     },
     "niit": {
@@ -110,7 +122,7 @@
   },
   "california": {
     "source": "S23",
-    "note": "2025 California Tax Rate Schedules, Form 540 (latest published schedules). California has NO preferential long-term capital gains rate: gain is taxed as ordinary income.",
+    "note": "2025 California Tax Rate Schedules, Form 540. These are the latest schedules published by the FTB at the time of this build. There is NO preferential long-term capital gains rate in California — gain is taxed as ordinary income.",
     "capital_gains_treated_as_ordinary": true,
     "brackets_2025": {
       "single": [
@@ -130,6 +142,16 @@
         [371479, 0.093], [445771, 0.103], [742953, 0.113], [Infinity, 0.123]
       ]
     },
+    "excluded": [
+      {
+        "item": "Parcel-specific property tax reassessment bill on sale (buyer base-year reset)",
+        "reason": "LA County FY2024-25 average rate (1.181%, BOE Pub 306) is verified (TX-11), but actual parcel tax-rate-area surcharges and current tax bill require owner/assessor records; buyer underwriting impact is not auto-subtracted from seller proceeds."
+      },
+      {
+        "item": "Alternative Minimum Tax",
+        "reason": "Requires Schedule P (540) preference items from the owner's full return. Thresholds are published so a CPA can be asked."
+      }
+    ],
     "source_deduction": "S24",
     "standard_deduction_2025": {
       "note": "FTB 2025 Form 540 instructions, California Standard Deduction Chart for Most People (Line 18).",
@@ -160,15 +182,16 @@
       "reason_not_applied": "Requires Schedule P (540) preference items from the owner's full return."
     },
     "credit_limitation_thresholds_2025": {
-      "note": "FTB 2025 Form 540 instructions, Box C.",
-      "single_or_head_of_household": 347808,
-      "married_joint": 463745,
-      "married_separate": 231868,
-      "source": "S24"
+      "note": "FTB 2025 Form 540 instructions, line 32 'AGI Limitation Worksheet'. If federal AGI (Form 540 line 13) exceeds these amounts for the filing status, exemption credits are reduced by $6 for each $2,500 of excess.",
+      "single_or_married_separate": 252203,
+      "married_joint_or_qualifying_surviving_spouse": 504411,
+      "head_of_household": 378310,
+      "source": "S24",
+      "corrected": "2026-11-26 — the previous record carried 347,808 / 463,745 / 231,868, which do not appear on the published FTB page. The values above are transcribed from the line 32 table."
     },
     "form_593_withholding_2026": {
       "status": "verified",
-      "source": "S38",
+      "source": "S38, S57",
       "total_sale_price_rate": 0.0333333333,
       "alternative_max_tax_rate_individual": 0.123,
       "corporate_rate": 0.0884,
@@ -177,7 +200,7 @@
     },
     "prop_13_and_transfer_tax": {
       "status": "verified",
-      "source": "S38",
+      "source": "S52, S54",
       "la_county_avg_property_tax_rate_2024_25": 0.01181,
       "prop_13_base_rate": 0.01,
       "prop_13_annual_inflation_cap": 0.02,
