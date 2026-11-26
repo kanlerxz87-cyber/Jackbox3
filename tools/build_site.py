@@ -83,6 +83,7 @@ SOURCES = {
     "CCPA": ("California Consumer Privacy Act (CCPA)", "https://oag.ca.gov/privacy/ccpa", "California Attorney General", "Fetched 2026-11-25/26; definition of personal information and consumer rights."),
     "ASSESSOR": ("Los Angeles County Assessor", "https://assessor.lacounty.gov/", "Los Angeles County", "Fetched 2026-11-25/26; official parcel/assessment record portal."),
     "LEGINFO": ("California Legislative Information", "https://leginfo.legislature.ca.gov/", "State of California", "Fetched 2026-11-25/26; official California codes."),
+    "CA_PROP13": ("California Constitution Article XIII A (Tax Limitation / Proposition 13)", "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&division=&title=&part=&chapter=&article=XIII%20A", "State of California Legislative Information", "Fetched 2026-11-26; Sec. 1(a) 1% ad valorem cap, Sec. 2(a) reassessment on change in ownership, Sec. 2(b) max 2%/yr inflation factor."),
     "GH_PAGES_DOCS": ("GitHub Pages documentation", "https://docs.github.com/en/pages", "GitHub, Inc.", "Official product documentation; used only for process irregularities, not for data values."),
 }
 
@@ -98,7 +99,7 @@ def begin_page(slug: str):
 NAV_GROUPS = [
     ("Overview", [("index.html", "Dashboard"), ("pages/executive-summary.html", "Executive Summary"), ("pages/decision-gates.html", "Decision Gates")]),
     ("Decide", [("pages/risks.html", "Risks & Decision"), ("pages/questions.html", "Questions & Answers"), ("pages/suggestions.html", "Suggestions")]),
-    ("Evidence", [("pages/market.html", "Market & Trade Area"), ("pages/hazards.html", "Hazards & Resilience"), ("pages/data-sources.html", "Data & Sources"), ("pages/flagged.html", "Flagged for Review")]),
+    ("Evidence", [("pages/market.html", "Market & Trade Area"), ("pages/hazards.html", "Hazards & Resilience"), ("pages/data-sources.html", "Data & Sources"), ("pages/verification.html", "Verification Log"), ("pages/flagged.html", "Flagged for Review")]),
     ("Tools", [("pages/lease-cashflow.html", "Lease & Cash Flow"), ("pages/calculator.html", "Private Calculator"), ("pages/privacy.html", "Privacy & Data Handling")]),
 ]
 
@@ -215,8 +216,8 @@ def page(slug, title, subtitle, sections, base, extra_head="", body_class=""):
     body = "\n".join(sections)
     foot = f'''</main>
 <footer class="footer">
-<p>Build {esc(BUILD_DATE)} · session <code>{esc(SESSION_ID)}</code> · model <code>{esc(MODEL_VERSION)}</code> · public anonymous summary only.</p>
-<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the {ilink(("pages/flagged.html" if base == "." else "flagged.html"), "Flagged for Review")} page. Raw verification log: {ilink(("../VERIFICATION.md" if base == "." else "../../VERIFICATION.md"), "VERIFICATION.md")}.</p>
+<p>Build {esc(BUILD_DATE)} · session <code>{esc(SESSION_ID)}</code> · model <code>{esc(MODEL_VERSION)}</code> · public anonymous summary only · {ilink(("../index.html" if base == "." else "../../index.html"), "Main Decision Site (root)")}.</p>
+<p>Every table row links to an official source. Blank values are flagged <strong>Unverified</strong> on the {ilink(("pages/flagged.html" if base == "." else "flagged.html"), "Flagged for Review")} page. Line-by-line verification log: {ilink(("pages/verification.html" if base == "." else "verification.html"), "Verification Log")} (raw markdown: {ilink(("../VERIFICATION.md" if base == "." else "../../VERIFICATION.md"), "VERIFICATION.md")}).</p>
 </footer>
 <script src="{js}"></script>
 </body>
@@ -702,6 +703,17 @@ s.append(section("Legal / official basis", table("Authority", "Relevance", "Sour
 ], "Official sources underpin the privacy boundary as well as the data.")))
 PAGES["workspace/pages/privacy.html"] = page("privacy.html", "Privacy & Data Handling", "Highest-urgency privacy policy: anonymisation, placeholders, internal-only records, and the secure location workflow.", s, "..")
 
+# --- Verification log (rendered HTML) --------------------------------------
+begin_page("pages/verification.html")
+ver_snapshot = list(VERIFIED_ROWS)
+ver_rows = []
+for idx_v, vr in enumerate(ver_snapshot, 1):
+    ver_rows.append(R(f"V{idx_v:03d} · {vr['v1']}", vr["v2"], f"{vr['page']} · {vr['v3']}", "Control", vr["sources"], "Text retrieved from official .gov page; transcribed verbatim without inference."))
+PAGES["workspace/pages/verification.html"] = page("verification.html", "Verification Log", "Rendered line-by-line audit register of every empirical value published in this workspace, linked to its primary .gov source.", [
+    section("Line-by-line verified observations", table("ID / Indicator", "Published value", "Page / Scope", ver_rows,
+        "Every verified empirical value published in /workspace/ is listed below with its official .gov source link. Unverified values are left blank and listed on Flagged for Review."))
+], "..")
+
 # --- Dashboard -------------------------------------------------------------
 verified_count = len(VERIFIED_ROWS)
 unverified_count = sum(1 for r in ALL_ROWS if r["unverified"])
@@ -734,6 +746,7 @@ for group, items in NAV_GROUPS:
             "Market & Trade Area": "W-01 trade-area framework, regional figures, tract trends, schools, traffic, jobs.",
             "Hazards & Resilience": "W-04 parcel screening, verified regional hazards, combined stress.",
             "Data & Sources": "Master official source register and verification summary.",
+            "Verification Log": "Rendered line-by-line audit register of every verified .gov observation.",
             "Flagged for Review": "Unverified values and irregularities with official links.",
             "Lease & Cash Flow": "Lease abstract placeholder, W-02 worksheet, after-tax rules, versioned model.",
             "Private Calculator": "Browser-only after-tax sell-vs-hold calculator with combined stress.",
