@@ -246,3 +246,31 @@ IR-01 fixed branch (no per-task branches); IR-02 legacy Pages build from `main`;
 | Merge result | **MERGED** 2026-11-25T14:11:14Z via `gh pr merge 6 --merge`; merge commit `fc58dfa` |
 | Pages deployment | **built** 2026-11-25T14:11:43Z (build `1402443065`, commit `fc58dfa`); live root and `/workspace/` URLs verified with HTTP 200 / fetched content |
 | Conflict rebase note | `git pull --rebase` was attempted before the final push but aborted because replaying `main`'s already-merged commits caused add/add conflicts; `origin/arena/dd713c44-jackbox3` was confirmed an ancestor of `HEAD`, so a fast-forward `git push` was used instead. No work was discarded. |
+
+---
+
+## Session `641e4e68` — comprehensive verification, tax-math & 2026 refresh (2026-11-26)
+
+### Scope & Audit Findings Resolved
+
+This session audited the entire repository (`build.py`, `data/findings.json`, `data/rules.json`, `assets/calculator.js`, `tools/build_site.py`, `workspace/assets/calculator.js`, and all generated pages) against live official `.gov` and SEC EDGAR filings as of **2026-11-26**:
+
+1. **Fixed `assets/calculator.js` tax & scope bugs**:
+   - Eliminated silent subtraction of non-sale `fedOrdTax` from sale `netProceeds` (now computes strict incremental federal tax `withSale - preSale`).
+   - Replaced independent `recaptureTax` / `fedLTCGTax` stacking with the exact **IRS Instructions for Schedule D (Form 1040) Schedule D Tax Worksheet (lines 1–47)** so unrecaptured §1250 gain fills Line 14 and ordinary brackets up to the 24% ceiling before 0%/15%/20% LTCG and 25% §1250 slicing.
+   - Included pre-existing `otherGain` in NIIT `baseMagi`/`baseNii` and California `caPreSale`/`bhstBase` baselines so both NIIT (3.8%) and California BHST (1% > $1M) measure pure incremental tax from the property sale.
+   - Added optional **City of LA Transfer Tax + Measure ULA** estimator (post-June 30, 2026 thresholds `$5,400,000` 4.0% / `$10,900,000` 5.5% + `0.56%` City+County base), **FTB Form 593** informational prepayment check (`3-1/3%` / `12.3%`), **Installment sale** equal-principal tranche preview (§1250 recognised first per Pub 537 / Schedule D), **§1031 deferral** toggle, and side-by-side **W-02 Hold/Renewal + Combined Stress** NPV comparison inside root `calculator.html` (zero network calls, zero storage).
+2. **Closed prior public-data gaps with verified 2026 `.gov` / SEC sources**:
+   - **Tax & transfer friction (`S38`, `S40`)**: BOE Pub 29 / FY24–25 Annual Report Pub 306 LA County avg property tax rate (`1.181%`), FTB 2026 Form 593 (`3-1/3%` gross / `12.3%` gain), and LA Office of Finance Measure ULA FAQ (`$5.4M` / `$10.9M` post-June 30, 2026).
+   - **Tenant credit & leases (`S28`–`S30`)**: Q3 FY26 Form 10-Q (`0000807882-26-000091`), Series 2026-1 `$500M` `7.624%` refinancing 8-K (`-000079`), and 2026 8-K governance/leadership series (`-000057`..`-000100`): `$1,492.0M` securitized debt (`$23.3M` cash sweep; ARDs Aug 2029, May 2031, Feb 2032), Note 5 standard 20-yr + 1–20-yr sole-discretion tenant option lease structure, `-18.0%` YTD franchise variable rent, Del Taco `$(47.4)M` loss + March 2026 Delaware Chancery suit, Qdoba `$22.9M` contingent lease guarantees, and 2026–27 C-suite / activist pact changes.
+   - **Macro, labour, wages, demographics, schools & hazards (`S31`–`S37`, `S39`)**: Census QuickFacts V2025 & CA DOF Jan 2026 E-1 population trends, SCAG Connect SoCal 2024 Adopted PEIR `+22.5%` 2019–2050 LA County households, BEA `$802.0B` 2023 Real GDP & `$818.5B` 2024 Personal Income (noting Feb 2026 MSA GDP discontinuation `BEA 26-08`), CA EDD Oct 2026p `4.6%` SA County unemp & `193,200` NAICS 722513 QSR jobs (`+1.6%` YoY), CA DIR `$16.90/hr` statewide / `$20.00/hr` AB 1228 fast-food min wage, NCES 2024–25 LAUSD `408,026` students + CDE/LAUSD 2024–25 CAASPP proficiency (`46.46%` ELA / `36.76%` Math / `27.28%` Science), USGS UCERF3 30-yr LA earthquake odds (`60%` M>=6.7 / `46%` M>=7.0 / `31%` M>=7.5), and CDI FAIR Plan `$20M/$100M` commercial cap sunsetting Jan 1, 2028.
+3. **Synchronized `/workspace/` (`tools/build_site.py`, `workspace/assets/calculator.js`)**:
+   - Fixed stale 2025 federal LTCG ceilings to 2026 Rev. Proc. 2025-32 (`$49,450/$545,500` Single; `$98,900/$613,700` MFJ), added `+1% CA BHST` and `LA Measure ULA` toggles to `workspace/assets/calculator.js`, resolved `CENSUS_COUNTY` (`IR-06`) while keeping W-01 parcel trade-area cells blank, synced Q3 FY26 SEC 10-Q/8-K data (role titles only), and fixed the `"job growthShould"` typo in `Q05`.
+   - Fixed `build.py` `index.html` drift so regenerating root pages preserves the `/workspace/` callout, and removed stale pass-1 unverified MHST / unread-8K text across `data/rules.json` and `build.py`.
+
+### Automated Verification
+
+- Root generator (`python3 build.py`) + validator (`python3 scripts/check_site.py`): **PASSED** (18 root pages, 40 sources, zero warnings/errors).
+- Workspace generator (`python3 tools/build_site.py`) + validator (`python3 tools/validate_site.py`): **OK** (13 files, 236 internal links, 577 external `.gov`/docs links, 353 rows, 148 verified rows, 114 unverified blank rows, zero PII).
+- Node.js unit suites verifying exact Schedule D Tax Worksheet stacking, incremental federal/NIIT/CA/BHST math, Measure ULA tiers, §1031 deferral, and W-02 Hold/Sell NPV on both `assets/calculator.js` and `workspace/assets/calculator.js`: **PASSED**.
+

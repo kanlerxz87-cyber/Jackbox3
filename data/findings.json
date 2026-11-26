@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "Verified findings dataset",
-    "compiled": "2026-11-25",
-    "session": "arena/47b70455-jackbox3",
+    "compiled": "2026-11-26",
+    "session": "arena/641e4e68-jackbox3",
     "status_vocabulary": {
       "verified": "Value read directly from an official government or SEC source during this session. Source URL recorded.",
       "derived": "Arithmetic computed by this project from two or more verified values. The formula is recorded in the `formula` field. Inputs are verified; the arithmetic is reproducible.",
@@ -11,7 +11,7 @@
       "assumption": "A modelling assumption, not a fact. Supplied by the reader in the private calculator. Never presented as data."
     },
     "geography_note": "The parcel's real address and coordinates are NOT in this repository and have deliberately not been researched. All spatial figures are computed for a CENTRAL LOS ANGELES REFERENCE POINT at latitude 34.0537, longitude -118.2428 (the Los Angeles Civic Center). These are trade-area proxies for 'central Los Angeles', not parcel-level facts.",
-    "revision": "2026-11-25 second pass: TX-07 moved from unverified to verified, and TX-15 and TX-16 added, after the FTB 2025 Form 540 instructions were successfully retrieved. The section 1250 treatment in rules.json was corrected from a flat 25% rate to a 25% ceiling in the same pass."
+    "revision": "2026-11-26 full audit pass: verified Q3 FY26 10-Q debt tranches/ARDs/Note 5 lease structure/Del Taco litigation/2026 8-K leadership changes (S28-S30); verified QuickFacts V2025 & DOF E-1 population trends (S31-S32); verified SCAG Connect SoCal 2024 PEIR 2050 growth projections (S33); verified BEA LA County GDP & personal income (S34); verified CA EDD LA County QSR payrolls & DIR $16.90/$20.00 min wages (S35-S36); verified 2024-25 NCES LAUSD enrollment & CDE/LAUSD CAASPP proficiency (S37); verified BOE Prop 13 1.181% LA rate, FTB 2026 Form 593, and LA Measure ULA $5.4M/$10.9M post-June 2026 thresholds (S38); verified USGS UCERF3 30-yr earthquake probabilities & CDI FAIR Plan commercial limits (S39); and verified IRS Schedule D Tax Worksheet lines 1-47 stacking (S40)."
   },
   "sources": [
     {
@@ -231,6 +231,113 @@
       "tier": "Primary \u2014 official site",
       "retrieved": "2026-11-25",
       "caveat": "The site is JavaScript-driven; a scripted query returned zero rows, so no school-level proficiency data could be captured here."
+    },
+    {
+      "id": "S28",
+      "name": "Jack in the Box Inc. Form 10-Q for Q3 FY2026 (ended 2026-07-05, accession 0000807882-26-000091)",
+      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
+      "url": "https://www.sec.gov/Archives/edgar/data/807882/000080788226000091/jack-20260705.htm",
+      "tier": "Primary \u2014 company filing",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S29",
+      "name": "Jack in the Box Inc. Form 8-K Exhibit 99.1 \u2014 Series 2026-1 $500M Senior Notes refinancing (filed 2026-06-23, accession 0000807882-26-000079)",
+      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
+      "url": "https://www.sec.gov/Archives/edgar/data/807882/000080788226000079/ex991-pressreleasexdebtclo.htm",
+      "tier": "Primary \u2014 company filing",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S30",
+      "name": "Jack in the Box Inc. 2026 Form 8-K governance and officer transition series (2026-03-04 through 2026-11-17, incl. accession 0000807882-26-000100)",
+      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
+      "url": "https://www.sec.gov/Archives/edgar/data/807882/000080788226000100/jack-20261113.htm",
+      "tier": "Primary \u2014 company filing",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S31",
+      "name": "U.S. Census Bureau QuickFacts \u2014 Los Angeles City & Los Angeles County (V2025 estimates & 2020\u20132024 ACS)",
+      "publisher": "U.S. Census Bureau",
+      "url": "https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia,losangelescountycalifornia/RHI125217",
+      "tier": "Primary \u2014 official release",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S32",
+      "name": "California Department of Finance \u2014 E-1 Cities, Counties, and State Population Estimates (Jan 1, 2026)",
+      "publisher": "California Department of Finance",
+      "url": "https://dof.ca.gov/media/docs/forecasting/demographics/estimates/e-1_2026_press_release.Pdf",
+      "tier": "Primary \u2014 official release",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S33",
+      "name": "SCAG Connect SoCal 2024 Adopted Final PEIR Appendix I \u2014 Socioeconomic Growth Forecasts (2019\u20132050)",
+      "publisher": "Southern California Association of Governments",
+      "url": "https://sustain.scag.ca.gov/sites/default/files/2024-05/appendix_i_updated_tables_508_final.pdf",
+      "tier": "Primary \u2014 official regional MPO projection",
+      "retrieved": "2026-11-26",
+      "caveat": "Official adopted regional planning projections (not observations)."
+    },
+    {
+      "id": "S34",
+      "name": "U.S. Bureau of Economic Analysis \u2014 Personal Income & Real GDP by County (BEA 26-08 / BEA 24-60)",
+      "publisher": "U.S. Bureau of Economic Analysis",
+      "url": "https://www.bea.gov/sites/default/files/2026-02/lagdppi0226.pdf",
+      "tier": "Primary \u2014 official release",
+      "retrieved": "2026-11-26",
+      "caveat": "BEA formally discontinued standalone MSA GDP tables in Feb 2026 (BEA 26-08), while continuing county GDP and personal income."
+    },
+    {
+      "id": "S35",
+      "name": "California EDD Labor Market Info \u2014 Los Angeles County Monthly Labor Force & Industry Employment (Oct 2026p)",
+      "publisher": "California Employment Development Department",
+      "url": "https://labormarketinfo.edd.ca.gov/file/lfmonth/la$pds.pdf",
+      "tier": "Primary \u2014 official release",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S36",
+      "name": "California DIR \u2014 Statewide Minimum Wage ($16.90 eff. 2026-01-01) & AB 1228 Fast Food Minimum Wage ($20.00)",
+      "publisher": "California Department of Industrial Relations",
+      "url": "https://www.dir.ca.gov/dlse/minimum_wage.htm",
+      "tier": "Primary \u2014 official guidance",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S37",
+      "name": "NCES District Detail 0622710 (2024\u201325) & CDE / LAUSD 2024\u201325 CAASPP Assessment Results",
+      "publisher": "NCES / California Department of Education / LAUSD",
+      "url": "https://www.cde.ca.gov/nr/ne/yr25/yr25rel43.asp",
+      "tier": "Primary \u2014 official release",
+      "retrieved": "2026-11-26",
+      "caveat": "District-wide LAUSD metrics from NCES CCD 2024-25 (ID2=0622710), CDE release yr25rel43, and LAUSD Oct 2025 release; parcel-specific attendance school remains unverified."
+    },
+    {
+      "id": "S38",
+      "name": "CA BOE Pub 29 / FY24\u201325 Pub 306, FTB 2026 Form 593, and City of LA Measure ULA FAQ (post-June 2026 thresholds)",
+      "publisher": "CA Board of Equalization / CA FTB / LA Office of Finance",
+      "url": "https://finance.lacity.gov/faq/measure-ula",
+      "tier": "Primary \u2014 official tax guidance",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S39",
+      "name": "USGS UCERF3 Los Angeles 30-Yr Earthquake Probabilities & CA Dept. of Insurance FAIR Plan Commercial Limits",
+      "publisher": "U.S. Geological Survey / California Department of Insurance",
+      "url": "https://www.usgs.gov/faqs/what-probability-earthquake-will-occur-los-angeles-area-san-francisco-bay-area",
+      "tier": "Primary \u2014 official scientific & insurance guidance",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S40",
+      "name": "IRS Instructions for Schedule D (Form 1040) \u2014 Schedule D Tax Worksheet (lines 1\u201347) & Installment Sales",
+      "publisher": "Internal Revenue Service",
+      "url": "https://www.irs.gov/instructions/i1040sd",
+      "tier": "Primary \u2014 official guidance",
+      "retrieved": "2026-11-26"
     }
   ],
   "findings": [
@@ -735,7 +842,7 @@
       "geo": "CBSA 31080",
       "status": "unverified",
       "source": "\u2014",
-      "note": "The BLS v1 API returns unadjusted local-area rates only for this series. Not converted; conversion is not an official figure."
+      "note": "The BLS v1 API returns unadjusted local-area rates only for the two-county MSA. CA EDD publishes seasonally adjusted LA County unemployment (4.6% in Oct 2026p; see EC-18)."
     },
     {
       "id": "EC-16",
@@ -746,8 +853,8 @@
       "period": "\u2014",
       "geo": "CBSA 31080",
       "status": "unverified",
-      "source": "\u2014",
-      "note": "Bureau of Economic Analysis data could not be retrieved in this session."
+      "source": "S34",
+      "note": "BEA formally discontinued standalone MSA GDP tables in February 2026 (BEA 26-08). County-level LA County Real GDP ($802.0B) and Personal Income ($818.5B) are published and verified in EC-21 and EC-22."
     },
     {
       "id": "EC-17",
@@ -760,6 +867,66 @@
       "status": "verified",
       "source": "S26",
       "note": "Federal Reserve national summary. Direct quotation of the substance, not a projection."
+    },
+    {
+      "id": "EC-18",
+      "section": "Economy & labour",
+      "metric": "Seasonally adjusted unemployment rate \u2014 Los Angeles County",
+      "value": "4.6",
+      "unit": "%",
+      "period": "October 2026 (preliminary)",
+      "geo": "County 06037",
+      "status": "verified",
+      "source": "S35",
+      "note": "CA EDD LA County release (down from 4.8% in Sep 2026 and 5.9% in Oct 2025). NSA county nonfarm employment 4,662,800 (+0.9% YoY)."
+    },
+    {
+      "id": "EC-19",
+      "section": "Economy & labour",
+      "metric": "Limited-service restaurants (NAICS 722513) payroll employment \u2014 LA County",
+      "value": "193200",
+      "unit": "jobs",
+      "period": "October 2026 (preliminary)",
+      "geo": "County 06037",
+      "status": "verified",
+      "source": "S35",
+      "note": "Up +1.6% (+3,000 jobs) YoY in NAICS 722513 (QSR / limited-service eating places); broader Food Services & Drinking Places stands at 395,000 (+1.9% YoY)."
+    },
+    {
+      "id": "EC-20",
+      "section": "Economy & labour",
+      "metric": "California statutory & AB 1228 fast-food minimum wage",
+      "value": "$16.90 statewide / $20.00 fast-food",
+      "unit": "USD/hour",
+      "period": "2026 (eff. Jan 1, 2026 / Apr 1, 2024)",
+      "geo": "California",
+      "status": "verified",
+      "source": "S36",
+      "note": "Direct labour-cost floor affecting California QSR store margins (41.3% of Jack in the Box system units sit in California per Q3 FY26 10-Q)."
+    },
+    {
+      "id": "EC-21",
+      "section": "Economy & labour",
+      "metric": "Real gross domestic product \u2014 Los Angeles County",
+      "value": "802000000000",
+      "unit": "USD (chained 2017$)",
+      "period": "2023 (latest county GDP)",
+      "geo": "County 06037",
+      "status": "verified",
+      "source": "S34",
+      "note": "BEA release: $802.0B real GDP (+1.0% YoY), ranking #1 among all U.S. counties."
+    },
+    {
+      "id": "EC-22",
+      "section": "Economy & labour",
+      "metric": "Personal income \u2014 Los Angeles County",
+      "value": "818500000000",
+      "unit": "USD",
+      "period": "2024",
+      "geo": "County 06037",
+      "status": "verified",
+      "source": "S34",
+      "note": "BEA county personal income $818.5B (#1 among U.S. counties; see BEA 26-08)."
     },
     {
       "id": "DM-01",
@@ -916,38 +1083,50 @@
     {
       "id": "DM-13",
       "section": "Demographics",
-      "metric": "Population change \u2014 Los Angeles County, 2019\u20132023 ACS",
-      "value": "",
-      "unit": "%",
-      "period": "2019 vs 2023 ACS 5-year",
-      "geo": "County 06037",
-      "status": "unverified",
-      "source": "\u2014",
-      "note": "The acs2019_5yr release could not be retrieved in this session, so no multi-year population trend is asserted. Trend claims would have to rest on raw Census counts, which were not pulled."
+      "metric": "Population change \u2014 Los Angeles County & City (V2025 & DOF E-1)",
+      "value": "-3.2% County (Apr 2020\u2013Jul 2025) / -0.6% YoY (Jan 2026 E-1)",
+      "unit": "text",
+      "period": "Apr 2020\u2013Jan 2026",
+      "geo": "County 06037 / LA City",
+      "status": "verified",
+      "source": "S31, S32",
+      "note": "Census QuickFacts V2025: LA County July 1, 2025 pop 9,694,934 (-3.2% vs 2020 base) and LA City 3,869,089 (-0.8%). CA DOF Jan 1, 2026 E-1: LA County 9,837,286 (-0.6% YoY) and LA City 3,806,201 (-0.9% YoY). County/City trend is mild outflow; tract-level multi-year ACS remains unverified (DM-15)."
     },
     {
       "id": "DM-14",
       "section": "Demographics",
-      "metric": "Household growth projection",
+      "metric": "Adopted long-term household growth projection (2019\u20132050)",
+      "value": "+22.5% Households (+7.4% Pop, +8.6% Jobs)",
+      "unit": "text",
+      "period": "2019\u20132050",
+      "geo": "County 06037",
+      "status": "flagged",
+      "source": "S33",
+      "note": "SCAG Connect SoCal 2024 Adopted Final PEIR Table 12 (official MPO planning projection, not an observation): LA County households projected from 3,393k (2019) to 3,784k (2030) to 4,155k (2050); population 10,046k to 10,793k; jobs 5,031k to 5,461k. Contrasts with recent 2020\u20132026 net population contraction (DM-13)."
+    },
+    {
+      "id": "DM-15",
+      "section": "Demographics",
+      "metric": "Multi-year ACS time series at Census Tract 2074",
       "value": "",
       "unit": "%",
-      "period": "\u2014",
-      "geo": "County 06037",
+      "period": "2019 vs 2024 ACS 5-year",
+      "geo": "Tract 06037207400",
       "status": "unverified",
       "source": "\u2014",
-      "note": "No official Department of Finance or SCAG projection was retrieved. Not projected here."
+      "note": "Keyless requests to api.census.gov are rejected, so no multi-year tract-level ACS series was pulled. Requires a free Census API key."
     },
     {
       "id": "SC-01",
       "section": "Schools",
       "metric": "Los Angeles Unified School District enrolment (NCES LEAID 0622710)",
-      "value": "427795",
+      "value": "408026",
       "unit": "students",
-      "period": "2022 school year",
+      "period": "2024\u20132025 school year (vs 427,795 in 2022)",
       "geo": "LAUSD",
       "status": "verified",
-      "source": "S25",
-      "note": "NCES Common Core of Data total enrolment, grade 99 (all grades) record."
+      "source": "S25, S37",
+      "note": "Updated to NCES CCD 2024-25 District Detail (784 operational schools; -4.6% enrolment decline vs 2022 S25; FY22-23 total revenue $14.77B or $32,681/pupil)."
     },
     {
       "id": "SC-02",
@@ -971,7 +1150,7 @@
       "geo": "Reference tract",
       "status": "unverified",
       "source": "S27",
-      "note": "The California Department of Education CAASPP and California School Dashboard endpoints could not be queried, and the NCES school locator is JavaScript-driven. No school-quality figure is asserted. This is a named evidence gap (GATE-12)."
+      "note": "District-wide LAUSD 2024\u201325 CAASPP proficiency is verified in SC-05 (46.46% ELA, 36.76% Math), but parcel-specific attendance-area school proficiency remains unverified because the parcel address is withheld (GATE-12)."
     },
     {
       "id": "SC-04",
@@ -984,6 +1163,18 @@
       "status": "unverified",
       "source": "S27",
       "note": "Requires the parcel address and a property-to-school attendance-area lookup."
+    },
+    {
+      "id": "SC-05",
+      "section": "Schools",
+      "metric": "LAUSD district-wide 2024\u201325 CAASPP proficiency (met or exceeded standard)",
+      "value": "46.46% ELA (+3.40 pp) / 36.76% Math (+3.93 pp) / 27.28% Science (+3.32 pp)",
+      "unit": "text",
+      "period": "2024\u20132025 school year",
+      "geo": "LAUSD",
+      "status": "verified",
+      "source": "S37",
+      "note": "CDE release yr25rel43 (+3.4/+3.9/+3.3 pp gains for LAUSD; CA statewide 48.8% ELA, 37.3% Math, 32.7% Science) paired with LAUSD Oct 9, 2025 official CAASPP summary."
     },
     {
       "id": "H-01",
@@ -1238,6 +1429,30 @@
       "note": "No official per-parcel wildfire history was retrieved. CAL FIRE's zone layer (H-03/H-04) is a hazard designation, not a loss history."
     },
     {
+      "id": "H-22",
+      "section": "Hazard screening (W-04)",
+      "metric": "USGS UCERF3 30-year Los Angeles region earthquake probabilities",
+      "value": "60% (M>=6.7) / 46% (M>=7.0) / 31% (M>=7.5)",
+      "unit": "probability",
+      "period": "30-year UCERF3 forecast",
+      "geo": "Los Angeles region",
+      "status": "verified",
+      "source": "S39",
+      "note": "Regional 30-year rupture probability framing the physical hazard behind Design Category D (H-06) and FEMA NRI Very High score (H-09)."
+    },
+    {
+      "id": "H-23",
+      "section": "Hazard screening (W-04)",
+      "metric": "California FAIR Plan commercial property coverage limits (CDI)",
+      "value": "$20M per building / $100M per location (2028 sunset)",
+      "unit": "USD coverage cap",
+      "period": "Current CDI order (sunsetting Jan 1, 2028)",
+      "geo": "California",
+      "status": "verified",
+      "source": "S39",
+      "note": "Last-resort commercial coverage capacity ordered by California Dept. of Insurance, with a 20% wildfire-hardening discount; illustrates insurer-retreat backstop and 2028 sunset risk."
+    },
+    {
       "id": "TX-01",
       "section": "After-tax rules",
       "metric": "Federal long-term capital gain \u2014 0% bracket ceiling, single filer",
@@ -1360,26 +1575,38 @@
     {
       "id": "TX-11",
       "section": "After-tax rules",
-      "metric": "Property tax reassessment on change of ownership (Proposition 13 base-year rules)",
-      "value": "",
-      "unit": "\u2014",
-      "period": "\u2014",
+      "metric": "Property tax reassessment on change of ownership (Proposition 13 & BOE average rate)",
+      "value": "Full reassessment to fair market value; 1.181% LA County avg rate (FY24\u201325)",
+      "unit": "text",
+      "period": "FY2024\u20132025 BOE Annual Report",
       "geo": "Los Angeles County",
-      "status": "unverified",
-      "source": "\u2014",
-      "note": "The County Assessor and Board of Equalization pages could not be retrieved. Property tax after a sale is a material cost to a BUYER and therefore to the achievable price. Excluded, flagged for professional confirmation."
+      "status": "verified",
+      "source": "S38",
+      "note": "CA BOE Pub 29 & FY24-25 Annual Report (Pub 306): 1% Prop 13 base + voter-approved debt (LA County avg 1.181%); 2% max annual inflation cap while held; full market-value reassessment upon ownership change affects a buyer's underwriting unless NNN lease passes full tax through."
     },
     {
       "id": "TX-12",
       "section": "After-tax rules",
-      "metric": "California source rules and nonresident withholding on the sale",
-      "value": "",
-      "unit": "\u2014",
-      "period": "\u2014",
+      "metric": "California real estate withholding at closing (FTB Form 593)",
+      "value": "3-1/3% of sales price or 12.3% optional gain election",
+      "unit": "text",
+      "period": "Tax year 2026 (FTB Form 593)",
       "geo": "California",
-      "status": "unverified",
-      "source": "\u2014",
-      "note": "FTB Form 593 withholding requirements were not retrieved. Not modelled."
+      "status": "verified",
+      "source": "S38",
+      "note": "Prepayment withheld by escrow and credited against final CA income tax return (individuals: 3-1/3% gross price or 12.3% optional gain; corps 8.84%; S-corps 13.8%; installment buyers withhold on principal). Not an additional tax, though it affects cash received on closing day."
+    },
+    {
+      "id": "TX-17",
+      "section": "After-tax rules",
+      "metric": "City of Los Angeles Documentary Transfer Tax & Measure ULA thresholds (post-June 30, 2026)",
+      "value": "0.56% City+County <=$5.4M / 4.56% ($5.4M\u2013$10.9M) / 6.06% >=$10.9M",
+      "unit": "rate on consideration",
+      "period": "Effective after 2026-06-30",
+      "geo": "City of Los Angeles",
+      "status": "verified",
+      "source": "S38",
+      "note": "LA Office of Finance Measure ULA FAQ: City Base $2.25/$500 (0.45%) + County $1.10/$1,000 (0.11%) plus Measure ULA 4.0% (> $5,400,000 to < $10,900,000) and 5.5% (>= $10,900,000) on gross consideration including liens. Applies only if parcel sits inside City of LA."
     },
     {
       "id": "TX-13",
@@ -1604,26 +1831,26 @@
     {
       "id": "TE-17",
       "section": "Tenant & franchise credit",
-      "metric": "Jack in the Box corporate debt refinancing terms",
-      "value": "Refinancing described as complete",
+      "metric": "Jack in the Box securitized debt stack, refinancing terms & ARD maturities",
+      "value": "$1,492.0m principal (4.14%\u20137.62%; ARDs Feb 2027\u2013Feb 2032) + $23.3m cash sweep",
       "unit": "text",
-      "period": "Q3 FY2026",
+      "period": "Q3 FY2026 (2026-07-05)",
       "geo": "Company",
       "status": "verified",
-      "source": "S15",
-      "note": "Stated by the interim CEO in the Q3 FY2026 release. An 8-K covering a material definitive agreement and a new financial obligation was filed 2026-06-23 (accession 0000807882-26-000079). Terms themselves were not read."
+      "source": "S28, S29",
+      "note": "Q3 FY26 10-Q Note 7 & June 23, 2026 8-K: $426.4M @ 4.970% (ARD Aug 2029), $500.0M Series 2026-1 @ 7.624% (ARD May 2031, replacing 2019-1 A-2-II & 2022-1 A-2-I), $503.3M @ 4.136% (ARD Feb 2032), $23.4M @ 3.445% (ARD Feb 2027), $39.0M VFN @ 6.946%. Senior ABS leverage > 5.25x triggered mandatory $23.3M current cash-sweep amortization. Notice ARDs cluster in 2029\u20132032 inside the subject lease's 2030\u20132035 expiry window."
     },
     {
       "id": "TE-18",
       "section": "Tenant & franchise credit",
-      "metric": "Officer changes affecting the tenant",
-      "value": "Item 5.02 8-K filed 2026-11-17",
+      "metric": "2026 governance, rights plan & executive succession (SEC Form 8-K series)",
+      "value": "CEO/CFO/CSCO turnover; President appointed Sep 2026; Rights Plan & activist pact to 2028",
       "unit": "text",
-      "period": "2026-11-17",
+      "period": "Mar\u2013Nov 2026",
       "geo": "Company",
-      "status": "flagged",
-      "source": "S17",
-      "note": "The filing was identified in the EDGAR index; its body was not read, so post-November 2026 officer status is unverified. The CEO transitioned to Mark King as interim CEO during 2026 per the Q3 release."
+      "status": "verified",
+      "source": "S30",
+      "note": "Verified from 2026 Form 8-Ks: Rights Plan ratified to July 1, 2028 (Mar 4 8-K); CEO departed May 2026 and Interim CEO appointed; CSCO exited Jul 2026; CFO exited Aug 2026; new President/CEO-track appointed eff. Sep 2026; GreenWood Cooperation Agreement extended to 2028 (Jul 7 8-K); Nov 17 2026 8-K disclosed planned 2027 CFO/CLAO/CTO transitions and COO promotion."
     },
     {
       "id": "TE-19",
@@ -1648,6 +1875,66 @@
       "status": "unverified",
       "source": "\u2014",
       "note": "No official source publishes private commercial rents. Requires broker rent comps. This is the gap behind the request to 'price the short-lease discount from real quotes'."
+    },
+    {
+      "id": "TE-21",
+      "section": "Tenant & franchise credit",
+      "metric": "40-week FY2026 system same-store sales & franchise variable-rent trend",
+      "value": "-4.2% YTD SSS / -18.0% franchise variable rent ($66.3m vs $80.8m)",
+      "unit": "text",
+      "period": "40 weeks ended 2026-07-05",
+      "geo": "Company-wide",
+      "status": "verified",
+      "source": "S28",
+      "note": "Q3 FY26 10-Q Note 5 & MD&A: 40-wk franchise rental revenues fell 6.8% ($242.5m vs $260.3m) while occupancy costs fell only 2.3% ($166.0m vs $169.9m), compressing JACK's net franchise rental spread by 15.4% ($76.5m vs $90.4m). Operating cash flow was $15.0m (vs $91.6m prior-yr 40 wks) after ~$11.0m franchisee deferrals."
+    },
+    {
+      "id": "TE-22",
+      "section": "Tenant & franchise credit",
+      "metric": "Jack in the Box standard lease architecture (10-Q Note 5)",
+      "value": "20-yr initial terms + 1\u201320 yr tenant sole-discretion renewal options",
+      "unit": "text",
+      "period": "Q3 FY2026 10-Q",
+      "geo": "Portfolio-wide",
+      "status": "verified",
+      "source": "S28",
+      "note": "Q3 FY26 10-Q Note 5 states initial real estate leases are generally 20 years, exclusive of renewal options generally exercisable at JACK's sole discretion for 1 to 20 years, with percentage rent, escalations, and NNN tax/insurance/maintenance obligations. Must check whether subject lease follows this template (GATE-01)."
+    },
+    {
+      "id": "TE-23",
+      "section": "Tenant & franchise credit",
+      "metric": "Del Taco divestiture loss & Delaware Chancery litigation",
+      "value": "$(47,428)k discontinued loss; post-closing suit filed 2026-03-13",
+      "unit": "text",
+      "period": "40 weeks ended 2026-07-05",
+      "geo": "Discontinued ops",
+      "status": "verified",
+      "source": "S28",
+      "note": "Q3 FY26 10-Q Note 4: sold Del Taco on 2025-12-22 for $119.3m net cash proceeds; buyer sued in Delaware Court of Chancery (2026-03-13) alleging pre-closing breaches. Highlights residual litigation overhang and historical capital allocation drag."
+    },
+    {
+      "id": "TE-24",
+      "section": "Tenant & franchise credit",
+      "metric": "Contingent off-balance-sheet lease guarantees (Qdoba)",
+      "value": "22900000",
+      "unit": "USD",
+      "period": "As of 2026-07-05 (expiring through 2032)",
+      "geo": "Company",
+      "status": "verified",
+      "source": "S28",
+      "note": "Q3 FY26 10-Q Note 13: $22.9m maximum potential future contingent exposure on guaranteed Qdoba leases expiring through 2032."
+    },
+    {
+      "id": "TE-25",
+      "section": "Tenant & franchise credit",
+      "metric": "California footprint share & Q3 / YTD real-estate sale gains",
+      "value": "41.3% of units in CA (874 stores); $9.6m Q3 / $18.9m YTD RE gains",
+      "unit": "text",
+      "period": "Q3 FY2026 (2026-07-05)",
+      "geo": "California / System",
+      "status": "verified",
+      "source": "S28",
+      "note": "High California store concentration exposes system cash flow directly to AB 1228 $20/hr fast-food wage pressure (EC-20), while JACK actively sold company real estate ($18.9m YTD gains across 40 weeks) to pay down debt."
     },
     {
       "id": "VA-01",
