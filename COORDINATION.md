@@ -11,6 +11,7 @@ Last updated: 2026-11-25 (session `arena/47b70455-jackbox3`)
 | Session ID | Branch | Scope (files it may edit) | Status |
 |---|---|---|---|
 | `47b70455` | `arena/47b70455-jackbox3` | Everything in this table below; sole active session at time of writing | active |
+| `19cf2e41` | `arena/19cf2e41-jackbox3` | Independent audit + re-verification pass (T-23…T-27 below); `data/findings.json`, `build.py`, generated HTML, `VERIFICATION.md`, `COORDINATION.md` | active |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -48,6 +49,11 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-20 | Link + integrity check script | done | `47b70455` | `scripts/check_site.py` |
 | T-21 | Integration: merge, re-verify, publish to Pages | done | `47b70455` | `main` |
 | T-22 | Pull request → merge → confirm deploy (PR #1) | done | `47b70455` | `main` |
+| T-23 | Independent re-verification of published findings against official sources (spot audit) | in progress | `19cf2e41` | `data/findings.json`, generated HTML |
+| T-24 | Fix ACS mirror source link drift (`/latest` → pinned `acs2024_5yr`) | in progress | `19cf2e41` | `data/findings.json`, `sources.html` |
+| T-25 | Record USGS ASCE 7-16 s1d partial recovery (2026-11-26 re-fetch) | in progress | `19cf2e41` | `data/findings.json`, `hazards.html` |
+| T-26 | Append independent spot-check log to workspace VERIFICATION.md | in progress | `19cf2e41` | `VERIFICATION.md` |
+| T-27 | Rebuild, checks, PR, merge, confirm Pages deploy, record | in progress | `19cf2e41` | `main` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
