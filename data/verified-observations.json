@@ -1311,6 +1311,15 @@
       ]
     },
     {
+      "page": "pages/data-sources.html",
+      "indicator": "CA_PROP13",
+      "value": "State of California Legislative Information",
+      "scope": "California Constitution Article XIII A (Tax Limitation / Proposition 13)",
+      "sources": [
+        "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&division=&title=&part=&chapter=&article=XIII%20A"
+      ]
+    },
+    {
       "page": "pages/privacy.html",
       "indicator": "Aggregate official statistics",
       "value": "Published with source links",

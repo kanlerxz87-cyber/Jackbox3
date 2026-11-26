@@ -477,6 +477,22 @@
       "url": "https://www.insurance.ca.gov/",
       "tier": "Primary — official state insurance backstop portal",
       "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S59",
+      "name": "Jack in the Box Inc. FY2025 Form 10-K — Consolidated Statements of Operations (filed 2025-11-19, accession 0000807882-25-000072)",
+      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
+      "url": "https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm",
+      "tier": "Primary — audited company filing",
+      "retrieved": "2026-11-26"
+    },
+    {
+      "id": "S60",
+      "name": "California Constitution Article XIII A — Tax Limitation (Proposition 13)",
+      "publisher": "State of California Legislative Information",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&division=&title=&part=&chapter=&article=XIII%20A",
+      "tier": "Primary — state constitutional text",
+      "retrieved": "2026-11-26"
     }
   ],
   "findings": [
@@ -1395,7 +1411,7 @@
       "geo": "34.05, -118.24",
       "status": "unverified",
       "source": "S10",
-      "note": "Re-queried 2026-11-26: the service now returns s1d = 0.785 g, but sm1, sd1 and sdc1 are STILL null for this latitude/longitude and site class, while SDS and SDC are populated (H-05, H-06). The nulls are reported as-is and have NOT been back-filled; s1d alone is not adopted as a verified value because the bundled S_1-based set is what the worksheet consumes."
+      "note": "Re-fetched 2026-11-26 (session 19cf2e41): the service now returns s1d = 0.785 g (s1uh = 0.781, model v4.0.x), which was null at the 2026-11-25 build. sd1, sm1, sdc1 and sdc are still null for this latitude/longitude and site class, while SDS and SDC (short period, \u2018D\u2019) are populated. The nulls are reported as-is and have NOT been back-filled; s1d alone is not a design value."
     },
     {
       "id": "H-09",
@@ -1706,8 +1722,8 @@
       "period": "FY2024–2025 BOE Annual Report",
       "geo": "Los Angeles County",
       "status": "verified",
-      "source": "S39, S52",
-      "note": "CA BOE Pub 29 & FY24-25 Annual Report (Pub 306): 1% Prop 13 base + voter-approved debt (LA County avg 1.181%); 2% max annual inflation cap while held; full market-value reassessment upon ownership change affects a buyer's underwriting unless NNN lease passes full tax through."
+      "source": "S39, S52, S60",
+      "note": "Cal. Const. Art. XIII A (S60) & CA BOE Pub 29 / FY24-25 Annual Report (Pub 306, S52): 1% Prop 13 base + voter-approved debt (LA County avg 1.181%); 2% max annual inflation cap while held; full market-value reassessment upon ownership change affects a buyer's underwriting unless NNN lease passes full tax through."
     },
     {
       "id": "TX-12",
@@ -2048,6 +2064,42 @@
       "status": "verified",
       "source": "S43",
       "note": "High California store concentration exposes system cash flow directly to AB 1228 $20/hr fast-food wage pressure (EC-20), while JACK actively sold company real estate ($18.9m YTD gains across 40 weeks) to pay down debt."
+    },
+    {
+      "id": "TE-26",
+      "section": "Tenant & franchise credit",
+      "metric": "Jack in the Box Inc. franchise rental revenues, fiscal 2023",
+      "value": "364591000",
+      "unit": "USD",
+      "period": "FY2023",
+      "geo": "Company-wide",
+      "status": "verified",
+      "source": "S59",
+      "note": "FY2025 Form 10-K Consolidated Statements of Operations ($364,591 thousand). Establishes the audited three-year annual franchise rental revenue series."
+    },
+    {
+      "id": "TE-27",
+      "section": "Tenant & franchise credit",
+      "metric": "Jack in the Box Inc. franchise rental revenues, fiscal 2024",
+      "value": "375428000",
+      "unit": "USD",
+      "period": "FY2024",
+      "geo": "Company-wide",
+      "status": "verified",
+      "source": "S59",
+      "note": "FY2025 Form 10-K Consolidated Statements of Operations ($375,428 thousand; +3.0% vs FY2023)."
+    },
+    {
+      "id": "TE-28",
+      "section": "Tenant & franchise credit",
+      "metric": "Jack in the Box Inc. franchise rental revenues, fiscal 2025",
+      "value": "368643000",
+      "unit": "USD",
+      "period": "FY2025",
+      "geo": "Company-wide",
+      "status": "verified",
+      "source": "S59",
+      "note": "FY2025 Form 10-K Consolidated Statements of Operations ($368,643 thousand; -1.8% vs FY2024 as franchised unit count declined)."
     },
     {
       "id": "VA-01",

@@ -1,6 +1,6 @@
 # COORDINATION.md — Shared Task Board
 
-Last updated: 2026-11-26 (session `arena/7c607b54-jackbox3`; final source-integrity integration)
+Last updated: 2026-11-26 (sessions `arena/7c607b54-jackbox3` final source-integrity integration; `arena/641e4e68-jackbox3` + `arena/b544c65d-jackbox3` unified 2026 audit & privacy scrub; `arena/19cf2e41-jackbox3` independent re-verification + merge reconciliation)
 
 > This file is the single shared task board for all agent sessions working on this repo.
 > Read it before starting any task. Claim a task before you touch files, then commit and
@@ -16,6 +16,8 @@ Last updated: 2026-11-26 (session `arena/7c607b54-jackbox3`; final source-integr
 | `4a251c0f` | `arena/4a251c0f-jackbox3` | A-01–A-05 line-by-line re-verification + integration, PR #14 | done |
 | `7c607b54` | `arena/7c607b54-jackbox3` | T-26 source audit and T-27 final integration; `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py`, `VERIFICATION.md` | done |
 | `641e4e68` | `arena/641e4e68-jackbox3` | T-28 unified 2026 audit: Schedule D tax engine, LA Measure ULA, W-02 Hold/Stress, Q3 FY26 10-Q/8-K & `.gov` updates across root + `/workspace/` | active |
+| `b544c65d` | `arena/b544c65d-jackbox3` | SHA-256 validator privacy scrub, 3-year franchise rental series, CA Const. Art. XIII A, rendered `/workspace/` verification log (PR #21, merged) | done |
+| `19cf2e41` | `arena/19cf2e41-jackbox3` | Independent re-verification + merge reconciliation (T-33…T-37 below); `data/findings.json`, `VERIFICATION.md`, `COORDINATION.md` | done |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -57,7 +59,12 @@ On merge conflict: stop, resolve without discarding the other session's work, an
 | T-24 | Follow-up source-link audit; correct demonstrated citation mismatch and re-validate | done | `0e787678` | `COORDINATION.md`, `data/findings.json`, generated root HTML |
 | T-25 | Integrate the citation correction; PR, merge, and confirm Pages deployment | done | `0e787678` | PR #10; deployment documented by PR #13 |
 | T-26 | Independent official-source/privacy audit; correct source-integrity issues | done | `7c607b54` | `COORDINATION.md`, `data/findings.json`, `build.py`, generated root pages, `scripts/check_site.py`, `VERIFICATION.md` |
-| T-27 | Final integration: preserve parallel fixes, merge official-source correction, verify Pages | in progress | `7c607b54` | `COORDINATION.md`, current branch → `main` |
+| T-27 | Final integration: preserve parallel fixes, merge official-source correction, verify Pages | done | `7c607b54` | `COORDINATION.md`, current branch → `main` |
+| T-33 | Independent re-verification of published findings against official sources (spot audit); renumbered twice: T-23→T-28 (collision with 57054140), T-28→T-33 (collision with 641e4e68) | done | `19cf2e41` | `VERIFICATION.md` |
+| T-34 | ACS mirror link drift: pinned `/latest` → `acs2024_5yr` (verified every cited figure reproduced); superseded by the official-source-only withdrawal merged from main | done (superseded) | `19cf2e41` | `data/findings.json` |
+| T-35 | Record USGS ASCE 7-16 s1d partial recovery (2026-11-26 re-fetch); sd1/sm1/sdc1/sdc remain null; finding stays unverified | done | `19cf2e41` | `data/findings.json` (H-08 note) |
+| T-36 | Append independent spot-check log to workspace VERIFICATION.md | done | `19cf2e41` | `VERIFICATION.md` |
+| T-37 | Rebuild, checks, reconcile merge with origin/main, PR, merge, confirm Pages deploy, record | done | `19cf2e41` | `COORDINATION.md`, PR #17 → `main` |
 
 Status vocabulary: `unclaimed` · `in progress` · `done` · `needs review`.
 `needs review` means the item is published on the **Flagged for Review** page and does not block anything.
@@ -279,6 +286,39 @@ IR-01 fixed branch (no per-task branches); IR-02 legacy Pages build from `main`;
 
 ---
 
+## Session `19cf2e41` — independent re-verification pass (2026-11-26)
+
+The user re-issued the master task to this session. Both prior builds (root site, `/workspace/` audit) were already merged and live. Rather than rebuild from scratch and discard that work, this session performed an independent line-level audit: it re-fetched every network source it could reach and checked the published values, derivations and generator against them.
+
+**Re-verified against official sources (2026-11-26, this environment):**
+- BLS `LAUMT063108000000003` — LA MSA unemployment 4.4% (Sep 2026, prelim); 2025 annual 5.3% (11-month avg excluding October 2025, appropriations lapse); 2024 annual 5.3%; peak 6.1% (Jul–Aug 2024). Match.
+- BLS `LNS14000000` — US unemployment 4.1% (Oct 2026); Dec 2025 4.4%. Match.
+- BLS `LASST060000000000003` — CA unemployment 5.0% (Oct 2026, prelim); Dec 2025 5.5%. Match.
+- BLS `SMU06310800000000001` — LA MSA nonfarm 6,371.5k (Oct 2026, prelim); 2025 avg 6,281.3k; 2024 avg 6,288.0k. Match.
+- BLS `CUUR0000SA0` — CPI-U 337.511 (Oct 2026); 2025 avg 321.943; 2024 avg 313.689; +2.63%. Match.
+- BLS Economy at a Glance page for LA MSA — match.
+- FEMA NFHL layer 28 at reference point — Zone X, AREA OF MINIMAL FLOOD HAZARD, DFIRM 06037C. Match.
+- FEMA NRI tract 2074 — composite Very High (score 97.92); EAL Very High (rate 0.218%); SOVI Relatively Low; RESL Very Low; population 2,002 (2020 base); building value $1.88B. Match.
+- CAL FIRE FHSZ (LRA) at reference point — no polygon (expected); Griffith Park control — Very High. Match.
+- USGS ASCE 7-16 — SDS 1.311 g; PGA 0.843 g; short-period category D. Match; `s1d` now returned as 0.785 g (see below).
+- Census Reporter `acs2024_5yr` mirror — county / tract / MSA population, income, rent, tenure, poverty, education, vacancy all reproduced exactly. **Note:** this session's audit completed before the parallel official-source-only withdrawal merged; see "Merge reconciliation" below.
+
+**Arithmetic re-checked:** every `derived` value recomputed from raw inputs; all matched (DM-03 7.27%, DM-05 13.7%, DM-09 36.0%, TA-05 87.1%, TA-09 1.61, TA-15 54.1%, TA-16 6.4%, EC-08 −0.1%, EC-09 1.3%, EC-11 2.63%, EC-13 3.70%, EC-14 3.46%).
+
+**Merge reconciliation (2026-11-26, PR #17 not mergeable → reconciled with `origin/main` twice).** While this branch was open, sessions `57054140`, `0e787678`, `4a251c0f`, `7c607b54` audited and merged; `main` moved from `f204b7c` to `f082c02` with an official-source-only policy. Later, while PR #17 awaited merge, sessions `641e4e68` (unified 2026 audit: Schedule D tax engine, LA Measure ULA, W-02 Hold/Stress, Q3 FY26 SEC & .gov updates, `workspace/pages/verification.html`) and `b544c65d` (SHA-256 PII scrub in validators, 3-year franchise rental series, CA Const. Art. XIII A) merged PRs #18/#19/#21; `main` advanced to `99dc316` and this branch merged it again. Conflicts were limited to this file, `VERIFICATION.md` and the generated `flagged-for-review.html`; findings/data rows auto-merged with the H-08 note intact. Under the official-source-only policy: the Census Reporter mirror was removed and all 29 ACS-mirror-sourced findings were withdrawn to blank/unverified. This branch was based on the pre-audit tree. Resolution, preserving both sides:
+
+1. The ACS mirror values are **not** reintroduced regardless of the reproduction match — the official-source-only policy stands. The `S02` pin correction (this session's T-29) is superseded and recorded as done (superseded); it remains useful evidence that the mirror matched the cited `acs2024_5yr` release.
+2. The `H-08` note (T-30) **is** retained: it records a dated, factual re-fetch (s1d = 0.785 g; sd1/sm1/sdc1/sdc still null; status unchanged at unverified; nothing back-filled).
+3. `build.py` was merged; the audit-workspace callout already exists there (line ~331) and this branch's duplicate insertion was removed. Rebuilds are stable.
+4. Generated HTML pages were taken from `origin/main` and regenerated from the merged JSON/build.py.
+5. Task IDs collided (both sides used T-23…T-27); this session's tasks were renumbered to T-28…T-32. No other session's board entries were altered.
+
+**Not verifiable here (unchanged):** `api.census.gov` (key required), historical ACS vintages, LA County QuickFacts (IR-06), BEA MSA GDP (EC-16), BLS local SA unemployment (EC-15), QCEW, and every parcel-private input. No value was invented.
+
+**Privacy:** no personal information researched or published; anonymous reference coordinate unchanged.
+
+**Checks after reconciliation:** `python3 build.py`, `python3 scripts/check_site.py`, `python3 tools/validate_site.py` — see the PR #17 record.
+
 ## Session `4a251c0f` — independent audit + publish pass (2026-11-26)
 
 Branch: `arena/4a251c0f-jackbox3` (branched from `f204b7c` on `main`).
@@ -420,66 +460,86 @@ Merged `origin/main` (`f082c02`, preserving PRs #9–#16) into `arena/641e4e68-j
 
 ---
 
-## Session `60fa27c2` — third-pass live audit against `f204b7c`, superseded by parallel 2026 audits (2026-11-26)
+## Session `b544c65d` — SHA-256 validator privacy scrub, 3-year franchise rental revenue series & rendered `/workspace/` verification log (2026-11-26)
 
-Branch `arena/60fa27c2-jackbox3`, forked from `main` @ `f204b7c` and merged back via PR
-[#20](https://github.com/kanlerxz87-cyber/Jackbox3/pull/20).
+Rebased cleanly onto `origin/main` (`4fc1496`, preserving 100% of PRs #1–#19 across sessions `47b70455`, `dd713c44`, `57054140`, `0e787678`, `4a251c0f`, `7c607b54`, and `641e4e68`; earlier rebase conflicts on `COORDINATION.md` were resolved by keeping every prior session's work intact).
 
-**Timeline and conflict resolution (per the protocol at the top of this file).** This session
-claimed T-30…T-34 against `f204b7c` (2026-11-26, ~13:20Z) and re-queried every official endpoint
-it could reach. While the audit was running, five other sessions integrated PRs #9–#19 to `main`
-(13:16Z–14:20Z), restructuring the dataset (the Census Reporter mirror was withdrawn; ACS rows and
-dependent arithmetic are blank by design; `S28`+ reassigned; `.gov`-only enforcement; Schedule D
-tax engine; Measure ULA; BEA metro discontinuation noted under their `S49`). PR #20 was therefore
-CONFLICTING. Resolution: `git merge origin/main` with **all shared/data/site files taken from
-`main`** (`data/findings.json`, `build.py`, all generated HTML, `README.md`, `SOURCES.md`,
-`VERIFICATION.md`). This session's redundant dashboard-callout edit was dropped because it is
-identical to and superseded by `641e4e68`'s generator change (PR #19 deduplicated the callout on
-the root page). No work from any session was discarded; the conflict itself is logged here as
-required.
+| Session ID | Branch | Scope | Status |
+|---|---|---|---|
+| `b544c65d` | `arena/b544c65d-jackbox3` | `COORDINATION.md`, `tools/validate_site.py`, `scripts/check_site.py`, `data/findings.json`, `build.py`, `tools/build_site.py`, `workspace/**`, `SOURCES.md`, `VERIFICATION.md`, `data/verified-observations.json`, regenerated `*.html` | complete |
 
-**Net additive contribution of this session on top of `main`:**
+### Task board — session `b544c65d`
 
-1. `EC-05` note now records the verification window: 6.1% in July 2024 and August 2024, the
-   highest monthly value in the January 2024–October 2026 window returned by BLS series
-   `LAUMT063108000000003` (2025 annual 5.3% is an 11-month average excluding the October 2025
-   appropriations lapse — corroborates the `EC-04` flag).
-2. `H-08` note re-queried 2026-11-26: the USGS ASCE 7-16 service now returns **`s1d` = 0.785 g**
-   (it was `null` on 2026-11-25); `sd1`, `sm1`, `sdc1` remain `null`; `SDS` 1.311 and `SDC` D
-   confirmed. Still unverified as a bundle; nothing back-filled. Inter-day drift in this web
-   service is real; seismic figures should always carry the query date.
-3. Independent corroboration of rows that `main` already carries: geocoder (tract 06037207400,
-   block …1025, county 06037, CD 34, SD 26, AD 54, MSA 31080); BLS US/CA/LA MSA series (Oct 2026:
-   4.1 / 5.0 / 4.4*p); LA MSA nonfarm 6,371.5k (Oct 2026p) vs 6,281.3k (2025 avg) vs 6,288.0k
-   (2024 avg); CPI-U 337.511 (Oct 2026) and food-away-from-home 400.850; FEMA NFHL Zone X (Area
-   of Minimal Flood Hazard); FEMA NRI tract 2074 (Very High risk; EAL buildings $3.65M/yr;
-   0.218% of building value; building value $1.882B; resilience Very Low); CAL FIRE LRA FHSZ
-   (reference point: no polygon; Griffith Park control: Very High); SEC EDGAR audited FY2025 10-K
-   (revenues $1,465,314k FY25 / $1,571,306k FY24; net loss $80,719k; adjusted EBITDA $270,931k)
-   and the Q3 FY2026 earnings release (SSS −1.1%; 2,115 restaurants; 4 opened / 17 closed);
-   IRS Topic 409; IRS Rev. Proc. 2025-32 §4.03 (TY2026 LTCG ceilings $49,450 / $545,500 single —
-   corroborated against the 2025 Form 1040 context); FTB 2025 Form 540 rate schedules; Fed Beige
-   Book Oct 2025. **Note: this session's own mirror-ACS re-verification is now moot — `7c607b54`
-   withdrew the mirror under the official-source-only standard, and that stands.**
-4. BEA metro discontinuation discovered independently and consistent with their `S49`: BEA
-   26-08 (2026-02-05) ended publication of metro/micropolitan/CSA/division GDP and personal
-   income; county is the finest published geography (LA County 2024 personal income $818.5B,
-   largest in the U.S.). Their EC-22 records this; this session added no duplicate row.
+| Task | Description | Status | Owner | Files touched |
+|---|---|---|---|---|
+| B-01 | Register session `b544c65d` claim and coordinate cleanly across concurrent merges (PRs #12, #14–#16, #18–#19) without discarding any session's work | done | `b544c65d` | `COORDINATION.md` |
+| B-02 | Privacy scrub in both validators: replace the 8 hardcoded literal personal names in `tools/validate_site.py` with 9 SHA-256 digests (`REDACTED_NAME_SHA256`) and add the identical SHA-256 check to `scripts/check_site.py` so zero personal names reside anywhere in source code or HTML | done | `b544c65d` | `tools/validate_site.py`, `scripts/check_site.py` |
+| B-03 | Independently verify IRS Schedule D Tax Worksheet (lines 1–47, `https://www.irs.gov/instructions/i1040sd`), 2026 FTB Form 593 (`https://www.ftb.ca.gov/forms/2026/2026-593-instructions.html`), and California Constitution Art. XIII A (`https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&division=&title=&part=&chapter=&article=XIII%20A`); confirm root & `/workspace/` calculators pass incremental Schedule D / NIIT / BHST / W-02 Hold & Stress checks | done | `b544c65d` | `data/findings.json` (`S60`, `TX-11`), `tools/build_site.py` (`CA_PROP13`) |
+| B-04 | Add rendered HTML verification audit page `workspace/pages/verification.html` and back-link to the root site (`Main Decision Site (root)`) in `/workspace/`'s footer so both workspaces cross-link bidirectionally | done | `b544c65d` | `tools/build_site.py`, `workspace/**`, `SOURCES.md`, `VERIFICATION.md`, `data/verified-observations.json` |
+| B-05 | Add the audited 3-year Franchise Rental Revenues series (`TE-26` `$364,591,000` FY2023, `TE-27` `$375,428,000` FY2024, `TE-28` `$368,643,000` FY2025) from the FY2025 Form 10-K Consolidated Statements of Operations (`S59`, `jack-20250928.htm` F-4) to `data/findings.json` and `tenant-credit.html`, run both validators, open PR → merge → verify GitHub Pages deployment | done | `b544c65d` | `data/findings.json`, `build.py`, `*.html` |
 
-**Irregularities / observations for the record:** (a) USGS `s1d` drift between 2026-11-25 and
-2026-11-26; (b) permanent BLS gaps for October 2025 (LAUS and CPI) due to the appropriations
-lapse — annual 2025 figures exclude October; (c) the reference point is not the parcel — all
-geography remains a labelled proxy; (d) the owner-supplied 2030–2035 lease expiry range remains
-unverified, as does every owner-held document.
 
-**PR record:** PR #20 opened 2026-11-26 against a stale base; conflicts resolved on the same
-branch by merging `origin/main` (this entry). Merged after checks; Pages deploy confirmation to
-be appended below.
+---
+
+## PR + deploy record (session `19cf2e41`, PR #17)
+
+| Field | Value |
+| --- | --- |
+| Pull request | [#17](https://github.com/kanlerxz87-cyber/Jackbox3/pull/17) — "Audit fixes: pin ACS source link, record USGS s1d recovery, restore generator fidelity" |
+| Base / head | `main` ← `arena/19cf2e41-jackbox3` |
+| Deliberation | While the PR was open, `main` moved twice (`f204b7c` → `f082c02` → `99dc316`, PRs #9–#21). The PR was reconciled twice by merging `origin/main` into the branch — first after the official-source-only audit ( Census Reporter mirror removed; 29 findings withdrawn), then after the unified 2026 audit + privacy scrub. The ACS link pin (T-34) was superseded by the withdrawal and is recorded as done (superseded); the `H-08` `s1d = 0.785 g` re-fetch note (T-35) was retained. |
+| Merge method | merge commit via `gh pr merge 17 --merge` |
+| Merge result | **MERGED** 2026-11-26T13:54:03Z; merge commit `07c0a94ff47b380243dd267782d465476125f94a` |
+| Pages build | **built** 2026-11-26T13:54:05Z → 13:54:28Z, commit `07c0a94`, error: null |
+| Workflow run | `45833636494` → `success` (27s) |
+| Live URL | https://kanlerxz87-cyber.github.io/Jackbox3/ |
+| Checks on merged tree | `python3 build.py` OK; `python3 scripts/check_site.py` PASSED; `python3 tools/validate_site.py` OK (14 files, 296 internal links, 751 external links, 503 table rows, 149 verified rows, 114 blank/unverified rows, no personal information detected) |
+| Merge conflicts | Resolved twice without discarding any session's work; task-ID collision handled by renumbering this session's tasks to T-33…T-37. Logged in the merge reconciliation section above. |
+
+### PR & GitHub Pages deployment record (`b544c65d`)
+
+- **PR:** [#21](https://github.com/kanlerxz87-cyber/Jackbox3/pull/21) (`arena/b544c65d-jackbox3` → `main`) — **MERGED** at `2026-11-26T13:47:29Z`, merge commit `99dc316c99689b39c01993a667d4a0e0e45b50f1`.
+- **GitHub Pages build:** `status: "built"` for commit `99dc316c99689b39c01993a667d4a0e0e45b50f1` at `2026-11-26T13:47:52Z`.
+- **Live deployment verified:** retrieved `https://kanlerxz87-cyber.github.io/Jackbox3/tenant-credit.html` (showing the 3-year Franchise Rental Revenues series `$364.6m / $375.4m / $368.6m`, `S59`), `https://kanlerxz87-cyber.github.io/Jackbox3/workspace/pages/verification.html` (149 verified `.gov` rows), and `https://kanlerxz87-cyber.github.io/Jackbox3/calculator.html` (Schedule D Tax Worksheet + W-02 Hold/Stress calculator). Zero personal names in repository or live HTML; no sell-vs-hold winner declared.
+
+
+
+
+---
+
+## Session `60fa27c2` — reconciliation with `main` (2026-11-26, final)
+
+Branch `arena/60fa27c2-jackbox3`; merges `origin/main` through PR #23 (`b2c8265`). This session
+audited `f204b7c` in parallel with six other sessions (`0e787678`, `4a251c0f`, `7c607b54`,
+`57054140`/`641e4e68`, `19cf2e41`, `b544c65d`), whose combined work constitutes the
+official-source-only, 2026-updated audit now on `main`.
+
+**Conflict resolution (logged per protocol).** PR #20 conflicted twice. Resolution both times:
+all shared files (`data/findings.json`, `build.py`, every generated page) taken from `main`;
+this session's dashboard-callout edit dropped (identical to `641e4e68`'s generator change,
+PR #19); this session's `EC-16`/`TX-11`/`TX-12`/`S28–S30` edits dropped as superseded by `main`
+(TX-11/TX-12 already verified there with richer sourcing — BOE Pub 29 + Pub 306 1.181% LA
+rate, FTB 2026 Form 593 3⅓%/12.3% election; BEA 26-08 county figures as `EC-22`); this
+session's `H-08` s1d observation independently corroborated by `19cf2e41` (`s1d = 0.785 g`,
+`sd1`/`sm1`/`sdc1` still null — main's note retained). Retained from this session: the `EC-05`
+verification-window note (6.1% in July and August 2024, highest monthly value in the
+Jan 2024–Oct 2026 BLS `LAUMT063108000000003` window; corroborates the `EC-04` 2025
+11-month-average flag). Nothing from any session was discarded.
+
+**Verification performed live 2026-11-26:** Census geocoder (tract 06037207400), Census/BLS/
+USGS/FEMA/CAL FIRE/SEC EDGAR/IRS/FTB/Fed Beige Book re-queries — all reproduced `main`'s
+values exactly (FY2025 revenues $1,465,314k; net loss $80,719k; adjusted EBITDA $270,931k;
+Q3 FY2026 SSS −1.1%, 2,115 restaurants; LA MSA unemployment Sep 2026p 4.4; LA nonfarm
+Oct 2026p 6,371.5k; FEMA NRI Very High 97.92; flood Zone X; TY2026 LTCG $49,450/$545,500;
+CA 2025 rate schedules 9.3% @ $72,724 single).
+
+**Checks on merged tree:** `python3 build.py` + `tools/build_site.py` regenerate cleanly;
+`python3 scripts/check_site.py` → PASSED; `python3 tools/validate_site.py` → OK.
 
 | Task | Description | Status | Owner | Files touched |
 |---|---|---|---|---|
 | T-30 | Board registration + claim | done | `60fa27c2` | `COORDINATION.md` |
-| T-31 | Live re-verification of headline findings | done (corroborates `main`; see above) | `60fa27c2` | audit log above |
-| T-32 | Recover unverified public values | superseded by `main`'s 2026 unified audit (EC-18 ↔ EC-22, TX-11/TX-12 already verified there with richer sourcing) | `60fa27c2` | none retained |
-| T-33 | Correct published values that fail re-verification | done — no value on `main` failed; two notes refined (EC-05, H-08) | `60fa27c2` | `data/findings.json` |
+| T-31 | Live re-verification against official sources | done — corroborates `main`; see note | `60fa27c2` | none retained |
+| T-32 | Recover unverified public values | superseded by `main` (EC-18 ↔ EC-22; TX-11/TX-12 richer on `main`) | `60fa27c2` | none retained |
+| T-33 | Correct published values that fail re-verification | done — no value on `main` failed; `EC-05` note retained | `60fa27c2` | `data/findings.json` |
 | T-34 | Integration: rebuild, checks, PR → merge → confirm Pages deploy | in progress | `60fa27c2` | this branch |

@@ -149,11 +149,12 @@ Every row below is a value printed on the site that was transcribed from text ac
 | 141 | pages/data-sources.html | CCPA | California Attorney General | [CCPA](https://oag.ca.gov/privacy/ccpa) | Text retrieved from official page; value transcribed verbatim; no inference. |
 | 142 | pages/data-sources.html | ASSESSOR | Los Angeles County | [ASSESSOR](https://assessor.lacounty.gov/) | Text retrieved from official page; value transcribed verbatim; no inference. |
 | 143 | pages/data-sources.html | LEGINFO | State of California | [LEGINFO](https://leginfo.legislature.ca.gov/) | Text retrieved from official page; value transcribed verbatim; no inference. |
-| 144 | pages/privacy.html | Aggregate official statistics | Published with source links | [CENSUS_CITY](https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224); [BLS_LA](https://www.bls.gov/eag/eag.ca_losangeles_msa.htm); [NCES_LAUSD](https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710) | Text retrieved from official page; value transcribed verbatim; no inference. |
-| 145 | pages/privacy.html | Public tenant filings | Published with source links | [SEC_10K](https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm) | Text retrieved from official page; value transcribed verbatim; no inference. |
-| 146 | pages/privacy.html | CCPA (as amended) | Defines personal information and consumer rights; sensitive personal information includes precise geolocation and financial account data. | [CCPA](https://oag.ca.gov/privacy/ccpa) | Text retrieved from official page; value transcribed verbatim; no inference. |
-| 147 | pages/privacy.html | Census Geocoder | Official address-to-geography matching; used only in the secure workflow. | [CENSUS_GEOCODER](https://geocoding.geo.census.gov/geocoder/) | Text retrieved from official page; value transcribed verbatim; no inference. |
-| 148 | pages/privacy.html | FEMA / CGS / CAL FIRE map portals | Parcel lookups require an address; therefore they belong to the private workflow. | [FEMA_NFHL](https://www.fema.gov/flood-maps/national-flood-hazard-layer); [CGS_EQZAPP](https://maps.conservation.ca.gov/cgs/informationwarehouse/eqzapp/); [CALFIRE_FHSZ](https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones) | Text retrieved from official page; value transcribed verbatim; no inference. |
+| 144 | pages/data-sources.html | CA_PROP13 | State of California Legislative Information | [CA_PROP13](https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&division=&title=&part=&chapter=&article=XIII%20A) | Text retrieved from official page; value transcribed verbatim; no inference. |
+| 145 | pages/privacy.html | Aggregate official statistics | Published with source links | [CENSUS_CITY](https://www.census.gov/quickfacts/fact/table/losangelescitycalifornia/PST045224); [BLS_LA](https://www.bls.gov/eag/eag.ca_losangeles_msa.htm); [NCES_LAUSD](https://nces.ed.gov/ccd/districtsearch/district_detail.asp?ID2=0622710) | Text retrieved from official page; value transcribed verbatim; no inference. |
+| 146 | pages/privacy.html | Public tenant filings | Published with source links | [SEC_10K](https://www.sec.gov/Archives/edgar/data/807882/000080788225000072/jack-20250928.htm) | Text retrieved from official page; value transcribed verbatim; no inference. |
+| 147 | pages/privacy.html | CCPA (as amended) | Defines personal information and consumer rights; sensitive personal information includes precise geolocation and financial account data. | [CCPA](https://oag.ca.gov/privacy/ccpa) | Text retrieved from official page; value transcribed verbatim; no inference. |
+| 148 | pages/privacy.html | Census Geocoder | Official address-to-geography matching; used only in the secure workflow. | [CENSUS_GEOCODER](https://geocoding.geo.census.gov/geocoder/) | Text retrieved from official page; value transcribed verbatim; no inference. |
+| 149 | pages/privacy.html | FEMA / CGS / CAL FIRE map portals | Parcel lookups require an address; therefore they belong to the private workflow. | [FEMA_NFHL](https://www.fema.gov/flood-maps/national-flood-hazard-layer); [CGS_EQZAPP](https://maps.conservation.ca.gov/cgs/informationwarehouse/eqzapp/); [CALFIRE_FHSZ](https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones) | Text retrieved from official page; value transcribed verbatim; no inference. |
 
 ## Unverified / blank values
 
@@ -167,3 +168,45 @@ IR-01 through IR-10 are published on `pages/flagged.html` and logged in `COORDIN
 
 Run `python3 tools/validate_site.py` — checks internal links, official source links on every table row, blank values on unverified rows, and the absence of personal-information patterns.
 
+
+---
+
+## Independent spot-check — 2026-11-26 (session `19cf2e41`)
+
+Scope: an independent re-read of a sample of published values from their official sources, performed **before** merging with `origin/main`. Parallel sessions (`57054140`, `0e787678`, `4a251c0f`, `7c607b54`, `641e4e68`, `b544c65d`) subsequently merged; under the official-source-only policy the Census Reporter mirror source was removed from the root build and all 29 mirror-derived findings were withdrawn to blank/unverified. The ACS re-pull below is therefore retained as **corroboration only**, not as decision-grade verification, and the pinned link is recorded for the independent official pull a human must still perform. Values withdrawn by the parallel audits are no longer published on the root site. Earlier sections are unchanged; this section is additive.
+
+### Findings of the audit
+
+1. **ACS mirror link drift (root `S02`) — subsequently superseded.** The root build's Census Reporter mirror link used `/show/latest?…`. On 2026-11-26 that alias was observed to return the `acs2024_1yr` release, not the cited `acs2024_5yr` release. Pinning to `/show/acs2024_5yr?table_ids=B01003,B19013,B25077,B25064,B25003,B23025,B15003,B17001,B19301,B25002&geo_ids=05000US06037,31000US31080,14000US06037207400` reproduced every mirror-derived figure cited on the then-published site exactly (county population 9,808,667; county median household income $90,112; tract median household income $78,482 ±$29,379; tract population 2,598 ±502; MSA population 12,974,487; MSA median household income $95,958; MSA median gross rent $2,063; MSA median home value $871,300). Under the official-source-only policy, the mirror source was then removed and those findings withdrawn rather than accepted on mirror evidence. The reproduction remains recorded here as corroboration. `api.census.gov` still requires a key; keyless requests return an error page.
+2. **USGS ASCE 7-16 `s1d` recovered (retained in merged tree).** The root H-08 finding (`s1d, sd1, sm1, sdc1`) was recorded as null on 2026-11-25. A re-fetch of the same service on 2026-11-26 returns `s1d = 0.785 g` (with `s1uh = 0.781`, model version `v4.0.x`). `sd1`, `sm1`, `sdc1` and `sdc` are still `null`; `SDS = 1.311 g`, `PGA = 0.843 g` and short-period category `D` (`sdcs`) are unchanged. `s1d` alone is not a design value; no value was back-filled and the finding remains unverified. The dated re-fetch note is in `data/findings.json` (H-08).
+3. **Generator drift on `index.html` (superseded).** At the time of the first pass, the root dashboard's audit-workspace callout had been hand-inserted after `build.py` ran and was dropped by a rebuild. It has since been restored by the parallel sessions (`4a251c0f` A-04 cross-link fix; confirmed present in the merged `build.py`). No further generator change was needed after the final reconciliation.
+
+### Re-verification of published values (this environment, 2026-11-26)
+
+| Value | Source | Result |
+| --- | --- | --- |
+| LA MSA unemployment 4.4% (Sep 2026, prelim); 2025 annual 5.3% (11-month avg excluding October 2025, appropriations lapse); 2024 annual 5.3%; Jul–Aug 2024 peak 6.1% | [BLS LAUMT063108000000003](https://api.bls.gov/publicAPI/v1/timeseries/data/LAUMT063108000000003) | Match |
+| US unemployment 4.1% (Oct 2026); Dec 2025 4.4% | [BLS LNS14000000](https://api.bls.gov/publicAPI/v1/timeseries/data/LNS14000000) | Match |
+| California unemployment 5.0% (Oct 2026, prelim); Dec 2025 5.5% | [BLS LASST060000000000003](https://api.bls.gov/publicAPI/v1/timeseries/data/LASST060000000000003) | Match |
+| LA MSA nonfarm employment 6,371.5k (Oct 2026, prelim); 2025 avg 6,281.3k; 2024 avg 6,288.0k | [BLS SMU06310800000000001](https://api.bls.gov/publicAPI/v1/timeseries/data/SMU06310800000000001) | Match |
+| CPI-U all items 337.511 (Oct 2026); 2025 avg 321.943; 2024 avg 313.689; 2025 vs 2024 = +2.63% | [BLS CUUR0000SA0](https://api.bls.gov/publicAPI/v1/timeseries/data/CUUR0000SA0) | Match |
+| BLS EAG page: LA MSA unemployment 4.4% (Sep 2026, prelim), nonfarm 6,371.5k (Oct 2026, prelim), 12-month change +0.9% | [BLS Economy at a Glance — Los Angeles MSA](https://www.bls.gov/eag/eag.ca_losangeles_msa.htm) | Match |
+| FEMA NFHL at reference point: Zone X, "AREA OF MINIMAL FLOOD HAZARD", DFIRM_ID 06037C | [NFHL MapServer layer 28](https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query?where=1%3D1&geometry=-118.2428,34.0537&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=FLD_ZONE,ZONE_SUBTY,DFIRM_ID&returnGeometry=false&f=json) | Match |
+| FEMA NRI Census Tract 2074: composite "Very High" (score 97.92), EAL rating "Very High" (EAL-building 3,648,244; rate 0.00218 = 0.218%), SOVI "Relatively Low", RESL "Very Low", population 2,002 (2020 base), building value 1,882,281,008 | [FEMA NRI services (tract 06037207400)](https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/National_Risk_Index_Census_Tracts/FeatureServer/0/query?where=TRACTFIPS%3D%2706037207400%27&outFields=TRACTFIPS,RISK_SCORE,RISK_RATNG,EAL_RATNG,EAL_VALB,ALR_VALB,SOVI_RATNG,RESL_RATNG,POPULATION,BUILDVALUE&returnGeometry=false&f=json) | Match |
+| CAL FIRE LRA layer at reference point: empty feature set (expected for dense urban core); positive control at Griffith Park (34.1180, -118.3400): "Very High" | [CAL FIRE FHSZ MapServer](https://services.gis.ca.gov/arcgis/rest/services/Environment/Fire_Severity_Zones/MapServer/1/query?where=1%3D1&geometry=-118.2428,34.0537&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=SRA,INCORP,HAZ_CODE,HAZ_CLASS&returnGeometry=false&f=json) | Match |
+| USGS ASCE 7-16: SDS 1.311 g; PGA 0.843 g; short-period category D (`sdcs`); `s1d` 0.785 g (new); `sd1`/`sm1`/`sdc1`/`sdc` null | [USGS design maps web service](https://earthquake.usgs.gov/ws/designmaps/asce7-16.json?latitude=34.05&longitude=-118.24&riskCategory=III&siteClass=D&title=central-los-angeles-reference) | Match (except s1d, see above) |
+| ACS 2020–2024 5-year (pinned `acs2024_5yr`): tract and county population, income, rent, tenure, poverty-status, education and vacancy figures | [Census Reporter mirror of ACS 2024 5-year](https://api.censusreporter.org/1.0/data/show/acs2024_5yr?table_ids=B01003,B19013,B25077,B25064,B25003,B23025,B15003,B17001,B19301,B25002&geo_ids=05000US06037,31000US31080,14000US06037207400) | Match (corroboration only; findings withdrawn) |
+
+Derived values were re-computed from the retrieved raw figures and matched what the site printed at the time (e.g. county civilian labour force 5,200,656; unemployed 378,125; rate 7.27%; county poverty 1,326,437 / 9,656,697 = 13.7%; county bachelor's+ 2,491,166 / 6,917,487 = 36.0%; county vacancy 234,017 / 3,650,466 = 6.4%; tract renter-occupied 967 / 967 = 100.0%). These derived rows have since been withdrawn with their mirror-sourced inputs.
+
+### Still not verifiable in this environment (unchanged; blank on both sites)
+
+- `api.census.gov` keyless requests (key required); an independent official Census pull remains a required human step before any decision.
+- Historical ACS 5-year vintages (`acs2019_5yr`, `acs2022_5yr`) are not served by the mirror; no multi-year population trend is asserted.
+- LA County QuickFacts page fails to fetch here (IR-06).
+- BEA GDP by MSA, BLS local seasonally adjusted unemployment, BLS QCEW CSV endpoints; parcel-level zone status, appraisal, cap rate, rent comps, basis, payoff, lease terms — all remain blank/flagged as before. No value was invented for any of these.
+- SEC XBRL JSON is large; only the portions cited on the sites were read.
+
+### Privacy check
+
+No personal information appears in this document or on either site. The reference coordinate remains the anonymous Civic Center point; the withheld parcel, lease, owner, tenant and finance data were not researched.
