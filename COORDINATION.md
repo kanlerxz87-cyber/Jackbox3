@@ -1,6 +1,6 @@
 # COORDINATION.md — Shared Task Board
 
-Last updated: 2026-11-25 (session `arena/47b70455-jackbox3`)
+Last updated: 2026-11-26 (session `arena/60fa27c2-jackbox3`)
 
 > This file is the single shared task board for all agent sessions working on this repo.
 > Read it before starting any task. Claim a task before you touch files, then commit and
@@ -11,6 +11,17 @@ Last updated: 2026-11-25 (session `arena/47b70455-jackbox3`)
 | Session ID | Branch | Scope (files it may edit) | Status |
 |---|---|---|---|
 | `47b70455` | `arena/47b70455-jackbox3` | Everything in this table below; sole active session at time of writing | active |
+| `60fa27c2` | `arena/60fa27c2-jackbox3` | Independent audit/re-verification pass by a third session: `COORDINATION.md`, `data/findings.json`, `data/rules.json` (only to correct values that fail re-verification), regenerated pages via `build.py`, `SOURCES.md`, `VERIFICATION.md`, README status note | active |
+
+## Task board — session `60fa27c2` (third pass, audit)
+
+| Task | Description | Status | Owner | Files touched |
+|---|---|---|---|---|
+| T-30 | Board registration + claim | in progress | `60fa27c2` | `COORDINATION.md` |
+| T-31 | Live re-verification of headline findings against official sources | unclaimed | `60fa27c2` | audit notes in `COORDINATION.md` |
+| T-32 | Recover any previously-unverified public values that now verify | unclaimed | `60fa27c2` | `data/findings.json`, regenerated pages |
+| T-33 | Correct any published value that fails re-verification | unclaimed | `60fa27c2` | `data/findings.json`, regenerated pages |
+| T-34 | Integration: rebuild, checks, PR → merge → confirm Pages deploy | unclaimed | `60fa27c2` | `main` |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
