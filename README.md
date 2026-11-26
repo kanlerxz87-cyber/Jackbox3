@@ -26,7 +26,7 @@ tenant-credit.html            the tenant read from its own SEC filings
 risk.html                     risk register, black swans, tripwires
 suggestions.html              twelve improvements, rankable by the owner
 flagged-for-review.html       every unverified and caveated item, with sources
-sources.html                  source register: 27 sources, cited-by column
+sources.html                  source register: 30 sources, cited-by column
 methodology.html              verification rules and privacy model
 calculator.html               private in-browser after-tax calculator
 advisor-one-page.html         W-10 · printable one-sheet
@@ -67,6 +67,13 @@ There are no dependencies beyond the Python standard library.
 No sell-or-renew recommendation is made, because the three inputs that determine the answer —
 market value, adjusted basis, and the lease terms — are not verified and cannot be obtained
 from public sources. `questions.html` lists the twenty gates that stand in the way.
+
+A third pass (session `arena/60fa27c2-jackbox3`, 2026-11-26) re-checked the published record live
+against the official sources and found no incorrect value. It promoted two public rules from
+unverified to verified (Proposition 13 reassessment, BOE; California Form 593 real-estate
+withholding, FTB), added one new verified figure (LA County 2024 personal income, $818.5B, BEA
+26-08) and noted that BEA has discontinued metropolitan-area GDP/personal-income statistics, so
+metro GDP remains blank rather than substituted. See `COORDINATION.md` for the full audit log.
 
 The one firm conclusion, argued in `executive-summary.html` and `risk.html`, is about
 sequencing: the material downside scenarios here are liquidity events that remove the owner's

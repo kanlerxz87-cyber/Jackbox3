@@ -17,11 +17,11 @@ Last updated: 2026-11-26 (session `arena/60fa27c2-jackbox3`)
 
 | Task | Description | Status | Owner | Files touched |
 |---|---|---|---|---|
-| T-30 | Board registration + claim | in progress | `60fa27c2` | `COORDINATION.md` |
-| T-31 | Live re-verification of headline findings against official sources | unclaimed | `60fa27c2` | audit notes in `COORDINATION.md` |
-| T-32 | Recover any previously-unverified public values that now verify | unclaimed | `60fa27c2` | `data/findings.json`, regenerated pages |
-| T-33 | Correct any published value that fails re-verification | unclaimed | `60fa27c2` | `data/findings.json`, regenerated pages |
-| T-34 | Integration: rebuild, checks, PR → merge → confirm Pages deploy | unclaimed | `60fa27c2` | `main` |
+| T-30 | Board registration + claim | done | `60fa27c2` | `COORDINATION.md` |
+| T-31 | Live re-verification of headline findings against official sources | done | `60fa27c2` | audit log in `COORDINATION.md` |
+| T-32 | Recover any previously-unverified public values that now verify | done | `60fa27c2` | `data/findings.json` (EC-18, TX-11, TX-12), regenerated pages |
+| T-33 | Correct any published value that fails re-verification | done (no value failed; notes refined) | `60fa27c2` | `data/findings.json`, regenerated pages |
+| T-34 | Integration: rebuild, checks, PR → merge → confirm Pages deploy | in progress | `60fa27c2` | `main` |
 
 **Handoff rule:** if a claim is more than 60 minutes old with no commits, any other session may
 take the task over and must note the handoff in the Log section below.
@@ -257,3 +257,101 @@ IR-01 fixed branch (no per-task branches); IR-02 legacy Pages build from `main`;
 | Merge result | **MERGED** 2026-11-25T14:11:14Z via `gh pr merge 6 --merge`; merge commit `fc58dfa` |
 | Pages deployment | **built** 2026-11-25T14:11:43Z (build `1402443065`, commit `fc58dfa`); live root and `/workspace/` URLs verified with HTTP 200 / fetched content |
 | Conflict rebase note | `git pull --rebase` was attempted before the final push but aborted because replaying `main`'s already-merged commits caused add/add conflicts; `origin/arena/dd713c44-jackbox3` was confirmed an ancestor of `HEAD`, so a fast-forward `git push` was used instead. No work was discarded. |
+
+---
+
+## Session `60fa27c2` — third-pass audit and re-verification (2026-11-26)
+
+Branch `arena/60fa27c2-jackbox3`, branched from `main` @ `f204b7c`.
+
+### What this session did
+
+1. **Registered and claimed** T-30…T-34 before editing anything; claim was committed and pushed
+   first. All other sessions (`47b70455`, `dd713c44`) are finished and merged; `main` was clean
+   at the time of claiming.
+2. **Live re-verification of the published record.** Every official endpoint that could be
+   reached was re-queried today and compared row by row:
+
+   - Census geocoder (tract 06037207400, block …1025, county 06037, CD 34, SD 26, AD 54,
+     MSA 31080, CSA 348) — all match `G-01…G-07`.
+   - Census Reporter API `acs2024_5yr` (tract / county / MSA: B01003, B19013, B25064, B25077,
+     B25003, B25002, B15003, B17001, B19001, B23025) — all `TA-01…TA-17`, `DM-01…DM-12`
+     estimates and the derived formulas match exactly, including tract B25077 = `null`
+     (`TA-12` stays unverified) and tract B25003 = 967/967 renter (`TA-14`).
+   - BLS Public Data API v1 (LNS14000000, LASST060000000000003, LAUMT063108000000003,
+     SMU06310800000000001, CUUR0000SA0, CUUR0000SEFV) — `EC-01…EC-14` all match. The guessed
+     LA MSA seasonally adjusted series `LASMT063108000000003` does not exist; `EC-15` stays
+     unverified, as it should. 2025 annual LA MSA rate (5.3%) is an 11-month average excluding
+     the October 2025 appropriations lapse — the flag on `EC-04` is correct.
+   - USGS ASCE 7-16 (`asce7-16.json`) — `SDS` 1.311 (`H-05`), `SDC` D (`H-06`), `PGA` 0.843
+     (`H-07`) confirmed; `sm1`/`sd1`/`sdc1` still `null`; **`s1d` now returns 0.785 g** (was
+     reported null on 2026-11-25). `H-08` note updated; it remains unverified as a bundle.
+   - FEMA NFHL (FLD_ZONE X, Area of Minimal Flood Hazard, SFHA_TF F) — `H-01` confirmed.
+   - FEMA National Risk Index (EAL_VALB 3,648,244; ALR_VALB 0.0021757 → 0.218%; BUILDVALUE
+     1,882,281,008; RISK Very High; SOVI Relatively Low; RESL Very Low; POPULATION 2002) —
+     `H-09…H-17` confirmed.
+   - CAL FIRE LRA FHSZ — reference point returns no polygon (`H-03`); Griffith Park control
+     returns Very High (`H-04`).
+   - SEC EDGAR — FY2025 10-K (accession 0000807882-25-000072, KPMG audit): revenues FY2025
+     $1,465,314k / FY2024 $1,571,306k (`TE-01`, `TE-02`, `TE-03` ✓); net loss FY2025 $80,719k
+     (`TE-13` ✓); franchise-contracts revenue 368,643 / 375,428 / 364,591 (economy page ✓).
+     Pay-vs-Performance table: adjusted EBITDA FY2025 $270,931k (`TE-14` ✓). Q3 FY2026 earnings
+     release (ex-99.1, filed 2026-08-12): same-store sales −1.1% (`TE-04` ✓), prior-year −7.1%
+     (`TE-05` ✓), revenues $257,657k (`TE-06` ✓), count 2,115 vs 2,168 (`TE-08`/`TE-09` ✓),
+     4 opened / 17 closed (`TE-12` ✓), "refinancing now complete" (`TE-17` ✓).
+   - IRS Topic 409 / Rev. Proc. 2025-32 / FTB 2025 Form 540 rate schedules / FTB 2025 Form 540
+     instructions / Fed Beige Book Oct 2025 — `TX-01…TX-10`, `TX-15`, `TX-16`, `EC-17` confirmed;
+     TY2026 LTCG ceilings ($49,450 / $545,500 single) match two independent secondary
+     corroborations of §4.03.
+
+3. **Recovered three previously-unverified items** (nothing was estimated or interpolated):
+
+   - `EC-18` (new): LA County total personal income 2024, **$818.5B current dollars**, largest
+     county personal-income level in the U.S. — BEA news release BEA 26-08 (2026-02-05), new
+     source `S28`.
+   - `TX-11` (→ verified): on a change in ownership the county assessor reassesses to current
+     fair market value as of the date of change (BOE Publication 29; BOE change-in-ownership
+     FAQ), new source `S30`.
+   - `TX-12` (→ verified): California real-estate withholding — 3⅓% of the amount subject to
+     withholding (conventional method) or an election based on gain; 2026 Form 593 instructions
+     (revised 02/2026), new source `S29`. Applicability/exemptions are determined at escrow.
+
+4. **Documented a source-of-record change that makes `EC-16` permanently unresolvable from an
+   official source:** BEA discontinued publication of metropolitan-area GDP and personal income
+   with BEA 26-08 (2026-02-05); county is now the finest published geography. `EC-16` stays
+   blank; no secondary-source metro figure was substituted.
+5. **Fixed one regression of our own making:** rebuilding via `build.py` dropped the manual
+   `dd713c44` callout on the dashboard (a post-build edit that no generator owned). The callout
+   is now part of `build.py`, so the live site keeps it. No other page lost content — verified
+   by stripping tags and diffing old vs new text for every regenerated page.
+
+### Counts after the audit
+
+127 findings: 86 verified/derived, 11 flagged, 30 unverified (was 126 / 83 / 11 / 32).
+
+### Irregularities and notes
+
+- `EC-16` cannot be closed from any official source going forward (BEA metro statistics
+  discontinued). Substitute: `EC-18` (county personal income) now carries the macro weight.
+- `s1d` flipped from `null` to `0.785` between 2026-11-25 and 2026-11-26 USGS responses; the
+  remainder of the S_1 bundle is still null. Inter-day drift in this web service is real —
+  anyone citing seismic design parameters should pin the date of query.
+- 2025 lapse in appropriations: BLS LAUS October 2025 and CPI-U October 2025 are permanently
+  missing from the record (`*` footnotes 9/X). Annual 2025 figures exclude October. This is not
+  an error in this repo.
+- BEA will supersede the 2024 county figures with the December 2, 2026 release (2025 data).
+- No personal information exists anywhere in the repository; the audit added none.
+
+### Verification performed
+
+`python3 build.py` → regenerates cleanly; `python3 scripts/check_site.py` → PASSED;
+`python3 tools/validate_site.py` → re-run for the workspace (see below). Live pages to be
+checked post-merge are the same set as PR #3 verified.
+
+| Task | Description | Status | Owner | Files touched |
+|---|---|---|---|---|
+| T-30 | Board registration + claim | done | `60fa27c2` | `COORDINATION.md` |
+| T-31 | Live re-verification of headline findings | done | `60fa27c2` | audit log above |
+| T-32 | Recover unverified public values (EC-18, TX-11, TX-12) | done | `60fa27c2` | `data/findings.json`, `sources.html` |
+| T-33 | Correct published values that fail re-verification | done (none failed; H-08 note refined; EC-16 note updated) | `60fa27c2` | `data/findings.json`, regenerated pages |
+| T-34 | Integration: rebuild, checks, PR → merge → confirm Pages deploy | in progress | `60fa27c2` | `main` |
