@@ -259,3 +259,21 @@ published value at the stated rounding and unit scale (percent, ratio, USD/month
 `TA-18`/`TA-19` (trade-area radius, traffic counts), `SC-02`–`SC-04` (school counts and performance),
 `EC-15`/`EC-16`, `DM-13`/`DM-14`, `H-02`, `H-16`, `H-18`–`H-21`, `TE-16`. No official public source publishes these for a
 private parcel or a private owner, so they stay blank, and no winner between sell and renew is stated.
+
+## Follow-up, same day: another session's CAL FIRE correction, and the H-03 re-test
+
+While this branch was open, session `57054140` merged PRs #9–#13 to `main`. Its only change to the data was to separate the
+CAL FIRE reference-point query (now `S28`) from the Griffith Park positive control (`S13`) — correct, because they are two
+different queries — but it labelled `S28` as "not independently retrievable during follow-up, retrieved: not retrieved".
+
+That label does not survive a re-test. Both endpoints answered on 2026-11-26:
+
+| Query | Result |
+| --- | --- |
+| Reference point 34.0537, −118.2428 | HTTP 200, `"features":[]` |
+| Positive control, Griffith Park 34.1180, −118.3400 | HTTP 200, `SRA` LRA, `INCORP` Y, `HAZ_CODE` 3, `HAZ_CLASS` Very High |
+
+`S28` is therefore recorded as **retrieved 2026-11-26, empty feature set** rather than as a failed retrieval, with a note
+that an empty result is not evidence the point lies outside every fire hazard severity zone. The row's `flagged` status,
+its blank-free value ("No polygon returned") and the H-04 control are unchanged: nothing about the conclusion moved,
+only the record of whether the source answered. The earlier failure another session hit was real; the endpoint recovered.
